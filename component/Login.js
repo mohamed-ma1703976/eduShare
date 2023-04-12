@@ -1,0 +1,128 @@
+import React, { useState } from "react";
+import {
+  Button,
+  Grid,
+  Paper,
+  Stack,
+  TextField,
+  Typography,
+  Link,
+  Alert
+} from "@mui/material";
+import { Box } from "@mui/system";
+import Router, { useRouter } from 'next/router';
+import useFetch from "../hooks/useFetch";
+import { useContext } from "react";
+import { AuthContext } from "../hooks/AuthProvider";
+export default function App() {
+
+  const { data, loading, error } = useFetch('http://localhost:1337/api/logins')
+
+  const router = useRouter()
+  const { login } = useContext(AuthContext);
+
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: ""
+  })
+
+  const [loginError, setLoginError] = useState(false)
+
+  function handelChange(event) {
+    setLoginData(pre => {
+      return {
+        ...pre,
+        [event.target.name]: event.target.value
+      }
+
+    })
+
+  }
+
+  function handelLogin(e) {
+    e.preventDefault()
+    const matchingUser = data.data?.find(s => s.attributes.email === loginData.email && s.attributes.password === loginData.password);
+    if (matchingUser) {
+      if (matchingUser.attributes.Role === "Admin") {
+        router.push("/Admin/dashboard")
+      } else if (matchingUser.attributes.Role === "student") {
+        const userId = matchingUser.id // replace with your actual user ID
+        login(userId);
+        router.push("/Student")
+      } else if (matchingUser.attributes.Role === "Instructor") {
+        router.push("/Instructor")
+      }
+      setLoginError(false)
+    } else {
+      setLoginError(true)
+    }
+
+
+  }
+  return (
+    <Grid
+      container
+      justifyContent={{ sm: "center" }}
+      alignItems={{ sm: "center" }}
+      height={"100vh"}
+    >
+      <Paper
+        sx={{
+          width: 500,
+          height: 300,
+          backgroundColor: "white",
+          padding: 5,
+          pb: 10,
+          boxShadow: {
+            xs: "none",
+            md:
+              "0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)"
+          }
+        }}
+      >
+        <Stack direction={"column"} gap={2}>
+          <Typography variant='h3' sx={{ color: "#454545", fontWeight: "800", margin: "0 0 0 -23px", textAlign: "center" }}>Edu<span style={{ color: "#1ABC9C" }}>Share</span></Typography>
+          <form style={{
+            display: "flex", flexDirection: "column", margin: "10px 10px 10px 10px"
+          }} onSubmit={handelLogin}>
+
+            {loginError && <Alert severity="error" sx={{ width: "85%", margin: "0 0 0 16px" }}>Email or Password is Wrong !</Alert>}
+            <TextField
+              id="outlined-basic"
+              label="Enter Email"
+              variant="outlined"
+              name="email"
+              onChange={handelChange}
+              sx={{ margin: "10px 10px 10px 10px" }}
+
+
+            />
+            <TextField
+              id="outlined-basic"
+              label="Enter Password"
+              variant="outlined"
+              name="password"
+              onChange={handelChange}
+              sx={{ margin: "10px 10px 10px 10px" }}
+
+            />
+            <Button
+              sx={{
+                backgroundColor: "#00adb5",
+                height: 45,
+                fontSize: 22,
+                fontWeight: "bold"
+              }}
+              variant="contained"
+              type="submit"
+              onClick={handelLogin}
+            >
+              Login
+            </Button>
+          </form>
+        </Stack>
+        <Link href="/signup/register" variant="body2" color="inherit"> Don't have an account? Register</Link>
+      </Paper>
+    </Grid >
+  );
+}
