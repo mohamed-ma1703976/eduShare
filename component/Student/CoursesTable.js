@@ -1,10 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import { useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import {
+  Button,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 import { AuthContext } from "../../hooks/AuthProvider";
-import useFetch from "../../hooks/useFetch";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, getFirestore, collection } from "firebase/firestore";
 import { db } from "../../Firebase/Firebase";
+import { useCollection } from "react-firebase-hooks/firestore";
 
 export default function CoursesTable() {
   const { userId } = useContext(AuthContext);
@@ -13,8 +21,14 @@ export default function CoursesTable() {
 
   const [disableButton, setDisableButton] = useState(false);
 
-  const { data: courses, loading, error } = useFetch("Course");
-  const { data: user } = useFetch(`User/${userId}`);
+  const { data: coursesSnapshot, loading, error } = useCollection(collection(db, "Course"));
+  //const { data: userSnapshot } = useCollection(doc(collection(db, "User"), userId));
+  
+
+  const courses = coursesSnapshot?.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
 
   let currentUserEmail = user?.email;
 
