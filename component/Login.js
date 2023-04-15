@@ -7,57 +7,51 @@ import {
   TextField,
   Typography,
   Link,
-  Alert
+  Alert,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import Router, { useRouter } from 'next/router';
-import useFetch from "../hooks/useFetch";
+import Router, { useRouter } from "next/router";
 import { useContext } from "react";
 import { AuthContext } from "../hooks/AuthProvider";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { app } from "../Firebase/Firebase"; // Add this import
+
 export default function App() {
-
-  const { data, loading, error } = useFetch('http://localhost:1337/api/logins')
-
-  const router = useRouter()
+  const router = useRouter();
   const { login } = useContext(AuthContext);
 
   const [loginData, setLoginData] = useState({
     email: "",
-    password: ""
-  })
+    password: "",
+  });
 
-  const [loginError, setLoginError] = useState(false)
+  const [loginError, setLoginError] = useState(false);
 
   function handelChange(event) {
-    setLoginData(pre => {
+    setLoginData((pre) => {
       return {
         ...pre,
-        [event.target.name]: event.target.value
-      }
-
-    })
-
+        [event.target.name]: event.target.value,
+      };
+    });
   }
 
-  function handelLogin(e) {
-    e.preventDefault()
-    const matchingUser = data.data?.find(s => s.attributes.email === loginData.email && s.attributes.password === loginData.password);
-    if (matchingUser) {
-      if (matchingUser.attributes.Role === "Admin") {
-        router.push("/Admin/dashboard")
-      } else if (matchingUser.attributes.Role === "student") {
-        const userId = matchingUser.id // replace with your actual user ID
-        login(userId);
-        router.push("/Student")
-      } else if (matchingUser.attributes.Role === "Instructor") {
-        router.push("/Instructor")
-      }
-      setLoginError(false)
-    } else {
-      setLoginError(true)
+  async function handelLogin(e) {
+    e.preventDefault();
+    const auth = getAuth(app);
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        loginData.email,
+        loginData.password
+      );
+      const userId = userCredential.user.uid;
+      login(userId);
+      router.push("/Student");
+      setLoginError(false);
+    } catch (error) {
+      setLoginError(true);
     }
-
-
   }
   return (
     <Grid

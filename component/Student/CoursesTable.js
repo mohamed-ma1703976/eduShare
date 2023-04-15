@@ -1,125 +1,94 @@
 import React, { useEffect, useState } from "react";
-import useFetch from "../../hooks/useFetch";
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useContext } from "react";
 import { AuthContext } from "../../hooks/AuthProvider";
+import useFetch from "../../hooks/useFetch";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../Firebase/Firebase";
+
 export default function CoursesTable() {
-    const { userId } = useContext(AuthContext);
-    const { currentIdState } = useContext(AuthContext);
-    console.log(userId);
+  const { userId } = useContext(AuthContext);
+  const { currentIdState } = useContext(AuthContext);
+  console.log(userId);
 
-    const [disableButton, setDisableButton] = useState(false)
+  const [disableButton, setDisableButton] = useState(false);
 
+  const { data: courses, loading, error } = useFetch("Course");
+  const { data: user } = useFetch(`User/${userId}`);
 
+  let currentUserEmail = user?.email;
 
-    // this is api include all the courses 
-    const { data: courses, loading, error } = useFetch('http://localhost:1337/api/courses');
+  let realUserId = user?.id;
+  let stateData = user?.courseId;
 
+  console.log(stateData);
+  console.log(realUserId);
+  currentIdState(realUserId);
 
-    const { data: loginData } = useFetch(`http://localhost:1337/api/logins/${userId}`);
-    const { data: studentData } = useFetch(`http://localhost:1337/api/sign-ups`);
+  const [updateCourse, setupdateCourse] = useState({
+    courseId: [],
+  });
 
+  useEffect(() => {
+    setupdateCourse({ courseId: stateData });
+  }, [realUserId]);
 
+  console.log(updateCourse);
 
+  async function handleAddCourse(selectedCourseId) {
+    console.log("handleAddCourse called with courseId:", selectedCourseId);
 
-    let currentUserEmail = loginData.data?.attributes.email
+    setupdateCourse((prevState) => ({
+      ...prevState,
+      courseId: prevState.courseId
+        ? [...prevState.courseId, selectedCourseId]
+        : [selectedCourseId],
+    }));
 
-    let realUserId = studentData.data?.find(s => s.attributes.email === currentUserEmail)?.id
+    console.log(updateCourse);
 
-    let stateData = studentData.data?.find(s => s.attributes.email === currentUserEmail)?.attributes.courseId
-    console.log(stateData)
-    console.log(realUserId)
-    currentIdState(realUserId)
-    const [updateCourse, setupdateCourse] = useState({
-        courseId: []
-    })
+    let collectedData = {
+      courseId: Array.isArray(updateCourse.courseId)
+        ? [...updateCourse.courseId, selectedCourseId]
+        : [selectedCourseId],
+    };
 
-    useEffect(() => {
-        setupdateCourse({ courseId: stateData })
+    console.log("collectedData:", collectedData);
 
-    }, [realUserId])
+    const studentRef = doc(db, "Student", realUserId);
+    await updateDoc(studentRef, {
+      courseId: collectedData.courseId,
+    });
 
-    console.log(updateCourse)
+    setDisableButton(true);
+  }
 
+  function handleJoinLiveSession(courseId) {
+    console.log("Joining live session for courseId:", courseId);
+    // Implement the logic to join the live session here
+  }
 
-    async function handleAddCourse(selectedCourseId) {
-        console.log("handleAddCourse called with courseId:", selectedCourseId);
+  async function handledeletCourse(courseid) {
+    console.log(courseid);
 
-        setupdateCourse((prevState) => ({
-            ...prevState,
-            courseId: prevState.courseId ? [...prevState.courseId, selectedCourseId] : [selectedCourseId],
-        }));
+    setupdateCourse((prevState) => ({
+      ...prevState,
+      courseId: prevState.courseId.filter((id) => id !== courseid),
+    }));
 
+    let collectedData = {
+      courseId: updateCourse.courseId.filter((id) => id !== courseid),
+    };
 
-        console.log(updateCourse)
-
-        let collectedData = {
-            courseId: Array.isArray(updateCourse.courseId) ? [...updateCourse.courseId, selectedCourseId] : [selectedCourseId]
-        }
-
-
-        console.log("collectedData:", collectedData);
-
-        try {
-            const res = await fetch(`http://localhost:1337/api/sign-ups/${realUserId}`,
-                {
-                    headers: {
-                        'Content-Type': "application/json"
-                    },
-                    body: JSON.stringify({ data: collectedData }),
-                    method: "PUT",
-
-                }
-            )
-            console.log("PUT request sent with response:", res);
-        } catch (err) {
-            console.log("Error:", err)
-        }
-        setDisableButton(true)
+    if (confirm("Are you sure you want to delete this Course?")) {
+      const studentRef = doc(db, "Student", realUserId);
+      await updateDoc(studentRef, {
+        courseId: collectedData.courseId,
+      });
+    } else {
+      return;
     }
-
-
-    function handleJoinLiveSession(courseId) {
-        console.log("Joining live session for courseId:", courseId);
-        // Implement the logic to join the live session here
-    }
-
-
-
-
-    async function handledeletCourse(courseid) {
-        console.log(courseid)
-
-        setupdateCourse((prevState) => ({
-            ...prevState,
-            courseId: prevState.courseId.filter((id) => id !== courseid),
-        }));
-
-        let collectedData = {
-            courseId: updateCourse.courseId.filter((id) => id !== courseid),
-
-        }
-        if (confirm("Are you sure you want to delete this Course?")) {
-            try {
-                const res = await fetch(`http://localhost:1337/api/sign-ups/${realUserId}`,
-                    {
-                        headers: {
-                            'Content-Type': "application/json"
-                        },
-                        body: JSON.stringify({ data: collectedData }),
-                        method: "PUT",
-
-                    }
-                )
-                console.log("PUT request sent with response:", res);
-            } catch (err) {
-                console.log("Error:", err)
-            }
-        } else {
-            return
-        }
-
-    }
+  }
 
 
     return (

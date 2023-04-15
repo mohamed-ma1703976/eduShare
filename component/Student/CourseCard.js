@@ -6,16 +6,14 @@ import Typography from '@mui/material/Typography';
 import { Box } from '@mui/system';
 import Link from 'next/link';
 import ButtonBase from '@mui/material/ButtonBase';
+import useFetch from '../../hooks/useFetch';
 
 const CourseCard = ({ course }) => {
-  const {
-    CourseTitle,
-    InstructorName,
-    CourseDescription,
-    img,
-  } = course.attributes;
+  const { CourseTitle, InstructorName, CourseDescription, img } = course;
 
-  console.log('Course Data:', course);
+  const { data: imageUrl } = useFetch(
+    `https://firebasestorage.googleapis.com/v0/b/edushare-e9242.appspot.com/o/images%2F${img}?alt=media`
+  );
 
   if (!course) {
     return null;
@@ -28,7 +26,7 @@ const CourseCard = ({ course }) => {
           <CardMedia
             component="img"
             height="100"
-            image="https://via.placeholder.com/150"
+            image={imageUrl}
             alt={CourseTitle}
           />
           <CardContent>

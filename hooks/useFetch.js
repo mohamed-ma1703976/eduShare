@@ -1,30 +1,29 @@
-import { useEffect , useState } from "react";
+import { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../Firebase/Firebase";
 
-const useFetch = (url) => {
-const [data, setData] = useState([]);
-const [error, setError] = useState(null);
-const [loading, setLoading] = useState(true);
+const useFetch = (path) => {
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
-
-        setLoading(true);
-        try {
-            const res = await fetch(url);
-            const json = await res.json();
-            setData(json);
-            setLoading(false);
-            console.log(json)
-        } catch (error) {
-            setError(error);
-            setLoading(false);
-        }
-    }
-
+      setLoading(true);
+      try {
+        const querySnapshot = await getDocs(collection(db, path));
+        const courses = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+        setData(courses);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
     fetchData();
-}, [url]);
+  }, [path]);
 
-return { data, error, loading };
-}
+  return { data, error, loading };
+};
 
 export default useFetch;

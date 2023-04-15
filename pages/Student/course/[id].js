@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import { Box, Typography, Grid, Card, CardContent, CardMedia, Rating, Button } from '@mui/material';
 import StuNav from '../../../component/Student/StuNav';
 import StuSideBar from '../../../component/Student/StuSideBar';
+import { getFirestore, doc, getDoc, collection } from 'firebase/firestore';
+import { db } from '../../../Firebase/Firebase';
 
 const CoursePage = ({ course }) => {
   const router = useRouter();
@@ -10,6 +12,7 @@ const CoursePage = ({ course }) => {
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
+
 
   return (
     <div>
@@ -57,23 +60,27 @@ const CoursePage = ({ course }) => {
   );
 };
 
-export async function getStaticPaths() {
-  const res = await fetch('http://localhost:1337/api/courses');
-  const data = await res.json();
-  const paths = data.data.map((course) => ({ params: { id: course.id.toString() } }));
+export async function getServerSideProps({ params }) {
+  const courseId = params.id;
+  const courseRef = doc(db, 'Course', courseId);
+  const courseSnapshot = await getDoc(courseRef);
 
-  return { paths, fallback: true };
-}
+  if (!courseSnapshot.exists()) {
+    return {
+      notFound: true,
+    };
+  }
 
-export async function getStaticProps({ params }) {
-  const res = await fetch(`http://localhost:1337/api/courses/${params.id}`);
-  const data = await res.json();
   const course = {
-    ...data.data.attributes,
-    img: 'https://via.placeholder.com/600x300', // Replace this with a real image URL from the course data
+    id: courseSnapshot.id,
+    ...courseSnapshot.data(),
   };
 
-  return { props: { course }, revalidate: 1 };
+  return {
+    props: {
+      course,
+    },
+  };
 }
 
 export default CoursePage;
