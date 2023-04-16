@@ -53,10 +53,18 @@ export default function App() {
       const studentDocRef = doc(db, "Student", userId);
       const studentDoc = await getDoc(studentDocRef);
 
+      const instructorDocRef = doc(db, "Instructor", userId);
+      const instructorDoc = await getDoc(instructorDocRef);
+
+      const adminDocRef = doc(db, "Admin", userId);
+      const adminDoc = await getDoc(adminDocRef);
+
       if (studentDoc.exists()) {
         router.push("/Student");
-      } else {
+      } else if (instructorDoc.exists()) {
         router.push("/Instructor");
+      } else {
+        router.push("/Admin");
       }
 
       setLoginError(false);
