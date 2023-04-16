@@ -14,7 +14,8 @@ import Router, { useRouter } from "next/router";
 import { useContext } from "react";
 import { AuthContext } from "../hooks/AuthProvider";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { app } from "../Firebase/Firebase"; // Add this import
+import { app } from "../Firebase/Firebase";
+import { getFirestore, doc, getDoc } from "firebase/firestore"; // Add this import
 
 export default function App() {
   const router = useRouter();
@@ -47,7 +48,17 @@ export default function App() {
       );
       const userId = userCredential.user.uid;
       login(userId);
-      router.push("/Student");
+
+      const db = getFirestore(app);
+      const studentDocRef = doc(db, "Student", userId);
+      const studentDoc = await getDoc(studentDocRef);
+
+      if (studentDoc.exists()) {
+        router.push("/Student");
+      } else {
+        router.push("/Instructor");
+      }
+
       setLoginError(false);
     } catch (error) {
       setLoginError(true);

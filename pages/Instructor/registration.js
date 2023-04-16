@@ -1,123 +1,63 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
-    Button,
-    Grid,
-    Paper,
-    Stack,
-    TextField,
-    Typography,
-    Link
+  Button,
+  Grid,
+  Paper,
+  Stack,
+  TextField,
+  Typography,
+  Link
 } from "@mui/material";
-import { Box } from "@mui/system";
-import Router, { useRouter } from 'next/router';
-import useFetch from "../../hooks/useFetch";
+import { useRouter } from 'next/router';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { app } from "../../Firebase/Firebase";
 
-// Todo check if the email exist in the login database befor sign up new account 
-export default function registration() {
+export default function Registration() {
+  const router = useRouter();
 
-    const router = useRouter()
-    const { data, loading, error } = useFetch('http://localhost:1337/api/logins')
+  const [signUpData, setSignUpData] = useState({
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    phone: "",
+    specialization: "",
+    personalInfo: "",
+  });
 
-    console.log(data)
+  function handleChange(event) {
+    setSignUpData((prev) => {
+      return {
+        ...prev,
+        [event.target.name]: event.target.value
+      };
+    });
+  }
 
-    const [signUpdata, setsignUpdata] = useState({
-        email: "",
-        password: "",
-        FirstName: "",
-        LastName: "",
-        phone: "",
-        Specialization: "",
-        PersonalInfo: "",
+  async function handleSignUp(e) {
+    e.preventDefault();
 
-    })
+    const auth = getAuth(app);
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, signUpData.email, signUpData.password);
+      const user = userCredential.user;
+      const db = getFirestore(app);
+      await setDoc(doc(db, "Instructor", user.uid), {
+        firstName: signUpData.firstName,
+        lastName: signUpData.lastName,
+        email: signUpData.email,
+        phone: signUpData.phone,
+        specialization: signUpData.specialization,
+        personalInfo: signUpData.personalInfo,
+        status: "Pending",
+      });
 
-
-
-    function handelChange(event) {
-        setsignUpdata(pre => {
-            return {
-                ...pre,
-                [event.target.name]: event.target.value
-            }
-
-        })
-
+      router.push("/Instructor");
+    } catch (error) {
+      console.error("Error signing up:", error);
     }
-
-
-    async function handelLogin(e) {
-        e.preventDefault()
-
-        let collectedData = {
-            email: signUpdata.email,
-            password: signUpdata.password,
-            firstname: signUpdata.FirstName,
-            lastname: signUpdata.LastName,
-            phonenumber: signUpdata.phone,
-            PersonalInfo: signUpdata.PersonalInfo,
-            Specialization: signUpdata.Specialization,
-            Status: "Pending"
-        }
-
-        try {
-
-            const res = await fetch('http://localhost:1337/api/instructor-signups',
-                {
-                    headers: {
-                        'Content-Type': "application/json"
-                    },
-                    body: JSON.stringify({ data: collectedData }),
-                    method: "POST",
-
-                }
-            )
-
-
-
-            console.log(res)
-            //  alert("student added ")
-            //router.reload()
-
-        } catch (err) {
-            console.log(err)
-        }
-
-        let collectedData1 = {
-            email: signUpdata.email,
-            password: signUpdata.password,
-            Role: "Instructor",
-            firstname: signUpdata.FirstName
-
-
-        }
-        try {
-            const res = await fetch('http://localhost:1337/api/logins',
-                {
-                    headers: {
-                        'Content-Type': "application/json"
-                    },
-                    body: JSON.stringify({ data: collectedData1 }),
-                    method: "POST",
-
-                }
-            )
-
-
-
-            console.log(res)
-
-            //router.reload()
-
-        } catch (err) {
-            console.log(err)
-        }
-        //  }
-
-        // })
-
-        router.push("/")
-
-    }
+  }
     return (
 
 
@@ -186,7 +126,7 @@ export default function registration() {
                         >
                             ( Instructor Registration )
                         </Typography>
-                        <form onSubmit={handelLogin}>
+                        <form onSubmit={handleSignUp}>
 
                             <Stack direction={"column"} gap={2} sx={{ margin: "10px" }}>
                                 <Stack direction={"row"} gap={2}>
@@ -198,7 +138,7 @@ export default function registration() {
                                         label="Firs tName"
                                         variant="outlined"
                                         name="FirstName"
-                                        onChange={handelChange}
+                                        onChange={handleChange}
                                         sx={{ margin: "10px 10px 10px 10px" }}
 
 
@@ -210,7 +150,7 @@ export default function registration() {
                                         label="Last Name"
                                         variant="outlined"
                                         name="LastName"
-                                        onChange={handelChange}
+                                        onChange={handleChange}
                                         sx={{ margin: "10px 10px 10px 10px" }}
 
 
@@ -225,7 +165,7 @@ export default function registration() {
                                         label="Phone Number"
                                         variant="outlined"
                                         name="phone"
-                                        onChange={handelChange}
+                                        onChange={handleChange}
                                         sx={{ margin: "10px 10px 10px 10px" }}
 
 
@@ -236,7 +176,7 @@ export default function registration() {
                                         label="Specialization"
                                         variant="outlined"
                                         name="Specialization"
-                                        onChange={handelChange}
+                                        onChange={handleChange}
                                         sx={{ margin: "10px 10px 10px 10px" }}
 
 
@@ -250,7 +190,7 @@ export default function registration() {
                                         label="Write about youself (Experiance,personla Info,etc..)"
                                         variant="outlined"
                                         name="PersonalInfo"
-                                        onChange={handelChange}
+                                        onChange={handleChange}
                                         sx={{ margin: "10px 10px 10px 10px" }}
 
 
@@ -260,7 +200,7 @@ export default function registration() {
                                         label="Enter Email"
                                         variant="outlined"
                                         name="email"
-                                        onChange={handelChange}
+                                        onChange={handleChange}
                                         sx={{ margin: "10px 10px 10px 10px" }}
 
 
@@ -273,7 +213,7 @@ export default function registration() {
                                         label="Enter Password"
                                         variant="outlined"
                                         name="password"
-                                        onChange={handelChange}
+                                        onChange={handleChange}
                                         sx={{ margin: "10px 10px 10px 10px" }}
 
 
@@ -289,7 +229,7 @@ export default function registration() {
                                     }}
                                     variant="contained"
                                     type="submit"
-                                    onClick={handelLogin}
+                                    onClick={handleSignUp}
                                 >
                                     Register
                                 </Button>

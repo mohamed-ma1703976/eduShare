@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React from "react";
 import {
   Button,
   Grid,
@@ -7,12 +7,10 @@ import {
   Typography,
   Link
 } from "@mui/material";
-import { Box } from "@mui/system";
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 
 export default function RoleSelection() {
-
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <Grid
@@ -38,8 +36,6 @@ export default function RoleSelection() {
       >
         <Stack direction={"column"} gap={2}>
           <Typography variant='h3' sx={{ color: "#454545", fontWeight: "800", margin: "0 0 0 -23px", textAlign: "center" }}>Edu<span style={{ color: "#1ABC9C" }}>Share</span></Typography>
-
-
 
           <Button
             sx={{
@@ -69,11 +65,11 @@ export default function RoleSelection() {
           >
             Sign Up as Instructor
           </Button>
-
         </Stack>
         <div style={{ margin: "10px 0 0 10px" }}>
           <Link href="/" variant="body2" color="inherit"> Back to login page</Link>
-        </div>      </Paper>
+        </div>
+      </Paper>
     </Grid >
   );
 }
