@@ -15,6 +15,16 @@
   ],
   "rootMainFiles": [],
   "pages": {
+    "/Admin/course": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/Admin/course.js"
+    ],
+    "/Admin/dashboard": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/Admin/dashboard.js"
+    ],
     "/Student": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

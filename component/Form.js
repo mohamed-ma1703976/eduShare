@@ -6,78 +6,58 @@ import {
     RadioGroup,
     FormControlLabel,
     FormControl,
-    FormLabel
-
-} from '@mui/material';
-import { color } from '@mui/system';
-
-import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
-
-import React, { useEffect, useState } from 'react'
-import Router, { useRouter } from 'next/router';
-
-const Form = () => {
-    const router = useRouter()
-
-    const [uploadImg, setUploadImg] = useState({ files: [] })
-    const [isSelected, setIsSelected] = useState(false)
-
-
+    FormLabel,
+  } from '@mui/material';
+  import { color } from '@mui/system';
+  
+  import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
+  
+  import React, { useEffect, useState } from 'react';
+  import Router, { useRouter } from 'next/router';
+  import { collection, addDoc } from 'firebase/firestore';
+  import { db } from '../Firebase/Firebase';
+  
+  const Form = () => {
+    const router = useRouter();
+  
+    const [uploadImg, setUploadImg] = useState({ files: [] });
+    const [isSelected, setIsSelected] = useState(false);
+  
     const [formData, setFormData] = useState({
-        CourseTitle: "",
-        InstructorName: "",
-        CourseDescription: "",
-        SesionType: "",
-        img: ''
-
-
-    })
-
-
-
-    const handelChange = async (event) => {
-        setFormData(pre => {
-            return {
-                ...pre,
-                [event.target.name]: event.target.value
-            }
-
-        })
-    }
-
-    const handelSub = async (e) => {
-        e.preventDefault()
-
-        let collectedData = {
-            CourseDescription: formData.CourseDescription,
-            CourseTitle: formData.CourseTitle,
-            InstructorName: formData.InstructorName,
-            SesionType: formData.SesionType
-
-        }
-        try {
-            const res = await fetch('http://localhost:1337/api/courses',
-                {
-                    headers: {
-                        'Content-Type': "application/json"
-                    },
-                    body: JSON.stringify({ data: collectedData }),
-                    method: "POST",
-
-                }
-            )
-
-
-
-            console.log(res)
-            router.reload()
-
-        } catch (err) {
-            console.log(err)
-        }
-
-
-    }
+      CourseTitle: '',
+      InstructorName: '',
+      CourseDescription: '',
+      SessionType: '',
+      img: '',
+    });
+  
+    const handleChange = async (event) => {
+      setFormData((pre) => {
+        return {
+          ...pre,
+          [event.target.name]: event.target.value,
+        };
+      });
+    };
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+  
+      let collectedData = {
+        CourseDescription: formData.CourseDescription,
+        CourseTitle: formData.CourseTitle,
+        InstructorName: formData.InstructorName,
+        SessionType: formData.SessionType,
+      };
+  
+      try {
+        const coursesCollection = collection(db, 'Course');
+        await addDoc(coursesCollection, collectedData);
+        router.reload();
+      } catch (err) {
+        console.log(err);
+      }
+    };
 
     function handleImg(e) {
         console.log(e.target.files);
@@ -105,7 +85,7 @@ const Form = () => {
 
     return (
 
-        <form onSubmit={handelSub} style={{
+        <form onSubmit={handleSubmit} style={{
             margin: "10px 10px 10px 10px"
 
         }}>
@@ -117,7 +97,7 @@ const Form = () => {
                 label="Course Title"
                 sx={{ margin: "10px 10px 10px 10px" }}
                 name="CourseTitle"
-                onChange={handelChange}
+                onChange={handleChange}
                 value={formData.CourseTitle}
             />
             <TextField
@@ -125,7 +105,7 @@ const Form = () => {
                 label="Instructor Name "
                 sx={{ margin: "10px 10px 10px 10px" }}
                 name="InstructorName"
-                onChange={handelChange}
+                onChange={handleChange}
                 value={formData.InstructorName}
 
 
@@ -137,7 +117,7 @@ const Form = () => {
                 maxRows={4}
                 sx={{ margin: "10px 10px 10px 10px" }}
                 name="CourseDescription"
-                onChange={handelChange}
+                onChange={handleChange}
                 value={formData.CourseDescription}
 
 
@@ -153,8 +133,8 @@ const Form = () => {
                     name="row-radio-buttons-group"
                 >
 
-                    <FormControlLabel value="Private" name="SesionType" control={<Radio />} label="Private" sx={{ margin: "0px 10px 0px 10px" }} onChange={handelChange} />
-                    <FormControlLabel value="Public" name="SesionType" control={<Radio />} label="Public" sx={{ margin: "0px 10px 0px 10px" }} onChange={handelChange} />
+                    <FormControlLabel value="Private" name="SesionType" control={<Radio />} label="Private" sx={{ margin: "0px 10px 0px 10px" }} onChange={handleChange} />
+                    <FormControlLabel value="Public" name="SesionType" control={<Radio />} label="Public" sx={{ margin: "0px 10px 0px 10px" }} onChange={handleChange} />
 
                 </RadioGroup>
             </FormControl>
@@ -178,11 +158,6 @@ const Form = () => {
 
 
         </form >
-
-
-
-
-
 
     )
 }
