@@ -50,7 +50,7 @@ export default function Registration() {
       const db = getFirestore(app);
       const docRef = doc(db, "Student", user.uid);
       await setDoc(docRef, collectedData);
-      router.push("/Student");
+      router.push("/");
     } catch (error) {
       console.error("Error signing up:", error);
     }
