@@ -17,7 +17,7 @@ function Card() {
 
   React.useEffect(() => {
     const fetchCourses = async () => {
-      const coursesCollection = collection(db, 'courses');
+      const coursesCollection = collection(db, 'Course');
       const courseSnapshot = await getDocs(coursesCollection);
       const coursesList = courseSnapshot.docs.map((doc) => ({
         id: doc.id,
@@ -30,7 +30,7 @@ function Card() {
     fetchCourses();
   }, []);
 
-  const numberOfCourses = courses.length;
+ // const numberOfCourses = courses;
 
   if (loading) {
     return <div>Loading...</div>;
@@ -56,7 +56,8 @@ function Card() {
             <Grid container alignContent={'center'} style={{ marginTop: '-250px' }}>
       <Grid item xs={3}>
         <AchievementCard
-          number={numberOfCourses}
+          
+          number={courses.length}
           description="Completed Courses"
           color="#1ABC9C"
         />
