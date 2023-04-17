@@ -51,22 +51,11 @@ export default function Registration() {
             status: "Pending"
         };
         try {
-            //     const userCredential = await createUserWithEmailAndPassword(auth, signUpData.email, signUpData.password);
-            //     const user = userCredential.user;
-            //     const db = getFirestore(app);
-            const collectionRef = collection(db, "Instructor")
-            //     await addDoc(doc(db, "Instructor", user.uid), {
-            //         firstName: signUpData.firstName,
-            //         lastName: signUpData.lastName,
-            //         email: signUpData.email,
-            //         phone: signUpData.phone,
-            //         specialization: signUpData.specialization,
-            //         personalInfo: signUpData.personalInfo,
-            //         status: "Pending",
-            //     });
-
-            await addDoc(collectionRef, collectedData);
-
+            const userCredential = await createUserWithEmailAndPassword(auth, signUpData.email, signUpData.password);
+            const user = userCredential.user;
+            const db = getFirestore(app);
+            const docRef = doc(db, "Instructor", user.uid);
+            await setDoc(docRef, collectedData);
             router.push("/Instructor");
         } catch (error) {
             console.error("Error signing up:", error);
