@@ -3,62 +3,55 @@ import { Button, FormControl, FormControlLabel, FormLabel, Paper, Radio, RadioGr
 import { Router, useRouter } from "next/router"
 import React, { useEffect, useState } from 'react'
 import useFetch from "../../hooks/useFetch"
+import {
+    collection,
+    getDocs,
+    doc,
+    deleteDoc,
+    updateDoc,
+    setDoc,
+} from 'firebase/firestore';
+import { db } from '../../Firebase/Firebase'
 
 function InstructorTable() {
-    const { data, loading, error } = useFetch('http://localhost:1337/api/instructor-signups')
-
-
 
     const router = useRouter()
-
     const [statusChange, setStatusChange] = useState()
+
+    const [instructors, setInstructors] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
+
+    console.log(instructors)
+    React.useEffect(() => {
+        const fetchInstructors = async () => {
+            const instructorCollection = collection(db, 'Instructor');
+            const instructorSnapshot = await getDocs(instructorCollection);
+            const instructorsList = instructorSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                attributes: doc.data(),
+            }));
+            setInstructors(instructorsList);
+            setLoading(false);
+        };
+
+        fetchInstructors();
+    }, []);
+
+    if (loading) return <div>Loading...</div>;
+
+
+
+
+
     async function handelDelete(id) {
 
-        const res = await fetch(`http://localhost:1337/api/instructor-signups/${id}`);
-        const { data: { attributes: { email } } } = await res.json();
-        console.log(email)
-
-
-        const response = await fetch('http://localhost:1337/api/logins');
-
-        const loginData = await response.json();
-        const emails = loginData.data.find(i => {
-            if (i.attributes.email === email)
-                return i.id
-
-        })
-
-
-
-
         try {
-            const confirmDelete = confirm("Are you sure you want to delete this record?");
-            if (!confirmDelete) {
-                return;
-            }
-
-
-            const [res1] = await Promise.all([
-
-                fetch(`http://localhost:1337/api/instructor-signups/${id}`, { method: "DELETE" }),
-            ]);
-
-            const res2 = await fetch(`http://localhost:1337/api/logins/${emails.id}`, {
-                method: "DELETE",
-            });
-
-            console.log(res1, res2);
-
-
+            const instructoreRef = doc(db, 'Instructor', id);
+            await deleteDoc(instructoreRef);
+            router.reload();
         } catch (err) {
-            console.log(err)
+            console.log(err);
         }
-
-        router.reload()
-
-
-
-
     }
 
 
@@ -68,26 +61,16 @@ function InstructorTable() {
 
     async function handelClick(id) {
         const collectedData = {
-            Status: "Active"
+            status: "Active"
         }
         try {
-            const res = await fetch(`http://localhost:1337/api/instructor-signups/${id}`,
-                {
-                    headers: {
-                        'Content-Type': "application/json"
-                    },
-                    body: JSON.stringify({ data: collectedData }),
-                    method: "PUT",
-
-                }
-            )
-
-            // setStatusChange(data.data[id - 1].attributes.Status)
-            router.reload()
-
+            const instructorRef = doc(db, 'Instructor', id);
+            await updateDoc(instructorRef, collectedData);
+            router.reload();
         } catch (err) {
-            console.log(err)
+            console.log(err);
         }
+
     }
     return (
 
@@ -109,7 +92,7 @@ function InstructorTable() {
                 </TableHead>
                 <TableBody>
 
-                    {data.data?.map(s => {
+                    {instructors?.map(s => {
 
                         return <TableRow
 
@@ -117,14 +100,14 @@ function InstructorTable() {
                             key={s.id}
                         >
                             <TableCell component="th" scope="row">
-                                {s.attributes.firstname
+                                {s.attributes.firstName
                                 }
                             </TableCell>
-                            <TableCell align="right"> {s.attributes.lastname}</TableCell>
-                            <TableCell align="right">{s.attributes.Specialization}</TableCell>
-                            <TableCell align="right"> {s.attributes.phonenumber}</TableCell>
-                            <TableCell align="right">{s.attributes.PersonalInfo}</TableCell>
-                            <TableCell align="right"><Button onClick={() => handelClick(s.id)}>{s.attributes.Status}</Button>
+                            <TableCell align="right"> {s.attributes.lastName}</TableCell>
+                            <TableCell align="right">{s.attributes.specialization}</TableCell>
+                            <TableCell align="right"> {s.attributes.phone}</TableCell>
+                            <TableCell align="right">{s.attributes.personalInfo}</TableCell>
+                            <TableCell align="right"><Button onClick={() => handelClick(s.id)}>{s.attributes.status}</Button>
                             </TableCell>
                             <TableCell align="right"><Button onClick={() => handelDelete(s.id)} >Delete</Button></TableCell>
 

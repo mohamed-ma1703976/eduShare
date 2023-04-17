@@ -1,22 +1,53 @@
 import React, { use, useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
-
+import {
+    collection,
+    getDocs,
+    doc,
+    deleteDoc,
+    updateDoc,
+    setDoc,
+} from 'firebase/firestore';
+import { db } from '../../Firebase/Firebase'
 export default function instructorDashboard() {
 
-    const [statusCheck, setstatusCheck] = useState(false)
-    const { data, loading, error } = useFetch('http://localhost:1337/api/instructor-signups')
+    const [statusCheck, setstatusCheck] = useState(true)
+    const [statusValue, setStatusValue] = useState('')
+
+
+    const [instructors, setInstructors] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
+
+    console.log(instructors)
     useEffect(() => {
-        if (data && data.data) {
-            const hasPendingRequests = data.data.some(
-                (item) => item.attributes.Status === "Pending"
-            );
-            setstatusCheck(hasPendingRequests);
-        }
-    }, [data]);
+        const fetchInstructors = async () => {
+            const instructorCollection = collection(db, 'Instructor');
+            const instructorSnapshot = await getDocs(instructorCollection);
+            const instructorsList = instructorSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                attributes: doc.data(),
+            }));
+            setInstructors(instructorsList);
+            setLoading(false);
+
+            instructorsList.map(s => {
+                if (s.attributes.status === 'Active') {
+                    setstatusCheck(false)
+                    setStatusValue(s.attributes.status)
+                }
+            })
+        };
+
+        fetchInstructors();
+    }, []);
+
+    if (loading) return <div>Loading...</div>;
 
 
-    console.log(statusCheck);
-    
+
+
+    console.log(instructors);
+
     return (
         <div>
 

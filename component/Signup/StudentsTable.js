@@ -3,54 +3,50 @@ import { Button, FormControl, FormControlLabel, FormLabel, Paper, Radio, RadioGr
 import { Router, useRouter } from "next/router"
 import React, { useEffect, useState } from 'react'
 import useFetch from "../../hooks/useFetch"
+import {
+    collection,
+    getDocs,
+    doc,
+    deleteDoc,
+    updateDoc,
+    setDoc,
+} from 'firebase/firestore';
+import { db } from '../../Firebase/Firebase'
 
 function StudentsTable() {
-    const { data, loading, error } = useFetch('http://localhost:1337/api/sign-ups')
-
 
 
     const router = useRouter()
+    const [students, setStudents] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
+
+    console.log(students)
+    React.useEffect(() => {
+        const fetchStudents = async () => {
+            const studentCollection = collection(db, 'Student');
+            const studentSnapshot = await getDocs(studentCollection);
+            const studentsList = studentSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                attributes: doc.data(),
+            }));
+            setStudents(studentsList);
+            setLoading(false);
+        };
+
+        fetchStudents();
+    }, []);
+
+    if (loading) return <div>Loading...</div>;
 
     async function handelDelete(id) {
-        const res = await fetch(`http://localhost:1337/api/sign-ups/${id}`);
-        const { data: { attributes: { email } } } = await res.json();
-        console.log(email)
-
-
-        const response = await fetch('http://localhost:1337/api/logins');
-        const loginData = await response.json();
-        const emails = loginData.data.find(i => {
-            if (i.attributes.email === email)
-                return i.id
-
-        })
 
         try {
-            const confirmDelete = confirm("Are you sure you want to delete this record?");
-            if (!confirmDelete) {
-                return;
-            }
-
-
-            const [res1] = await Promise.all([
-
-                fetch(`http://localhost:1337/api/sign-ups/${id}`, { method: "DELETE" }),
-            ]);
-
-            const res2 = await fetch(`http://localhost:1337/api/logins/${emails.id}`, {
-                method: "DELETE",
-            });
-
-            console.log(res1);
-
-
+            const studentRef = doc(db, 'Student', id);
+            await deleteDoc(studentRef);
+            router.reload();
         } catch (err) {
-            console.log(err)
+            console.log(err);
         }
-
-        router.reload()
-
-
 
     }
     return (
@@ -72,7 +68,7 @@ function StudentsTable() {
                 </TableHead>
                 <TableBody>
 
-                    {data.data?.map(s => {
+                    {students?.map(s => {
 
                         return <TableRow
 
@@ -80,12 +76,12 @@ function StudentsTable() {
                             key={s.id}
                         >
                             <TableCell component="th" scope="row">
-                                {s.attributes.firstname
+                                {s.attributes.firstName
                                 }
                             </TableCell>
-                            <TableCell align="right"> {s.attributes.lastname}</TableCell>
+                            <TableCell align="right"> {s.attributes.lastName}</TableCell>
                             {/* <TableCell align="right">{s.attributes.Specialization}</TableCell> */}
-                            <TableCell align="right"> {s.attributes.phonenumber}</TableCell>
+                            <TableCell align="right"> {s.attributes.phone}</TableCell>
                             {/* <TableCell align="right">{s.attributes.PersonalInfo}</TableCell> */}
 
                             <TableCell align="right"><Button onClick={() => handelDelete(s.id)} >Delete</Button></TableCell>
