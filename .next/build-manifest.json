@@ -20,15 +20,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/index.js"
     ],
-    "/Admin": [
+    "/Instructor/registration": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Admin.js"
-    ],
-    "/Admin/dashboard": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Admin/dashboard.js"
+      "static/chunks/pages/Instructor/registration.js"
     ],
     "/_app": [
       "static/chunks/webpack.js",

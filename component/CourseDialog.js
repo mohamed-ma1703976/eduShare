@@ -40,6 +40,9 @@ const CourseDialog = () => {
                 }} onClick={handleClickOpen}>
                 Add Course
             </Button>
+
+
+           
             </Typography>
             <Dialog
                 open={open}
@@ -51,11 +54,11 @@ const CourseDialog = () => {
                 <DialogTitle  sx={{fontSize:"30px" ,textAlign:"center",fontWeight:"750",color:"#1ABC9C"}}>{"Add Course"}</DialogTitle>
                 <DialogContent>
 
-                    <Form />
+                    <Form setOpen={setOpen}/>
                 </DialogContent>
               
             </Dialog>
-        </div>
+        </div >
 
     )
 }

@@ -1,63 +1,77 @@
 import React, { useState } from "react";
 import {
-  Button,
-  Grid,
-  Paper,
-  Stack,
-  TextField,
-  Typography,
-  Link
+    Button,
+    Grid,
+    Paper,
+    Stack,
+    TextField,
+    Typography,
+    Link
 } from "@mui/material";
 import { useRouter } from 'next/router';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, addDoc } from "firebase/firestore";
+import { db, collection } from "../../Firebase/Firebase"
 import { app } from "../../Firebase/Firebase";
 
 export default function Registration() {
-  const router = useRouter();
+    const router = useRouter();
 
-  const [signUpData, setSignUpData] = useState({
-    email: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    phone: "",
-    specialization: "",
-    personalInfo: "",
-  });
-
-  function handleChange(event) {
-    setSignUpData((prev) => {
-      return {
-        ...prev,
-        [event.target.name]: event.target.value
-      };
+    const [signUpData, setSignUpData] = useState({
+        email: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        phone: "",
+        specialization: "",
+        personalInfo: "",
     });
-  }
 
-  async function handleSignUp(e) {
-    e.preventDefault();
-
-    const auth = getAuth(app);
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, signUpData.email, signUpData.password);
-      const user = userCredential.user;
-      const db = getFirestore(app);
-      await setDoc(doc(db, "Instructor", user.uid), {
-        firstName: signUpData.firstName,
-        lastName: signUpData.lastName,
-        email: signUpData.email,
-        phone: signUpData.phone,
-        specialization: signUpData.specialization,
-        personalInfo: signUpData.personalInfo,
-        status: "Pending",
-      });
-
-      router.push("/Instructor");
-    } catch (error) {
-      console.error("Error signing up:", error);
+    function handleChange(event) {
+        setSignUpData((prev) => {
+            return {
+                ...prev,
+                [event.target.name]: event.target.value
+            };
+        });
     }
-  }
+    console.log(signUpData)
+    async function handleSignUp(e) {
+        e.preventDefault();
+
+        const auth = getAuth(app);
+
+        let collectedData = {
+            firstName: signUpData.firstName,
+            lastName: signUpData.lastName,
+            email: signUpData.email,
+            phone: signUpData.phone,
+            specialization: signUpData.specialization,
+            personalInfo: signUpData.personalInfo,
+            status: "Pending"
+        };
+        try {
+            //     const userCredential = await createUserWithEmailAndPassword(auth, signUpData.email, signUpData.password);
+            //     const user = userCredential.user;
+            //     const db = getFirestore(app);
+            const collectionRef = collection(db, "Instructor")
+            //     await addDoc(doc(db, "Instructor", user.uid), {
+            //         firstName: signUpData.firstName,
+            //         lastName: signUpData.lastName,
+            //         email: signUpData.email,
+            //         phone: signUpData.phone,
+            //         specialization: signUpData.specialization,
+            //         personalInfo: signUpData.personalInfo,
+            //         status: "Pending",
+            //     });
+
+            await addDoc(collectionRef, collectedData);
+
+            router.push("/Instructor");
+        } catch (error) {
+            console.error("Error signing up:", error);
+        }
+    }
     return (
 
 
@@ -137,7 +151,7 @@ export default function Registration() {
                                         id="outlined-basic"
                                         label="Firs tName"
                                         variant="outlined"
-                                        name="FirstName"
+                                        name="firstName"
                                         onChange={handleChange}
                                         sx={{ margin: "10px 10px 10px 10px" }}
 
@@ -149,7 +163,7 @@ export default function Registration() {
                                         id="outlined-basic"
                                         label="Last Name"
                                         variant="outlined"
-                                        name="LastName"
+                                        name="lastName"
                                         onChange={handleChange}
                                         sx={{ margin: "10px 10px 10px 10px" }}
 
@@ -175,7 +189,7 @@ export default function Registration() {
                                         id="outlined-basic"
                                         label="Specialization"
                                         variant="outlined"
-                                        name="Specialization"
+                                        name="specialization"
                                         onChange={handleChange}
                                         sx={{ margin: "10px 10px 10px 10px" }}
 
@@ -189,7 +203,7 @@ export default function Registration() {
                                         id="outlined-basic"
                                         label="Write about youself (Experiance,personla Info,etc..)"
                                         variant="outlined"
-                                        name="PersonalInfo"
+                                        name="personalInfo"
                                         onChange={handleChange}
                                         sx={{ margin: "10px 10px 10px 10px" }}
 

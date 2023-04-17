@@ -39,6 +39,7 @@ function CardList({ courseSearch }) {
   const [courses, setCourses] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
+  console.log(courses)
   React.useEffect(() => {
     const fetchCourses = async () => {
       const coursesCollection = collection(db, 'Course');
@@ -58,7 +59,7 @@ function CardList({ courseSearch }) {
 
   async function handleDelete(id) {
     try {
-      const courseRef = doc(db, 'courses', id);
+      const courseRef = doc(db, 'Course', id);
       await deleteDoc(courseRef);
       router.reload();
     } catch (err) {
@@ -75,9 +76,6 @@ function CardList({ courseSearch }) {
               <TableCell sx={{ color: 'white' }}>Course Title</TableCell>
               <TableCell align="right" sx={{ color: 'white' }}>
                 Instructor Name
-              </TableCell>
-              <TableCell align="right" sx={{ color: 'white' }}>
-                Session Type
               </TableCell>
               <TableCell align="center" sx={{ color: 'white' }}>
                 Course Description
@@ -115,31 +113,30 @@ function CardList({ courseSearch }) {
                       {s.attributes.CourseTitle}
                     </TableCell>
                     <TableCell align="right">{s.attributes.InstructorName}</TableCell>
-                    <TableCell align="right">{s.attributes.SessionType}</TableCell>
                     <TableCell align="center" sx={{ width: '50%' }}>
-                  {s.attributes.CourseDescription}
-                </TableCell>
-                <TableCell align="right">
-                  <Button>
-                    <UpdateDialog
-                      id={s.id}
-                      title={s.attributes.CourseTitle}
-                      InstructorName={s.attributes.InstructorName}
-                      SessionType={s.attributes.SessionType}
-                      CourseDescription={s.attributes.CourseDescription}
-                    />
-                  </Button>
-                </TableCell>
-                <TableCell align="right">
-                  <Button onClick={() => handleDelete(s.id)}>Delete</Button>
-                </TableCell>
-              </TableRow>
-            );
-          })}
-      </TableBody>
-    </Table>
-  </TableContainer>
-</div>
+                      {s.attributes.CourseDescription}
+                    </TableCell>
+                    <TableCell align="right">
+                      <Button>
+                        <UpdateDialog
+                          id={s.id}
+                          title={s.attributes.CourseTitle}
+                          InstructorName={s.attributes.InstructorName}
+                          SessionType={s.attributes.SessionType}
+                          CourseDescription={s.attributes.CourseDescription}
+                        />
+                      </Button>
+                    </TableCell>
+                    <TableCell align="right">
+                      <Button onClick={() => handleDelete(s.id)}>Delete</Button>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 }
 export default CardList;

@@ -17,7 +17,7 @@ import {
   import { collection, addDoc } from 'firebase/firestore';
   import { db } from '../Firebase/Firebase';
   
-  const Form = () => {
+  const Form = ({setOpen}) => {
     const router = useRouter();
   
     const [uploadImg, setUploadImg] = useState({ files: [] });
@@ -47,7 +47,7 @@ import {
         CourseDescription: formData.CourseDescription,
         CourseTitle: formData.CourseTitle,
         InstructorName: formData.InstructorName,
-        SessionType: formData.SessionType,
+        //SessionType: formData.SessionType,
       };
   
       try {
@@ -123,7 +123,7 @@ import {
 
             />
 
-            <FormControl sx={{ margin: "0 0 0 10px" }}>
+            {/* <FormControl sx={{ margin: "0 0 0 10px" }}>
                 <FormLabel id="demo-row-radio-buttons-group-label" sx={{ margin: "10px 10px 0px 20px" }}
                 >Sesion Type </FormLabel>
 
@@ -137,7 +137,7 @@ import {
                     <FormControlLabel value="Public" name="SesionType" control={<Radio />} label="Public" sx={{ margin: "0px 10px 0px 10px" }} onChange={handleChange} />
 
                 </RadioGroup>
-            </FormControl>
+            </FormControl> */}
             <div>
 
             </div>
@@ -156,8 +156,16 @@ import {
             </div>
 
 
+            <div style={{ display: "flex" }}>
+                <Button variant="outlined" sx={{ margin: "10px 0 0 10px" }} onClick={()=>setOpen(false)}>
+                    cancel
+                </Button>
+            </div>
+
+           
 
         </form >
+        
 
     )
 }
