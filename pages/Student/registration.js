@@ -43,6 +43,7 @@ export default function Registration() {
       lastName: signUpData.lastName,
       email: signUpData.email,
       phone: signUpData.phone,
+      registerdcourses: []
     }
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, signUpData.email, signUpData.password);

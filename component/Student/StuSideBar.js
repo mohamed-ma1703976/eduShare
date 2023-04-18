@@ -53,14 +53,7 @@ function StuSideBar() {
 
 
 
-                <ListItem disablePadding>
-                    <ListItemButton onClick={()=>router.push('/Student/courseregistration')}>
-                        <ListItemIcon>
-                            <EventNoteIcon />
-                        </ListItemIcon>
-                        <ListItemText sx={{ color: "#909497" }} primary="Registration" />
-                    </ListItemButton>
-                </ListItem>
+              
 
                 <ListItem disablePadding>
                 <ListItemButton onClick={()=>router.push('/Student/Profile')}>

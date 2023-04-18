@@ -1,52 +1,92 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useContext } from "react";
 import { AuthContext } from "../../hooks/AuthProvider";
 import MycoursesCard from "./MycoursesCard";
+import { collection, getDocs } from "firebase/firestore";
+import { app, db } from "../../Firebase/Firebase";
+import { getAuth } from "firebase/auth";
 export default function DropCourse() {
-    const { currentId } = useContext(AuthContext);
 
-    console.log(currentId)
-
-    // this is api include all the courses 
-    const { data: courses, loading, error } = useFetch('http://localhost:1337/api/courses');
-
-    //  const { data: loginData } = useFetch(`http://localhost:1337/api/logins/${userId}`);
-    //  const { data: studentData } = useFetch(`http://localhost:1337/api/sign-ups`);
-
-    // let currentUserEmail = loginData.data?.attributes.email
-    // let realUserId = studentData.data?.find(s => s.attributes.email === currentUserEmail).id
-    // console.log(realUserId)
-
-    const { data: currentStudentData } = useFetch(`http://localhost:1337/api/sign-ups/${currentId}`);
-    console.log(currentStudentData)
-
-    // console.log(currentStudentData.data?.attributes.courseId)
-
-    let registerdCourses = currentStudentData.data?.attributes.courseId
-    let myCourses = courses.data?.filter((course) => registerdCourses?.includes(course.id))
-    //   console.log(courses.data?.filter(s=>s.id ===currentStudentData.data?.attributes.courseId)  )
-    //   console.log(currentStudentData.data?.attributes.courseId)
-
-
-
-    // const [updateCourse, setupdateCourse] = useState({
-    //     courseId: []
-    // })
-    // console.log(updateCourse)
+    const [courses, setCourses] = React.useState([]);
+    const [students, setStudents] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
+    const [userId, setUserId] = React.useState(null);
 
 
 
 
+    useEffect(() => {
+        const auth = getAuth(app);
 
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (user) {
+                setUserId(user.uid);
+            } else {
+                setUserId(null);
+            }
+        });
+        return () => unsubscribe();
+    }, []);
+
+    React.useEffect(() => {
+        const fetchStudents = async () => {
+            const studentCollection = collection(db, 'Student');
+            const studentSnapshot = await getDocs(studentCollection);
+            const studentList = studentSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                attributes: doc.data(),
+            }));
+            setStudents(studentList);
+            setLoading(false);
+        };
+
+        fetchStudents();
+    }, []);
+
+    React.useEffect(() => {
+        const fetchCourses = async () => {
+            const coursesCollection = collection(db, 'Course');
+            const courseSnapshot = await getDocs(coursesCollection);
+            const coursesList = courseSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                attributes: doc.data(),
+            }));
+            setCourses(coursesList);
+            setLoading(false);
+        };
+
+        fetchCourses();
+    }, []);
+
+    if (loading) return <div>Loading...</div>;
+
+
+
+
+
+    const currentStudent = students.find(s => s.id === userId).attributes.registerdcourses
+    console.log(currentStudent)
+
+
+    const registerdCoursesByStudent = courses.filter(s => currentStudent.includes(s.id))
+    console.log(registerdCoursesByStudent)
+
+
+
+
+
+    console.log(courses)
+    console.log(userId)
+    console.log(students)
 
     return (
         <div>
-            {myCourses?.map(s => (
-                <Box sx={{ display: 'flex', flexDirection: 'row', margin:'10px 700px 0 0',cursor:'pointer',alignItems:'center'}}>
+            {registerdCoursesByStudent?.map(s => (
+                <Box sx={{ display: 'flex', flexDirection: 'row', margin: '10px 700px 0 0', cursor: 'pointer', alignItems: 'center' }}>
 
-                    <MycoursesCard courseTitle={s.attributes.CourseTitle} InstName={s.attributes.InstructorName} />
+                    <MycoursesCard courseTitle={s.attributes.CourseTitle} InstName={s.attributes.InstructorName} id={s.id}/>
                 </Box>
 
             ))}
