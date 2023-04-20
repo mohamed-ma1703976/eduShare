@@ -11,7 +11,7 @@ import {
 import { db } from '../../Firebase/Firebase'
 import { getAuth } from "firebase/auth";
 import { app } from "../../Firebase/Firebase"
-
+import UploadFile from "../../component/Instructors/UploadFile";
 
 export default function instructorDashboard() {
 
@@ -59,7 +59,7 @@ export default function instructorDashboard() {
             setLoading(false);
 
             instructorsList.forEach(s => {
-            
+
                 if (s.id === userId) {
                     if (s.attributes.status === 'Active') {
                         console.log(s.attributes.status)
@@ -73,7 +73,7 @@ export default function instructorDashboard() {
                     setstatusCheck(true);
                 }
             });
-            
+
         };
 
         fetchInstructors();
@@ -95,6 +95,8 @@ export default function instructorDashboard() {
                 ) : (
                     <p>Instructor Dashboard</p>
                 )}
+                <UploadFile />
+
             </div>
 
         </div>

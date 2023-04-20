@@ -48,7 +48,8 @@ export default function Registration() {
             phone: signUpData.phone,
             specialization: signUpData.specialization,
             personalInfo: signUpData.personalInfo,
-            status: "Pending"
+            status: "Pending",
+            myCourse:[]
         };
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, signUpData.email, signUpData.password);
