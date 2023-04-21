@@ -20,7 +20,7 @@ export default function coursePage() {
             <Stack direction="row" spacing={2} >
 
                 <StuSideBar />
-                <CoursePage />
+                <CoursePage courseName={courseName}/>
             </Stack>
 
         </Box>

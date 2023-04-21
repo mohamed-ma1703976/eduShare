@@ -6,7 +6,7 @@ import { getDocs } from 'firebase/firestore';
 
 const UploadFile = () => {
     const [file, setFile] = useState(null);
-    const [fileList, setFileList] = useState([]);
+    // const [fileList, setFileList] = useState([]);
 
     const [instructors, setInstructors] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -14,7 +14,7 @@ const UploadFile = () => {
     console.log(instructors)
     const currentUser = auth.currentUser.uid;
 
-   let currentInstructor = instructors?.find(ins => ins.id === currentUser)?.attributes.myCourse[0].coursname[0].replace(/\s+/g, '')
+    let currentInstructor = instructors?.find(ins => ins.id === currentUser)?.attributes.myCourse[0].coursname[0].replace(/\s+/g, '')
     console.log(currentInstructor)
 
     //const fileListRef = ref(storage, `${currentInstructor}/`); // Declare and initialize fileListRef
@@ -59,10 +59,10 @@ const UploadFile = () => {
         uploadBytes(fileRef, file)
         
         // .then((snapshot) => {
-        //     getDownloadURL(snapshot.ref).then((url) => {
-        //         setFileList((pre) => [...pre, url])
+        //         getDownloadURL(snapshot.ref).then((url) => {
+        //             setFileList((pre) => [...pre, url])
+        //         });
         //     });
-        // });
     };
 
     return (
@@ -70,13 +70,13 @@ const UploadFile = () => {
             <h1>Instructor Component</h1>
             <input type="file" onChange={handleFileChange} />
             <button onClick={handleUpload}>Upload File</button>
-            {fileList.map((url, index) => {
+            {/* {fileList.map((url, index) => {
                 return (
                     <div key={index}>
                         <a href={url} target="_blank" rel="noopener noreferrer">{url}</a>
                     </div>
                 );
-            })}
+            })} */}
         </div>
     );
 };

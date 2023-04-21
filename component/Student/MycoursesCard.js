@@ -8,7 +8,6 @@ import { getAuth } from 'firebase/auth';
 import { app, collection, db, storage } from '../../Firebase/Firebase';
 import { doc, getDocs, updateDoc } from 'firebase/firestore';
 import { useRouter } from 'next/router';
-import { getDownloadURL, listAll, ref } from 'firebase/storage';
 
 export default function MycoursesCard({ courseTitle, InstName, id, userid }) {
     const router = useRouter();
@@ -18,10 +17,7 @@ export default function MycoursesCard({ courseTitle, InstName, id, userid }) {
     const [loading, setLoading] = React.useState(true);
     //const [userId, setUserId] = React.useState(null);
     const [currentCourses, setCurrentCourses] = React.useState();
-    const [isCoursePage, setIsCoursePage] = React.useState(false);
-    const [fileList, setFileList] = React.useState([]);
-    const [trimedCourse, setTrimedCourse] = React.useState([]);
-
+   
 
 
     //const currentStudent = students.find(s => s.id === userId)?.attributes.registerdcourses
@@ -107,24 +103,6 @@ export default function MycoursesCard({ courseTitle, InstName, id, userid }) {
 
 
 
-    async function handelCourseFiles(id, courseName) {
-        setIsCoursePage(p => !p)
-        console.log(courseName)
-        const CourseNameTrimed = courseName.replace(/\s+/g, '')
-        setTrimedCourse(CourseNameTrimed)
-        console.log(CourseNameTrimed)
-        const fileListRef = ref(storage, `${CourseNameTrimed}/`); // Declare and initialize fileListRef
-
-        listAll(fileListRef).then((res) => {
-            setFileList([]); // Clear fileList state
-            res.items.forEach((item) => {
-                getDownloadURL(item).then((url) => {
-                    setFileList(pre => [...pre, url]);
-                });
-            });
-        });
-    }
-    console.log(fileList)
 
     function handelRoute(id,name){
         router.push({
@@ -135,35 +113,8 @@ export default function MycoursesCard({ courseTitle, InstName, id, userid }) {
     }
     return (
         <div>
-            {
-                isCoursePage ? <div><Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '1000' }}>
-                    Course Content
-                </Typography>
-
-
-                    <Button onClick={() => setIsCoursePage(p => !p)}>back to my courses</Button>
-                    {fileList.map((url, index) => {
-                        return (
-                            <div key={index}>
-                                <Card sx={{ width: '100%', backgroundColor: '', color: '' }}>
-                                    <CardContent>
-
-
-                                        <a href={url} target="_blank" rel="noopener noreferrer" style={{ color: "black", textDecoration: "none" }}>{trimedCourse + "/" + (index + 1)}</a>
-
-                                    </CardContent>
-
-                                </Card>
-                            </div>
-
-
-
-
-
-                        );
-                    })}
-
-                </div> :
+            
+                 
                     <Card sx={{ width: '100%', backgroundColor: '#1ABC9C', color: '#454545' }}>
                         <CardContent>
                             <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '1000' }}>
@@ -175,12 +126,11 @@ export default function MycoursesCard({ courseTitle, InstName, id, userid }) {
                         </CardContent>
                         <CardActions>
                             <Button size="small" sx={{ backgroundColor: '#1ABC9C', color: 'white', margin: '0 0 10px 0', border: '1px solid' }} onClick={() => handelDrop(id)}>Drop course</Button>
-                            {/* <Button size="small" sx={{ backgroundColor: '#1ABC9C', color: 'white', margin: '0 0 10px 0', border: '1px solid' }} onClick={() => handelCourseFiles(id, courseTitle)}>Course Page</Button> */}
                             <Button size="small" sx={{ backgroundColor: '#1ABC9C', color: 'white', margin: '0 0 10px 0', border: '1px solid' }} onClick={() => handelRoute(id, courseTitle)}>Course Page</Button>
 
                         </CardActions>
                     </Card>
-            }
+            
         </div >
 
     );
