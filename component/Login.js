@@ -48,25 +48,53 @@ export default function App() {
       );
       const userId = userCredential.user.uid;
       login(userId);
-
+  
       const db = getFirestore(app);
+      
       const studentDocRef = doc(db, "Student", userId);
       const studentDoc = await getDoc(studentDocRef);
-
+  
       const instructorDocRef = doc(db, "Instructor", userId);
       const instructorDoc = await getDoc(instructorDocRef);
-
+  
       const adminDocRef = doc(db, "Admin", userId);
       const adminDoc = await getDoc(adminDocRef);
-
+  
+      let userDoc;
+      let role;
+  
       if (studentDoc.exists()) {
-        router.push("/Student");
+        userDoc = studentDoc;
+        role = "student";
       } else if (instructorDoc.exists()) {
-        router.push("/Instructor");
+        userDoc = instructorDoc;
+        role = "instructor";
+      } else if (adminDoc.exists()) {
+        userDoc = adminDoc;
+        role = "admin";
       } else {
-        router.push("/Admin");
+        throw new Error("User not found in any role collection.");
       }
-
+  
+      const userData = userDoc.data();
+      const profileComplete = (
+        userData.displayName &&
+        userData.bio &&
+        userData.title
+      );
+  
+      if (!profileComplete) {
+        router.push("/createProfile");
+      } else {
+        if (role === "student") {
+          router.push("/Student");
+        } else if (role === "instructor") {
+          router.push("/Instructor");
+        } else {
+          router.push("/Admin");
+        }
+      }
+  
       setLoginError(false);
     } catch (error) {
       setLoginError(true);
