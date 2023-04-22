@@ -14,7 +14,7 @@ const UploadFile = () => {
     console.log(instructors)
     const currentUser = auth.currentUser.uid;
 
-    let currentInstructor = instructors?.find(ins => ins.id === currentUser)?.attributes.myCourse[0].coursname[0].replace(/\s+/g, '')
+    let currentInstructor = instructors?.find(ins => ins.id === currentUser)?.attributes.myCourse?.[0]?.coursname?.[0]?.replace(/\s+/g, '');
     console.log(currentInstructor)
 
     //const fileListRef = ref(storage, `${currentInstructor}/`); // Declare and initialize fileListRef

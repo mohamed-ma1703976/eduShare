@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Box } from "@mui/system";
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { app } from "../../Firebase/Firebase";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { AuthContext } from "../../hooks/AuthProvider";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
   const router = useRouter();
+  const { userId, userRole } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const userId = localStorage.getItem("userId");
-      const userRole = localStorage.getItem("userRole");
-
       if (!userId || !userRole) {
         router.push("/");
         return;
@@ -29,7 +28,7 @@ const Profile = () => {
     };
 
     fetchUserData();
-  }, [router]);
+  }, [router, userId, userRole]);
 
   if (!user) {
     return <div>Loading...</div>;
@@ -41,15 +40,18 @@ const Profile = () => {
         <CardMedia
           component="img"
           height="200"
-          image={user.coverImage}
+          image={user.coverPicture || "/path/to/default/cover/picture"}
           alt="Cover Image"
         />
         <CardContent>
           <Typography variant="h5" component="div">
-            {user.name}
+            {user.displayName}
+          </Typography>
+          <Typography variant="subtitle1" component="div">
+            {user.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {user.description}
+            {user.bio}
           </Typography>
         </CardContent>
       </Card>

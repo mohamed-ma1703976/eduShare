@@ -1,5 +1,4 @@
 // createProfile.js
-import React, { useContext, useState } from "react";
 import { AuthContext } from "../hooks/AuthProvider";
 import {
   Button,
@@ -17,14 +16,20 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Box } from "@mui/system";
 import { useRouter } from "next/router";
 import { app } from "../Firebase/Firebase";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import getUserRole from '../hooks/getRole';
+
+import { getFirestore, doc, setDoc, getDoc, updateDoc, collection } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { Avatar } from "@mui/material";
 import AddAPhoto from "@mui/icons-material/AddAPhoto";
+import React, { useContext, useState, useEffect } from "react";
 export default function CreateProfile() {
-  const router = useRouter();
+    const router = useRouter();
+    const { userId } = useContext(AuthContext); // Move this line here  
   const [profilePicturePreview, setProfilePicturePreview] = useState(null);
   const [coverPicturePreview, setCoverPicturePreview] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false); 
   const [profileData, setProfileData] = useState({
     displayName: "",
     bio: "",
@@ -34,66 +39,79 @@ export default function CreateProfile() {
     collection: "",
     title: "", // Add this line
   });
-  async function handleSave(e) {
-    e.preventDefault();
-  
-    const { userId } = useContext(AuthContext);
     const db = getFirestore(app);
     const userRef = doc(db, "Users", userId);
   
     useEffect(() => {
+      if (!userId) return; // Don't proceed if userId is not set yet
+    
       async function fetchUserRole() {
-        const userDoc = await getDoc(userRef);
-  
-        if (userDoc.exists()) {
-          const user = userDoc.data();
-          setProfileData((prevData) => ({ ...prevData, role: user.role, collection: user.role === "student" ? "Student" : "Instructor" }));
+        const userRole = await getUserRole(userId, app);
+    
+        if (userRole) {
+          setProfileData((prevData) => ({
+            ...prevData,
+            role: userRole,
+            collection: userRole === "student" ? "Student" : "Instructor",
+          }));
         }
       }
-  
+    
       fetchUserRole();
-    }, []);
-    // Uploading profile picture and cover picture
-    const storage = getStorage(app);
-    const profilePictureRef = ref(storage, `profile_pictures/${userId}`);
-    const coverPictureRef = ref(storage, `cover_pictures/${userId}`);
-  
-    if (profileData.profilePicture) {
-      const profilePictureSnapshot = await uploadBytes(
-        profilePictureRef,
-        profileData.profilePicture
-      );
-      const profilePictureURL = await getDownloadURL(
-        profilePictureSnapshot.ref
-      );
-      profileData.profilePicture = profilePictureURL;
+    }, [userId]);
+    function validateProfileData(data) {
+      if (!data.displayName || !data.bio || !data.title) {
+        return "All fields are required.";
+      }
+      return null;
     }
-  
-    if (profileData.coverPicture) {
-      const coverPictureSnapshot = await uploadBytes(
-        coverPictureRef,
-        profileData.coverPicture
-      );
-      const coverPictureURL = await getDownloadURL(coverPictureSnapshot.ref);
-      profileData.coverPicture = coverPictureURL;
+    async function handleSave(e) {
+      e.preventDefault();
+      setLoading(true);
+    
+      const { displayName, bio, title } = profileData; // Destructure the values from profileData
+    
+      try {
+        const updatedProfileData = {
+          displayName: displayName.trim(),
+          bio: bio.trim(),
+          title: title.trim(),
+        };
+    
+        // Validate the profile data
+        const validationError = validateProfileData(updatedProfileData);
+        if (validationError) {
+          setError(validationError);
+          setLoading(false);
+          return;
+        }
+    
+        // Save the profile data in the appropriate collection
+        const collectionRef = collection(db, profileData.collection); // Use profileData.collection
+        const userDocRef = doc(db, profileData.collection, userId);
+await updateDoc(userDocRef, {
+  displayName: updatedProfileData.displayName,
+  bio: updatedProfileData.bio,
+  title: updatedProfileData.title,
+});
+    
+        const userRole = await getUserRole(userId, app);
+    
+        if (userRole === "student") {
+          router.push("/Student");
+        } else if (userRole === "instructor") {
+          router.push("/Instructor");
+        } else {
+          router.push("/Admin");
+        }
+    
+        setLoading(false);
+      } catch (error) {
+        console.log(error); // Add this line to log the error
+        setError("An error occurred while saving your profile.");
+        setLoading(false);
+      }
     }
-  
-    // Update the user document with the new profile data
-    await updateDoc(userDocRef, {
-        displayName: profileData.displayName,
-        bio: profileData.bio,
-        profilePicture: profileData.profilePicture,
-        coverPicture: profileData.coverPicture,
-        title: profileData.title, // Add this line
-      })
-  
-    // Navigate based on the user's role
-    if (profileData.role === "student") {
-      router.push("/Student/Profile");
-    } else if (profileData.role === "instructor") {
-      router.push("/Instructor/Profile");
-    }
-  }
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setProfileData({ ...profileData, [name]: value });
@@ -163,10 +181,12 @@ export default function CreateProfile() {
   width="100%"
   height="200px"
   style={{
-    background: `url(${
+    backgroundImage: `url(${
       coverPicturePreview || "/path/to/default/cover/picture"
-    }) no-repeat center center`,
+    })`,
     backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center center",
     cursor: "pointer",
     position: "relative",
   }}
