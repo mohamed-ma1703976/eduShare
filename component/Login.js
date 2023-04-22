@@ -64,11 +64,14 @@ export default function App() {
       let role;
   
       if (studentDoc.exists()) {
-        userDoc = studentDoc;
-        role = "student";
+        // userDoc = studentDoc;
+        // role = "student";
+        router.push('/Student')
       } else if (instructorDoc.exists()) {
-        userDoc = instructorDoc;
-        role = "instructor";
+        // userDoc = instructorDoc;
+        // role = "instructor";
+        router.push('/Instructor')
+
       } else if (adminDoc.exists()) {
         userDoc = adminDoc;
         role = "admin";

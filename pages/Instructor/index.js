@@ -11,8 +11,9 @@ import {
 import { db } from '../../Firebase/Firebase'
 import { getAuth } from "firebase/auth";
 import { app } from "../../Firebase/Firebase"
-import UploadFile from "../../component/Instructors/UploadFile";
-
+import InstNav from "../../component/Instructors/InstNav";
+import InstSidebar from "../../component/Instructors/InstSidebarr";
+import { Box, Stack } from "@mui/material";
 export default function instructorDashboard() {
 
     const [statusCheck, setstatusCheck] = useState(true)
@@ -90,12 +91,24 @@ export default function instructorDashboard() {
         <div>
 
             <div>
-                {statusCheck ? (
+                {/* {statusCheck ? (
                     <p>Your request is pending</p>
-                ) : (
-                    <p>Instructor Dashboard</p>
-                )}
-                <UploadFile />
+                ) : ( */}
+                    <Box>
+
+                        <InstNav />
+
+                        <Stack direction="row" spacing={2} >
+
+                            <InstSidebar />
+
+                            {/* <Card /> */}
+
+                        </Stack>
+
+                    </Box>
+                {/* )} */}
+                {/* <UploadFile /> */}
 
             </div>
 

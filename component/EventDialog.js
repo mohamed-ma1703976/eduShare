@@ -10,7 +10,7 @@ import {
 
 
 import Form from './Form';
-
+import CompationFormm from './Instructors/CompationFormm';
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -33,10 +33,10 @@ const EventDialog = () => {
             <Button variant="contained" size="large"style={{
                 borderRadius: 15,
                 backgroundColor: "#FEC64F",
-                padding: "14px 55px",
+                padding: "14px 20px",
                 fontSize: "18px"
                 }} onClick={handleClickOpen}>
-                Add Event
+                Create Compation
             </Button>
             </Typography>
             <Dialog
@@ -49,7 +49,7 @@ const EventDialog = () => {
                 <DialogTitle  sx={{fontSize:"30px" ,textAlign:"center",fontWeight:"00",color:"#FEC64F"}}>{"Add Event"}</DialogTitle>
                 <DialogContent>
 
-                    <Form />
+                    <CompationFormm />
                 </DialogContent>
               
             </Dialog>

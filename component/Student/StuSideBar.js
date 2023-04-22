@@ -34,7 +34,7 @@ function StuSideBar() {
                 </ListItem> */}
 
                 <ListItem disablePadding>
-                <ListItemButton onClick={()=>router.push('/Student')}>
+                    <ListItemButton onClick={() => router.push('/Student')}>
                         <ListItemIcon>
                             <AccountCircleIcon />
                         </ListItemIcon>
@@ -53,10 +53,18 @@ function StuSideBar() {
 
 
 
-              
 
                 <ListItem disablePadding>
-                <ListItemButton onClick={()=>router.push('/Student/Profile')}>
+                    <ListItemButton onClick={() => router.push("/Student/InstructorAciveCard")}>
+                        <ListItemIcon>
+                            <Groups3Icon />
+                        </ListItemIcon>
+                        <ListItemText sx={{ color: "#909497" }} primary="Instructors Achievements " />
+                    </ListItemButton>
+                </ListItem>
+
+                <ListItem disablePadding>
+                    <ListItemButton onClick={() => router.push('/Student/Profile')}>
                         <ListItemIcon>
                             <AccountCircleIcon />
                         </ListItemIcon>
