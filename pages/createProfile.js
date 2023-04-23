@@ -68,35 +68,53 @@ export default function CreateProfile() {
   async function handleSave(e) {
     e.preventDefault();
     setLoading(true);
-
-    const { displayName, bio, title } = profileData; // Destructure the values from profileData
-
+  
+    const { displayName, bio, title, profilePicture, coverPicture } = profileData;
+  
     try {
       const updatedProfileData = {
         displayName: displayName.trim(),
         bio: bio.trim(),
         title: title.trim(),
       };
-
-      // Validate the profile data
+  
       const validationError = validateProfileData(updatedProfileData);
       if (validationError) {
         setError(validationError);
         setLoading(false);
         return;
       }
-
+  
+      // Upload images to Firebase storage and get the download URLs
+      const storage = getStorage(app);
+      let profilePictureURL, coverPictureURL;
+  
+      if (profilePicture) {
+        const profilePictureRef = ref(storage, `profilePictures/${userId}`);
+        await uploadBytes(profilePictureRef, profilePicture);
+        profilePictureURL = await getDownloadURL(profilePictureRef);
+      }
+  
+      if (coverPicture) {
+        const coverPictureRef = ref(storage, `coverPictures/${userId}`);
+        await uploadBytes(coverPictureRef, coverPicture);
+        coverPictureURL = await getDownloadURL(coverPictureRef);
+      }
+  
       // Save the profile data in the appropriate collection
-      const collectionRef = collection(db, profileData.collection); // Use profileData.collection
+      const collectionRef = collection(db, profileData.collection);
       const userDocRef = doc(db, profileData.collection, userId);
+  
       await updateDoc(userDocRef, {
         displayName: updatedProfileData.displayName,
         bio: updatedProfileData.bio,
         title: updatedProfileData.title,
+        ...(profilePictureURL && { profilePicture: profilePictureURL }),
+        ...(coverPictureURL && { coverPicture: coverPictureURL }),
       });
-
+  
       const userRole = await getUserRole(userId, app);
-
+  
       if (userRole === "Student") {
         router.push("/Student");
       } else if (userRole === "Instructor") {
@@ -104,14 +122,14 @@ export default function CreateProfile() {
       } else {
         router.push("/Admin");
       }
-
+  
       setLoading(false);
     } catch (error) {
-      console.log(error); // Add this line to log the error
+      console.log(error);
       setError("An error occurred while saving your profile.");
       setLoading(false);
     }
-  }
+  }  
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setProfileData({ ...profileData, [name]: value });
