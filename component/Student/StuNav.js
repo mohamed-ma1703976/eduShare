@@ -2,17 +2,36 @@ import { AppBar, Toolbar, Typography, MenuItem, Menu, styled, InputBase } from '
 import MapsUgcIcon from '@mui/icons-material/MapsUgc';
 import SettingsIcon from '@mui/icons-material/Settings';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from "next/router"
 import useFetch from '../../hooks/useFetch';
+import { auth, collection, db } from '../../Firebase/Firebase';
+import { getDocs } from 'firebase/firestore';
 function StuNav({ setCourseSearch }) {
-    const { data, loading, error } = useFetch('http://localhost:1337/api/logins')
 
     const router = useRouter()
 
     const [open, setOpen] = useState(false)
 
+    const [students, setStudents] = useState([]);
+    const currentUser = auth.currentUser.uid
+    let fName = students.find(s=>s.id === currentUser)?.attributes.firstName
+    let lName = students.find(s=>s.id === currentUser)?.attributes.lastName
 
+    console.log(currentUser)
+    useEffect(() => {
+        const fetchStudents = async () => {
+            const studentCollection = collection(db, 'Student');
+            const studentSnapshot = await getDocs(studentCollection);
+            const studentList = studentSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                attributes: doc.data(),
+            }));
+            setStudents(studentList);
+        };
+
+        fetchStudents();
+    }, []);
 
 
     return (
@@ -22,7 +41,7 @@ function StuNav({ setCourseSearch }) {
 
                 <Toolbar >
                     <Typography variant='h6' sx={{ color: "#454545", fontWeight: "800", margin: "0 0 0 -23px", cursor: "pointer" }}>Edu<span style={{ color: "#1ABC9C" }} onClick={() => router.push("/Student")}>Share</span></Typography>
-                    <Typography variant='h6' sx={{ padding: "6px", margin: "0 0 0 66px", color: "#454545", fontWeight: "800", cursor: "pointer" }}>Student </Typography>
+                    <Typography variant='h6' sx={{ padding: "6px", margin: "0 0 0 66px", color: "#454545", fontWeight: "800", cursor: "pointer" }}>Wellcome {fName + " " + lName} </Typography>
                 </Toolbar>
 
 

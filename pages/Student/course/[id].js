@@ -29,7 +29,7 @@ const CoursePage = ({ course }) => {
     myCourse: []
   });
 
-  console.log("course id", course.id)
+  console.log("course id", course.fileUrl)
   console.log("user id", userId)
   console.log("state", enrolledCourse)
   console.log("students data", students)
@@ -172,7 +172,7 @@ const CoursePage = ({ course }) => {
               <CardMedia
                 component="img"
                 height="200"
-                image={course.CourseImageURL || "https://via.placeholder.com/900x200"}
+                image={course.fileUrl || "https://via.placeholder.com/900x200"}
                 alt={course.CourseTitle}
               />
 

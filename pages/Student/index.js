@@ -76,7 +76,7 @@ export default function studentDashboard() {
             <Box>
               <ImageCarousel />
               <Card />
-              <Typography variant="h5" gutterBottom>
+              <Typography variant="h5" gutterBottom style={{ fontSize: '30px', fontWeight: "1000", margin: "0 400px 0 0", color: "#454545" }}>
                 Latest Courses
               </Typography>
               <Slider {...settings}>
@@ -86,9 +86,16 @@ export default function studentDashboard() {
                   </Box>
                 ))}
               </Slider>
-              <Typography variant="h5" gutterBottom mt={4}>
+
+
+              <Typography variant="h5" mt={4} gutterBottom style={{ fontSize: '30px', fontWeight: "1000", margin: "0 400px 0 0", color: "#454545" }}>
                 Trending Courses
               </Typography>
+
+
+
+
+
               <Slider {...settings}>
                 {trendingCourses.map((course) => (
                   <Box key={course.id} sx={{ padding: 1 }}>

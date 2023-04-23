@@ -70,9 +70,7 @@ export default function instructorDashboard() {
                     } else {
                         setstatusCheck(true);
                     }
-                } else {
-                    setstatusCheck(true);
-                }
+                } 
             });
 
         };

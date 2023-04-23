@@ -20,15 +20,20 @@
       "static/chunks/main.js",
       "static/chunks/pages/index.js"
     ],
-    "/Instructor": [
+    "/Admin/dashboard": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Instructor.js"
+      "static/chunks/pages/Admin/dashboard.js"
     ],
-    "/Instructor/profile": [
+    "/Student": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Instructor/profile.js"
+      "static/chunks/pages/Student.js"
+    ],
+    "/Student/Profile": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/Student/Profile.js"
     ],
     "/_app": [
       "static/chunks/webpack.js",
@@ -39,11 +44,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
-    ],
-    "/createProfile": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/createProfile.js"
     ]
   },
   "ampFirstPages": []

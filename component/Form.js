@@ -10,6 +10,7 @@ import {
   Select,
   MenuItem,
   InputLabel,
+  Typography,
 } from '@mui/material';
 import { color } from '@mui/system';
 
@@ -18,15 +19,18 @@ import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 import React, { useEffect, useState } from 'react';
 import Router, { useRouter } from 'next/router';
 import { collection, addDoc, getDocs } from 'firebase/firestore';
-import { db } from '../Firebase/Firebase';
+import { db, storage } from '../Firebase/Firebase';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 const Form = ({ setOpen }) => {
   const router = useRouter();
 
   const [uploadImg, setUploadImg] = useState({ files: [] });
   const [isSelected, setIsSelected] = useState(false);
+  const [isSelectedd, setIsSelectedd] = useState('');
 
   const [instructors, setInstructors] = React.useState([]);
+  const [fileList, setFileList] = useState([]);
 
   const [formData, setFormData] = useState({
     CourseTitle: '',
@@ -34,6 +38,7 @@ const Form = ({ setOpen }) => {
     CourseDescription: '',
     SessionType: '',
     img: '',
+    fileUrl: ''
   });
 
 
@@ -71,7 +76,7 @@ const Form = ({ setOpen }) => {
       CourseDescription: formData.CourseDescription,
       CourseTitle: formData.CourseTitle,
       InstructorName: formData.InstructorName,
-      //SessionType: formData.SessionType,
+      fileUrl: fileList[0]
     };
 
     try {
@@ -83,30 +88,25 @@ const Form = ({ setOpen }) => {
     }
   };
 
-  function handleImg(e) {
-    console.log(e.target.files);
-    if (e.target.files.length !== 0) {
-      setUploadImg(URL.createObjectURL(e.target.files[0]))
-      setIsSelected(true)
-      setFormData(pre => {
-        return {
-          ...pre,
-          [e.target.name]: e.target.value
-        }
 
-      })
-    } else {
-      console.log("no file selected")
-      setIsSelected(false)
-
-    }
-
-  }
 
 
   console.log(uploadImg);
   console.log(formData)
+  const handleFileUpload = async (event) => {
 
+    const file = event.target.files[0];
+    setIsSelectedd(file.name)
+    const storageRef = ref(storage, `Courses/${file.name}`);
+
+    uploadBytes(storageRef, file).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        setFileList((pre) => [url])
+      });
+    });
+
+  };
+  console.log(fileList)
   return (
 
     <form onSubmit={handleSubmit} style={{
@@ -152,6 +152,16 @@ const Form = ({ setOpen }) => {
 
 
       />
+      
+        <input type="file" onChange={handleFileUpload} style={{
+          margin: "24px 0px 0px 30px",
+          width: "47%",
+          height: "50%",
+          border: "1px solid #000",
+          padding: "5px" // Add border
+        }} />
+
+      {/* {<span>{isSelectedd}</span>} */}
 
       {/* <FormControl sx={{ margin: "0 0 0 10px" }}>
                 <FormLabel id="demo-row-radio-buttons-group-label" sx={{ margin: "10px 10px 0px 20px" }}

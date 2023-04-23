@@ -10,14 +10,13 @@ const Profile = () => {
   const [user, setUser] = useState(null);
   const router = useRouter();
   const { userId, userRole } = useContext(AuthContext);
-  let currentUserId = auth.currentUser.uid;
 
   //console.log(getUserRole(userId, app))
   const [useRole, setUseRole] = useState("")
 
 
 
-  console.log(user, userId, userRole, currentUserId)
+  console.log(user, userId, userRole)
 
   useEffect(() => {
     //getUserRole(userId, app).then(res => setUseRole(res))

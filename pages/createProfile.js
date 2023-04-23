@@ -52,7 +52,7 @@ export default function CreateProfile() {
         setProfileData((prevData) => ({
           ...prevData,
           role: userRole,
-          collection: userRole === "student" ? "Student" : "Instructor",
+          collection: userRole === "Student" ? "Student" : "Instructor",
         }));
       }
     }
@@ -97,9 +97,9 @@ export default function CreateProfile() {
 
       const userRole = await getUserRole(userId, app);
 
-      if (userRole === "student") {
+      if (userRole === "Student") {
         router.push("/Student");
-      } else if (userRole === "instructor") {
+      } else if (userRole === "Instructor") {
         router.push("/Instructor");
       } else {
         router.push("/Admin");
@@ -126,12 +126,13 @@ export default function CreateProfile() {
         if (type === "profilePicture") {
           setProfilePicturePreview(reader.result);
         } else {
-          setCoverPicturePreview(reader.result);
+          setCoverPicturePreview(reader.result); // Update coverPicturePreview state
         }
       };
       reader.readAsDataURL(file);
     }
   };
+  
   return (
     <Grid
       container

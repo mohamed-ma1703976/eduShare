@@ -53,6 +53,7 @@ const UploadFile = () => {
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
     };
+    console.log(file)
     console.log(currentUser)
     const handleUpload = () => {
         if (file === null) return;

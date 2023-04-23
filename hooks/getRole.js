@@ -1,5 +1,9 @@
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 export default async function getUserRole(userId, app) {
+
+  if (!userId) {
+    throw new Error("userId is null or undefined.");
+  }
   const db = getFirestore(app);
 
   const studentDocRef = doc(db, "Student", userId);

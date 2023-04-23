@@ -8,7 +8,7 @@ import { getAuth } from 'firebase/auth';
 import { app, collection, db, storage } from '../../Firebase/Firebase';
 import { doc, getDocs, updateDoc } from 'firebase/firestore';
 import { useRouter } from 'next/router';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
 export default function MycoursesCard({ courseTitle, InstName, id, userid }) {
     const router = useRouter();
@@ -18,13 +18,11 @@ export default function MycoursesCard({ courseTitle, InstName, id, userid }) {
     const [loading, setLoading] = React.useState(true);
     //const [userId, setUserId] = React.useState(null);
     const [currentCourses, setCurrentCourses] = React.useState();
-   
+
 
 
     //const currentStudent = students.find(s => s.id === userId)?.attributes.registerdcourses
     React.useEffect(() => {
-        const auth = getAuth(app);
-
         const fetchStudents = async () => {
             const studentCollection = collection(db, 'Student');
             const studentSnapshot = await getDocs(studentCollection);
@@ -36,19 +34,8 @@ export default function MycoursesCard({ courseTitle, InstName, id, userid }) {
             setLoading(false);
         };
 
-        // const unsubscribe = auth.onAuthStateChanged(user => {
-        //     if (user) {
-        //         setUserId(user.uid);
-        //     } else {
-        //         setUserId(null);
-        //     }
-        // });
-
         fetchStudents();
-
-        // return () => unsubscribe();
     }, [userid]);
-    if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "200px 550px 0 0 " }} /></div>;
 
     React.useEffect(() => {
         if (students.length > 0 && userid) {
@@ -58,28 +45,18 @@ export default function MycoursesCard({ courseTitle, InstName, id, userid }) {
             }
         }
     }, [students, userid]);
+    if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "200px 550px 0 0 " }} /></div>;
 
 
     console.log(userid)
 
     async function handelDrop(id) {
         try {
-            // Find the index of the course with the given id in the currentCourses array
             const index = currentCourses.findIndex(course => course === id);
             if (index !== -1) {
-                // If the course is found, remove it from the currentCourses array
                 const updatedCourses = [...currentCourses];
                 updatedCourses.splice(index, 1);
                 setCurrentCourses(updatedCourses);
-
-                // Update the current student's registered courses in the database
-                // const studentDocRef = collection(db, 'Student', userId);
-                // await studentDocRef.update({
-                //     registerdcourses: updatedCourses
-                // });
-
-
-
                 try {
                     if (userid) {
                         const studentRef = doc(db, 'Student', userid);
@@ -106,18 +83,18 @@ export default function MycoursesCard({ courseTitle, InstName, id, userid }) {
 
 
 
-    function handelRoute(id,name){
+    function handelRoute(id, name) {
         router.push({
-            pathname:'/Student/coursePage',
-            query:{myParam:name}
+            pathname: '/Student/coursePage',
+            query: { myParam: name }
         })
 
     }
     return (
         <div>
-            
-                 
-                    <Card sx={{ width: '100%', backgroundColor: '#1ABC9C', color: '#454545' }}>
+
+
+            {/* <Card sx={{ width: '100%', backgroundColor: '#1ABC9C', color: '#454545' }}>
                         <CardContent>
                             <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '1000' }}>
                                 Course Name : {courseTitle}
@@ -132,7 +109,48 @@ export default function MycoursesCard({ courseTitle, InstName, id, userid }) {
 
                         </CardActions>
                     </Card>
-            
+             */}
+
+
+
+
+
+
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 1000, margin: "5px 0 0 0px " }} aria-label="simple table">
+                    <TableHead sx={{ backgroundColor: "#1ABC9C" }}>
+                        <TableRow>
+                            <TableCell sx={{ color: "white" }}>    Course Name</TableCell>
+                            <TableCell align="right" sx={{ color: "white" }}> Instructor Name</TableCell>
+                            <TableCell align="center" sx={{ color: "white" }}>Drop course</TableCell>
+                            <TableCell align="center" sx={{ color: "white" }}>Course Page</TableCell>
+
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+
+                        <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            key={id}
+                        >
+                            <TableCell component="th" scope="row">{courseTitle}</TableCell>
+                            <TableCell align="right">{InstName}</TableCell>
+                            <TableCell align="center">
+                                <Button size="small" sx={{ backgroundColor: '#1ABC9C', color: 'white', margin: '0 0 10px 0', border: '1px solid','&:hover': { backgroundColor: '#1ABC9C' } }} onClick={() => handelDrop(id)}>Drop course</Button>
+                            </TableCell>
+
+
+                            <TableCell align="center">
+
+                                <Button size="small" sx={{ backgroundColor: '#1ABC9C', color: 'white', margin: '0 0 10px 0', border: '1px solid','&:hover': { backgroundColor: '#1ABC9C' } }} onClick={() => handelRoute(id, courseTitle)}>Course Page</Button>
+
+                            </TableCell>
+
+                        </TableRow>
+
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </div >
 
     );
