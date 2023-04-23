@@ -1,5 +1,5 @@
 
-import { Button, FormControl, FormControlLabel, FormLabel, Paper, Radio, RadioGroup, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
+import { Button, CircularProgress, FormControl, FormControlLabel, FormLabel, Paper, Radio, RadioGroup, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
 import { Router, useRouter } from "next/router"
 import React, { useEffect, useState } from 'react'
 import useFetch from "../../hooks/useFetch"
@@ -36,7 +36,7 @@ function StudentsTable() {
         fetchStudents();
     }, []);
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "200px 550px 0 0 " }} /></div>;
 
     async function handelDelete(id) {
 

@@ -65,6 +65,15 @@ function InstSidebar() {
                 </ListItem>
 
 
+                <ListItem disablePadding>
+                    <ListItemButton onClick={()=>router.push('/Instructor/profile')}>
+                        <ListItemIcon>
+                            <AccountCircleIcon />
+                        </ListItemIcon>
+                        <ListItemText sx={{ color: "#909497" }} primary="Profile" />
+                    </ListItemButton>
+                </ListItem>
+
 
 
 
@@ -96,16 +105,7 @@ function InstSidebar() {
 
 
 
-                <ListItem disablePadding>
-                    <ListItemButton >
-                        <ListItemIcon>
-                            <AccountCircleIcon />
-                        </ListItemIcon>
-                        <ListItemText sx={{ color: "#909497" }} primary="Profile" />
-                    </ListItemButton>
-                </ListItem>
-
-
+              
 
                 <ListItem disablePadding>
                     <ListItemButton >

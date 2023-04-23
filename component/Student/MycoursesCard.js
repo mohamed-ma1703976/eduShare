@@ -8,6 +8,7 @@ import { getAuth } from 'firebase/auth';
 import { app, collection, db, storage } from '../../Firebase/Firebase';
 import { doc, getDocs, updateDoc } from 'firebase/firestore';
 import { useRouter } from 'next/router';
+import { CircularProgress } from '@mui/material';
 
 export default function MycoursesCard({ courseTitle, InstName, id, userid }) {
     const router = useRouter();
@@ -47,6 +48,7 @@ export default function MycoursesCard({ courseTitle, InstName, id, userid }) {
 
         // return () => unsubscribe();
     }, [userid]);
+    if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "200px 550px 0 0 " }} /></div>;
 
     React.useEffect(() => {
         if (students.length > 0 && userid) {

@@ -2,33 +2,49 @@ import React, { useState, useEffect, useContext } from "react";
 import { Box } from "@mui/system";
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { useRouter } from "next/router";
-import { app } from "../../Firebase/Firebase";
+import { app, auth } from "../../Firebase/Firebase";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { AuthContext } from "../../hooks/AuthProvider";
-
+import getUserRole from "../../hooks/getRole"
 const Profile = () => {
   const [user, setUser] = useState(null);
   const router = useRouter();
   const { userId, userRole } = useContext(AuthContext);
+  let currentUserId = auth.currentUser.uid;
+
+  //console.log(getUserRole(userId, app))
+  const [useRole, setUseRole] = useState("")
+
+
+
+  console.log(user, userId, userRole, currentUserId)
 
   useEffect(() => {
+    //getUserRole(userId, app).then(res => setUseRole(res))
+
     const fetchUserData = async () => {
-      if (!userId || !userRole) {
+      const role = await getUserRole(userId, app); // Wait for the promise to resolve
+      console.log('User role:', role);
+      setUseRole(role)
+
+      if (!userId || !role) {
         router.push("/");
         return;
       }
-
       const db = getFirestore(app);
-      const userDocRef = doc(db, userRole, userId);
+      const userDocRef = doc(db, role, userId);
       const userDoc = await getDoc(userDocRef);
 
       if (userDoc.exists()) {
-        setUser(userDoc.data());
+       let data = userDoc.data()
+        console.log(data);
+        setUser(data);
       }
     };
 
     fetchUserData();
-  }, [router, userId, userRole]);
+  }, [router, userId, useRole]);
+
 
   if (!user) {
     return <div>Loading...</div>;

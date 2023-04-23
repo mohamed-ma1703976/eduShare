@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from '@mui/material';
+import { CircularProgress, Grid } from '@mui/material';
 import CourseDialog from './CourseDialog';
 import EventDialog from './EventDialog';
 import AnnounceDialog from './AnnounceDialog';
@@ -32,9 +32,8 @@ function Card() {
 
  // const numberOfCourses = courses;
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+ if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "200px 550px 0 0 " }} /></div>;
+
     return (
         <Grid container spacing={1}>
             <Grid container spacing={2} sx={{marginLeft:"9px"}}>

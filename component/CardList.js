@@ -30,6 +30,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Router, { useRouter } from 'next/router';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import UpdateDialog from './UpdateDialog';
 
@@ -55,7 +56,7 @@ function CardList({ courseSearch }) {
     fetchCourses();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "200px 550px 0 0 " }} /></div>;
 
   async function handleDelete(id) {
     try {

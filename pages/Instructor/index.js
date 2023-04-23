@@ -13,7 +13,7 @@ import { getAuth } from "firebase/auth";
 import { app } from "../../Firebase/Firebase"
 import InstNav from "../../component/Instructors/InstNav";
 import InstSidebar from "../../component/Instructors/InstSidebarr";
-import { Box, Stack } from "@mui/material";
+import { Box, CircularProgress, Stack } from "@mui/material";
 export default function instructorDashboard() {
 
     const [statusCheck, setstatusCheck] = useState(true)
@@ -80,7 +80,7 @@ export default function instructorDashboard() {
         fetchInstructors();
     }, [userId]);
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "250px 0 0 570px" }} /></div>;
 
 
 
@@ -91,9 +91,9 @@ export default function instructorDashboard() {
         <div>
 
             <div>
-                {/* {statusCheck ? (
+                {statusCheck ? (
                     <p>Your request is pending</p>
-                ) : ( */}
+                ) : (
                     <Box>
 
                         <InstNav />
@@ -107,7 +107,7 @@ export default function instructorDashboard() {
                         </Stack>
 
                     </Box>
-                {/* )} */}
+                )}
                 {/* <UploadFile /> */}
 
             </div>

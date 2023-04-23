@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Box, Card, Stack, Typography, Grid } from "@mui/material";
+import { Box, Card, Stack, Typography, Grid, CircularProgress } from "@mui/material";
 import StuNav from "../../component/Student/StuNav";
 import StuSideBar from "../../component/Student/StuSideBar";
 import CourseCard from "../../component/Student/CourseCard";
@@ -18,7 +18,7 @@ export default function studentDashboard() {
     collection(db, "Course")
   );
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "200px 550px 0 0 " }} /></div>;
   if (error) return <div>Error: {error.message}</div>;
 
   const courses = coursesSnapshot.docs.map((doc) => ({

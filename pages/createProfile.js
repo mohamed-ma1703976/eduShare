@@ -24,12 +24,12 @@ import { Avatar } from "@mui/material";
 import AddAPhoto from "@mui/icons-material/AddAPhoto";
 import React, { useContext, useState, useEffect } from "react";
 export default function CreateProfile() {
-    const router = useRouter();
-    const { userId } = useContext(AuthContext); // Move this line here  
+  const router = useRouter();
+  const { userId } = useContext(AuthContext); // Move this line here  
   const [profilePicturePreview, setProfilePicturePreview] = useState(null);
   const [coverPicturePreview, setCoverPicturePreview] = useState(null);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const [profileData, setProfileData] = useState({
     displayName: "",
     bio: "",
@@ -39,83 +39,83 @@ export default function CreateProfile() {
     collection: "",
     title: "", // Add this line
   });
-    const db = getFirestore(app);
-    const userRef = doc(db, "Users", userId);
-  
-    useEffect(() => {
-      if (!userId) return; // Don't proceed if userId is not set yet
-    
-      async function fetchUserRole() {
-        const userRole = await getUserRole(userId, app);
-    
-        if (userRole) {
-          setProfileData((prevData) => ({
-            ...prevData,
-            role: userRole,
-            collection: userRole === "student" ? "Student" : "Instructor",
-          }));
-        }
-      }
-    
-      fetchUserRole();
-    }, [userId]);
-    function validateProfileData(data) {
-      if (!data.displayName || !data.bio || !data.title) {
-        return "All fields are required.";
-      }
-      return null;
-    }
-    async function handleSave(e) {
-      e.preventDefault();
-      setLoading(true);
-    
-      const { displayName, bio, title } = profileData; // Destructure the values from profileData
-    
-      try {
-        const updatedProfileData = {
-          displayName: displayName.trim(),
-          bio: bio.trim(),
-          title: title.trim(),
-        };
-    
-        // Validate the profile data
-        const validationError = validateProfileData(updatedProfileData);
-        if (validationError) {
-          setError(validationError);
-          setLoading(false);
-          return;
-        }
-    
-        // Save the profile data in the appropriate collection
-        const collectionRef = collection(db, profileData.collection); // Use profileData.collection
-        const userDocRef = doc(db, profileData.collection, userId);
-await updateDoc(userDocRef, {
-  displayName: updatedProfileData.displayName,
-  bio: updatedProfileData.bio,
-  title: updatedProfileData.title,
-});
-    
-        const userRole = await getUserRole(userId, app);
-    
-        if (userRole === "student") {
-          router.push("/Student");
-        } else if (userRole === "instructor") {
-          router.push("/Instructor");
-        } else {
-          router.push("/Admin");
-        }
-    
-        setLoading(false);
-      } catch (error) {
-        console.log(error); // Add this line to log the error
-        setError("An error occurred while saving your profile.");
-        setLoading(false);
+  const db = getFirestore(app);
+  const userRef = doc(db, "Users", userId);
+
+  useEffect(() => {
+    if (!userId) return; // Don't proceed if userId is not set yet
+
+    async function fetchUserRole() {
+      const userRole = await getUserRole(userId, app);
+
+      if (userRole) {
+        setProfileData((prevData) => ({
+          ...prevData,
+          role: userRole,
+          collection: userRole === "student" ? "Student" : "Instructor",
+        }));
       }
     }
+
+    fetchUserRole();
+  }, [userId]);
+  function validateProfileData(data) {
+    if (!data.displayName || !data.bio || !data.title) {
+      return "All fields are required.";
+    }
+    return null;
+  }
+  async function handleSave(e) {
+    e.preventDefault();
+    setLoading(true);
+
+    const { displayName, bio, title } = profileData; // Destructure the values from profileData
+
+    try {
+      const updatedProfileData = {
+        displayName: displayName.trim(),
+        bio: bio.trim(),
+        title: title.trim(),
+      };
+
+      // Validate the profile data
+      const validationError = validateProfileData(updatedProfileData);
+      if (validationError) {
+        setError(validationError);
+        setLoading(false);
+        return;
+      }
+
+      // Save the profile data in the appropriate collection
+      const collectionRef = collection(db, profileData.collection); // Use profileData.collection
+      const userDocRef = doc(db, profileData.collection, userId);
+      await updateDoc(userDocRef, {
+        displayName: updatedProfileData.displayName,
+        bio: updatedProfileData.bio,
+        title: updatedProfileData.title,
+      });
+
+      const userRole = await getUserRole(userId, app);
+
+      if (userRole === "student") {
+        router.push("/Student");
+      } else if (userRole === "instructor") {
+        router.push("/Instructor");
+      } else {
+        router.push("/Admin");
+      }
+
+      setLoading(false);
+    } catch (error) {
+      console.log(error); // Add this line to log the error
+      setError("An error occurred while saving your profile.");
+      setLoading(false);
+    }
+  }
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setProfileData({ ...profileData, [name]: value });
-    
+
   };
   const handleFileInputChange = (event, type) => {
     const file = event.target.files[0];
@@ -176,73 +176,72 @@ await updateDoc(userDocRef, {
             }}
             onSubmit={handleSave}
           >
-<Box
-  component="div"
-  width="100%"
-  height="200px"
-  style={{
-    backgroundImage: `url(${
-      coverPicturePreview || "/path/to/default/cover/picture"
-    })`,
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center center",
-    cursor: "pointer",
-    position: "relative",
-  }}
-  onClick={() => document.getElementById("coverPicture").click()}
->
-  {!coverPicturePreview && (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      width="100%"
-      height="100%"
-      style={{
-        background: "rgba(128, 128, 128, 0.5)",
-      }}
-    >
-      <AddAPhoto />
-    </Box>
-  )}
-</Box>
-      <input
-  type="file"
-  id="coverPicture"
-  name="coverPicture"
-  style={{ display: "none" }}
-  onChange={(e) => handleFileInputChange(e, "coverPicture")}
-/>
-  <Box display="flex" justifyContent="center">
-          <Avatar
-            src={profilePicturePreview}
-            sx={{
-              width: 100,
-              height: 100,
-              cursor: "pointer",
-            }}
-            onClick={() => document.getElementById("profilePicture").click()}
-          >
-            {!profilePicturePreview && <AddAPhoto />}
-          </Avatar>
-          <input
-  type="file"
-  id="profilePicture"
-  name="profilePicture"
-  style={{ display: "none" }}
-  onChange={(e) => handleFileInputChange(e, "profilePicture")}
-/>
-        </Box>
+            <Box
+              component="div"
+              width="100%"
+              height="200px"
+              style={{
+                backgroundImage: `url(${coverPicturePreview || "/path/to/default/cover/picture"
+                  })`,
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center center",
+                cursor: "pointer",
+                position: "relative",
+              }}
+              onClick={() => document.getElementById("coverPicture").click()}
+            >
+              {!coverPicturePreview && (
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  width="100%"
+                  height="100%"
+                  style={{
+                    background: "rgba(128, 128, 128, 0.5)",
+                  }}
+                >
+                  <AddAPhoto />
+                </Box>
+              )}
+            </Box>
+            <input
+              type="file"
+              id="coverPicture"
+              name="coverPicture"
+              style={{ display: "none" }}
+              onChange={(e) => handleFileInputChange(e, "coverPicture")}
+            />
+            <Box display="flex" justifyContent="center">
+              <Avatar
+                src={profilePicturePreview}
+                sx={{
+                  width: 100,
+                  height: 100,
+                  cursor: "pointer",
+                }}
+                onClick={() => document.getElementById("profilePicture").click()}
+              >
+                {!profilePicturePreview && <AddAPhoto />}
+              </Avatar>
+              <input
+                type="file"
+                id="profilePicture"
+                name="profilePicture"
+                style={{ display: "none" }}
+                onChange={(e) => handleFileInputChange(e, "profilePicture")}
+              />
+            </Box>
             <TextField
-  id="title"
-  label="Title"
-  variant="outlined"
-  name="title"
-  value={profileData.title}
-  onChange={handleInputChange}
-  sx={{ margin: "10px 10px 10px 10px" }}
-/>
+              id="title"
+              label="Title"
+              variant="outlined"
+              name="title"
+              value={profileData.title}
+              onChange={handleInputChange}
+              sx={{ margin: "10px 10px 10px 10px" }}
+            />
             <TextField
               id="displayName"
               label="Display Name"
@@ -279,5 +278,5 @@ await updateDoc(userDocRef, {
 
     </Grid>
   );
-  
+
 }

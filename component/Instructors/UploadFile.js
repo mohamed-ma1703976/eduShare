@@ -3,6 +3,7 @@ import { auth, collection, db, storage } from '../../Firebase/Firebase';
 import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 import { getDocs } from 'firebase/firestore';
+import { CircularProgress } from '@mui/material';
 
 const UploadFile = () => {
     const [file, setFile] = useState(null);
@@ -45,7 +46,7 @@ const UploadFile = () => {
         fetchInstructors();
     }, []);
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "200px 550px 0 0 " }} /></div>;
 
 
 
