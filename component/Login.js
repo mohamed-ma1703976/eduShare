@@ -80,11 +80,15 @@ export default function App() {
       }
   
       const userData = userDoc.data();
-      const profileComplete = (
-        userData.displayName &&
-        userData.bio &&
-        userData.title
-      );
+      let profileComplete;
+
+if (role === "student") {
+  profileComplete = userData.displayName && userData.bio && userData.title;
+} else if (role === "instructor") {
+  profileComplete = userData.displayName && userData.bio && userData.title;
+} else {
+  profileComplete = true; // Assuming admins don't need a profile completeness check
+}
   
       if (!profileComplete) {
         router.push("/createProfile");
