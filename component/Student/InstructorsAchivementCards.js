@@ -8,12 +8,14 @@ import { getAuth } from 'firebase/auth';
 import { app, collection, db, storage } from '../../Firebase/Firebase';
 import { doc, getDocs, updateDoc } from 'firebase/firestore';
 import { useRouter } from 'next/router';
-import { CircularProgress } from '@mui/material';
+import { Box, ButtonBase, CardMedia, CircularProgress } from '@mui/material';
 
 export default function InstructorsAchivementCards() {
 
 
     const [achivment, setAchivment] = React.useState([]);
+    const [instructor, setInstructor] = React.useState([]);
+
     const [loading, setLoading] = React.useState(true);
 
 
@@ -32,36 +34,61 @@ export default function InstructorsAchivementCards() {
             setLoading(false);
         };
 
-        fetchAchivment();
+        const fetchInstructors = async () => {
+            const studentCollection = collection(db, 'Instructor');
+            const studentSnapshot = await getDocs(studentCollection);
+            const studentList = studentSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                attributes: doc.data(),
+            }));
+            setInstructor(studentList);
+
+        };
+        fetchAchivment()
+        fetchInstructors();
+
 
     }, []);
 
     if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "200px 550px 0 0 " }} /></div>;
 
 
-    console.log(achivment)
 
     return (
         <div>
-
             {achivment.map(a => {
-                return <Card key={a.id} sx={{ width: '100%', backgroundColor: '#1ABC9C', color: '#454545' }}>
-                    <CardContent>
-                        <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '1000' }}>
-                            Instructor Name : {a.attributes.name}
-                        </Typography>
-                        <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '700' }}>
-                            {a.attributes.achievementcard
-                            }
-                        </Typography>
-                    </CardContent>
+                // Find matching instructor object based on first name
+                const matchingInstructor = instructor.find(i => a.attributes.name.split(' ')[0] === i.attributes.firstName);
 
-                </Card>
+                // Get coverPicture URL
+                const coverPictureUrl = matchingInstructor ? matchingInstructor.attributes.coverPicture : '';
+
+                return (
+                    <ButtonBase component="div" sx={{ textDecoration: 'none', color: 'inherit' }} key={a.id}>
+                        <Card sx={{ display: 'flex', flexDirection: 'column', Height: '100', cursor: 'pointer', Width: "300" ,margin:"10px 20px 0 0" }}>
+                            <CardMedia
+                                component="img"
+                                height="100"
+                                image={coverPictureUrl} // Set the coverPicture URL as the image
+                                alt={a.attributes.name}
+                                style={{ maxHeight: "200px", width: "1000px"}}
+
+
+                            />
+                            <CardContent sx={{ flex: 1 }}>
+                                <Typography gutterBottom variant="subtitle2" component="div">
+                                    Instructor Name : {a.attributes.name}
+                                </Typography>
+                                <Typography variant="subtitle2" color="text.secondary">
+                                    {a.attributes.achievementcard}
+                                </Typography>
+
+                            </CardContent>
+                        </Card>
+                    </ButtonBase>
+                );
             })}
-
-
-
-        </div >
+        </div>
 
     );
 }

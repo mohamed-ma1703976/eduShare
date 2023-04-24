@@ -14,11 +14,11 @@ function StuNav({ setCourseSearch }) {
     const [open, setOpen] = useState(false)
 
     const [students, setStudents] = useState([]);
-    const currentUser = auth.currentUser.uid
-    let fName = students.find(s=>s.id === currentUser)?.attributes.firstName
-    let lName = students.find(s=>s.id === currentUser)?.attributes.lastName
+    // const currentUser = auth.currentUser.uid
+    // let fName = students.find(s=>s.id === currentUser)?.attributes.firstName
+    // let lName = students.find(s=>s.id === currentUser)?.attributes.lastName
 
-    console.log(currentUser)
+    // console.log(currentUser)
     useEffect(() => {
         const fetchStudents = async () => {
             const studentCollection = collection(db, 'Student');
@@ -41,7 +41,7 @@ function StuNav({ setCourseSearch }) {
 
                 <Toolbar >
                     <Typography variant='h6' sx={{ color: "#454545", fontWeight: "800", margin: "0 0 0 -23px", cursor: "pointer" }}>Edu<span style={{ color: "#1ABC9C" }} onClick={() => router.push("/Student")}>Share</span></Typography>
-                    <Typography variant='h6' sx={{ padding: "6px", margin: "0 0 0 66px", color: "#454545", fontWeight: "800", cursor: "pointer" }}>Wellcome {fName + " " + lName} </Typography>
+                    <Typography variant='h6' sx={{ padding: "6px", margin: "0 0 0 66px", color: "#454545", fontWeight: "800", cursor: "pointer" }}>Student Page  </Typography>
                 </Toolbar>
 
 
