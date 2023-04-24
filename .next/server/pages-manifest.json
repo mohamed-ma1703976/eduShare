@@ -2,9 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/Student/InstructorAciveCard": "pages/Student/InstructorAciveCard.js",
-  "/Student": "pages/Student.js",
-  "/Student/Profile": "pages/Student/Profile.js",
-  "/Student/mycourses": "pages/Student/mycourses.js",
-  "/Instructor/joincompation": "pages/Instructor/joincompation.js"
+  "/Instructor/profile": "pages/Instructor/profile.js",
+  "/Admin/course": "pages/Admin/course.js",
+  "/": "pages/index.js"
 }

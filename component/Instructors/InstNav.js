@@ -21,8 +21,8 @@ function InstNav({ setCourseSearch }) {
             <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }} >
 
                 <Toolbar >
-                    <Typography variant='h6' sx={{ color: "#454545", fontWeight: "800", margin: "0 0 0 -23px", cursor: "pointer" }}>Edu<span style={{ color: "#1ABC9C" }} onClick={() => router.push("/Student")}>Share</span></Typography>
-                    <Typography variant='h6' sx={{ padding: "6px", margin: "0 0 0 66px", color: "#454545", fontWeight: "800", cursor: "pointer" }}>Instructor </Typography>
+                    <Typography variant='h6' sx={{ color: "#454545", fontWeight: "800", margin: "0 0 0 -23px", cursor: "pointer" }}>Edu<span style={{ color: "#1ABC9C" }} onClick={() => router.push("/Instructor")}>Share</span></Typography>
+                    <Typography variant='h6' sx={{ padding: "6px", margin: "0 0 0 66px", color: "#454545", fontWeight: "800", cursor: "pointer" }}>Instructor Page </Typography>
                 </Toolbar>
 
 

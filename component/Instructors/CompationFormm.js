@@ -117,7 +117,7 @@ const CompationForm = ({ setOpen }) => {
             <TextField
                 id="outlined-error-helper-text"
                 label="How the Message  will look like in Achievement Card"
-                sx={{ margin: "10px 10px 10px 10px" ,width:"100%"}}
+                sx={{ margin: "10px 10px 10px 10px", width: "100%" }}
                 name="AchivmentCard"
                 onChange={handleChange}
                 value={formData.AchivmentCard}
@@ -138,6 +138,10 @@ const CompationForm = ({ setOpen }) => {
             <div style={{ display: "flex" }}>
                 <Button variant="outlined" sx={{ margin: "10px 0 0 10px" }} type="submit">
                     Save
+                </Button>
+
+                <Button variant="outlined" sx={{ margin: "10px 0 0 340px", width: "13%" }} onClick={() => setOpen(false)}>
+                    cancel
                 </Button>
 
 

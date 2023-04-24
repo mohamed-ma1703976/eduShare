@@ -140,7 +140,7 @@ const Form = ({ setOpen }) => {
 
 
 
-      <TextField
+      {/* <TextField
         id="outlined-multiline-flexible"
         label="Course Description"
         multiline
@@ -151,15 +151,26 @@ const Form = ({ setOpen }) => {
         value={formData.CourseDescription}
 
 
+      /> */}
+
+      <TextField
+        id="outlined-multiline-static"
+        label="Course Description"
+        multiline
+        rows={4}
+        sx={{ margin: "10px 10px 10px 10px" }}
+        name="CourseDescription"
+        onChange={handleChange}
+        value={formData.CourseDescription}
       />
-      
-        <input type="file" onChange={handleFileUpload} style={{
-          margin: "24px 0px 0px 30px",
-          width: "47%",
-          height: "50%",
-          border: "1px solid #000",
-          padding: "5px" // Add border
-        }} />
+
+      <input type="file" onChange={handleFileUpload} style={{
+        margin: "50px 0px 0px 30px",
+        width: "47%",
+        height: "50%",
+        border: "1px solid gray",
+        padding: "5px" // Add border
+      }} />
 
       {/* {<span>{isSelectedd}</span>} */}
 

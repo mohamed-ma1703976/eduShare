@@ -30,14 +30,14 @@ const EventDialog = () => {
     return (
         <div>
             <Typography align='center'>
-            <Button variant="contained" size="large"style={{
-                borderRadius: 15,
-                backgroundColor: "#FEC64F",
-                padding: "14px 20px",
-                fontSize: "18px"
+                <Button variant="contained" size="large" style={{
+                    borderRadius: 15,
+                    backgroundColor: "#FEC64F",
+                    padding: "14px 20px",
+                    fontSize: "18px"
                 }} onClick={handleClickOpen}>
-                Create Compation
-            </Button>
+                    Create Compation
+                </Button>
             </Typography>
             <Dialog
                 open={open}
@@ -46,12 +46,12 @@ const EventDialog = () => {
                 onClose={handleClose}
                 aria-describedby="alert-dialog-slide-description"
             >
-                <DialogTitle  sx={{fontSize:"30px" ,textAlign:"center",fontWeight:"00",color:"#FEC64F"}}>{"Add Event"}</DialogTitle>
+                <DialogTitle sx={{ fontSize: "30px", textAlign: "center", fontWeight: "00", color: "#FEC64F" }}>{" Create Compation"}</DialogTitle>
                 <DialogContent>
 
-                    <CompationFormm />
+                    <CompationFormm setOpen={setOpen} />
                 </DialogContent>
-              
+
             </Dialog>
         </div>
 

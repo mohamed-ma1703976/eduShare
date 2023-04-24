@@ -15,30 +15,20 @@
   ],
   "rootMainFiles": [],
   "pages": {
-    "/Instructor/joincompation": [
+    "/": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Instructor/joincompation.js"
+      "static/chunks/pages/index.js"
     ],
-    "/Student": [
+    "/Admin/course": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Student.js"
+      "static/chunks/pages/Admin/course.js"
     ],
-    "/Student/InstructorAciveCard": [
+    "/Instructor/profile": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Student/InstructorAciveCard.js"
-    ],
-    "/Student/Profile": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Student/Profile.js"
-    ],
-    "/Student/mycourses": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Student/mycourses.js"
+      "static/chunks/pages/Instructor/profile.js"
     ],
     "/_app": [
       "static/chunks/webpack.js",

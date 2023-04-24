@@ -13,6 +13,8 @@ import { db } from '../Firebase/Firebase';
 
 function Card() {
   const [courses, setCourses] = React.useState([]);
+  const [compat, setCompat] = React.useState([]);
+
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
@@ -27,7 +29,20 @@ function Card() {
       setLoading(false);
     };
 
+
+    const fetchCompa = async () => {
+      const coursesCollection = collection(db, 'Compations');
+      const courseSnapshot = await getDocs(coursesCollection);
+      const coursesList = courseSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setCompat(coursesList);
+      setLoading(false);
+    };
+
     fetchCourses();
+    fetchCompa()
   }, []);
 
  // const numberOfCourses = courses;
@@ -62,7 +77,7 @@ function Card() {
         />
       </Grid>
                 <Grid item xs={3}>
-                    <AchievementCard number="-" description="Compeleted Events" color="#FEC64F" />
+                    <AchievementCard number={compat.length} description="Publised Compations" color="#FEC64F" />
                 </Grid>
                 <Grid item xs={3}>
                     <AchievementCard number="-" description="Publised Announcments" color="#374557" />
