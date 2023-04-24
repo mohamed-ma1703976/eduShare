@@ -27,6 +27,7 @@
     "react-firebase-hooks": "^5.1.1",
     "react-responsive-datepicker": "^1.0.6",
     "react-slick": "^0.29.0",
+    "recharts": "^2.5.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.6",
     "uuid": "^9.0.0"
