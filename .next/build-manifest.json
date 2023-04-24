@@ -30,6 +30,16 @@
       "static/chunks/main.js",
       "static/chunks/pages/Student/InstructorAciveCard.js"
     ],
+    "/Student/Profile": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/Student/Profile.js"
+    ],
+    "/Student/mycourses": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/Student/mycourses.js"
+    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

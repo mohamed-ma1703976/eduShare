@@ -4,5 +4,7 @@
   "/_document": "pages/_document.js",
   "/Student/InstructorAciveCard": "pages/Student/InstructorAciveCard.js",
   "/Student": "pages/Student.js",
+  "/Student/Profile": "pages/Student/Profile.js",
+  "/Student/mycourses": "pages/Student/mycourses.js",
   "/Instructor/joincompation": "pages/Instructor/joincompation.js"
 }

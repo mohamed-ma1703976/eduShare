@@ -22,7 +22,7 @@ export default function studentDashboard() {
     collection(db, "Instructor")
   );
   
-  if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "200px 550px 0 0 " }} /></div>;
+  if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "200px 0px 0 550px " }} /></div>;
   if (error) return <div>Error: {error.message}</div>;
   if (instructorsLoading) return <div>Loading...</div>;
   if (instructorsError) return <div>Error: {instructorsError.message}</div>;

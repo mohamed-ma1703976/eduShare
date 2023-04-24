@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Box, Typography, Grid, Card, CardContent, CardMedia, Rating, Button } from '@mui/material';
+import { Box, Typography, Grid, Card, CardContent, CardMedia, Rating, Button, CircularProgress } from '@mui/material';
 import StuNav from '../../../component/Student/StuNav';
 import StuSideBar from '../../../component/Student/StuSideBar';
 import { getFirestore, doc, getDoc, collection, getDocs, updateDoc } from 'firebase/firestore';
@@ -85,7 +85,8 @@ const CoursePage = ({ course }) => {
 
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "200px 550px 0 0 " }} /></div>;
+  ;
 
 
 
@@ -130,7 +131,7 @@ const CoursePage = ({ course }) => {
     let collectedData1 = {
       myCourse: [
         ...instructorCourses.myCourse,
-        { coursname :[courseName], studentsId: [userId] }
+        { coursname: [courseName], studentsId: [userId] }
       ]
     };
 
@@ -139,7 +140,7 @@ const CoursePage = ({ course }) => {
       if (userId) {
         const studentRef = doc(db, 'Student', userId);
         await updateDoc(studentRef, collectedData);
-        
+
       }
     } catch (err) {
       console.log(err);
