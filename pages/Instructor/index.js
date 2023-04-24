@@ -6,7 +6,11 @@ import { app } from "../../Firebase/Firebase"
 import InstNav from "../../component/Instructors/InstNav";
 import InstSidebar from "../../component/Instructors/InstSidebarr";
 import { Box, CircularProgress, Stack } from "@mui/material";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Typography, Grid , Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions, CardActions} from "@mui/material";
 import { getDocs, collection, where, query } from "firebase/firestore";
 import {
     LineChart,
@@ -27,7 +31,7 @@ export default function instructorDashboard() {
         { date: "01-04", students: 25 },
         { date: "01-05", students: 30 },
       ];
-      
+      const [competitions, setCompetitions] = useState([]);
     const [statusCheck, setstatusCheck] = useState(true)
     const [statusValue, setStatusValue] = useState('')
     const [totalStudents, setTotalStudents] = useState(0);
@@ -39,7 +43,17 @@ export default function instructorDashboard() {
 
     const [userId, setUserId] = useState(null);
     const [numCourses, setNumCourses] = useState(0);
-
+    const [openDialog, setOpenDialog] = useState(false);
+    const [selectedCompation, setSelectedCompation] = useState(null);
+    
+    const handleJoinCompation = (compation) => {
+        setSelectedCompation(compation);
+        setOpenDialog(true);
+    };
+    
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+    };
     async function fetchCourseData() {
       const instructorCourses = await getDocs(query(collection(db, "Course"), where("instructorId", "==", userId)));
   
@@ -56,6 +70,18 @@ export default function instructorDashboard() {
       
         setTotalStudents(totalStudentsCount);
       }
+      async function fetchCompetitions() {
+        const compationsCollection = collection(db, "Compations");
+        const compationsSnapshot = await getDocs(compationsCollection);
+        const compationsList = compationsSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          attributes: doc.data(),
+        }));
+        setCompetitions(compationsList);
+      }
+      useEffect(() => {
+        fetchCompetitions();
+      }, []);            
       
     useEffect(() => {
         // Listen for changes in the authentication state
@@ -151,7 +177,65 @@ export default function instructorDashboard() {
                   </Typography>
                 </CardContent>
                 </Card>
+                <Typography variant="h4" component="div" sx={{ margin: "30px 0" }}>
+        Competitions
+      </Typography>
+      
 
+      
+        
+          
+        <Grid container spacing={2}>
+        {competitions.slice(0, 3).map((competition) => (
+    <Grid item xs={4} sm={12} md={4} key={competition.id}>
+                    <Card
+                    >
+                        <CardContent>
+                            <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '1000' }}>
+                                Competition Type: {competition.attributes.CompationType}
+                            </Typography>
+                            <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '1000' }}>
+                                {competition.attributes.CompationQuestion}
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Button
+                                size="small"
+                                onClick={() => handleJoinCompation(competition)}
+                            >
+                                Join This Competition
+                            </Button>
+                        </CardActions>
+                    </Card>
+                </Grid>
+            ))}
+        
+
+        <Dialog open={openDialog} onClose={handleCloseDialog}>
+            <DialogTitle>Join Competition</DialogTitle>
+            <DialogContent>
+                <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '700' }}>
+                    Competition Type: {selectedCompation?.attributes?.CompationType}
+                </Typography>
+                <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '700' }}>
+                    Question: {selectedCompation?.attributes?.CompationQuestion}
+                </Typography>
+                {/* Add additional form fields for joining the competition */}
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleCloseDialog}>No</Button>
+                <Button
+                    onClick={() => handleJoinSubmit(selectedCompation?.id, selectedCompation?.attributes.AchivmentCard)}
+                    variant="contained"
+                    color="primary"
+                >
+                    Yes
+                </Button>
+            </DialogActions>
+        </Dialog>
+    
+        </Grid>
+    
               </Stack>
                   <Card sx={{ minWidth: 900, margin: 2, height: 400}}>
                     <CardContent>
@@ -185,7 +269,9 @@ export default function instructorDashboard() {
                       </ResponsiveContainer>
                     </CardContent>
                   </Card>
+                
                 </Stack>
+              
               </Box>
             )}
           </div>
