@@ -34,7 +34,7 @@ const CourseDialog = () => {
                 marginleft: "10px",
                 borderRadius: 15,
                 backgroundColor: "#1ABC9C",
-                padding: "14px 55px",
+                padding: "6px 55px",
                 fontSize: "18px"
                
                 }} onClick={handleClickOpen}>

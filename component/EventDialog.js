@@ -33,8 +33,9 @@ const EventDialog = () => {
                 <Button variant="contained" size="large" style={{
                     borderRadius: 15,
                     backgroundColor: "#FEC64F",
-                    padding: "14px 20px",
-                    fontSize: "18px"
+                    padding: "6px 20px",
+                    fontSize: "18px",
+                    margin:"0 0 0 5px"
                 }} onClick={handleClickOpen}>
                     Create Compation
                 </Button>

@@ -68,7 +68,7 @@ function Card() {
             </Grid>
            
             <Grid container alignContent={'center'} style={{ marginTop: '-250px' }}>
-      <Grid item xs={3}>
+      <Grid item xs={3} style={{margin:"30px 0 0 0"}}>
         <AchievementCard
           
           number={courses.length}
@@ -76,12 +76,12 @@ function Card() {
           color="#1ABC9C"
         />
       </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={3} style={{margin:"30px 0 0 0"}}>
                     <AchievementCard number={compat.length} description="Publised Compations" color="#FEC64F" />
                 </Grid>
-                <Grid item xs={3}>
+                {/* <Grid item xs={3} style={{margin:"3px 0 0 0"}}>
                     <AchievementCard number="-" description="Publised Announcments" color="#374557" />
-                </Grid>
+                </Grid> */}
             </Grid>
             <Grid container style={{ marginLeft: "-200px" }}>
                 <TodoList />

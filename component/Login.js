@@ -48,48 +48,49 @@ export default function App() {
       );
       const userId = userCredential.user.uid;
       login(userId);
-  
+
       const db = getFirestore(app);
-      
+
       const studentDocRef = doc(db, "Student", userId);
       const studentDoc = await getDoc(studentDocRef);
-  
+
       const instructorDocRef = doc(db, "Instructor", userId);
       const instructorDoc = await getDoc(instructorDocRef);
-  
+
       const adminDocRef = doc(db, "Admin", userId);
       const adminDoc = await getDoc(adminDocRef);
-  
+
       let userDoc;
       let role;
-  
+
       if (studentDoc.exists()) {
         userDoc = studentDoc;
         role = "student";
-      //  router.push('/Student')
+        //  router.push('/Student')
       } else if (instructorDoc.exists()) {
         userDoc = instructorDoc;
         role = "instructor";
-       // router.push('/Instructor')
+        // router.push('/Instructor')
 
       } else if (adminDoc.exists()) {
         userDoc = adminDoc;
         role = "admin";
+        //router.push('/Admin')
       } else {
         throw new Error("User not found in any role collection.");
       }
-  
+
       const userData = userDoc.data();
       let profileComplete;
 
-if (role === "student") {
-  profileComplete = userData.displayName && userData.bio && userData.title;
-} else if (role === "instructor") {
-  profileComplete = userData.displayName && userData.bio && userData.title;
-} else {
-  profileComplete = true; // Assuming admins don't need a profile completeness check
-}
-  
+      if (role === "student") {
+        profileComplete = userData.displayName && userData.bio && userData.title;
+      } else if (role === "instructor") {
+        profileComplete = userData.displayName && userData.bio && userData.title;
+      } else {
+        profileComplete = true; // Assuming admins don't need a profile completeness check
+      }
+
       if (!profileComplete) {
         router.push("/createProfile");
       } else {
@@ -101,7 +102,7 @@ if (role === "student") {
           router.push("/Admin");
         }
       }
-  
+
       setLoginError(false);
     } catch (error) {
       setLoginError(true);

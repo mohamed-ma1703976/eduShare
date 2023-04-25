@@ -50,8 +50,17 @@ const Form = ({ setOpen }) => {
         id: doc.id,
         attributes: doc.data(),
       }));
-      setInstructors(instructorsList);
+      const courseCollection = collection(db, 'Course');
+      const courseSnapshot = await getDocs(courseCollection);
+      const courseList = courseSnapshot.docs.map((doc) => doc.data().InstructorName);
+
+      const filteredInstructorsList = instructorsList.filter((instructor) => {
+        return !courseList.includes(instructor.attributes.firstName);
+      });
+
+      setInstructors(filteredInstructorsList);
     };
+
 
     fetchInstructors();
   }, []);

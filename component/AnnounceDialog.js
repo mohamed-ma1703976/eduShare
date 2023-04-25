@@ -34,7 +34,7 @@ const AnnounceDialog = () => {
                 marginleft: "10px",
                 borderRadius: 15,
                 backgroundColor: "#374557",
-                padding: "14px 20px",
+                padding: "6px 20px",
                 fontSize: "18px"
                 }} onClick={handleClickOpen}>
                 Add Announcement
