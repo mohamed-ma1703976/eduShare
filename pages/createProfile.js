@@ -15,7 +15,7 @@ import {
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Box } from "@mui/system";
 import { useRouter } from "next/router";
-import { app } from "../Firebase/Firebase";
+import { app, auth } from "../Firebase/Firebase";
 import getUserRole from '../hooks/getRole';
 
 import { getFirestore, doc, setDoc, getDoc, updateDoc, collection } from "firebase/firestore";
@@ -40,13 +40,14 @@ export default function CreateProfile() {
     title: "", // Add this line
   });
   const db = getFirestore(app);
-  const userRef = doc(db, "Users", userId);
+  //const userRef = doc(db, "Users", userId);
+  const userid= auth.currentUser.uid
 
   useEffect(() => {
-    if (!userId) return; // Don't proceed if userId is not set yet
+    if (!userid) console.log("user id is not defined"); // Don't proceed if userId is not set yet
 
     async function fetchUserRole() {
-      const userRole = await getUserRole(userId, app);
+      const userRole = await getUserRole(userid, app);
 
       if (userRole) {
         setProfileData((prevData) => ({
@@ -58,7 +59,7 @@ export default function CreateProfile() {
     }
 
     fetchUserRole();
-  }, [userId]);
+  }, [userid]);
   function validateProfileData(data) {
     if (!data.displayName || !data.bio || !data.title) {
       return "All fields are required.";
@@ -90,20 +91,20 @@ export default function CreateProfile() {
       let profilePictureURL, coverPictureURL;
   
       if (profilePicture) {
-        const profilePictureRef = ref(storage, `profilePictures/${userId}`);
+        const profilePictureRef = ref(storage, `profilePictures/${userid}`);
         await uploadBytes(profilePictureRef, profilePicture);
         profilePictureURL = await getDownloadURL(profilePictureRef);
       }
   
       if (coverPicture) {
-        const coverPictureRef = ref(storage, `coverPictures/${userId}`);
+        const coverPictureRef = ref(storage, `coverPictures/${userid}`);
         await uploadBytes(coverPictureRef, coverPicture);
         coverPictureURL = await getDownloadURL(coverPictureRef);
       }
   
       // Save the profile data in the appropriate collection
       const collectionRef = collection(db, profileData.collection);
-      const userDocRef = doc(db, profileData.collection, userId);
+      const userDocRef = doc(db, profileData.collection, userid);
   
       await updateDoc(userDocRef, {
         displayName: updatedProfileData.displayName,
@@ -113,7 +114,7 @@ export default function CreateProfile() {
         ...(coverPictureURL && { coverPicture: coverPictureURL }),
       });
   
-      const userRole = await getUserRole(userId, app);
+      const userRole = await getUserRole(userid, app);
   
       if (userRole === "Student") {
         router.push("/Student");

@@ -41,7 +41,9 @@ export default function instructorDashboard() {
 
   const [instructors, setInstructors] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
-
+  const [joinedComp, setJoinedCom] = useState({
+    joinedCompations: []
+});
   console.log(instructors)
 
   const [userId, setUserId] = useState(null);
@@ -158,7 +160,58 @@ export default function instructorDashboard() {
   }, [userId]);
 
   if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "250px 0 0 570px" }} /></div>;
+  const instructorFirstName = instructors.find(s => s.id === userId)?.attributes.firstName
+  const instructorLastName = instructors.find(s => s.id === userId)?.attributes.lastName
+  const JoindComputionByInst = instructors.find(s => s.id === userId)?.attributes.joinedCompations ?? []
 
+
+  const handleJoinSubmit = async (id, congMessage) => {
+    console.log(id)
+    if (JoindComputionByInst.includes(id)) {
+      alert("you already join this compation")
+      //setOpenDialog(true);
+    } else {
+      setJoinedCom((prevState) => ({
+        ...prevState,
+        //joinedCourses: [...prevState.joinedCourses, id],
+
+        joinedCompations: prevState.joinedCompations
+          ? [...prevState.joinedCompations, id]
+          : [id],
+      }));
+
+      let collectedData = {
+        joinedCompations: Array.isArray(joinedComp.joinedCompations)
+          ? [...joinedComp.joinedCompations, id]
+          : [id],
+      };
+
+
+      let collectedData1 = {
+        name: instructorFirstName + "  " + instructorLastName,
+        achievementcard: congMessage
+
+      };
+
+      try {
+        const compationCollection = doc(db, 'Instructor', userId);
+        await updateDoc(compationCollection, collectedData);
+        //router.reload();
+      } catch (err) {
+        console.log(err);
+      }
+
+      try {
+        const compationCollection = collection(db, 'AchievementCard');
+        await addDoc(compationCollection, collectedData1);
+        //router.reload();
+      } catch (err) {
+        console.log(err);
+      }
+      handleCloseDialog();
+    }
+
+  };
 
 
 
@@ -219,63 +272,63 @@ export default function instructorDashboard() {
                 </CardContent>
               </Card>
 
-                <Grid item xs={12} sm={6} md={6}>
-                  <Typography
-                    variant="h4"
-                    component="div"
-                    sx={{ marginBottom: 2 }}
-                  >
-                    Competitions
-                  </Typography>
-                  <Grid container spacing={2}>
-                    {competitions.slice(0, 3).map((competition) => (
-                      <Grid item xs={12} sm={6} md={4} key={competition.id}>
-                        <Card>
-                          <CardContent>
-                            <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '1000' }}>
-                              Competition Type: {competition.attributes.CompationType}
-                            </Typography>
-                            <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '1000' }}>
-                              {competition.attributes.CompationQuestion}
-                            </Typography>
-                          </CardContent>
-                          <CardActions>
-                            <Button
-                              size="small"
-                              onClick={() => handleJoinCompation(competition)}
-                            >
-                              Join This Competition
-                            </Button>
-                          </CardActions>
-                        </Card>
-                      </Grid>
-                    ))}
-                  </Grid>
+              <Grid item xs={12} sm={6} md={6}>
+                <Typography
+                  variant="h4"
+                  component="div"
+                  sx={{ marginBottom: 2 }}
+                >
+                  Competitions
+                </Typography>
+                <Grid container spacing={2}>
+                  {competitions.slice(0, 3).map((competition) => (
+                    <Grid item xs={12} sm={6} md={4} key={competition.id}>
+                      <Card>
+                        <CardContent>
+                          <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '1000' }}>
+                            Competition Type: {competition.attributes.CompationType}
+                          </Typography>
+                          <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '1000' }}>
+                            {competition.attributes.CompationQuestion}
+                          </Typography>
+                        </CardContent>
+                        <CardActions>
+                          <Button
+                            size="small"
+                            onClick={() => handleJoinCompation(competition)}
+                          >
+                            Join This Competition
+                          </Button>
+                        </CardActions>
+                      </Card>
+                    </Grid>
+                  ))}
                 </Grid>
+              </Grid>
 
 
-                <Dialog open={openDialog} onClose={handleCloseDialog}>
-                  <DialogTitle>Join Competition</DialogTitle>
-                  <DialogContent>
-                    <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '700' }}>
-                      Competition Type: {selectedCompation?.attributes?.CompationType}
-                    </Typography>
-                    <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '700' }}>
-                      Question: {selectedCompation?.attributes?.CompationQuestion}
-                    </Typography>
-                    {/* Add additional form fields for joining the competition */}
-                  </DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleCloseDialog}>No</Button>
-                    <Button
-                      onClick={() => handleJoinSubmit(selectedCompation?.id, selectedCompation?.attributes.AchivmentCard)}
-                      variant="contained"
-                      color="primary"
-                    >
-                      Yes
-                    </Button>
-                  </DialogActions>
-                </Dialog>
+              <Dialog open={openDialog} onClose={handleCloseDialog}>
+                <DialogTitle>Join Competition</DialogTitle>
+                <DialogContent>
+                  <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '700' }}>
+                    Competition Type: {selectedCompation?.attributes?.CompationType}
+                  </Typography>
+                  <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '700' }}>
+                    Question: {selectedCompation?.attributes?.CompationQuestion}
+                  </Typography>
+                  {/* Add additional form fields for joining the competition */}
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleCloseDialog}>No</Button>
+                  <Button
+                    onClick={() => handleJoinSubmit(selectedCompation?.id, selectedCompation?.attributes.AchivmentCard)}
+                    variant="contained"
+                    color="primary"
+                  >
+                    Yes
+                  </Button>
+                </DialogActions>
+              </Dialog>
             </Stack>
           </Stack>
         </Box>

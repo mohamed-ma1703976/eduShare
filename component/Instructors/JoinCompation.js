@@ -100,6 +100,8 @@ const JoinCompation = () => {
 
     const instructorFirstName = instructors.find(s => s.id === userId)?.attributes.firstName
     const instructorLastName = instructors.find(s => s.id === userId)?.attributes.lastName
+    const currentId = instructors.find(s => s.id === userId)?.id
+
     const JoindComputionByInst = instructors.find(s => s.id === userId)?.attributes.joinedCompations ?? []
 
 
@@ -130,7 +132,8 @@ const JoinCompation = () => {
 
             let collectedData1 = {
                 name: instructorFirstName + "  " + instructorLastName,
-                achievementcard: congMessage
+                achievementcard: congMessage,
+                id:currentId
 
             };
 
