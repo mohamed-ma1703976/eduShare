@@ -70,6 +70,24 @@ export default function instructorDashboard() {
       
         setTotalStudents(totalStudentsCount);
       }
+      const [instructorCourses, setInstructorCourses] = useState([]);
+
+async function fetchCourseData() {
+  const instructorCoursesSnapshot = await getDocs(query(collection(db, "Course"), where("instructorId", "==", userId)));
+
+  // Update the state with the number of courses
+  setNumCourses(instructorCoursesSnapshot.size);
+
+  // Update the state with the list of courses
+  const coursesList = instructorCoursesSnapshot.docs.map((doc) => ({
+    id: doc.id,
+    attributes: doc.data(),
+  }));
+  setInstructorCourses(coursesList);
+
+  // ...
+}
+
       async function fetchCompetitions() {
         const compationsCollection = collection(db, "Compations");
         const compationsSnapshot = await getDocs(compationsCollection);
@@ -144,52 +162,105 @@ export default function instructorDashboard() {
     console.log(instructors);
 
     return (
-        <div>
-          <div>
-            {statusCheck ? (
-              <p>Your request is pending</p>
-            ) : (
-                <Box>
+      <div>
+        {statusCheck ? (
+          <p>Your request is pending</p>
+        ) : (
+          <Box>
             <InstNav />
-
+    
             <Stack direction="row" spacing={2}>
               <InstSidebar />
-
-              {/* Wrap the cards in a Stack with column direction */}
+    
               <Stack direction="column" spacing={2}>
+                <Card sx={{ minWidth: 900, margin: 2, height: 400 }}>
+              <CardContent>
+                <Typography variant="h5" component="div">
+                  Student Registration Trend
+                </Typography>
+                <ResponsiveContainer width="100%" height={300}>
+                  <LineChart
+                    width={500}
+                    height={300}
+                    data={data}
+                    margin={{
+                      top: 5,
+                      right: 30,
+                      left: 20,
+                      bottom: 5,
+                    }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="date" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Line
+                      type="monotone"
+                      dataKey="students"
+                      stroke="#8884d8"
+                      activeDot={{ r: 8 }}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
                 <Card sx={{ minWidth: 500, margin: 2, height: 170 }}>
-                    <CardContent>
-                      <Typography variant="h5" component="div">
-                        Total Students
-                      </Typography>
-                      <Typography variant="h2" component="div">
-                        {totalStudents}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                  <Card sx={{ minWidth: 500, margin: 2, height: 170 }}>
-                <CardContent>
-                  <Typography variant="h5" component="div">
-                    Number of Courses
-                  </Typography>
-                  <Typography variant="h2" component="div">
-                    {numCourses}
-                  </Typography>
-                </CardContent>
+                  <CardContent>
+                    <Typography variant="h5" component="div">
+                      Total Students
+                    </Typography>
+                    <Typography variant="h2" component="div">
+                      {totalStudents}
+                    </Typography>
+                  </CardContent>
                 </Card>
-                <Typography variant="h4" component="div" sx={{ margin: "30px 0" }}>
-        Competitions
-      </Typography>
-      
-
-      
-        
-          
-        <Grid container spacing={2}>
-        {competitions.slice(0, 3).map((competition) => (
-    <Grid item xs={4} sm={12} md={4} key={competition.id}>
-                    <Card
+                <Card sx={{ minWidth: 500, margin: 4, height: 170 }}>
+                  <CardContent>
+                    <Typography variant="h5" component="div">
+                      Number of Courses
+                    </Typography>
+                    <Typography variant="h2" component="div">
+                      {numCourses}
+                    </Typography>
+                  </CardContent>
+                </Card>
+    
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={6} md={6}>
+                    <Typography
+                      variant="h4"
+                      component="div"
+                      sx={{ marginBottom: 2 }}
                     >
+                      My Courses
+                    </Typography>
+                    <Grid container spacing={2}>
+                  {instructorCourses.slice(0, 3).map((course) => (
+                    <Grid item xs={12} sm={6} md={4} key={course.id}>
+                      <Card
+                        onClick={() => handleCourseClick(course.id)}
+                        sx={{ cursor: "pointer" }}
+                      >
+                        {/* ... course card content */}
+                      </Card>
+                    </Grid>
+                  ))}
+                </Grid>
+              </Grid>
+
+              <Grid item xs={12} sm={6} md={6}>
+                <Typography
+                  variant="h4"
+                  component="div"
+                  sx={{ marginBottom: 2 }}
+                >
+                  Competitions
+                </Typography>
+                <Grid container spacing={2}>
+                  {competitions.slice(0, 3).map((competition) => (
+                    <Grid item xs={12} sm={6} md={4} key={competition.id}>
+                      <Card>
                         <CardContent>
                             <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '1000' }}>
                                 Competition Type: {competition.attributes.CompationType}
@@ -206,9 +277,11 @@ export default function instructorDashboard() {
                                 Join This Competition
                             </Button>
                         </CardActions>
-                    </Card>
+                        </Card>
+                    </Grid>
+                  ))}
                 </Grid>
-            ))}
+              </Grid>
         
 
         <Dialog open={openDialog} onClose={handleCloseDialog}>
@@ -235,46 +308,10 @@ export default function instructorDashboard() {
         </Dialog>
     
         </Grid>
-    
-              </Stack>
-                  <Card sx={{ minWidth: 900, margin: 2, height: 400}}>
-                    <CardContent>
-                      <Typography variant="h5" component="div">
-                        Student Registration Trend
-                      </Typography>
-                      <ResponsiveContainer width="100%" height={300}>
-                        <LineChart
-                          width={500}
-                          height={300}
-                          data={data}
-                          margin={{
-                            top: 5,
-                            right: 30,
-                            left: 20,
-                            bottom: 5,
-                          }}
-                        >
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="date" />
-                          <YAxis />
-                          <Tooltip />
-                          <Legend />
-                          <Line
-                            type="monotone"
-                            dataKey="students"
-                            stroke="#8884d8"
-                            activeDot={{ r: 8 }}
-                          />
-                        </LineChart>
-                      </ResponsiveContainer>
-                    </CardContent>
-                  </Card>
-                
-                </Stack>
-              
-              </Box>
-            )}
-          </div>
-        </div>
-      );
+          </Stack>
+        </Stack>
+      </Box>
+    )}
+  </div>
+);
 }

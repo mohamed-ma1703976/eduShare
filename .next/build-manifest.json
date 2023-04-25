@@ -20,6 +20,21 @@
       "static/chunks/main.js",
       "static/chunks/pages/Instructor.js"
     ],
+    "/Instructor/joincompation": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/Instructor/joincompation.js"
+    ],
+    "/Instructor/profile": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/Instructor/profile.js"
+    ],
+    "/Instructor/uploadcontanet": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/Instructor/uploadcontanet.js"
+    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
