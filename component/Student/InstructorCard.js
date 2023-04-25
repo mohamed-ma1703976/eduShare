@@ -8,18 +8,18 @@ import ButtonBase from '@mui/material/ButtonBase';
 import Avatar from '@mui/material/Avatar';
 
 export default function InstructorCard({ instructor }) {
-    const { title, displayName, img, id } = instructor;
+    const { title, displayName, img, id ,profilePicture} = instructor;
   
     const url = 'https://cdn.pixabay.com/photo/2014/04/05/11/39/people-316506__480.jpg';
   
     return (
       <ButtonBase component="div" sx={{ textDecoration: 'none', color: 'inherit' }}>
-        <Card sx={{ display: 'flex', flexDirection: 'column', height: '300px', cursor: 'pointer', width: "300" }}>
+        <Card sx={{ display: 'flex', flexDirection: 'column', height: '250px', cursor: 'pointer', width: "300" }}>
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', pt: 2 }}>
             <Avatar
-              src={url} // Replace 'url' with the image URL from the instructor object if available
+              src={profilePicture} // Replace 'url' with the image URL from the instructor object if available
               alt={name}
-              sx={{ width: 128, height: 128 }}
+              sx={{ width: 125, height: 128 }}
             />
           </Box>
           <CardContent sx={{ flex: 1 }}>
