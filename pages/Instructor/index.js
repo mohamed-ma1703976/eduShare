@@ -218,39 +218,6 @@ export default function instructorDashboard() {
                   </Typography>
                 </CardContent>
               </Card>
-              <Card sx={{ minWidth: 500, margin: 4, height: 170 }}>
-                <CardContent>
-                  <Typography variant="h5" component="div">
-                    Number of Courses
-                  </Typography>
-                  <Typography variant="h2" component="div">
-                    {numCourses}
-                  </Typography>
-                </CardContent>
-              </Card>
-
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6} md={6}>
-                  <Typography
-                    variant="h4"
-                    component="div"
-                    sx={{ marginBottom: 2 }}
-                  >
-                    My Courses
-                  </Typography>
-                  <Grid container spacing={2}>
-                    {instructorCourses.slice(0, 3).map((course) => (
-                      <Grid item xs={12} sm={6} md={4} key={course.id}>
-                        <Card
-                          onClick={() => handleCourseClick(course.id)}
-                          sx={{ cursor: "pointer" }}
-                        >
-                          {/* ... course card content */}
-                        </Card>
-                      </Grid>
-                    ))}
-                  </Grid>
-                </Grid>
 
                 <Grid item xs={12} sm={6} md={6}>
                   <Typography
@@ -309,8 +276,6 @@ export default function instructorDashboard() {
                     </Button>
                   </DialogActions>
                 </Dialog>
-
-              </Grid>
             </Stack>
           </Stack>
         </Box>
