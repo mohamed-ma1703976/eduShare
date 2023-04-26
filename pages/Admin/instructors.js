@@ -18,9 +18,9 @@ function instructors() {
 
                 <Sidebar />
 
-
+                <Box flexGrow={1}>
                 <InstructorTable />
-
+                </Box>
 
 
             </Stack>

@@ -17,8 +17,9 @@ function course() {
 
                 <Sidebar />
 
-
+                <Box flexGrow={1}>
                 <CardList courseSearch={search}/>
+                </Box>
 
 
 

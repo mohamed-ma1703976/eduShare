@@ -13,7 +13,7 @@ import {
   Typography,
 } from '@mui/material';
 import { color } from '@mui/system';
-
+import { getFirestoreTimestamp } from '../Firebase/Firebase'; // Import the helper function
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 
 import React, { useEffect, useState } from 'react';
@@ -24,7 +24,7 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 const Form = ({ setOpen }) => {
   const router = useRouter();
-
+  const currentDate = getFirestoreTimestamp(); // Get the current date using the helper function
   const [uploadImg, setUploadImg] = useState({ files: [] });
   const [isSelected, setIsSelected] = useState(false);
   const [isSelectedd, setIsSelectedd] = useState('');
@@ -33,6 +33,7 @@ const Form = ({ setOpen }) => {
   const [fileList, setFileList] = useState([]);
 
   const [formData, setFormData] = useState({
+    creatingDate: currentDate,
     CourseTitle: '',
     InstructorName: '',
     CourseDescription: '',

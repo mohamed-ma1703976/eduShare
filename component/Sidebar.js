@@ -21,91 +21,112 @@ function Sidebar() {
     })
 
     return (
-
-        <Box bgcolor="#FDFEFE" flex={1} p={1} position="sticky" >
+        <Box bgcolor="#FDFEFE" flex={1} p={1} position="sticky" sx={{ maxWidth: "250px" }}>
             <List>
-                <ListItem disablePadding >
-                    <ListItemButton onClick={()=>router.push("/Admin/dashboard")} >
-                        <ListItemIcon >
+                <ListItem disablePadding>
+                    <ListItemButton onClick={() => router.push("/Admin/dashboard")} sx={{
+                        "&:hover": {
+                            backgroundColor: "#1ABC9C",
+                            color: "primary.contrastText",
+                        },
+                        transition: "background-color 0.3s ease-in-out",
+                    }}>
+                        <ListItemIcon>
                             <GridViewIcon />
                         </ListItemIcon>
                         <ListItemText sx={{ color: "#909497" }} primary="Dashboard" />
                     </ListItemButton>
                 </ListItem>
-
-
-
+    
                 <ListItem disablePadding>
-                    <ListItemButton onClick={handelClickRoute}>
-                        <ListItemIcon >
+                    <ListItemButton onClick={handelClickRoute} sx={{
+                        "&:hover": {
+                            backgroundColor: "#1ABC9C",
+                            color: "primary.contrastText",
+                        },
+                        transition: "background-color 0.3s ease-in-out",
+                    }}>
+                        <ListItemIcon>
                             <AutoStoriesIcon />
                         </ListItemIcon>
                         <ListItemText sx={{ color: "#909497" }} primary="Courses" />
                     </ListItemButton>
                 </ListItem>
-
-
-
+    
                 <ListItem disablePadding>
-                    <ListItemButton>
+                    <ListItemButton sx={{
+                        "&:hover": {
+                            backgroundColor: "#1ABC9C",
+                            color: "primary.contrastText",
+                        },
+                        transition: "background-color 0.3s ease-in-out",
+                    }}>
                         <ListItemIcon>
                             <EventNoteIcon />
                         </ListItemIcon>
                         <ListItemText sx={{ color: "#909497" }} primary="Schedule" />
                     </ListItemButton>
                 </ListItem>
-
-
-
-
-
+    
                 <ListItem disablePadding>
-                    <ListItemButton onClick={()=>router.push("/Admin/instructors")} >
+                    <ListItemButton onClick={() => router.push("/Admin/instructors")} sx={{
+                        "&:hover": {
+                            backgroundColor: "#1ABC9C",
+                            color: "primary.contrastText",
+                        },
+                        transition: "background-color 0.3s ease-in-out",
+                    }}>
                         <ListItemIcon>
                             <Groups2Icon />
                         </ListItemIcon>
                         <ListItemText sx={{ color: "#909497" }} primary="Instructors" />
                     </ListItemButton>
                 </ListItem>
-
-
-
-
-
-
+    
                 <ListItem disablePadding>
-                    <ListItemButton onClick={()=>router.push("/Admin/student")}>
+                    <ListItemButton onClick={() => router.push("/Admin/student")} sx={{
+                        "&:hover": {
+                            backgroundColor: "#1ABC9C",
+                            color: "primary.contrastText",
+                        },
+                        transition: "background-color 0.3s ease-in-out",
+                    }}>
                         <ListItemIcon>
                             <Groups3Icon />
                         </ListItemIcon>
                         <ListItemText sx={{ color: "#909497" }} primary="Students" />
                     </ListItemButton>
                 </ListItem>
-
-
-
-
-
-
+    
                 <ListItem disablePadding>
-                    <ListItemButton >
+                    <ListItemButton sx={{
+                        "&:hover": {
+                            backgroundColor: "#1ABC9C",
+                            color: "primary.contrastText",
+                        },
+                        transition: "background-color 0.3s ease-in-out",
+                    }}>
                         <ListItemIcon>
                             <AccountCircleIcon />
                         </ListItemIcon>
                         <ListItemText sx={{ color: "#909497" }} primary="Profile" />
                     </ListItemButton>
                 </ListItem>
-
-
-
+    
                 <ListItem disablePadding>
-                    <ListItemButton >
+                    <ListItemButton sx={{
+                        "&:hover": {
+                            backgroundColor: "#1ABC9C",
+                            color: "primary.contrastText",
+                        },
+                        transition: "background-color 0.3s ease-in-out",
+                    }}>
                         <ListItemIcon>
                             <LocalActivityIcon />
                         </ListItemIcon>
                         <ListItemText sx={{ color: "#909497" }} primary="Activity" />
                     </ListItemButton>
-                </ListItem>
+                </ListItem>    
 
 
 
