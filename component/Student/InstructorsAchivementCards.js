@@ -16,8 +16,6 @@ export default function InstructorsAchivementCards() {
     const [achivment, setAchivment] = React.useState([]);
     const [instructor, setInstructor] = React.useState([]);
 
-    const [loading, setLoading] = React.useState(true);
-
 
 
     //const currentStudent = students.find(s => s.id === userId)?.attributes.registerdcourses
@@ -31,7 +29,6 @@ export default function InstructorsAchivementCards() {
                 attributes: doc.data(),
             }));
             setAchivment(studentList);
-            setLoading(false);
         };
 
         const fetchInstructors = async () => {
@@ -49,9 +46,6 @@ export default function InstructorsAchivementCards() {
 
 
     }, []);
-
-    if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "200px 550px 0 0 " }} /></div>;
-
 
 
     return (
