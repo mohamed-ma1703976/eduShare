@@ -144,7 +144,7 @@ export default function instructorDashboard() {
   let registeredStudents = students.filter(s => s.attributes.registerdcourses.includes(courseid));
   let studentNumber = registeredStudents.length;
 
-  console.log(studentNumber)
+  console.log(registeredStudents)
 
   const handleJoinSubmit = async (id, congMessage) => {
     console.log(id)
