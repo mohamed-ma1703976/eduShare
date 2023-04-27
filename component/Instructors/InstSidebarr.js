@@ -22,12 +22,12 @@ function InstSidebar() {
 
   return (
     <Box
-    bgcolor="#FDFEFE"
-    flex={1}
-    p={1}
-    position="sticky"
-    sx={{ maxWidth: "250px" }} // Add this line
-  >
+      bgcolor="#FDFEFE"
+      flex={1}
+      p={1}
+      position="sticky"
+      sx={{ maxWidth: "250px" }} // Add this line
+    >
       <List>
         <ListItem disablePadding>
           <ListItemButton
@@ -65,23 +65,20 @@ function InstSidebar() {
           </ListItemButton>
         </ListItem>
 
-        {/* <ListItem disablePadding>
-          <ListItemButton
-            onClick={() => router.push("/Instructor/joincompation")}
-            sx={{
-              "&:hover": {
-                backgroundColor: "#1ABC9C",
-                color: "primary.contrastText",
-              },
-              transition: "background-color 0.3s ease-in-out",
-            }}
-          >
+        <ListItem disablePadding>
+          <ListItemButton onClick={() => router.push("/Instructor/mystudents")} sx={{
+            "&:hover": {
+              backgroundColor: "#1ABC9C",
+              color: "primary.contrastText",
+            },
+            transition: "background-color 0.3s ease-in-out",
+          }}>
             <ListItemIcon>
-              <LocalActivityIcon />
+              <Groups3Icon />
             </ListItemIcon>
-            <ListItemText sx={{ color: "#909497" }} primary="Join Compation" />
+            <ListItemText sx={{ color: "#909497" }} primary="My Students" />
           </ListItemButton>
-        </ListItem> */}
+        </ListItem>
 
         <ListItem disablePadding>
           <ListItemButton
