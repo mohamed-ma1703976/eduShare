@@ -8,11 +8,11 @@ import { app, auth, db } from "../../Firebase/Firebase";
 import { getAuth } from "firebase/auth";
 import { useRouter } from 'next/router';
 
-export default function DropCourse({userId}) {
+export default function DropCourse() {
     const [courses, setCourses] = useState([]);
     const [students, setStudents] = useState([]);
 
-
+    let userId = auth.currentUser.uid
     useEffect(() => {
         const fetchStudents = async () => {
             const studentCollection = collection(db, 'Student');
@@ -51,8 +51,8 @@ export default function DropCourse({userId}) {
     console.log(students);
 
     return (
-        <div>  
-            { registeredCoursesByStudent?.map(s => (
+        <div>
+            {registeredCoursesByStudent?.map(s => (
                 <Box sx={{ display: 'flex', flexDirection: 'row', margin: '10px 700px 0 0', cursor: 'pointer', alignItems: 'center' }} key={s.id}>
                     <MycoursesCard courseTitle={s.attributes.CourseTitle} InstName={s.attributes.InstructorName} id={s.id} userid={userId} />
                 </Box>
