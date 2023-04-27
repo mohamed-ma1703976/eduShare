@@ -10,7 +10,7 @@ const UploadFile = ({ setFileList }) => {
     const [instructors, setInstructors] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const currentUser = auth.currentUser.uid;
+    const currentUser = auth?.currentUser?.uid;
 
     let currentInstructor = instructors?.find(ins => ins.id === currentUser)?.attributes.myCourse?.[0]?.coursname?.[0]?.replace(/\s+/g, '');
 

@@ -13,13 +13,15 @@ import Loading from "../../component/Loading ";
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
   const router = useRouter();
   const { userId, userRole } = useContext(AuthContext);
 
   const [useRole, setUseRole] = useState("");
 
-  const userid = auth.currentUser.uid
-
+  const userid = auth?.currentUser?.uid 
+  console.log(userid)
+  
   useEffect(() => {
     const fetchUserData = async () => {
       const role = await getUserRole(userid, app);
@@ -49,7 +51,7 @@ const Profile = () => {
 
   return (
     <div>
-      <Box>
+     <Box>
         {loading && <Loading />}
         {!loading && (
           <>

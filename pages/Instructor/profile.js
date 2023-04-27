@@ -20,7 +20,7 @@ const Profile = () => {
 
 
   //console.log(user, userId, userRole)
-  const userid = auth.currentUser.uid
+  const userid = auth?.currentUser?.uid
 
   useEffect(() => {
     //getUserRole(userId, app).then(res => setUseRole(res))

@@ -8,7 +8,7 @@ function MyStudents() {
     const [coursess, setCoursess] = useState([]);
     const [instructor, setInstructor] = useState([]);
 
-    let currentId = auth.currentUser.uid
+    let currentId = auth?.currentUser?.uid
     async function fetchCourses() {
         const compationsCollection = collection(db, "Course");
         const compationsSnapshot = await getDocs(compationsCollection);
