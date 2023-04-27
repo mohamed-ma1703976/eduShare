@@ -1,4 +1,5 @@
-import React from 'react';
+import React ,{useEffect,useState }from 'react'
+import Loading from '../../component/Loading ';
 import {
     Box,
     Stack,
@@ -19,7 +20,17 @@ import UploadFile from '../../component/Instructors/UploadFile';
 
 function UploadContent() {
     const [fileList, setFileList] = React.useState([]);
+    const [loading, setLoading] = useState(true);
 
+    useEffect(() => {
+      setTimeout(() => {
+        setLoading(false);
+      }, 5000); // Set timeout to 5 seconds
+    }, []);
+  
+    if (loading) {
+      return <Loading />; // Render Loading component
+    }
     return (
         <div>
             <Box>

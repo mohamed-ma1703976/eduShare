@@ -6,17 +6,17 @@ import StuSideBar from '../../../component/Student/StuSideBar';
 import { getFirestore, doc, getDoc, collection, getDocs, updateDoc } from 'firebase/firestore';
 import { db } from '../../../Firebase/Firebase';
 import { getAuth } from "firebase/auth";
-import { app } from "../../../Firebase/Firebase"
+import { app } from "../../../Firebase/Firebase";
+import Loading from "../../../component/Loading "; // Import Loading component
+
 const CoursePage = ({ course }) => {
   const router = useRouter();
-
-
 
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
-  const [enrollButtonDisabled, setEnrollButtonDisabled] = React.useState(false);
 
+  const [enrollButtonDisabled, setEnrollButtonDisabled] = React.useState(false);
   const [students, setStudents] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [userId, setUserId] = React.useState(null);
@@ -28,6 +28,7 @@ const CoursePage = ({ course }) => {
   const [instructorCourses, setInstructorCourses] = React.useState({
     myCourse: []
   });
+
 
   console.log("course id", course.fileUrl)
   console.log("user id", userId)
@@ -82,11 +83,14 @@ const CoursePage = ({ course }) => {
 
     fetchStudents();
     fetchInstructors();
-
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000); // Set timeout to 5 seconds
   }, []);
 
-  if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "200px 550px 0 0 " }} /></div>;
-  ;
+  if (loading) {
+    return <Loading />; // Render Loading component
+  }  ;
 
 
 

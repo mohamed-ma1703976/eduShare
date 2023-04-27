@@ -1,11 +1,23 @@
-import React from 'react'
+import React ,{useEffect,useState }from 'react'
 import InstSidebar from '../../component/Instructors/InstSidebarr'
 import InstNav from '../../component/Instructors/InstNav'
 import Card from '../../component/Card'
 import { Box, Stack } from "@mui/material"
 import MyStudents from '../../component/Instructors/MyStudents'
+import Loading from '../../component/Loading '
 function mystudents() {
     const [search, setSearch] = React.useState("")
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+      setTimeout(() => {
+        setLoading(false);
+      }, 5000); // Set timeout to 5 seconds
+    }, []);
+  
+    if (loading) {
+      return <Loading />; // Render Loading component
+    }
 
     return (
 

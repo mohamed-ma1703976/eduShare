@@ -3,34 +3,29 @@ import React, { useEffect, useState } from "react";
 import StuNav from "../../component/Student/StuNav";
 import StuSideBar from "../../component/Student/StuSideBar";
 import InstructorsAchivementCards from "../../component/Student/InstructorsAchivementCards";
-import Loading from "../../component/Loading ";
+import Loading from "../../component/Loading "; // Import Loading component
 
 export default function coursePage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    setTimeout(() => {
       setLoading(false);
-    }, 4000);
-
-    return () => {
-      clearTimeout(timer);
-    };
+    }, 5000); // Set timeout to 5 seconds
   }, []);
+
+  if (loading) {
+    return <Loading />; // Render Loading component
+  }
 
   return (
     <Box>
-      {loading ? (
-        <Loading />
-      ) : (
-        <>
-          <StuNav />
-          <Stack direction="row" spacing={2}>
-            <StuSideBar />
-            <InstructorsAchivementCards />
-          </Stack>
-        </>
-      )}
+      <StuNav />
+
+      <Stack direction="row" spacing={2}>
+        <StuSideBar />
+        <InstructorsAchivementCards />
+      </Stack>
     </Box>
   );
 }
