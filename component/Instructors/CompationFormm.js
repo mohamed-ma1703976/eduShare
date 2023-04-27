@@ -13,7 +13,7 @@ import {
     Grid,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { getFirestoreTimestamp } from '../Firebase/Firebase'; // Import the helper function
+import { getFirestoreTimestamp } from '../../Firebase/Firebase'; // Import the helper function
 import Router, { useRouter } from 'next/router';
 import { collection, addDoc, getDocs, updateDoc } from 'firebase/firestore';
 import { db } from '../../Firebase/Firebase';

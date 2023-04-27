@@ -15,7 +15,6 @@ function Card() {
   const [courses, setCourses] = React.useState([]);
   const [compat, setCompat] = React.useState([]);
 
-  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     const fetchCourses = async () => {
@@ -26,7 +25,6 @@ function Card() {
         ...doc.data(),
       }));
       setCourses(coursesList);
-      setLoading(false);
     };
 
 
@@ -38,7 +36,6 @@ function Card() {
         ...doc.data(),
       }));
       setCompat(coursesList);
-      setLoading(false);
     };
 
     fetchCourses();
@@ -47,7 +44,6 @@ function Card() {
 
  // const numberOfCourses = courses;
 
- if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "200px 550px 0 0 " }} /></div>;
 
     return (
         <Grid container spacing={1}>

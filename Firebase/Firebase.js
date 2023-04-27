@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore, collection } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { getStorage } from 'firebase/storage'; // Import the storage module
-
+import { serverTimestamp } from 'firebase/firestore';
 const firebaseConfig = {
   apiKey: "AIzaSyC-ZYyj3mpgKszGlMQmETjBuBCqzYGFDh4",
   authDomain: "edushare-e9242.firebaseapp.com",
@@ -18,5 +18,9 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 const storage = getStorage(app); // Get the storage instance
+
+export const getFirestoreTimestamp = () => {
+  return serverTimestamp();
+};
 
 export { app, db, auth,storage, collection };

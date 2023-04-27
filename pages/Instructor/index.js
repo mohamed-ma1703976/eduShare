@@ -1,8 +1,7 @@
-import React, { use, useEffect, useState } from "react";
-import useFetch from "../../hooks/useFetch";
-import { db } from '../../Firebase/Firebase'
+import React, { useState, useEffect } from "react";
+import { db } from '../../Firebase/Firebase';
 import { getAuth } from "firebase/auth";
-import { app } from "../../Firebase/Firebase"
+import { app } from "../../Firebase/Firebase";
 import InstNav from "../../component/Instructors/InstNav";
 import InstSidebar from "../../component/Instructors/InstSidebarr";
 import { Box, CircularProgress, Stack } from "@mui/material";
@@ -25,6 +24,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import Pending from "../../component/Instructors/Pending";
+import Loading from '../../component/Loading ';
 
 export default function instructorDashboard() {
   const data = [
@@ -35,22 +35,22 @@ export default function instructorDashboard() {
     { date: "01-05", students: 30 },
   ];
   const [competitions, setCompetitions] = useState([]);
-  const [statusCheck, setstatusCheck] = useState(true)
-  const [statusValue, setStatusValue] = useState('')
+  const [statusCheck, setstatusCheck] = useState(true);
+  const [statusValue, setStatusValue] = useState('');
   const [totalStudents, setTotalStudents] = useState(0);
-
-  const [instructors, setInstructors] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
+  const [instructors, setInstructors] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [joinedComp, setJoinedCom] = useState({
     joinedCompations: []
-});
-  console.log(instructors)
+  });
 
   const [userId, setUserId] = useState(null);
   const [numCourses, setNumCourses] = useState(0);
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedCompation, setSelectedCompation] = useState(null);
-
+  const instructorFirstName = instructors.find(s => s.id === userId)?.attributes.firstName
+  const instructorLastName = instructors.find(s => s.id === userId)?.attributes.lastName
+  const JoindComputionByInst = instructors.find(s => s.id === userId)?.attributes.joinedCompations ?? []
   const handleJoinCompation = (compation) => {
     setSelectedCompation(compation);
     setOpenDialog(true);
@@ -105,67 +105,7 @@ export default function instructorDashboard() {
   useEffect(() => {
     fetchCompetitions();
   }, []);
-
-  useEffect(() => {
-    // Listen for changes in the authentication state
-    const auth = getAuth(app);
-
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      if (user) {
-        // User is signed in, get the user ID
-        setUserId(user.uid);
-      } else {
-        // User is signed out, set user ID to null
-        setUserId(null);
-      }
-    });
-
-    // Clean up the listener when the component unmounts
-    return () => unsubscribe();
-  }, []);
-  console.log(userId)
-
-  useEffect(() => {
-    fetchCourseData();
-  }, []);
-
-  useEffect(() => {
-    const fetchInstructors = async () => {
-      const instructorCollection = collection(db, 'Instructor');
-      const instructorSnapshot = await getDocs(instructorCollection);
-      const instructorsList = instructorSnapshot.docs.map((doc) => ({
-        id: doc.id,
-        attributes: doc.data(),
-      }));
-      setInstructors(instructorsList);
-      setLoading(false);
-
-      instructorsList.forEach(s => {
-
-        if (s.id === userId) {
-          if (s.attributes.status === 'Active') {
-            console.log(s.attributes.status)
-
-            setstatusCheck(false);
-            setStatusValue(s.attributes.status);
-          } else {
-            setstatusCheck(true);
-          }
-        }
-      });
-
-    };
-
-    fetchInstructors();
-  }, [userId]);
-
-  if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "250px 0 0 570px" }} /></div>;
-  const instructorFirstName = instructors.find(s => s.id === userId)?.attributes.firstName
-  const instructorLastName = instructors.find(s => s.id === userId)?.attributes.lastName
-  const JoindComputionByInst = instructors.find(s => s.id === userId)?.attributes.joinedCompations ?? []
-
-
-  const handleJoinSubmit = async (id, congMessage) => {
+    const handleJoinSubmit = async (id, congMessage) => {
     console.log(id)
     if (JoindComputionByInst.includes(id)) {
       alert("you already join this compation")
@@ -217,16 +157,58 @@ export default function instructorDashboard() {
 
   console.log(instructors);
 
-  return (
-    <div>
-      {statusCheck ? (
-        <Pending />
-      ) : (
-        <Box>
-          <InstNav />
+  useEffect(() => {
+    const auth = getAuth(app);
 
-          <Stack direction="row" spacing={2}>
-            <InstSidebar />
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if (user) {
+        setUserId(user.uid);
+      } else {
+        setUserId(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    const fetchInstructors = async () => {
+      const instructorCollection = collection(db, 'Instructor');
+      const instructorSnapshot = await getDocs(instructorCollection);
+      const instructorsList = instructorSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        attributes: doc.data(),
+      }));
+      setInstructors(instructorsList);
+      setIsLoading(false);
+
+      instructorsList.forEach(s => {
+        if (s.id === userId) {
+          if (s.attributes.status === 'Active') {
+            setstatusCheck(false);
+            setStatusValue(s.attributes.status);
+          } else {
+            setstatusCheck(true);
+          }
+        }
+      });
+    };
+
+    fetchInstructors();
+  }, [userId]);
+  return (
+    isLoading ? (
+      <Loading />
+    ) : (
+      <div>
+        {statusCheck ? (
+          <Pending />
+        ) : (
+          <Box>
+            <InstNav />
+
+            <Stack direction="row" spacing={2}>
+              <InstSidebar />
 
             <Stack direction="column" spacing={2}>
               <Card sx={{ minWidth: 900, margin: 2, height: 400 }}>
@@ -334,5 +316,6 @@ export default function instructorDashboard() {
         </Box>
       )}
     </div>
+    )
   );
 }

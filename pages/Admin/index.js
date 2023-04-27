@@ -1,33 +1,40 @@
-import React from 'react'
-import Navbar from '../../component/Navbar'
-import Sidebar from '../../component/Sidebar'
-import Card from '../../component/Card'
-import { Box, Stack } from "@mui/material"
+import React, { useState, useEffect } from 'react';
+import Navbar from '../../component/Navbar';
+import Sidebar from '../../component/Sidebar';
+import Card from '../../component/Card';
+import { Box, Stack } from '@mui/material';
+import LineChartComponent from '../../component/Admin/LineChartComponent';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../Firebase/Firebase';
+import Loading from "../../component/Loading ";
+
 function AdminDashBoard() {
-    return (
-        <div >
-            <Box>
+  const [isLoading, setIsLoading] = useState(true);
 
-                <Navbar />
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000); // Adjust the duration (3000ms) as needed
+    return () => clearTimeout(timer);
+  }, []);
 
-                <Stack direction="row" spacing={2} >
+  return (
+    <div>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Box>
+          <Navbar />
 
-                    <Sidebar />
+          <Stack direction="row" spacing={2}>
+            <Sidebar />
 
-                    <Card />
+            <Card />
+          </Stack>
+        </Box>
+      )}
+    </div>
+  );
+}
 
-                </Stack>
-
-            </Box>
-
-              
-        </div>    
-
-
-
-
-
-    )
-}   
-
-export default AdminDashBoard
+export default AdminDashBoard;
