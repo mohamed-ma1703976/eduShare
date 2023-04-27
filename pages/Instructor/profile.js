@@ -19,22 +19,23 @@ const Profile = () => {
 
 
 
-  console.log(user, userId, userRole)
+  //console.log(user, userId, userRole)
+  const userid = auth.currentUser.uid
 
   useEffect(() => {
     //getUserRole(userId, app).then(res => setUseRole(res))
 
     const fetchUserData = async () => {
-      const role = await getUserRole(userId, app); // Wait for the promise to resolve
+      const role = await getUserRole(userid, app); // Wait for the promise to resolve
       console.log('User role:', role);
       setUseRole(role)
 
-      if (!userId || !role) {
+      if (!userid || !role) {
         router.push("/");
         return;
       }
       const db = getFirestore(app);
-      const userDocRef = doc(db, role, userId);
+      const userDocRef = doc(db, role, userid);
       const userDoc = await getDoc(userDocRef);
 
       if (userDoc.exists()) {
@@ -45,7 +46,7 @@ const Profile = () => {
     };
 
     fetchUserData();
-  }, [router, userId, useRole]);
+  }, [router, userid, useRole]);
 
 
   if (!user) {
