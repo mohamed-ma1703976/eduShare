@@ -1,36 +1,49 @@
 import { Box, Card, Stack } from "@mui/material";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import StuNav from "../../component/Student/StuNav";
 import StuSideBar from "../../component/Student/StuSideBar";
 import DropCourse from "../../component/Student/DropCourse";
-import {auth} from "../../Firebase/Firebase";
+import { auth } from "../../Firebase/Firebase";
+import Loading from "../../component/Loading ";
 
 export default function mycourses() {
+  const [userId, setUserId] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    const [userId, setUserId] = useState(null);
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if (user) {
+        setUserId(user.uid);
+      } else {
+        setUserId(null);
+      }
+    });
 
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(user => {
-            if (user) {
-                setUserId(user.uid);
-            } else {
-                setUserId(null);
-            }
-        });
+    return () => unsubscribe();
+  }, []);
 
-        return () => unsubscribe();
-    }, []);
-    return (
-        <Box>
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
 
-            <StuNav />
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
 
-            <Stack direction="row" spacing={2} >
-
-                <StuSideBar />
-                <DropCourse userId={userId}/>
-            </Stack>
-
-        </Box>
-    );
+  return (
+    <Box>
+      {loading && <Loading />}
+      {!loading && (
+        <>
+          <StuNav />
+          <Stack direction="row" spacing={2}>
+            <StuSideBar />
+            <DropCourse userId={userId} />
+          </Stack>
+        </>
+      )}
+    </Box>
+  );
 }

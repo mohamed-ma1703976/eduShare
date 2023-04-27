@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, CircularProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useContext } from "react";
 import { AuthContext } from "../../hooks/AuthProvider";
 import MycoursesCard from "./MycoursesCard";
@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 export default function DropCourse({userId}) {
     const [courses, setCourses] = useState([]);
     const [students, setStudents] = useState([]);
-    const [loading, setLoading] = useState(true);
+
 
     useEffect(() => {
         const fetchStudents = async () => {
@@ -22,7 +22,6 @@ export default function DropCourse({userId}) {
                 attributes: doc.data(),
             }));
             setStudents(studentList);
-            setLoading(false);
         };
 
         fetchStudents();
@@ -37,13 +36,10 @@ export default function DropCourse({userId}) {
                 attributes: doc.data(),
             }));
             setCourses(coursesList);
-            setLoading(false);
         };
 
         fetchCourses();
     }, []);
-
-    if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "200px 550px 0 0 " }} /></div>;
 
     const currentStudent = students.find(s => s.id === userId)?.attributes.registerdcourses;
     console.log(currentStudent);

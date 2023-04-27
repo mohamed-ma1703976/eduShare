@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { getDownloadURL, listAll, ref } from 'firebase/storage';
 import { storage } from '../../Firebase/Firebase';
 import { Button, Toolbar } from '@mui/material';
-import { CircularProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
 
 const CoursePage = ({ courseName }) => {

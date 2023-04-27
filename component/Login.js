@@ -15,7 +15,8 @@ import { useContext } from "react";
 import { AuthContext } from "../hooks/AuthProvider";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from "../Firebase/Firebase";
-import { getFirestore, doc, getDoc } from "firebase/firestore"; // Add this import
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+
 
 export default function App() {
   const router = useRouter();

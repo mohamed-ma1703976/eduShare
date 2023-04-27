@@ -8,14 +8,13 @@ import { getAuth } from 'firebase/auth';
 import { app, collection, db, storage } from '../../Firebase/Firebase';
 import { doc, getDocs, updateDoc } from 'firebase/firestore';
 import { useRouter } from 'next/router';
-import { CircularProgress, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
 export default function MycoursesCard({ courseTitle, InstName, id, userid }) {
     const router = useRouter();
 
 
     const [students, setStudents] = React.useState([]);
-    const [loading, setLoading] = React.useState(true);
     //const [userId, setUserId] = React.useState(null);
     const [currentCourses, setCurrentCourses] = React.useState();
 
@@ -30,8 +29,7 @@ export default function MycoursesCard({ courseTitle, InstName, id, userid }) {
                 id: doc.id,
                 attributes: doc.data(),
             }));
-            setStudents(studentList);
-            setLoading(false);
+            setStudents(studentList);;
         };
 
         fetchStudents();
@@ -45,8 +43,6 @@ export default function MycoursesCard({ courseTitle, InstName, id, userid }) {
             }
         }
     }, [students, userid]);
-    if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "200px 550px 0 0 " }} /></div>;
-
 
     console.log(userid)
 
