@@ -44,7 +44,7 @@ const UploadFile = ({ setFileList }) => {
                     if (loading)
     return (
         <div>
-            <CircularProgress size={100} color="success" sx={{ margin: '200px 550px 0 0 ' }} />
+            <CircularProgress size={100} color="success" sx={{ margin: '100px 0px 0 350px ' }} />
         </div>
     );
 

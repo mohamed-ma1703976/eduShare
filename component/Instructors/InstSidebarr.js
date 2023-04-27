@@ -65,7 +65,7 @@ function InstSidebar() {
           </ListItemButton>
         </ListItem>
 
-        <ListItem disablePadding>
+        {/* <ListItem disablePadding>
           <ListItemButton
             onClick={() => router.push("/Instructor/joincompation")}
             sx={{
@@ -81,7 +81,7 @@ function InstSidebar() {
             </ListItemIcon>
             <ListItemText sx={{ color: "#909497" }} primary="Join Compation" />
           </ListItemButton>
-        </ListItem>
+        </ListItem> */}
 
         <ListItem disablePadding>
           <ListItemButton

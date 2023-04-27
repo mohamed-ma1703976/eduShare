@@ -12,7 +12,7 @@ import {
   DialogContent,
   DialogActions, CardActions
 } from "@mui/material";
-import { getDocs, collection, where, query } from "firebase/firestore";
+import { getDocs, collection, where, query, doc, updateDoc, addDoc } from "firebase/firestore";
 import {
   LineChart,
   Line,
@@ -105,8 +105,12 @@ export default function instructorDashboard() {
   useEffect(() => {
     fetchCompetitions();
   }, []);
+
+
     const handleJoinSubmit = async (id, congMessage) => {
     console.log(id)
+    console.log(congMessage)
+
     if (JoindComputionByInst.includes(id)) {
       alert("you already join this compation")
       //setOpenDialog(true);
@@ -129,7 +133,9 @@ export default function instructorDashboard() {
 
       let collectedData1 = {
         name: instructorFirstName + "  " + instructorLastName,
-        achievementcard: congMessage
+        achievementcard: congMessage,
+        id:userId
+
 
       };
 
@@ -263,7 +269,7 @@ export default function instructorDashboard() {
                   Competitions
                 </Typography>
                 <Grid container spacing={2}>
-                  {competitions.slice(0, 3).map((competition) => (
+                  {competitions.map((competition) => (
                     <Grid item xs={12} sm={6} md={4} key={competition.id}>
                       <Card>
                         <CardContent>

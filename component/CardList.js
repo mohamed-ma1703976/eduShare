@@ -33,6 +33,7 @@ import Router, { useRouter } from 'next/router';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import UpdateDialog from './UpdateDialog';
+import Loading from './Loading ';
 
 function CardList({ courseSearch }) {
   const router = useRouter();
@@ -56,7 +57,7 @@ function CardList({ courseSearch }) {
     fetchCourses();
   }, []);
 
-  if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "200px 550px 0 0 " }} /></div>;
+  if (loading) return <div><Loading /></div>;
 
   async function handleDelete(id) {
     try {

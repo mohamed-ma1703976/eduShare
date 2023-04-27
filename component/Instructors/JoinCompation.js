@@ -25,6 +25,7 @@ import {
 import Router, { useRouter } from 'next/router';
 import { collection, addDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
 import { auth, db } from '../../Firebase/Firebase';
+import Loading from '../Loading ';
 
 const JoinCompation = () => {
     const router = useRouter();
@@ -86,7 +87,7 @@ const JoinCompation = () => {
 
         return () => unsubscribe();
     }, [joinedComp]);
-    if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "200px 550px 0 0 " }} /></div>;
+    if (loading) return <div><Loading /></div>;
 
     const handleJoinCompation = (compation) => {
         setSelectedCompation(compation);
