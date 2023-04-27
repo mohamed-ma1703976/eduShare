@@ -37,7 +37,7 @@ export default function instructorDashboard() {
   const [competitions, setCompetitions] = useState([]);
   const [students, setStudents] = useState([]);
   const [coursess, setCoursess] = useState([]);
-
+  const [showname, setShowName] = useState(false);
 
   const [statusCheck, setstatusCheck] = useState(true);
   const [statusValue, setStatusValue] = useState('');
@@ -131,8 +131,12 @@ export default function instructorDashboard() {
   }, []);
 
   console.log(students)
-  let nameOfCourse = instructors.find(s => s.id === userId)?.attributes.myCourse[0].coursname[0]
-  //console.log(idOfCourse)
+  let nameOfCourse = instructors.find(s => s.id === userId)?.attributes.myCourse[0]?.coursname[0]  //console.log(idOfCourse)
+  useEffect(() => {
+    if (nameOfCourse !== undefined) {
+      setShowName(true)
+    }
+  }, [nameOfCourse])
 
   let courseid = coursess.find(c => c.attributes.CourseTitle === nameOfCourse)?.id
   console.log(courseid)
@@ -252,7 +256,7 @@ export default function instructorDashboard() {
               <InstSidebar />
 
               <Stack direction="column" spacing={2}>
-                <Card sx={{ minWidth: 900, margin: 2, height: 400 }}>
+                <Card sx={{ minWidth: 900, margin: "5px 11px 2px 2px ", height: 400 }}>
                   <CardContent>
                     <Typography variant="h5" component="div">
                       Student Registration Trend
@@ -294,6 +298,25 @@ export default function instructorDashboard() {
                     </Typography>
                   </CardContent>
                 </Card>
+
+
+                {showname ? <Card sx={{ minWidth: 500, margin: 2, height: 170 }}>
+                  <CardContent>
+
+
+
+                    <Typography variant="h5" component="div">
+                      My Course
+                    </Typography>
+                    <Typography variant="h4" component="div" sx={{ margin: "10px 0 0 0 " }}>
+                      {nameOfCourse}
+                    </Typography>
+
+
+                  </CardContent>
+
+                </Card> : ""}
+
 
                 <Grid item xs={12} sm={6} md={6}>
                   <Typography
