@@ -21,7 +21,7 @@ const Profile = () => {
   const [loading, setLoading] = useState(true); // Add loading state
 
   //console.log(user, userId, userRole)
-  const userid = auth.currentUser.uid
+  const userid = auth?.currentUser?.uid
 
   useEffect(() => {
     setTimeout(() => {
