@@ -41,7 +41,7 @@ export default function CreateProfile() {
   });
   const db = getFirestore(app);
   //const userRef = doc(db, "Users", userId);
-  const userid= auth.currentUser.uid
+  const userid= auth?.currentUser?.uid
 
   useEffect(() => {
     if (!userid) console.log("user id is not defined"); // Don't proceed if userId is not set yet
