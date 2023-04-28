@@ -1,19 +1,26 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Box } from "@mui/system";
-import { Card, CardContent, CardMedia, Typography, Avatar, CircularProgress } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Avatar,
+  CircularProgress,
+  Grid,
+  IconButton,
+} from "@mui/material";
 import { useRouter } from "next/router";
-import { app, auth } from "../../Firebase/Firebase";
+import { app } from "../../Firebase/Firebase";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
-import { AuthContext } from "../../hooks/AuthProvider";
 import getUserRole from "../../hooks/getRole";
-import StuNav from "../../component/Student/StuNav";
-import StuSideBar from "../../component/Student/StuSideBar";
-import Grid from "@mui/material/Grid";
+import { MessageOutlined, FavoriteOutlined } from "@mui/icons-material";
+import { motion } from "framer-motion";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
   const router = useRouter();
-  const { id } = router.query; // Get the user ID from the URL path
+  const { id } = router.query;
 
   const [userRole, setUserRole] = useState("");
 
@@ -23,7 +30,7 @@ const Profile = () => {
     }
 
     const fetchUserData = async () => {
-      const role = await getUserRole(id, app); // Wait for the promise to resolve
+      const role = await getUserRole(id, app);
       console.log("User role:", role);
       setUserRole(role);
 
@@ -42,87 +49,110 @@ const Profile = () => {
   }, [router, id]);
 
   if (!user) {
-    return <div><CircularProgress size={100} color="success" sx={{ margin: "200px 550px 0 0 " }} /></div>;
+    return (
+      <div>
+        <CircularProgress
+          size={100}
+          color="success"
+          sx={{ margin: "200px 550px 0 0 " }}
+        />
+      </div>
+    );
   }
+
+  const cardVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1 },
+  };
+  const defaultCoverImage =
+  "https://via.placeholder.com/1920x400.png?text=Cover+Image";
+const defaultProfileImage =
+  "https://via.placeholder.com/140x140.png?text=Profile+Image";
 
 
   return (
-    <div>
-      <Box>
-        <StuNav />
-        <Grid container>
-          <Grid item xs={2}>
-            <StuSideBar />
-          </Grid>
-          <Grid item xs={10}>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                minHeight: "100vh",
-                backgroundColor: "#f5f5f5",
-              }}
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        maxHeight: "100vh",
+      }}
+    >
+      <CardMedia
+        component="img"
+        height="40%"
+        image={user.coverPicture || defaultCoverImage}
+        alt="Cover Image"
+        sx={{ borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
+      />
+      <Box
+        sx={{
+          flexGrow: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#f5f5f5",
+        }}
+      >
+        <Avatar
+          src={user.profilePicture || defaultProfileImage}
+          alt="Profile Picture"
+          sx={{
+            width: 140,
+            height: 140,
+            marginBottom: 2,
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+            border: "4px solid #ffffff",
+            position: "relative",
+            top: "-70px",
+          }}
+        />
+        <Typography variant="h4" component="div" sx={{ mt: -3 }}>
+          {user.displayName}
+        </Typography>
+        <Typography variant="subtitle1" component="div" sx={{ mb: 2 }}>
+          {user.title}
+        </Typography>
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          sx={{ textAlign: "center", px: 2 }}
+        >
+          {user.bio}
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: "24px",
+          }}
+        >
+          <IconButton sx={{ mr: 1 }}>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
             >
-              <Card
-                sx={{
-                  width: "90%",
-                  maxWidth: 700,
-                  boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
-                  borderRadius: 2,
-                }}
-              >
-                <CardMedia
-                  component="img"
-                  height="200"
-                  image={user.coverPicture || "/path/to/default/cover/picture"}
-                  alt="Cover Image"
-                  sx={{ borderTopLeftRadius: 2, borderTopRightRadius: 2 }}
-                />
-                <CardContent>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Avatar
-                      src={user.profilePicture || "/path/to/default/profile/picture"}
-                      alt="Profile Picture"
-                      sx={{
-                        width: 140,
-                        height: 140,
-                        marginBottom: 2,
-                        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                        border: "4px solid #ffffff",
-                        position: "relative",
-                        top: "-70px",
-                      }}
-                    />
-                    <Typography variant="h4" component="div" sx={{ mt: -3 }}>
-                      {user.displayName}
-                    </Typography>
-                    <Typography variant="subtitle1" component="div" sx={{ mb: 2 }}>
-                      {user.title}
-                    </Typography>
-                  </Box>
-                  <Typography
-                    variant="body1"
-                    color="text.secondary"
-                    sx={{ textAlign: "center" }}
-                  >
-                    {user.bio}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Box>
-          </Grid>
-        </Grid>
+              <MessageOutlined fontSize="large" />
+            </motion.div>
+          </IconButton>
+          <IconButton>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <FavoriteOutlined fontSize="large" color="error" />
+            </motion.div>
+          </IconButton>
+        </Box>
       </Box>
-    </div>
+    </Box>
   );
+  
 };
 
 export default Profile;
+

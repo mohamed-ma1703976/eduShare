@@ -34,6 +34,7 @@
     "react-slick": "^0.29.0",
     "react-spinners": "^0.13.8",
     "react-typewriter-hook": "^1.0.1",
+    "react-useanimations": "^2.10.0",
     "recharts": "^2.5.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.6",
