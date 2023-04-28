@@ -3,6 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/Student/InstructorAciveCard": "pages/Student/InstructorAciveCard.js",
-  "/Student/mycourses": "pages/Student/mycourses.js",
-  "/Student": "pages/Student.js"
+  "/Student": "pages/Student.js",
+  "/Student/course/[id]": "pages/Student/course/[id].js"
 }
