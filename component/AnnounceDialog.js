@@ -10,6 +10,7 @@ import {
 
 
 import Form from './Form';
+import CreateAdminForm from './Admin/CreateAdminForm';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -30,15 +31,15 @@ const AnnounceDialog = () => {
     return (
         <div >
             <Typography align='center'>
-            <Button variant="contained" size="large"style={{
-                marginleft: "10px",
-                borderRadius: 15,
-                backgroundColor: "#374557",
-                padding: "6px 20px",
-                fontSize: "18px"
+                <Button variant="contained" size="large" style={{
+                    marginleft: "10px",
+                    borderRadius: 15,
+                    backgroundColor: "#374557",
+                    padding: "6px 20px",
+                    fontSize: "18px"
                 }} onClick={handleClickOpen}>
-                Add Announcement
-            </Button>
+                    Create Admin
+                </Button>
             </Typography>
             <Dialog
                 open={open}
@@ -47,12 +48,12 @@ const AnnounceDialog = () => {
                 onClose={handleClose}
                 aria-describedby="alert-dialog-slide-description"
             >
-                <DialogTitle  sx={{fontSize:"30px" ,textAlign:"center",fontWeight:"00",color:"#374557"}}>{"Add Announcement"}</DialogTitle>
+                <DialogTitle sx={{ fontSize: "30px", textAlign: "center", fontWeight: "00", color: "#374557" }}>{"Create Admin"}</DialogTitle>
                 <DialogContent>
 
-                    <Form />
+                    <CreateAdminForm setOpenn={setOpen} />
                 </DialogContent>
-              
+
             </Dialog>
         </div>
 

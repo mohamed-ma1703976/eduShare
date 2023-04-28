@@ -20,15 +20,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/Admin.js"
     ],
-    "/Profile/[id]": [
+    "/Instructor/uploadcontanet": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Profile/[id].js"
-    ],
-    "/Student": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Student.js"
+      "static/chunks/pages/Instructor/uploadcontanet.js"
     ],
     "/_app": [
       "static/chunks/webpack.js",

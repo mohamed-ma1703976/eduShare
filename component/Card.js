@@ -14,6 +14,7 @@ import { db } from '../Firebase/Firebase';
 function Card() {
   const [courses, setCourses] = React.useState([]);
   const [compat, setCompat] = React.useState([]);
+  const [admin, setAdmin] = React.useState([]);
 
 
   React.useEffect(() => {
@@ -25,6 +26,16 @@ function Card() {
         ...doc.data(),
       }));
       setCourses(coursesList);
+    };
+
+    const fetchad = async () => {
+      const coursesCollection = collection(db, 'Admin');
+      const courseSnapshot = await getDocs(coursesCollection);
+      const coursesList = courseSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setAdmin(coursesList);
     };
 
 
@@ -40,6 +51,7 @@ function Card() {
 
     fetchCourses();
     fetchCompa()
+    fetchad()
   }, []);
 
  // const numberOfCourses = courses;
@@ -75,9 +87,9 @@ function Card() {
                 <Grid item xs={3} style={{margin:"30px 0 0 0"}}>
                     <AchievementCard number={compat.length} description="Publised Compations" color="#FEC64F" />
                 </Grid>
-                {/* <Grid item xs={3} style={{margin:"3px 0 0 0"}}>
-                    <AchievementCard number="-" description="Publised Announcments" color="#374557" />
-                </Grid> */}
+                <Grid item xs={3} style={{margin:"30px 0 0 0"}}>
+                    <AchievementCard number={admin.length} description="Numbers Of Admins" color="#374557" />
+                </Grid>
             </Grid>
             <Grid container style={{ marginLeft: "-200px" }}>
                 <TodoList />
