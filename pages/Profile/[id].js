@@ -67,7 +67,7 @@ const Profile = () => {
   const defaultCoverImage =
   "https://via.placeholder.com/1920x400.png?text=Cover+Image";
 const defaultProfileImage =
-  "https://via.placeholder.com/140x140.png?text=Profile+Image";
+  "https://i.ibb.co/stTJ1P1/computer-icons-teacher-png-favpng-s-JASskmgxhu-ZQK1-Ya-Xj-UMPj-ZG.jpg";
 
 return (
   <Box
