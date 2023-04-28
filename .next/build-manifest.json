@@ -15,6 +15,11 @@
   ],
   "rootMainFiles": [],
   "pages": {
+    "/Admin": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/Admin.js"
+    ],
     "/Profile/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

@@ -69,22 +69,27 @@ const Profile = () => {
 const defaultProfileImage =
   "https://via.placeholder.com/140x140.png?text=Profile+Image";
 
-
-  return (
-    <Box
+return (
+  <Box
+    sx={{
+      display: "flex",
+      flexDirection: "column",
+      minHeight: "100vh",
+    }}
+  >
+    <CardMedia
+      component="img"
+      image={user.coverPicture || defaultCoverImage}
+      alt="Cover Image"
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        maxHeight: "100vh",
+        borderTopLeftRadius: 0,
+        borderTopRightRadius: 0,
+        height: "40%",
+        maxHeight: "300px", // Set the maxHeight here
+        objectFit: "cover",
+        width: "100%",
       }}
-    >
-      <CardMedia
-        component="img"
-        height="40%"
-        image={user.coverPicture || defaultCoverImage}
-        alt="Cover Image"
-        sx={{ borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
-      />
+    />
       <Box
         sx={{
           flexGrow: 1,
