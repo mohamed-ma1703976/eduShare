@@ -6,23 +6,53 @@ import Typography from '@mui/material/Typography';
 import { Box } from '@mui/system';
 import ButtonBase from '@mui/material/ButtonBase';
 import Avatar from '@mui/material/Avatar';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export default function InstructorCard({ instructor }) {
-    const { title, displayName, img, id ,profilePicture} = instructor;
-  
-    const url = 'https://cdn.pixabay.com/photo/2014/04/05/11/39/people-316506__480.jpg';
-  
-    return (
-      <ButtonBase component="div" sx={{ textDecoration: 'none', color: 'inherit' }}>
-        <Card sx={{ display: 'flex', flexDirection: 'column', height: '250px', cursor: 'pointer', width: "300" }}>
+  const { title, displayName, img, id, profilePicture } = instructor;
+
+  const url = 'https://cdn.pixabay.com/photo/2014/04/05/11/39/people-316506__480.jpg';
+
+  const cardVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+  };
+
+  const avatarVariants = {
+    initial: { scale: 1 },
+    hover: { scale: 1.1 },
+  };
+
+  return (
+    <Link href={`/Profile/${id}`}>
+      <ButtonBase component="a" sx={{ textDecoration: 'none', color: 'inherit' }}>
+        <Card
+          component={motion.div}
+          initial="initial"
+          animate="animate"
+          variants={cardVariants}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            height: '250px',
+            cursor: 'pointer',
+            width: '300px',
+            bgcolor: 'transparent',
+            boxShadow: 'none',
+          }}
+        >
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', pt: 2 }}>
             <Avatar
+              component={motion.div}
+              whileHover="hover"
+              variants={avatarVariants}
               src={profilePicture} // Replace 'url' with the image URL from the instructor object if available
               alt={name}
               sx={{ width: 125, height: 128 }}
             />
           </Box>
-          <CardContent sx={{ flex: 1 }}>
+          <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <Typography gutterBottom variant="subtitle2" component="div">
               {title}
             </Typography>
@@ -32,5 +62,6 @@ export default function InstructorCard({ instructor }) {
           </CardContent>
         </Card>
       </ButtonBase>
-    );
-  };
+    </Link>
+  );
+};

@@ -8,7 +8,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ImageCarousel from "../../component/Student/ImageCarousel";
-import InstructorCard from '../../component/Student/InstructorCard';
+import InstructorCard from "../../component/Student/InstructorCard";
 import { db, collection } from "../../Firebase/Firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
 import ReactLoading from "react-loading";
@@ -19,14 +19,22 @@ import useIsMounted from "../../hooks/useIsMounted";
 export default function StudentDashboard() {
   const { userId } = useContext(AuthContext);
 
-  const [coursesSnapshot, loading, error] = useCollection(collection(db, "Course"));
-  const [instructorsSnapshot, instructorsLoading, instructorsError] = useCollection(collection(db, "Instructor"));
+  const [coursesSnapshot, loading, error] = useCollection(
+    collection(db, "Course")
+  );
+  const [instructorsSnapshot, instructorsLoading, instructorsError] =
+    useCollection(collection(db, "Instructor"));
 
-  const courses = coursesSnapshot?.docs.map((doc) => ({ id: doc.id, ...doc.data() })) || [];
-  const instructors = instructorsSnapshot?.docs.map((doc) => ({ id: doc.id, ...doc.data() })) || [];
+  const courses =
+    coursesSnapshot?.docs.map((doc) => ({ id: doc.id, ...doc.data() })) || [];
+  const instructors =
+    instructorsSnapshot?.docs.map((doc) => ({ id: doc.id, ...doc.data() })) ||
+    [];
 
   const sortedCourses = courses.sort((a, b) => b.id - a.id);
-  const trendingCourses = courses.sort((a, b) => b.enrolledStudents - a.enrolledStudents);
+  const trendingCourses = courses.sort(
+    (a, b) => b.enrolledStudents - a.enrolledStudents
+  );
 
   const settings = {
     dots: true,
@@ -61,7 +69,6 @@ export default function StudentDashboard() {
   };
   const isMounted = useIsMounted();
 
-
   return (
     <>
       {loading || instructorsLoading ? (
@@ -78,41 +85,75 @@ export default function StudentDashboard() {
                 <Box>
                   <ImageCarousel />
                   <Card />
-                  <Typography variant="h5" gutterBottom style={{ fontSize: '30px', fontWeight: "1000", margin: "0 400px 0 0", color: "#454545" }}>
+                  <Typography
+                    variant="h5"
+                    gutterBottom
+                    style={{
+                      fontSize: "30px",
+                      fontWeight: "1000",
+                      margin: "0 400px 0 0",
+                      color: "#454545",
+                    }}
+                  >
                     Latest Courses
                   </Typography>
                   <Slider {...settings}>
                     {sortedCourses.map((course) => (
-                      <Box key={course.id} sx={{ padding: 1 }}>
+                      <Box key={course.id} sx={{ padding: 1, width: "240px" }}>
+                        {" "}
+                        {/* Add a fixed width here */}
                         <CourseCard course={course} />
                       </Box>
                     ))}
                   </Slider>
-  
-                  <Typography variant="h5" mt={4} gutterBottom style={{ fontSize: '30px', fontWeight: "1000", margin: "0 400px 0 0", color: "#454545" }}>
+
+                  <Typography
+                    variant="h5"
+                    mt={4}
+                    gutterBottom
+                    style={{
+                      fontSize: "30px",
+                      fontWeight: "1000",
+                      margin: "0 400px 0 0",
+                      color: "#454545",
+                    }}
+                  >
                     Trending Courses
                   </Typography>
                   <Slider {...settings}>
                     {trendingCourses.map((course) => (
-                      <Box key={course.id} sx={{ padding: 1 }}>
+                      <Box key={course.id} sx={{ padding: 1, width: "240px" }}>
+                        {" "}
+                        {/* Add a fixed width here */}
                         <CourseCard course={course} />
                       </Box>
                     ))}
                   </Slider>
-  
+
                   {instructors.length > 0 && (
                     <>
-                      <Typography variant="h5" mt={4} gutterBottom style={{ fontSize: '30px', fontWeight: "1000", margin: "0 400px 0 0", color: "#454545" }}>
+                      <Typography
+                        variant="h5"
+                        mt={4}
+                        gutterBottom
+                        style={{
+                          fontSize: "30px",
+                          fontWeight: "1000",
+                          margin: "0 400px 0 0",
+                          color: "#454545",
+                        }}
+                      >
                         Top Instructors
                       </Typography>
                       <Slider {...settings}>
-                        {instructors.map((instructor) => (
-                          instructor.hasOwnProperty('title') && instructor.title ? (
+                        {instructors.map((instructor) =>
+                          instructor.hasOwnProperty("title") &&
+                          instructor.title ? (
                             <Box key={instructor.id} sx={{ padding: 1 }}>
                               <InstructorCard instructor={instructor} />
                             </Box>
                           ) : null
-                        ))}
+                        )}
                       </Slider>
                     </>
                   )}
@@ -122,18 +163,34 @@ export default function StudentDashboard() {
           </Box>
         </div>
       )}
-  
+
       {error && (
-        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "50vh" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "50vh",
+          }}
+        >
           <Typography variant="h5">Error: {error.message}</Typography>
         </Box>
       )}
-  
+
       {instructorsError && (
-        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "50vh" }}>
-          <Typography variant="h5">Error: {instructorsError.message}</Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "50vh",
+          }}
+        >
+          <Typography variant="h5">
+            Error: {instructorsError.message}
+          </Typography>
         </Box>
       )}
     </>
   );
-}  
+}
