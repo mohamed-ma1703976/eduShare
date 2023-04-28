@@ -15,15 +15,10 @@
   ],
   "rootMainFiles": [],
   "pages": {
-    "/Instructor/profile": [
+    "/Instructor/mystudents": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Instructor/profile.js"
-    ],
-    "/Instructor/uploadcontanet": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Instructor/uploadcontanet.js"
+      "static/chunks/pages/Instructor/mystudents.js"
     ],
     "/_app": [
       "static/chunks/webpack.js",

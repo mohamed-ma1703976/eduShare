@@ -9,6 +9,8 @@ import getUserRole from "../../hooks/getRole";
 
 import InstSidebar from '../../component/Instructors/InstSidebarr'
 import InstNav from '../../component/Instructors/InstNav'
+import Loading from "../../component/Loading "; // Import Loading component
+
 const Profile = () => {
   const [user, setUser] = useState(null);
   const router = useRouter();
@@ -16,11 +18,16 @@ const Profile = () => {
 
   //console.log(getUserRole(userId, app))
   const [useRole, setUseRole] = useState("")
-
-
+  const [loading, setLoading] = useState(true); // Add loading state
 
   //console.log(user, userId, userRole)
   const userid = auth.currentUser.uid
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000); // Set timeout to 5 seconds
+  }, []);
 
   useEffect(() => {
     //getUserRole(userId, app).then(res => setUseRole(res))
@@ -48,11 +55,14 @@ const Profile = () => {
     fetchUserData();
   }, [router, userid, useRole]);
 
+  if (loading) {
+    return <Loading />; // Render Loading component
+  }
 
   if (!user) {
     return <div><CircularProgress size={100} color="success" sx={{ margin: "200px 0px 0 550px " }} /></div>;
-
   }
+
 
 
   return (

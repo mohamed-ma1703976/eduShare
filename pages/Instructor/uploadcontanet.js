@@ -25,7 +25,7 @@ function UploadContent() {
     useEffect(() => {
       setTimeout(() => {
         setLoading(false);
-      }, 5000); // Set timeout to 5 seconds
+      }, 2000); // Set timeout to 5 seconds
     }, []);
   
     if (loading) {

@@ -12,7 +12,7 @@ function mystudents() {
     useEffect(() => {
       setTimeout(() => {
         setLoading(false);
-      }, 5000); // Set timeout to 5 seconds
+      }, 2000); // Set timeout to 5 seconds
     }, []);
   
     if (loading) {
@@ -26,12 +26,14 @@ function mystudents() {
 
                 <InstNav setCourseSearch={setSearch} />
 
-                <Stack direction="row" spacing={2} justifyContent="space-between">
+                <Stack direction="row">
 
                     <InstSidebar />
 
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", margin: "20px 0 0 0" }}>
+                    <div style={{ display: "flex", alignItems: "center", margin: "px 0 0 0" }}>
+                    <Box flexGrow={1}>
                         <MyStudents />
+                    </Box>
                     </div>
                 </Stack>
 

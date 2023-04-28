@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { useRouter } from "next/router"
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { collection, getDocs } from 'firebase/firestore';
 import { auth, db } from '../../Firebase/Firebase';
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Card, CardContent, Grid, Typography, Box } from '@mui/material';
+import { motion } from 'framer-motion';
+import MessageIcon from '@mui/icons-material/Message';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 function MyStudents() {
     const [students, setStudentys] = useState([]);
     const [coursess, setCoursess] = useState([]);
     const [instructor, setInstructor] = useState([]);
-
+      
     let currentId = auth.currentUser.uid
     async function fetchCourses() {
         const compationsCollection = collection(db, "Course");
@@ -56,55 +59,57 @@ function MyStudents() {
 
     console.log(registeredStudents)
 
-    return (
-
+    const cardVariants = {
+        hidden: { opacity: 0, scale: 0.8 },
+        visible: { opacity: 1, scale: 1 },
+      };
+    
+      return (
         <div>
-            <TableContainer component={Paper} sx={{margin:"-90px 0 0 0 "}}>
-                <Table sx={{ minWidth: 1000, margin: '5px 0 0 0 ' }} aria-label="simple table">
-                    <TableHead sx={{ backgroundColor: '#1ABC9C' }}>
-                        <TableRow>
-                            
-                            <TableCell align="center" sx={{ color: 'white' }}>
-                                First Name
-                            </TableCell>
-                            <TableCell align="center" sx={{ color: 'white' }}>
-                                Last Name
-                            </TableCell>
-                            <TableCell align="center" sx={{ color: 'white', fontSize: '20px' }}>
-                                Phone Number
-                            </TableCell>
-                            <TableCell align="center" sx={{ color: 'white', fontSize: '20px' }}>
-                                email
-                            </TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {registeredStudents.map((s) => {
-                            return (
-                                <TableRow
-                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    key={s.id}
-                                >
-                                    <TableCell align="center" component="th" scope="row">
-                                        {s.attributes.firstName}
-                                    </TableCell>
-                                    <TableCell align="center">{s.attributes.lastName}</TableCell>
-                                    <TableCell align="center" sx={{ width: '50%' }}>
-                                        {s.attributes.phone}
-                                    </TableCell>
-
-                                    <TableCell align="center">
-                                        {s.attributes.email}
-                                    </TableCell>
-                                    
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+          <Grid container>
+            {registeredStudents.map((s, index) => {
+              return (
+                <Grid item xs={12} sm={6} md={6} lg={6} key={s.id}>
+                  <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    variants={cardVariants}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <Card sx={{ minWidth: 300, margin: '16px' }}>
+                      <CardContent>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <Typography variant="h5" component="div">
+                            {s.attributes.firstName} {s.attributes.lastName}
+                          </Typography>
+                          <Box>
+                            <MessageIcon sx={{ marginRight: 1 }} />
+                            <NotificationsIcon />
+                          </Box>
+                        </Box>
+                        <Typography variant="body2" color="text.secondary">
+                          Phone: {s.attributes.phone}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          Email: {s.attributes.email}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </Grid>
+              );
+            })}
+          </Grid>
         </div>
-    )
-}
-
-export default MyStudents
+      );
+      
+      
+    }
+    
+    export default MyStudents;

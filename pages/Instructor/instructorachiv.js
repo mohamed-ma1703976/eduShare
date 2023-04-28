@@ -3,14 +3,14 @@ import React, { use, useEffect, useState } from "react";
 import StuNav from "../../component/Student/StuNav";
 import StuSideBar from "../../component/Student/StuSideBar";
 import InstructorsAchivementCards from "../../component/Student/InstructorsAchivementCards";
-
+import Loading from "../../component/Loading "; // Import Loading component
 export default function coursePage() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
       setTimeout(() => {
         setLoading(false);
-      }, 5000); // Set timeout to 5 seconds
+      }, 2000); // Set timeout to 5 seconds
     }, []);
   
     if (loading) {

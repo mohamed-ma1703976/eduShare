@@ -2,7 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/Instructor": "pages/Instructor.js",
-  "/Instructor/profile": "pages/Instructor/profile.js",
-  "/Instructor/uploadcontanet": "pages/Instructor/uploadcontanet.js"
+  "/Instructor/mystudents": "pages/Instructor/mystudents.js"
 }
