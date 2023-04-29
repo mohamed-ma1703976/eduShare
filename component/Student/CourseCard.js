@@ -32,7 +32,7 @@ const CourseCard = ({ course }) => {
   };
 
   return (
-    <Link href={router.pathname === "/Student/Courses" ? `/Student/course/${course.id}` : `course/${course.id}`} passHref>
+    <Link href={router.pathname === "/Student/courses" ? `course/${course.id}` : `Student/course/${course.id}`} passHref>
       <ButtonBase
         component="div"
         sx={{ textDecoration: "none", color: "inherit" }}
