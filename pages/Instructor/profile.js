@@ -6,8 +6,8 @@ import { app, auth } from "../../Firebase/Firebase";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { AuthContext } from "../../hooks/AuthProvider";
 import getUserRole from "../../hooks/getRole";
-import StuNav from "../../component/Student/StuNav";
-import StuSideBar from "../../component/Student/StuSideBar";
+import InstSidebar from '../../component/Instructors/InstSidebarr'
+import InstNav from '../../component/Instructors/InstNav'
 import Loading from "../../component/Loading ";
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -53,10 +53,10 @@ const Profile = () => {
         {loading && <Loading />}
         {!loading && (
           <>
-            <StuNav />
+            <InstNav />
             <Grid container>
               <Grid item xs={2}>
-                <StuSideBar />
+                <InstSidebar />
               </Grid>
               <Grid item xs={10}>
                 <Box

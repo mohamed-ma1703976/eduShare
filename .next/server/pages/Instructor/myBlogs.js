@@ -1,0 +1,136 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+(() => {
+var exports = {};
+exports.id = "pages/Instructor/myBlogs";
+exports.ids = ["pages/Instructor/myBlogs"];
+exports.modules = {
+
+/***/ "./Firebase/Firebase.js":
+/*!******************************!*\
+  !*** ./Firebase/Firebase.js ***!
+  \******************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"app\": () => (/* binding */ app),\n/* harmony export */   \"auth\": () => (/* binding */ auth),\n/* harmony export */   \"collection\": () => (/* reexport safe */ firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection),\n/* harmony export */   \"db\": () => (/* binding */ db),\n/* harmony export */   \"getFirestoreTimestamp\": () => (/* binding */ getFirestoreTimestamp),\n/* harmony export */   \"storage\": () => (/* binding */ storage)\n/* harmony export */ });\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"firebase/app\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/firestore */ \"firebase/firestore\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/auth */ \"firebase/auth\");\n/* harmony import */ var firebase_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/storage */ \"firebase/storage\");\nvar __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([firebase_app__WEBPACK_IMPORTED_MODULE_0__, firebase_firestore__WEBPACK_IMPORTED_MODULE_1__, firebase_auth__WEBPACK_IMPORTED_MODULE_2__, firebase_storage__WEBPACK_IMPORTED_MODULE_3__]);\n([firebase_app__WEBPACK_IMPORTED_MODULE_0__, firebase_firestore__WEBPACK_IMPORTED_MODULE_1__, firebase_auth__WEBPACK_IMPORTED_MODULE_2__, firebase_storage__WEBPACK_IMPORTED_MODULE_3__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);\n\n\n\n // Import the storage module\n\nconst firebaseConfig = {\n    apiKey: \"AIzaSyC-ZYyj3mpgKszGlMQmETjBuBCqzYGFDh4\",\n    authDomain: \"edushare-e9242.firebaseapp.com\",\n    projectId: \"edushare-e9242\",\n    storageBucket: \"edushare-e9242.appspot.com\",\n    messagingSenderId: \"826723606155\",\n    appId: \"1:826723606155:web:4ef2868e093bc281523e8e\",\n    measurementId: \"G-BGCNB10FJ0\"\n};\n// Initialize Firebase\nconst app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(app);\nconst auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_2__.getAuth)(app);\nconst storage = (0,firebase_storage__WEBPACK_IMPORTED_MODULE_3__.getStorage)(app); // Get the storage instance\nconst getFirestoreTimestamp = ()=>{\n    return (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.serverTimestamp)();\n};\n\n\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } });//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9GaXJlYmFzZS9GaXJlYmFzZS5qcy5qcyIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7O0FBQTZDO0FBQ2lCO0FBQ3RCO0FBQ00sQ0FBQyw0QkFBNEI7QUFDdEI7QUFDckQsTUFBTU0saUJBQWlCO0lBQ3JCQyxRQUFRO0lBQ1JDLFlBQVk7SUFDWkMsV0FBVztJQUNYQyxlQUFlO0lBQ2ZDLG1CQUFtQjtJQUNuQkMsT0FBTztJQUNQQyxlQUFlO0FBQ2pCO0FBRUEsc0JBQXNCO0FBQ3RCLE1BQU1DLE1BQU1kLDJEQUFhQSxDQUFDTTtBQUMxQixNQUFNUyxLQUFLZCxnRUFBWUEsQ0FBQ2E7QUFDeEIsTUFBTUUsT0FBT2Isc0RBQU9BLENBQUNXO0FBQ3JCLE1BQU1HLFVBQVViLDREQUFVQSxDQUFDVSxNQUFNLDJCQUEyQjtBQUVyRCxNQUFNSSx3QkFBd0IsSUFBTTtJQUN6QyxPQUFPYixtRUFBZUE7QUFDeEIsRUFBRTtBQUUyQyIsInNvdXJjZXMiOlsid2VicGFjazovL2VkdXNoYXJlLy4vRmlyZWJhc2UvRmlyZWJhc2UuanM/MzAwNiJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBpbml0aWFsaXplQXBwIH0gZnJvbSAnZmlyZWJhc2UvYXBwJztcclxuaW1wb3J0IHsgZ2V0RmlyZXN0b3JlLCBjb2xsZWN0aW9uIH0gZnJvbSAnZmlyZWJhc2UvZmlyZXN0b3JlJztcclxuaW1wb3J0IHsgZ2V0QXV0aCB9IGZyb20gJ2ZpcmViYXNlL2F1dGgnO1xyXG5pbXBvcnQgeyBnZXRTdG9yYWdlIH0gZnJvbSAnZmlyZWJhc2Uvc3RvcmFnZSc7IC8vIEltcG9ydCB0aGUgc3RvcmFnZSBtb2R1bGVcclxuaW1wb3J0IHsgc2VydmVyVGltZXN0YW1wIH0gZnJvbSAnZmlyZWJhc2UvZmlyZXN0b3JlJztcclxuY29uc3QgZmlyZWJhc2VDb25maWcgPSB7XHJcbiAgYXBpS2V5OiBcIkFJemFTeUMtWll5ajNtcGdLc3pHbE1RbUVUakJ1QkNxellHRkRoNFwiLFxyXG4gIGF1dGhEb21haW46IFwiZWR1c2hhcmUtZTkyNDIuZmlyZWJhc2VhcHAuY29tXCIsXHJcbiAgcHJvamVjdElkOiBcImVkdXNoYXJlLWU5MjQyXCIsXHJcbiAgc3RvcmFnZUJ1Y2tldDogXCJlZHVzaGFyZS1lOTI0Mi5hcHBzcG90LmNvbVwiLFxyXG4gIG1lc3NhZ2luZ1NlbmRlcklkOiBcIjgyNjcyMzYwNjE1NVwiLFxyXG4gIGFwcElkOiBcIjE6ODI2NzIzNjA2MTU1OndlYjo0ZWYyODY4ZTA5M2JjMjgxNTIzZThlXCIsXHJcbiAgbWVhc3VyZW1lbnRJZDogXCJHLUJHQ05CMTBGSjBcIlxyXG59O1xyXG5cclxuLy8gSW5pdGlhbGl6ZSBGaXJlYmFzZVxyXG5jb25zdCBhcHAgPSBpbml0aWFsaXplQXBwKGZpcmViYXNlQ29uZmlnKTtcclxuY29uc3QgZGIgPSBnZXRGaXJlc3RvcmUoYXBwKTtcclxuY29uc3QgYXV0aCA9IGdldEF1dGgoYXBwKTtcclxuY29uc3Qgc3RvcmFnZSA9IGdldFN0b3JhZ2UoYXBwKTsgLy8gR2V0IHRoZSBzdG9yYWdlIGluc3RhbmNlXHJcblxyXG5leHBvcnQgY29uc3QgZ2V0RmlyZXN0b3JlVGltZXN0YW1wID0gKCkgPT4ge1xyXG4gIHJldHVybiBzZXJ2ZXJUaW1lc3RhbXAoKTtcclxufTtcclxuXHJcbmV4cG9ydCB7IGFwcCwgZGIsIGF1dGgsc3RvcmFnZSwgY29sbGVjdGlvbiB9O1xyXG4iXSwibmFtZXMiOlsiaW5pdGlhbGl6ZUFwcCIsImdldEZpcmVzdG9yZSIsImNvbGxlY3Rpb24iLCJnZXRBdXRoIiwiZ2V0U3RvcmFnZSIsInNlcnZlclRpbWVzdGFtcCIsImZpcmViYXNlQ29uZmlnIiwiYXBpS2V5IiwiYXV0aERvbWFpbiIsInByb2plY3RJZCIsInN0b3JhZ2VCdWNrZXQiLCJtZXNzYWdpbmdTZW5kZXJJZCIsImFwcElkIiwibWVhc3VyZW1lbnRJZCIsImFwcCIsImRiIiwiYXV0aCIsInN0b3JhZ2UiLCJnZXRGaXJlc3RvcmVUaW1lc3RhbXAiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./Firebase/Firebase.js\n");
+
+/***/ }),
+
+/***/ "./hooks/AuthProvider.js":
+/*!*******************************!*\
+  !*** ./hooks/AuthProvider.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"AuthContext\": () => (/* binding */ AuthContext),\n/* harmony export */   \"AuthProvider\": () => (/* binding */ AuthProvider)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"react/jsx-dev-runtime\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n\n\nconst AuthContext = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.createContext)();\nconst AuthProvider = ({ children  })=>{\n    const [userId, setUserId] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);\n    const [currentId, setCurrentId] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);\n    const login = (userId)=>{\n        setUserId(userId);\n    };\n    const logout = ()=>{\n        setUserId(null);\n    };\n    const currentIdState = (currentId)=>{\n        setCurrentId(currentId);\n    };\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(AuthContext.Provider, {\n        value: {\n            userId,\n            login,\n            logout,\n            currentIdState,\n            currentId\n        },\n        children: children\n    }, void 0, false, {\n        fileName: \"C:\\\\Users\\\\moham\\\\Documents\\\\GitHub\\\\eduShare\\\\hooks\\\\AuthProvider.js\",\n        lineNumber: 21,\n        columnNumber: 5\n    }, undefined);\n};\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9ob29rcy9BdXRoUHJvdmlkZXIuanMuanMiLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQUE7QUFBZ0Q7QUFFekMsTUFBTUUsNEJBQWNGLG9EQUFhQSxHQUFHO0FBRXBDLE1BQU1HLGVBQWUsQ0FBQyxFQUFFQyxTQUFRLEVBQUUsR0FBSztJQUM1QyxNQUFNLENBQUNDLFFBQVFDLFVBQVUsR0FBR0wsK0NBQVFBLENBQUMsSUFBSTtJQUN6QyxNQUFNLENBQUNNLFdBQVdDLGFBQWEsR0FBR1AsK0NBQVFBLENBQUMsSUFBSTtJQUUvQyxNQUFNUSxRQUFRLENBQUNKLFNBQVc7UUFDeEJDLFVBQVVEO0lBQ1o7SUFFQSxNQUFNSyxTQUFTLElBQU07UUFDbkJKLFVBQVUsSUFBSTtJQUNoQjtJQUNBLE1BQU1LLGlCQUFpQixDQUFDSixZQUFjO1FBQ3BDQyxhQUFhRDtJQUNmO0lBRUEscUJBQ0UsOERBQUNMLFlBQVlVLFFBQVE7UUFBQ0MsT0FBTztZQUFFUjtZQUFRSTtZQUFPQztZQUFRQztZQUFlSjtRQUFTO2tCQUMzRUg7Ozs7OztBQUdQLEVBQUUiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9lZHVzaGFyZS8uL2hvb2tzL0F1dGhQcm92aWRlci5qcz9hYTUwIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IGNyZWF0ZUNvbnRleHQsIHVzZVN0YXRlIH0gZnJvbSBcInJlYWN0XCI7XHJcblxyXG5leHBvcnQgY29uc3QgQXV0aENvbnRleHQgPSBjcmVhdGVDb250ZXh0KCk7XHJcblxyXG5leHBvcnQgY29uc3QgQXV0aFByb3ZpZGVyID0gKHsgY2hpbGRyZW4gfSkgPT4ge1xyXG4gIGNvbnN0IFt1c2VySWQsIHNldFVzZXJJZF0gPSB1c2VTdGF0ZShudWxsKTtcclxuICBjb25zdCBbY3VycmVudElkLCBzZXRDdXJyZW50SWRdID0gdXNlU3RhdGUobnVsbCk7XHJcblxyXG4gIGNvbnN0IGxvZ2luID0gKHVzZXJJZCkgPT4ge1xyXG4gICAgc2V0VXNlcklkKHVzZXJJZCk7XHJcbiAgfTtcclxuXHJcbiAgY29uc3QgbG9nb3V0ID0gKCkgPT4ge1xyXG4gICAgc2V0VXNlcklkKG51bGwpO1xyXG4gIH07XHJcbiAgY29uc3QgY3VycmVudElkU3RhdGUgPSAoY3VycmVudElkKSA9PiB7XHJcbiAgICBzZXRDdXJyZW50SWQoY3VycmVudElkKTtcclxuICB9O1xyXG5cclxuICByZXR1cm4gKFxyXG4gICAgPEF1dGhDb250ZXh0LlByb3ZpZGVyIHZhbHVlPXt7IHVzZXJJZCwgbG9naW4sIGxvZ291dCAsY3VycmVudElkU3RhdGUsY3VycmVudElkfX0+XHJcbiAgICAgIHtjaGlsZHJlbn1cclxuICAgIDwvQXV0aENvbnRleHQuUHJvdmlkZXI+XHJcbiAgKTtcclxufTtcclxuIl0sIm5hbWVzIjpbImNyZWF0ZUNvbnRleHQiLCJ1c2VTdGF0ZSIsIkF1dGhDb250ZXh0IiwiQXV0aFByb3ZpZGVyIiwiY2hpbGRyZW4iLCJ1c2VySWQiLCJzZXRVc2VySWQiLCJjdXJyZW50SWQiLCJzZXRDdXJyZW50SWQiLCJsb2dpbiIsImxvZ291dCIsImN1cnJlbnRJZFN0YXRlIiwiUHJvdmlkZXIiLCJ2YWx1ZSJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./hooks/AuthProvider.js\n");
+
+/***/ }),
+
+/***/ "./pages/Instructor/myBlogs.js":
+/*!*************************************!*\
+  !*** ./pages/Instructor/myBlogs.js ***!
+  \*************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"react/jsx-dev-runtime\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/router */ \"next/router\");\n/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material */ \"@mui/material\");\n/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_mui_material__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _hooks_AuthProvider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../hooks/AuthProvider */ \"./hooks/AuthProvider.js\");\n/* harmony import */ var _Firebase_Firebase__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../Firebase/Firebase */ \"./Firebase/Firebase.js\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! firebase/firestore */ \"firebase/firestore\");\nvar __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_Firebase_Firebase__WEBPACK_IMPORTED_MODULE_5__, firebase_firestore__WEBPACK_IMPORTED_MODULE_6__]);\n([_Firebase_Firebase__WEBPACK_IMPORTED_MODULE_5__, firebase_firestore__WEBPACK_IMPORTED_MODULE_6__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);\n\n\n\n\n\n\n\nfunction MyBlogs() {\n    const router = (0,next_router__WEBPACK_IMPORTED_MODULE_2__.useRouter)();\n    const { userId  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_hooks_AuthProvider__WEBPACK_IMPORTED_MODULE_4__.AuthContext);\n    const [blogs, setBlogs] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);\n    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{\n        if (!userId) return;\n        const blogsRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_6__.collection)(_Firebase_Firebase__WEBPACK_IMPORTED_MODULE_5__.db, \"Blog\");\n        const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_6__.query)(blogsRef, (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_6__.where)(\"author\", \"==\", userId));\n        const unsubscribe = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_6__.onSnapshot)(q, (querySnapshot)=>{\n            const blogsData = [];\n            querySnapshot.forEach((doc)=>{\n                blogsData.push({\n                    id: doc.id,\n                    ...doc.data()\n                });\n            });\n            setBlogs(blogsData);\n        });\n        return ()=>{\n            unsubscribe();\n        };\n    }, [\n        userId\n    ]);\n    const handleCreateBlog = ()=>{\n        router.push(\"/Instructor/createBlog\");\n    };\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_3__.Box, {\n        children: [\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_3__.Grid, {\n                container: true,\n                spacing: 3,\n                children: blogs.map((blog)=>/*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_3__.Grid, {\n                        item: true,\n                        xs: 12,\n                        sm: 6,\n                        md: 4,\n                        children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_3__.Card, {\n                            children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_3__.CardContent, {\n                                children: [\n                                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_3__.Typography, {\n                                        variant: \"h5\",\n                                        component: \"div\",\n                                        children: blog.Title\n                                    }, void 0, false, {\n                                        fileName: \"C:\\\\Users\\\\moham\\\\Documents\\\\GitHub\\\\eduShare\\\\pages\\\\Instructor\\\\myBlogs.js\",\n                                        lineNumber: 42,\n                                        columnNumber: 17\n                                    }, this),\n                                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_3__.Typography, {\n                                        variant: \"body2\",\n                                        color: \"text.secondary\",\n                                        children: [\n                                            blog.Body.slice(0, 100),\n                                            \"...\"\n                                        ]\n                                    }, void 0, true, {\n                                        fileName: \"C:\\\\Users\\\\moham\\\\Documents\\\\GitHub\\\\eduShare\\\\pages\\\\Instructor\\\\myBlogs.js\",\n                                        lineNumber: 45,\n                                        columnNumber: 17\n                                    }, this)\n                                ]\n                            }, void 0, true, {\n                                fileName: \"C:\\\\Users\\\\moham\\\\Documents\\\\GitHub\\\\eduShare\\\\pages\\\\Instructor\\\\myBlogs.js\",\n                                lineNumber: 41,\n                                columnNumber: 15\n                            }, this)\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\moham\\\\Documents\\\\GitHub\\\\eduShare\\\\pages\\\\Instructor\\\\myBlogs.js\",\n                            lineNumber: 40,\n                            columnNumber: 13\n                        }, this)\n                    }, blog.id, false, {\n                        fileName: \"C:\\\\Users\\\\moham\\\\Documents\\\\GitHub\\\\eduShare\\\\pages\\\\Instructor\\\\myBlogs.js\",\n                        lineNumber: 39,\n                        columnNumber: 11\n                    }, this))\n            }, void 0, false, {\n                fileName: \"C:\\\\Users\\\\moham\\\\Documents\\\\GitHub\\\\eduShare\\\\pages\\\\Instructor\\\\myBlogs.js\",\n                lineNumber: 37,\n                columnNumber: 7\n            }, this),\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_3__.Box, {\n                mt: 3,\n                display: \"flex\",\n                justifyContent: \"center\",\n                children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_3__.Button, {\n                    variant: \"contained\",\n                    color: \"primary\",\n                    onClick: handleCreateBlog,\n                    children: \"Add New Blog\"\n                }, void 0, false, {\n                    fileName: \"C:\\\\Users\\\\moham\\\\Documents\\\\GitHub\\\\eduShare\\\\pages\\\\Instructor\\\\myBlogs.js\",\n                    lineNumber: 54,\n                    columnNumber: 9\n                }, this)\n            }, void 0, false, {\n                fileName: \"C:\\\\Users\\\\moham\\\\Documents\\\\GitHub\\\\eduShare\\\\pages\\\\Instructor\\\\myBlogs.js\",\n                lineNumber: 53,\n                columnNumber: 7\n            }, this)\n        ]\n    }, void 0, true, {\n        fileName: \"C:\\\\Users\\\\moham\\\\Documents\\\\GitHub\\\\eduShare\\\\pages\\\\Instructor\\\\myBlogs.js\",\n        lineNumber: 36,\n        columnNumber: 5\n    }, this);\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MyBlogs);\n\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } });//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9wYWdlcy9JbnN0cnVjdG9yL215QmxvZ3MuanMuanMiLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUE7QUFBK0Q7QUFDdkI7QUFDeUM7QUFDMUI7QUFDVjtBQUM2QjtBQUUxRSxTQUFTaUIsVUFBVTtJQUNqQixNQUFNQyxTQUFTZCxzREFBU0E7SUFDeEIsTUFBTSxFQUFFZSxPQUFNLEVBQUUsR0FBR2hCLGlEQUFVQSxDQUFDUSw0REFBV0E7SUFDekMsTUFBTSxDQUFDUyxPQUFPQyxTQUFTLEdBQUdwQiwrQ0FBUUEsQ0FBQyxFQUFFO0lBRXJDQyxnREFBU0EsQ0FBQyxJQUFNO1FBQ2QsSUFBSSxDQUFDaUIsUUFBUTtRQUViLE1BQU1HLFdBQVdULDhEQUFVQSxDQUFDRCxrREFBRUEsRUFBRTtRQUNoQyxNQUFNVyxJQUFJVCx5REFBS0EsQ0FBQ1EsVUFBVVAseURBQUtBLENBQUMsVUFBVSxNQUFNSTtRQUNoRCxNQUFNSyxjQUFjUiw4REFBVUEsQ0FBQ08sR0FBRyxDQUFDRSxnQkFBa0I7WUFDbkQsTUFBTUMsWUFBWSxFQUFFO1lBQ3BCRCxjQUFjRSxPQUFPLENBQUMsQ0FBQ0MsTUFBUTtnQkFDN0JGLFVBQVVHLElBQUksQ0FBQztvQkFBRUMsSUFBSUYsSUFBSUUsRUFBRTtvQkFBRSxHQUFHRixJQUFJRyxJQUFJLEVBQUU7Z0JBQUM7WUFDN0M7WUFDQVYsU0FBU0s7UUFDWDtRQUVBLE9BQU8sSUFBTTtZQUNYRjtRQUNGO0lBQ0YsR0FBRztRQUFDTDtLQUFPO0lBRVgsTUFBTWEsbUJBQW1CLElBQU07UUFDN0JkLE9BQU9XLElBQUksQ0FBQztJQUNkO0lBRUEscUJBQ0UsOERBQUN4Qiw4Q0FBR0E7OzBCQUNGLDhEQUFDRSwrQ0FBSUE7Z0JBQUMwQixTQUFTO2dCQUFDQyxTQUFTOzBCQUN0QmQsTUFBTWUsR0FBRyxDQUFDLENBQUNDLHFCQUNWLDhEQUFDN0IsK0NBQUlBO3dCQUFDOEIsSUFBSTt3QkFBQ0MsSUFBSTt3QkFBSUMsSUFBSTt3QkFBR0MsSUFBSTtrQ0FDNUIsNEVBQUMvQiwrQ0FBSUE7c0NBQ0gsNEVBQUNDLHNEQUFXQTs7a0RBQ1YsOERBQUNKLHFEQUFVQTt3Q0FBQ21DLFNBQVE7d0NBQUtDLFdBQVU7a0RBQ2hDTixLQUFLTyxLQUFLOzs7Ozs7a0RBRWIsOERBQUNyQyxxREFBVUE7d0NBQUNtQyxTQUFRO3dDQUFRRyxPQUFNOzs0Q0FDL0JSLEtBQUtTLElBQUksQ0FBQ0MsS0FBSyxDQUFDLEdBQUc7NENBQUs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozt1QkFQS1YsS0FBS04sRUFBRTs7Ozs7Ozs7OzswQkFjakQsOERBQUN6Qiw4Q0FBR0E7Z0JBQUMwQyxJQUFJO2dCQUFHQyxTQUFRO2dCQUFPQyxnQkFBZTswQkFDeEMsNEVBQUN6QyxpREFBTUE7b0JBQUNpQyxTQUFRO29CQUFZRyxPQUFNO29CQUFVTSxTQUFTbEI7OEJBQWtCOzs7Ozs7Ozs7Ozs7Ozs7OztBQU0vRTtBQUVBLGlFQUFlZixPQUFPQSxFQUFDIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vZWR1c2hhcmUvLi9wYWdlcy9JbnN0cnVjdG9yL215QmxvZ3MuanM/YzU3MSJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUmVhY3QsIHsgdXNlU3RhdGUsIHVzZUVmZmVjdCwgdXNlQ29udGV4dCB9IGZyb20gJ3JlYWN0JztcclxuaW1wb3J0IHsgdXNlUm91dGVyIH0gZnJvbSAnbmV4dC9yb3V0ZXInO1xyXG5pbXBvcnQgeyBCb3gsIFR5cG9ncmFwaHksIEdyaWQsIEJ1dHRvbiwgQ2FyZCwgQ2FyZENvbnRlbnQgfSBmcm9tICdAbXVpL21hdGVyaWFsJztcclxuaW1wb3J0IHsgQXV0aENvbnRleHQgfSBmcm9tICcuLi8uLi9ob29rcy9BdXRoUHJvdmlkZXInO1xyXG5pbXBvcnQgeyBkYiB9IGZyb20gJy4uLy4uL0ZpcmViYXNlL0ZpcmViYXNlJztcclxuaW1wb3J0IHsgY29sbGVjdGlvbiwgcXVlcnksIHdoZXJlLCBvblNuYXBzaG90IH0gZnJvbSAnZmlyZWJhc2UvZmlyZXN0b3JlJztcclxuXHJcbmZ1bmN0aW9uIE15QmxvZ3MoKSB7XHJcbiAgY29uc3Qgcm91dGVyID0gdXNlUm91dGVyKCk7XHJcbiAgY29uc3QgeyB1c2VySWQgfSA9IHVzZUNvbnRleHQoQXV0aENvbnRleHQpO1xyXG4gIGNvbnN0IFtibG9ncywgc2V0QmxvZ3NdID0gdXNlU3RhdGUoW10pO1xyXG5cclxuICB1c2VFZmZlY3QoKCkgPT4ge1xyXG4gICAgaWYgKCF1c2VySWQpIHJldHVybjtcclxuXHJcbiAgICBjb25zdCBibG9nc1JlZiA9IGNvbGxlY3Rpb24oZGIsICdCbG9nJyk7XHJcbiAgICBjb25zdCBxID0gcXVlcnkoYmxvZ3NSZWYsIHdoZXJlKCdhdXRob3InLCAnPT0nLCB1c2VySWQpKTtcclxuICAgIGNvbnN0IHVuc3Vic2NyaWJlID0gb25TbmFwc2hvdChxLCAocXVlcnlTbmFwc2hvdCkgPT4ge1xyXG4gICAgICBjb25zdCBibG9nc0RhdGEgPSBbXTtcclxuICAgICAgcXVlcnlTbmFwc2hvdC5mb3JFYWNoKChkb2MpID0+IHtcclxuICAgICAgICBibG9nc0RhdGEucHVzaCh7IGlkOiBkb2MuaWQsIC4uLmRvYy5kYXRhKCkgfSk7XHJcbiAgICAgIH0pO1xyXG4gICAgICBzZXRCbG9ncyhibG9nc0RhdGEpO1xyXG4gICAgfSk7XHJcblxyXG4gICAgcmV0dXJuICgpID0+IHtcclxuICAgICAgdW5zdWJzY3JpYmUoKTtcclxuICAgIH07XHJcbiAgfSwgW3VzZXJJZF0pO1xyXG5cclxuICBjb25zdCBoYW5kbGVDcmVhdGVCbG9nID0gKCkgPT4ge1xyXG4gICAgcm91dGVyLnB1c2goJy9JbnN0cnVjdG9yL2NyZWF0ZUJsb2cnKTtcclxuICB9O1xyXG5cclxuICByZXR1cm4gKFxyXG4gICAgPEJveD5cclxuICAgICAgPEdyaWQgY29udGFpbmVyIHNwYWNpbmc9ezN9PlxyXG4gICAgICAgIHtibG9ncy5tYXAoKGJsb2cpID0+IChcclxuICAgICAgICAgIDxHcmlkIGl0ZW0geHM9ezEyfSBzbT17Nn0gbWQ9ezR9IGtleT17YmxvZy5pZH0+XHJcbiAgICAgICAgICAgIDxDYXJkPlxyXG4gICAgICAgICAgICAgIDxDYXJkQ29udGVudD5cclxuICAgICAgICAgICAgICAgIDxUeXBvZ3JhcGh5IHZhcmlhbnQ9XCJoNVwiIGNvbXBvbmVudD1cImRpdlwiPlxyXG4gICAgICAgICAgICAgICAgICB7YmxvZy5UaXRsZX1cclxuICAgICAgICAgICAgICAgIDwvVHlwb2dyYXBoeT5cclxuICAgICAgICAgICAgICAgIDxUeXBvZ3JhcGh5IHZhcmlhbnQ9XCJib2R5MlwiIGNvbG9yPVwidGV4dC5zZWNvbmRhcnlcIj5cclxuICAgICAgICAgICAgICAgICAge2Jsb2cuQm9keS5zbGljZSgwLCAxMDApfS4uLlxyXG4gICAgICAgICAgICAgICAgPC9UeXBvZ3JhcGh5PlxyXG4gICAgICAgICAgICAgIDwvQ2FyZENvbnRlbnQ+XHJcbiAgICAgICAgICAgIDwvQ2FyZD5cclxuICAgICAgICAgIDwvR3JpZD5cclxuICAgICAgICApKX1cclxuICAgICAgPC9HcmlkPlxyXG4gICAgICA8Qm94IG10PXszfSBkaXNwbGF5PVwiZmxleFwiIGp1c3RpZnlDb250ZW50PVwiY2VudGVyXCI+XHJcbiAgICAgICAgPEJ1dHRvbiB2YXJpYW50PVwiY29udGFpbmVkXCIgY29sb3I9XCJwcmltYXJ5XCIgb25DbGljaz17aGFuZGxlQ3JlYXRlQmxvZ30+XHJcbiAgICAgICAgICBBZGQgTmV3IEJsb2dcclxuICAgICAgICA8L0J1dHRvbj5cclxuICAgICAgPC9Cb3g+XHJcbiAgICA8L0JveD5cclxuICApO1xyXG59XHJcblxyXG5leHBvcnQgZGVmYXVsdCBNeUJsb2dzO1xyXG4iXSwibmFtZXMiOlsiUmVhY3QiLCJ1c2VTdGF0ZSIsInVzZUVmZmVjdCIsInVzZUNvbnRleHQiLCJ1c2VSb3V0ZXIiLCJCb3giLCJUeXBvZ3JhcGh5IiwiR3JpZCIsIkJ1dHRvbiIsIkNhcmQiLCJDYXJkQ29udGVudCIsIkF1dGhDb250ZXh0IiwiZGIiLCJjb2xsZWN0aW9uIiwicXVlcnkiLCJ3aGVyZSIsIm9uU25hcHNob3QiLCJNeUJsb2dzIiwicm91dGVyIiwidXNlcklkIiwiYmxvZ3MiLCJzZXRCbG9ncyIsImJsb2dzUmVmIiwicSIsInVuc3Vic2NyaWJlIiwicXVlcnlTbmFwc2hvdCIsImJsb2dzRGF0YSIsImZvckVhY2giLCJkb2MiLCJwdXNoIiwiaWQiLCJkYXRhIiwiaGFuZGxlQ3JlYXRlQmxvZyIsImNvbnRhaW5lciIsInNwYWNpbmciLCJtYXAiLCJibG9nIiwiaXRlbSIsInhzIiwic20iLCJtZCIsInZhcmlhbnQiLCJjb21wb25lbnQiLCJUaXRsZSIsImNvbG9yIiwiQm9keSIsInNsaWNlIiwibXQiLCJkaXNwbGF5IiwianVzdGlmeUNvbnRlbnQiLCJvbkNsaWNrIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./pages/Instructor/myBlogs.js\n");
+
+/***/ }),
+
+/***/ "@mui/material":
+/*!********************************!*\
+  !*** external "@mui/material" ***!
+  \********************************/
+/***/ ((module) => {
+
+module.exports = require("@mui/material");
+
+/***/ }),
+
+/***/ "next/router":
+/*!******************************!*\
+  !*** external "next/router" ***!
+  \******************************/
+/***/ ((module) => {
+
+module.exports = require("next/router");
+
+/***/ }),
+
+/***/ "react":
+/*!************************!*\
+  !*** external "react" ***!
+  \************************/
+/***/ ((module) => {
+
+module.exports = require("react");
+
+/***/ }),
+
+/***/ "react/jsx-dev-runtime":
+/*!****************************************!*\
+  !*** external "react/jsx-dev-runtime" ***!
+  \****************************************/
+/***/ ((module) => {
+
+module.exports = require("react/jsx-dev-runtime");
+
+/***/ }),
+
+/***/ "firebase/app":
+/*!*******************************!*\
+  !*** external "firebase/app" ***!
+  \*******************************/
+/***/ ((module) => {
+
+module.exports = import("firebase/app");;
+
+/***/ }),
+
+/***/ "firebase/auth":
+/*!********************************!*\
+  !*** external "firebase/auth" ***!
+  \********************************/
+/***/ ((module) => {
+
+module.exports = import("firebase/auth");;
+
+/***/ }),
+
+/***/ "firebase/firestore":
+/*!*************************************!*\
+  !*** external "firebase/firestore" ***!
+  \*************************************/
+/***/ ((module) => {
+
+module.exports = import("firebase/firestore");;
+
+/***/ }),
+
+/***/ "firebase/storage":
+/*!***********************************!*\
+  !*** external "firebase/storage" ***!
+  \***********************************/
+/***/ ((module) => {
+
+module.exports = import("firebase/storage");;
+
+/***/ })
+
+};
+;
+
+// load runtime
+var __webpack_require__ = require("../../webpack-runtime.js");
+__webpack_require__.C(exports);
+var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
+var __webpack_exports__ = (__webpack_exec__("./pages/Instructor/myBlogs.js"));
+module.exports = __webpack_exports__;
+
+})();

@@ -4,7 +4,7 @@ import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import Groups3Icon from '@mui/icons-material/Groups3';
 import { useRouter } from "next/router";
 import React, { useEffect } from 'react';
-
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 function StuSideBar() {
     const router = useRouter();
 
@@ -78,7 +78,40 @@ function StuSideBar() {
                         <ListItemText sx={{ color: "#909497" }} primary="Instructors Achievements" />
                     </ListItemButton>
                 </ListItem>
-
+                <ListItem disablePadding>
+                    <ListItemButton
+                        onClick={() => router.push("/Student/courses")}
+                        sx={{
+                            "&:hover": {
+                                backgroundColor: "#1ABC9C",
+                                color: "primary.contrastText",
+                            },
+                            transition: "background-color 0.3s ease-in-out",
+                        }}
+                    >
+                        <ListItemIcon>
+                            <LibraryBooksIcon />
+                        </ListItemIcon>
+                        <ListItemText sx={{ color: "#909497" }} primary="Courses" />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton
+                        onClick={() => router.push('/Student/Blogs')}
+                        sx={{
+                            "&:hover": {
+                                backgroundColor: "#1ABC9C",
+                                color: "primary.contrastText",
+                            },
+                            transition: "background-color 0.3s ease-in-out",
+                        }}
+                    >
+                        <ListItemIcon>
+                            <AccountCircleIcon />
+                        </ListItemIcon>
+                        <ListItemText sx={{ color: "#909497" }} primary="Blogs" />
+                    </ListItemButton>
+                </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton
                         onClick={() => router.push('/Student/Profile')}

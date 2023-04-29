@@ -8,6 +8,7 @@ import Link from "next/link";
 import ButtonBase from "@mui/material/ButtonBase";
 import useFetch from "../../hooks/useFetch";
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 
 const CourseCard = ({ course }) => {
   const { CourseTitle, InstructorName, CourseDescription, img, fileUrl } =
@@ -16,6 +17,8 @@ const CourseCard = ({ course }) => {
   const { data: imageUrl } = useFetch(
     `https://firebasestorage.googleapis.com/v0/b/edushare-e9242.appspot.com/o/images%2F${img}?alt=media`
   );
+
+  const router = useRouter();
 
   if (!course) {
     return null;
@@ -29,7 +32,7 @@ const CourseCard = ({ course }) => {
   };
 
   return (
-    <Link href={`Student/course/${course.id}`} passHref>
+    <Link href={router.pathname === "/Student/Courses" ? `/Student/course/${course.id}` : `course/${course.id}`} passHref>
       <ButtonBase
         component="div"
         sx={{ textDecoration: "none", color: "inherit" }}
