@@ -9,10 +9,10 @@ import LocalActivityIcon from "@mui/icons-material/LocalActivity";
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-
+import { motion, useAnimation } from 'framer-motion';
 function InstSidebar() {
   const router = useRouter();
-
+  const controls = useAnimation();
   function handelClickRoute() {
     router.push("/Instructor/uploadcontanet");
   }
@@ -20,14 +20,21 @@ function InstSidebar() {
   useEffect(() => {
     handelClickRoute;
   });
+  useEffect(() => {
+    handelClickRoute;
+    controls.start({ opacity: 1, x: 0, transition: { duration: 1 } });
+}, []);
 
-  return (
+return (
     <Box
-      bgcolor="#FDFEFE"
-      flex={1}
-      p={1}
-      position="sticky"
-      sx={{ maxWidth: "250px" }} // Add this line
+        component={motion.div}
+        animate={controls}
+        initial={{ opacity: 0, x: -100 }}
+        bgcolor="#FDFEFE"
+        flex={1}
+        p={1}
+        position="sticky"
+        sx={{ maxWidth: '250px' }}
     >
       <List>
         <ListItem disablePadding>

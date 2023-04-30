@@ -8,20 +8,31 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LocalActivityIcon from '@mui/icons-material/LocalActivity';
 import { useRouter } from "next/router"
 import React, { useEffect } from 'react'
-
+import { motion, useAnimation } from 'framer-motion';
 function Sidebar() {
     const router = useRouter()
+    const controls = useAnimation();
 
     function handelClickRoute() {
         router.push("/Admin/course")
 
     }
     useEffect(() => {
-        handelClickRoute
-    })
-
+        handelClickRoute;
+        controls.start({ opacity: 1, x: 0, transition: { duration: 1 } });
+    }, []);
+    
     return (
-        <Box bgcolor="#FDFEFE" flex={1} p={1} position="sticky" sx={{ maxWidth: "250px" }}>
+        <Box
+            component={motion.div}
+            animate={controls}
+            initial={{ opacity: 0, x: -100 }}
+            bgcolor="#FDFEFE"
+            flex={1}
+            p={1}
+            position="sticky"
+            sx={{ maxWidth: '250px' }}
+        >
             <List>
                 <ListItem disablePadding>
                     <ListItemButton onClick={() => router.push("/Admin/dashboard")} sx={{

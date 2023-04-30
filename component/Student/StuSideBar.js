@@ -8,24 +8,29 @@ import React, { useEffect } from 'react';
 import MessageIcon from '@mui/icons-material/Message';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
+import { motion, useAnimation } from 'framer-motion';
 function StuSideBar() {
     const router = useRouter();
-
+    const controls = useAnimation();
     function handelClickRoute() {
         router.push("/Student/mycourses");
     }
 
     useEffect(() => {
         handelClickRoute;
-    });
+        controls.start({ opacity: 1, x: 0, transition: { duration: 1 } });
+    }, []);
 
     return (
         <Box
+            component={motion.div}
+            animate={controls}
+            initial={{ opacity: 0, x: -100 }}
             bgcolor="#FDFEFE"
             flex={1}
             p={1}
             position="sticky"
-            sx={{ maxWidth: "250px" }}
+            sx={{ maxWidth: '250px' }}
         >
             <List>
                 <ListItem disablePadding>
