@@ -124,10 +124,10 @@ function MyStudents() {
       </Grid>
       {selectedStudentId && (
         <SendMessage
-          open={sendMessageOpen}
-          handleClose={handleSendMessageClose}
-          studentId={selectedStudentId}
-        />
+        open={sendMessageOpen}
+        handleClose={handleSendMessageClose}
+        toId={selectedStudentId}
+      />
       )}
     </div>
   );

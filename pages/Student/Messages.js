@@ -12,7 +12,7 @@ function Messages({ userId }) {
   useEffect(() => {
     if (userId) {
       const messagesCollection = collection(db, 'Message');
-      const messagesQuery = query(messagesCollection, where('studentId', '==', userId));
+      const messagesQuery = query(messagesCollection, where('toId', '==', userId));
       const unsubscribe = onSnapshot(messagesQuery, (querySnapshot) => {
         const messagesList = querySnapshot.docs.map((doc) => ({
           id: doc.id,

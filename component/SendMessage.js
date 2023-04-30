@@ -3,7 +3,7 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } 
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from '../Firebase/Firebase';
 
-function SendMessage({ open, handleClose, studentId }) {
+function SendMessage({ open, handleClose, toId }) {
   const [message, setMessage] = useState('');
   const senderId = auth.currentUser.uid;
   const senderName = auth.currentUser.displayName;
@@ -13,7 +13,7 @@ function SendMessage({ open, handleClose, studentId }) {
     const messageData = {
       fromId: senderId,
       fromName: senderName,
-      studentId: studentId,
+      toId: toId,
       message: message,
       timestamp: serverTimestamp(),
     };
