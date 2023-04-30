@@ -6,6 +6,7 @@ import Groups2Icon from "@mui/icons-material/Groups2";
 import Groups3Icon from "@mui/icons-material/Groups3";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LocalActivityIcon from "@mui/icons-material/LocalActivity";
+import NewspaperIcon from '@mui/icons-material/Newspaper';
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
@@ -88,7 +89,7 @@ function InstSidebar() {
             transition: "background-color 0.3s ease-in-out",
           }}>
             <ListItemIcon>
-              <Groups3Icon />
+              <NewspaperIcon />
             </ListItemIcon>
             <ListItemText sx={{ color: "#909497" }} primary="My Blogs" />
           </ListItemButton>

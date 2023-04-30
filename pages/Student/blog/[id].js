@@ -9,6 +9,7 @@ import Loading from '../../../component/Loading ';
 
 function BlogPage ({ blog }) {
   const router = useRouter();
+  const imageSrc = blog.img ? blog.img : 'https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png';
 
   if (router.isFallback) {
     return <div>Loading...</div>;
@@ -24,6 +25,11 @@ function BlogPage ({ blog }) {
           </Grid>
           <Grid item xs={10}>
             <Box>
+              <img src={imageSrc} alt={blog.Title} style={{
+                  width: '100%',
+                  minHeight: '300px',
+                  maxHeight: '600px',
+                  objectFit: 'cover',}} />
               <Typography variant="h4" gutterBottom>
                 {blog.Title}
               </Typography>
@@ -39,7 +45,7 @@ function BlogPage ({ blog }) {
       </Box>
     </div>
   );
-};
+}
 
 export async function getServerSideProps({ params }) {
     const blogId = params.id;
@@ -55,8 +61,11 @@ export async function getServerSideProps({ params }) {
     const blogData = blogSnapshot.data();
   
     // Fetch the instructor name
-    const instructorDoc = await getDoc(blogData.Instructor);
-    const instructorName = instructorDoc.data().displayName;
+    let instructorName = "Unknown";
+    if (blogData.Instructor) {
+      const instructorDoc = await getDoc(blogData.Instructor);
+      instructorName = instructorDoc.data().displayName;
+    }
   
     const blog = {
       id: blogSnapshot.id,
@@ -73,6 +82,5 @@ export async function getServerSideProps({ params }) {
     };
   }
   
-  
+  export default BlogPage;
 
-export default BlogPage;

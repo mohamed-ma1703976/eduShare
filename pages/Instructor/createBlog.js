@@ -61,8 +61,8 @@ function CreateBlog() {
         setSuccess(true);
       
         // Navigate to the Instructor/myBlogs page after blog is created
-        router.push('/Instructor/profile');
-      };
+        router.push('/Instructor/myBlogs');
+    };
       useEffect(() => {
         setImagePreview(preview);
       }, [preview]);
@@ -92,21 +92,21 @@ function CreateBlog() {
       <Paper
         sx={{
           width: { xs: '90%', sm: 500 },
-          minHeight: { xs: '80%', sm: 650 },
-          padding: 5,
-          pb: 10,
+          minHeight: { xs: '80%', sm: 750 },
+          padding: 10,
+          pb: 5,
           boxShadow: {
             xs: "none",
             md: "0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)",
           },
         }}
       >
-        <Stack direction={"column"} gap={2}>
+        <Stack direction={"column"} gap={1} >
           <Typography variant="h5" align="center">
             Create Blog
           </Typography>
           <form onSubmit={handleSubmit}>
-            <Box display="flex" justifyContent="center">
+            <Box display="flex" justifyContent="center" mb={2}>
               <div
                 style={{
                   width: '100px',
@@ -121,7 +121,7 @@ function CreateBlog() {
                 onClick={() => document.getElementById("blogCover").click()}
               />
             </Box>
-            <Box display="flex" justifyContent="center">
+            <Box display="flex" justifyContent="center" mb={2}>
               <label htmlFor="blogCover">
                 <Input
                   id="blogCover"
@@ -145,46 +145,53 @@ function CreateBlog() {
               id="title"
               label="Title"
               type="text"
+              fullWidth
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
             />
-  
-            <TextField
-              id="content"
-              label="Content"
-              type="text"
-              multiline
-              rows={4}
-              value={body}
-              onChange={(e) => setBody(e.target.value)}
-              required
-            />
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              style={{ marginTop: '20px' }}
-            >
-              Save Blog
-            </Button>
-          </form>
-        </Stack>
-        {loading && (
-          <Typography variant="body2" color="text.secondary">
-            Uploading...
-          </Typography>
-        )}
-        {error && (
-          <Typography variant="body2" color="text.secondary">
-            {error}
-          </Typography>
-        )}
-      </Paper>
-    </Grid>
+            <Box mt={2}>
+              <TextField
+                id="content"
+                label="Content"
+                type="text"
+                fullWidth
+                multiline
+                rows={4}
+                value={body}
+                onChange={(e) => setBody(e.target.value)}
+                required
+                />
+                </Box>
+                <Box mt={2}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                  >
+                    Save Blog
+                  </Button>
+                </Box>
+              </form>
+            </Stack>
+            {loading && (
+              <Box mt={2}>
+                <Typography variant="body2" color="text.secondary">
+                  Uploading...
+                </Typography>
+              </Box>
+            )}
+            {error && (
+              <Box mt={2}>
+                <Typography variant="body2" color="text.secondary">
+                  {error}
+                </Typography>
+              </Box>
+            )}
+          </Paper>
+        </Grid>
   );
-  
-  
-}
+            }    
 
 export default CreateBlog;  

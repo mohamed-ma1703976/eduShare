@@ -5,6 +5,7 @@ import Groups3Icon from '@mui/icons-material/Groups3';
 import { useRouter } from "next/router";
 import React, { useEffect } from 'react';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import NewspaperIcon from '@mui/icons-material/Newspaper';
 function StuSideBar() {
     const router = useRouter();
 
@@ -107,7 +108,7 @@ function StuSideBar() {
                         }}
                     >
                         <ListItemIcon>
-                            <AccountCircleIcon />
+                            <NewspaperIcon />
                         </ListItemIcon>
                         <ListItemText sx={{ color: "#909497" }} primary="Blogs" />
                     </ListItemButton>

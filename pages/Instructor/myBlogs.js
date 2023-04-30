@@ -16,7 +16,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { AuthContext } from '../../hooks/AuthProvider';
 import { db , app ,} from '../../Firebase/Firebase';
-import { getAuth } from 'firebase/auth'; // Add this import
+import { getAuth } from 'firebase/auth';
 import { getFirestore, collection, query, where, onSnapshot, doc, deleteDoc } from 'firebase/firestore';
 import InstSidebar from '../../component/Instructors/InstSidebarr';
 import InstNav from '../../component/Instructors/InstNav';
@@ -48,14 +48,15 @@ function MyBlogs() {
         unsubscribe();
       };
     }, [userId]);
-  
+
+    const defaultImage = 'https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png'; // Add the default image URL here
 
   const handleCreateBlog = () => {
     router.push('/Instructor/createBlog');
   };
 
   const handleUpdateBlog = (id) => {
-    // Logic for updating the blog
+    router.push(`/Instructor/UpdateBlog?blogId=${id}`);
   };
 
   const handleDeleteBlog = async (id) => {
@@ -78,13 +79,13 @@ function MyBlogs() {
 
           <Box flexGrow={1}>
             <Box display="flex" justifyContent="center" mb={3}>
-            <Button
-          variant="contained"
-          sx={{ backgroundColor: '#1abc9c', marginRight: '16px' }}
-          onClick={handleCreateBlog}
-        >
-          Add New Blog
-        </Button>
+              <Button
+                variant="contained"
+                sx={{ backgroundColor: '#1abc9c', marginRight: '16px' }}
+                onClick={handleCreateBlog}
+              >
+                Add New Blog
+              </Button>
             </Box>
             <Grid container spacing={3}>
               {blogs.map((blog) => (
@@ -93,40 +94,39 @@ function MyBlogs() {
                     <CardMedia
                       component="img"
                       height="140"
-                      image={blog.img}
+                      image={blog.img ? blog.img : defaultImage} // Use the provided image, or use the default image if not provided
                       alt={blog.Title}
                     />
                     <CardContent>
                       <Typography variant="h5" component="div">
                         {blog.Title}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {blog.Body.slice(0, 100)}...
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <IconButton
-                        aria-label="update"
-                        onClick={() => handleUpdateBlog(blog.id)}
-                      >
-                        <EditIcon />
-                      </IconButton>
-                      <IconButton
-                        aria-label="delete"
-                        onClick={() => handleDeleteBlog(blog.id)}
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                    </CardActions>
-                  </Card>
-                </Grid>
-              ))}
+                        </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {blog.Body.slice(0, 100)}...
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <IconButton
+                    aria-label="update"
+                    onClick={() => handleUpdateBlog(blog.id)}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton
+                    aria-label="delete"
+                    onClick={() => handleDeleteBlog(blog.id)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </CardActions>
+              </Card>
             </Grid>
-          </Box>
-        </Stack>
+          ))}
+        </Grid>
       </Box>
-    </div>
-  );
+    </Stack>
+  </Box>
+</div>
+    );
 }
-
 export default MyBlogs;
