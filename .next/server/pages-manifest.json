@@ -2,8 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/Student/Profile": "pages/Student/Profile.js",
-  "/Student/Messages": "pages/Student/Messages.js",
-  "/Student": "pages/Student.js",
-  "/Student/InstructorAciveCard": "pages/Student/InstructorAciveCard.js"
+  "/Student/Blogs": "pages/Student/Blogs.js",
+  "/Student/mycourses": "pages/Student/mycourses.js",
+  "/Student/courses": "pages/Student/courses.js"
 }

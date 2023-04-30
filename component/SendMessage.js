@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '../Firebase/Firebase';
+import { auth, db } from '../Firebase/Firebase';
 
 function SendMessage({ open, handleClose, studentId }) {
   const [message, setMessage] = useState('');
+  const senderId = auth.currentUser.uid;
+  const senderName = auth.currentUser.displayName;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const messageData = {
+      fromId: senderId,
+      fromName: senderName,
       studentId: studentId,
       message: message,
       timestamp: serverTimestamp(),
