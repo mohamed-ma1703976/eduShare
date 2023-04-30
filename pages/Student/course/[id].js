@@ -39,7 +39,7 @@ const CoursePage = ({ course }) => {
 
 
 
-  const currentStudentRegisterdCourses = students.find(s => s.id === userId)?.attributes.registerdcourses
+  const currentStudentRegisterdCourses = students.find(s => s.id === userId)?.attributes?.registerdcourses
 
   useEffect(() => {
     const auth = getAuth(app);
@@ -102,7 +102,7 @@ const CoursePage = ({ course }) => {
     console.log(courseName);
     console.log(instructorNameOfCourse);
 
-    const InstructorId = instructors.find(s => s.attributes.firstName === instructorNameOfCourse).id
+    const InstructorId = instructors.find(s => s.attributes.firstName === instructorNameOfCourse)?.id
     console.log("check me", InstructorId)
 
     setEnrollButtonDisabled(true);

@@ -28,7 +28,7 @@ import {
 
 export default function UpdateProfile() {
   const router = useRouter();
-  const { userId } = useContext(AuthContext);
+  //const { userId } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [profileData, setProfileData] = useState({
     displayName: '',
@@ -39,7 +39,8 @@ export default function UpdateProfile() {
   });
   const [profilePicturePreview, setProfilePicturePreview] = useState(null);
   const [coverPicturePreview, setCoverPicturePreview] = useState(null);
-
+ 
+  let userId =auth?.currentUser?.uid
   // Fetch user data and set the initial state
   useEffect(() => {
     async function fetchUserData() {
@@ -137,7 +138,7 @@ export default function UpdateProfile() {
     await updateDoc(userDocRef, updatedProfileData);
   
     setLoading(false);
-    router.push('/Student/profile');
+    router.push('/Student/Profile');
   };
     
   return (
