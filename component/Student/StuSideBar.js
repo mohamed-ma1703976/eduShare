@@ -3,7 +3,9 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import Groups3Icon from '@mui/icons-material/Groups3';
 import { useRouter } from "next/router";
+import HomeIcon from '@mui/icons-material/Home';
 import React, { useEffect } from 'react';
+import MessageIcon from '@mui/icons-material/Message';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 function StuSideBar() {
@@ -38,7 +40,7 @@ function StuSideBar() {
                         }}
                     >
                         <ListItemIcon>
-                            <AccountCircleIcon />
+                            <HomeIcon />
                         </ListItemIcon>
                         <ListItemText sx={{ color: "#909497" }} primary="Home" />
                     </ListItemButton>
@@ -113,6 +115,23 @@ function StuSideBar() {
                         <ListItemText sx={{ color: "#909497" }} primary="Blogs" />
                     </ListItemButton>
                 </ListItem>
+                <ListItem disablePadding>
+                <ListItemButton
+                        onClick={() => router.push('/Student/Messages')}
+                        sx={{
+                            "&:hover": {
+                                backgroundColor: "#1ABC9C",
+                                color: "primary.contrastText",
+                            },
+                            transition: "background-color 0.3s ease-in-out",
+                        }}
+                    >
+                        <ListItemIcon>
+                            <MessageIcon />
+                        </ListItemIcon>
+                        <ListItemText sx={{ color: "#909497" }} primary="Messages" />
+                    </ListItemButton>
+                    </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton
                         onClick={() => router.push('/Student/Profile')}

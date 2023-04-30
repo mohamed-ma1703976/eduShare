@@ -20,10 +20,20 @@
       "static/chunks/main.js",
       "static/chunks/pages/Student.js"
     ],
-    "/Student/Blogs": [
+    "/Student/InstructorAciveCard": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Student/Blogs.js"
+      "static/chunks/pages/Student/InstructorAciveCard.js"
+    ],
+    "/Student/Messages": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/Student/Messages.js"
+    ],
+    "/Student/Profile": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/Student/Profile.js"
     ],
     "/_app": [
       "static/chunks/webpack.js",

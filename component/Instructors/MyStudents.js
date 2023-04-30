@@ -6,68 +6,72 @@ import { Card, CardContent, Grid, Typography, Box, ButtonBase } from '@mui/mater
 import { motion } from 'framer-motion';
 import MessageIcon from '@mui/icons-material/Message';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import SendMessage from '../SendMessage';
 
 function MyStudents() {
-  const [students, setStudentys] = useState([]);
-  const [coursess, setCoursess] = useState([]);
+  const [students, setStudents] = useState([]);
+  const [courses, setCourses] = useState([]);
   const [instructor, setInstructor] = useState([]);
+  const [selectedStudentId, setSelectedStudentId] = useState(null);
+  const [sendMessageOpen, setSendMessageOpen] = useState(false);
   const router = useRouter();
 
   let currentId = auth.currentUser.uid;
 
   async function fetchCourses() {
-    const compationsCollection = collection(db, 'Course');
-    const compationsSnapshot = await getDocs(compationsCollection);
-    const compationsList = compationsSnapshot.docs.map((doc) => ({
+    const coursesCollection = collection(db, 'Course');
+    const coursesSnapshot = await getDocs(coursesCollection);
+    const coursesList = coursesSnapshot.docs.map((doc) => ({
       id: doc.id,
       attributes: doc.data(),
     }));
-    setCoursess(compationsList);
+    setCourses(coursesList);
   }
 
   async function fetchStudents() {
-    const compationsCollection = collection(db, 'Student');
-    const compationsSnapshot = await getDocs(compationsCollection);
-    const compationsList = compationsSnapshot.docs.map((doc) => ({
+    const studentsCollection = collection(db, 'Student');
+    const studentsSnapshot = await getDocs(studentsCollection);
+    const studentsList = studentsSnapshot.docs.map((doc) => ({
       id: doc.id,
       attributes: doc.data(),
     }));
-    setStudentys(compationsList);
+    setStudents(studentsList);
   }
 
-  async function fetchInstruuctors() {
-    const compationsCollection = collection(db, 'Instructor');
-    const compationsSnapshot = await getDocs(compationsCollection);
-    const compationsList = compationsSnapshot.docs.map((doc) => ({
+  async function fetchInstructors() {
+    const instructorsCollection = collection(db, 'Instructor');
+    const instructorsSnapshot = await getDocs(instructorsCollection);
+    const instructorsList = instructorsSnapshot.docs.map((doc) => ({
       id: doc.id,
       attributes: doc.data(),
     }));
-    setInstructor(compationsList);
+    setInstructor(instructorsList);
   }
 
   useEffect(() => {
     fetchStudents();
     fetchCourses();
-    fetchInstruuctors();
+    fetchInstructors();
   }, []);
 
-  let nameOfCourse = instructor.find((s) => s.id === currentId)?.attributes.myCourse[0]?.coursname[0]; //console.log(idOfCourse)
+  let nameOfCourse = instructor.find((i) => i.id === currentId)?.attributes.myCourse[0]?.coursname[0];
+  let courseId = courses.find((c) => c.attributes.CourseTitle === nameOfCourse)?.id;
 
-  let courseid = coursess.find((c) => c.attributes.CourseTitle === nameOfCourse)?.id;
-  console.log(courseid);
-
-  let registeredStudents = students.filter((s) => s.attributes.registerdcourses.includes(courseid));
-
-  console.log(registeredStudents);
-
-  const cardVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1 },
-  };
+  let registeredStudents = students.filter((s) => s.attributes.registerdcourses.includes(courseId));
 
   const handleStudentCardClick = (id) => {
     router.push(`/Profile/${id}`);
   };
+
+  const handleSendMessageClick = (id) => {
+    setSelectedStudentId(id);
+    setSendMessageOpen(true);
+  };
+
+  const handleSendMessageClose = () => {
+    setSendMessageOpen(false);
+  };
+
   return (
     <div>
       <Grid container>
@@ -77,14 +81,13 @@ function MyStudents() {
               <motion.div
                 initial="hidden"
                 animate="visible"
-                variants={cardVariants}
+                variants={{
+                  hidden: { opacity: 0, scale: 0.8 },
+                  visible: { opacity: 1, scale: 1 },
+                }}
                 transition={{ delay: index * 0.1 }}
               >
-                <ButtonBase
-                  component="div"
-                  sx={{ textDecoration: 'none', color: 'inherit' }}
-                  onClick={() => router.push(`/Profile/${s.id}`)}
-                >
+                <ButtonBase component="div" sx={{ textDecoration: 'none', color: 'inherit' }}>
                   <Card sx={{ minWidth: 300, margin: '16px' }}>
                     <CardContent>
                       <Box
@@ -97,8 +100,11 @@ function MyStudents() {
                         <Typography variant="h5" component="div">
                           {s.attributes.firstName} {s.attributes.lastName}
                         </Typography>
-                        <Box>
-                          <MessageIcon sx={{ marginRight: 1 }} />
+                        <Box sx={{ display: 'flex' }}>
+                          <MessageIcon
+                            sx={{ marginRight: 1 }}
+                            onClick={() => handleSendMessageClick(s.id)}
+                          />
                           <NotificationsIcon />
                         </Box>
                       </Box>
@@ -116,10 +122,14 @@ function MyStudents() {
           );
         })}
       </Grid>
+      {selectedStudentId && (
+        <SendMessage
+          open={sendMessageOpen}
+          handleClose={handleSendMessageClose}
+          studentId={selectedStudentId}
+        />
+      )}
     </div>
   );
-  
-      
-    }
-    
-    export default MyStudents;
+}
+export default MyStudents;    
