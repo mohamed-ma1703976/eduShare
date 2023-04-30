@@ -2,9 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/Student": "pages/Student.js",
-  "/Student/mycourses": "pages/Student/mycourses.js",
-  "/Student/Blogs": "pages/Student/Blogs.js",
-  "/Student/Profile": "pages/Student/Profile.js",
-  "/Student/Messages": "pages/Student/Messages.js"
+  "/Student/blog/[id]": "pages/Student/blog/[id].js",
+  "/Instructor/myBlogs": "pages/Instructor/myBlogs.js"
 }

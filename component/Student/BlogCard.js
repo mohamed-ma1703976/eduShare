@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 const BlogCard = ({ blog }) => {
-    const { id, Title, Instructor, img } = blog;
+    const { id, Title, Instructor,instruuctorName, img } = blog;
     const [InstructorName, setInstructorName] = useState('');
   
     useEffect(() => {
@@ -60,7 +60,7 @@ const BlogCard = ({ blog }) => {
                 {Title}
               </Typography>
               <Typography variant="subtitle2" color="text.secondary">
-                By: {InstructorName}
+                By: {instruuctorName}
               </Typography>
             </CardContent>
           </Card>

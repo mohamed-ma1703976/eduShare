@@ -27,7 +27,7 @@ function MyBlogs() {
     const [loading, setLoading] = useState(true);
     const auth = getAuth(app);
     const userId = auth.currentUser.uid;
-    
+    console.log(blogs)
   
     useEffect(() => {
       if (!userId) return;

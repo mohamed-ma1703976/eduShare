@@ -14,6 +14,7 @@ export default function Blogs() {
   if (loading) {
     return <Loading />;
   }
+  console.log(blogs)
 
   if (error) {
     return (

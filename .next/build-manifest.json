@@ -15,30 +15,15 @@
   ],
   "rootMainFiles": [],
   "pages": {
-    "/Student": [
+    "/Instructor/myBlogs": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Student.js"
+      "static/chunks/pages/Instructor/myBlogs.js"
     ],
-    "/Student/Blogs": [
+    "/Student/blog/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Student/Blogs.js"
-    ],
-    "/Student/Messages": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Student/Messages.js"
-    ],
-    "/Student/Profile": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Student/Profile.js"
-    ],
-    "/Student/mycourses": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Student/mycourses.js"
+      "static/chunks/pages/Student/blog/[id].js"
     ],
     "/_app": [
       "static/chunks/webpack.js",

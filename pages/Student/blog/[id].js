@@ -14,7 +14,7 @@ function BlogPage ({ blog }) {
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
-
+console.log(blog)
   return (
     <div>
       <Box>
@@ -72,7 +72,7 @@ export async function getServerSideProps({ params }) {
       Title: blogData.Title,
       Body: blogData.Body,
       img: blogData.img,
-      InstructorName: instructorName,
+      InstructorName: blogData.instruuctorName,
     };
   
     return {
