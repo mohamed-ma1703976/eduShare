@@ -33,7 +33,8 @@ function StuNav({ setCourseSearch }) {
         fetchStudents();
     }, []);
 
-
+    const idOfCurrentUser = auth?.currentUser?.uid
+    let name = students.find(s => s.id === idOfCurrentUser)?.attributes.displayName
     return (
 
         <AppBar position='sticky' sx={{ backgroundColor: "#FDFEFE" }}>
@@ -41,7 +42,7 @@ function StuNav({ setCourseSearch }) {
 
                 <Toolbar >
                     <Typography variant='h6' sx={{ color: "#454545", fontWeight: "800", margin: "0 0 0 -23px", cursor: "pointer" }}>Edu<span style={{ color: "#1ABC9C" }} onClick={() => router.push("/Student")}>Share</span></Typography>
-                    <Typography variant='h6' sx={{ padding: "6px", margin: "0 0 0 66px", color: "#454545", fontWeight: "800", cursor: "pointer" }}>Student Page  </Typography>
+                    <Typography variant='h6' sx={{ padding: "6px", margin: "0 0 0 66px", color: "#454545", fontWeight: "800", cursor: "pointer" }}>Wellcome  {name} !  </Typography>
                 </Toolbar>
 
 
