@@ -17,7 +17,11 @@ const CoursePage = ({ course }) => {
   }
 
   const [enrollButtonDisabled, setEnrollButtonDisabled] = React.useState(false);
+  const [showReg, setShowReg] = React.useState(false);
+
   const [students, setStudents] = React.useState([]);
+  const [courses, setCourses] = React.useState([]);
+
   const [loading, setLoading] = React.useState(true);
   const [userId, setUserId] = React.useState(null);
   const [instructors, setInstructors] = React.useState([]);
@@ -69,6 +73,17 @@ const CoursePage = ({ course }) => {
       setLoading(false);
     };
 
+    const fetchCourses = async () => {
+      const studentCollection = collection(db, 'Course');
+      const studentSnapshot = await getDocs(studentCollection);
+      const studentList = studentSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        attributes: doc.data(),
+      }));
+      setCourses(studentList);
+      setLoading(false);
+    };
+
     const fetchInstructors = async () => {
       const instructorCollection = collection(db, 'Instructor');
       const instructorSnapshot = await getDocs(instructorCollection);
@@ -80,7 +95,7 @@ const CoursePage = ({ course }) => {
       setLoading(false);
     };
 
-
+    fetchCourses()
     fetchStudents();
     fetchInstructors();
     setTimeout(() => {
@@ -88,76 +103,97 @@ const CoursePage = ({ course }) => {
     }, 5000); // Set timeout to 5 seconds
   }, []);
 
+
+  React.useEffect(() => {
+    if (currentStudentRegisterdCourses) {
+      let test = currentStudentRegisterdCourses?.includes(course.id)
+
+      console.log(test)
+      setShowReg(test)
+    }
+
+  }, [course.id, currentStudentRegisterdCourses])
+
   if (loading) {
     return <Loading />; // Render Loading component
-  }  ;
+  };
 
-
-
-
-
+  // let allCoursesId = []
+  // console.log(courses.forEach(c => allCoursesId.push(c.id)))
+  // console.log(allCoursesId)
 
   async function handelAddCourse(id, courseName, instructorNameOfCourse) {
     console.log(id);
     console.log(courseName);
     console.log(instructorNameOfCourse);
 
-    const InstructorId = instructors.find(s => s.attributes.firstName === instructorNameOfCourse)?.id
-    console.log("check me", InstructorId)
+    let isReg = currentStudentRegisterdCourses?.includes(id)
+    if (isReg) {
+      alert("You are already registerd in this course ")
 
-    setEnrollButtonDisabled(true);
-    setEnrolledCourse((prevState) => ({
-      ...prevState,
-      registerdcourses: prevState.registerdcourses
-        ? [...prevState.registerdcourses, id]
-        : [id],
-    }));
+    } else {
+      setEnrollButtonDisabled(true)
 
+      const InstructorId = instructors.find(s => s.attributes.firstName === instructorNameOfCourse)?.id
+      console.log("check me", InstructorId)
 
-    const courseObj = {
-      [courseName]: [userId]
-    };
-    setInstructorCourses(prevState => ({
-      ...prevState,
-      myCourse: [...prevState.myCourse, courseObj]
-    }));
+      setEnrolledCourse((prevState) => ({
+        ...prevState,
+        registerdcourses: prevState.registerdcourses
+          ? [...prevState.registerdcourses, id]
+          : [id],
+      }));
 
 
+      const courseObj = {
+        [courseName]: [userId]
+      };
+      setInstructorCourses(prevState => ({
+        ...prevState,
+        myCourse: [...prevState.myCourse, courseObj]
+      }));
 
 
 
-    let collectedData = {
-      registerdcourses: Array.isArray(enrolledCourse.registerdcourses)
-        ? [...enrolledCourse.registerdcourses, id]
-        : [id],
-    };
-
-    let collectedData1 = {
-      myCourse: [
-        ...instructorCourses.myCourse,
-        { coursname: [courseName], studentsId: [userId] }
-      ]
-    };
 
 
-    try {
-      if (userId) {
-        const studentRef = doc(db, 'Student', userId);
-        await updateDoc(studentRef, collectedData);
+      let collectedData = {
+        registerdcourses: Array.isArray(enrolledCourse.registerdcourses)
+          ? [...enrolledCourse.registerdcourses, id]
+          : [id],
 
+      };
+
+      let collectedData1 = {
+        myCourse: [
+          ...instructorCourses.myCourse,
+          { coursname: [courseName], studentsId: [userId] }
+        ]
+      };
+
+
+      try {
+        if (userId) {
+          const studentRef = doc(db, 'Student', userId);
+          await updateDoc(studentRef, collectedData);
+
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
+
+      try {
+        if (userId) {
+          const instructorRef = doc(db, 'Instructor', InstructorId);
+          await updateDoc(instructorRef, collectedData1);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+
+      router.push('/Student')
     }
 
-    try {
-      if (userId) {
-        const instructorRef = doc(db, 'Instructor', InstructorId);
-        await updateDoc(instructorRef, collectedData1);
-      }
-    } catch (err) {
-      console.log(err);
-    }
 
   }
 
@@ -181,6 +217,7 @@ const CoursePage = ({ course }) => {
                 alt={course.CourseTitle}
               />
 
+
               <Typography variant="h4" gutterBottom>
                 {course.CourseTitle}
               </Typography>
@@ -194,8 +231,8 @@ const CoursePage = ({ course }) => {
               {/* Add more course content here */}
 
               <Box mt={3}>
-                <Button variant="contained" sx={{ backgroundColor: '#1ABC9C', marginRight: 2 }} onClick={() => handelAddCourse(course.id, course.CourseTitle, course.InstructorName)} disabled={enrollButtonDisabled}>
-                  Enroll
+                <Button variant="contained" sx={{ backgroundColor: '#1ABC9C', marginRight: 2 }} onClick={() => handelAddCourse(course.id, course.CourseTitle, course.InstructorName)} disabled={showReg}>
+                  {showReg ? "Registerd" :"ENROLL"}
                 </Button>
                 <Button variant="contained" sx={{ backgroundColor: '#1ABC9C' }}>
                   Join Live Session
