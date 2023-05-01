@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -9,16 +9,41 @@ import ButtonBase from "@mui/material/ButtonBase";
 import useFetch from "../../hooks/useFetch";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+import { auth, collection, db } from "../../Firebase/Firebase";
+import { getDocs } from "firebase/firestore";
 
 const CourseCard = ({ course }) => {
   const { CourseTitle, InstructorName, CourseDescription, img, fileUrl } =
     course;
+
 
   const { data: imageUrl } = useFetch(
     `https://firebasestorage.googleapis.com/v0/b/edushare-e9242.appspot.com/o/images%2F${img}?alt=media`
   );
 
   const router = useRouter();
+  const [stu, setStu] = useState([])
+  React.useEffect(() => {
+    const fetchStudents = async () => {
+      const studentCollection = collection(db, 'Student');
+      const studentSnapshot = await getDocs(studentCollection);
+      const studentList = studentSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        attributes: doc.data(),
+      }));
+      setStu(studentList);
+    };
+    fetchStudents();
+  }, []);
+
+  let userId = auth?.currentUser?.uid
+  const currentStudentRegisterdCourses = stu.find(s => s.id === userId)?.attributes?.registerdcourses
+  let test = currentStudentRegisterdCourses?.includes(course.id)
+
+  console.log(userId)
+  console.log(currentStudentRegisterdCourses)
+  console.log(test)
+
 
   if (!course) {
     return null;
@@ -53,6 +78,29 @@ const CourseCard = ({ course }) => {
             borderRadius: 2,
             overflow: "hidden",
             bgcolor: "#ffffff",
+            border: test ? "2px solid red" : "none",
+            position: "relative", // Add position relative to the card
+            "&::after": {
+              content: "'registered'", // Set the text to display
+              display: test ? "block" : "none", // Only show the text if test is true
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundColor: "rgba(255, 0, 0, 0.5)", // Set the background color to red
+              color: "#fff",
+              fontSize: "1.5rem",
+              fontWeight: "bold",
+              textAlign: "center",
+              paddingTop: "50%", // Center the text vertically
+              opacity: 0, // Set the initial opacity to 0
+              transition: "opacity 0.2s ease", // Add a transition for opacity
+            },
+            "&:hover::after": {
+              opacity: 1, // Show the text when hovering over the card
+            },
+
           }}
         >
           <CardMedia
@@ -62,6 +110,9 @@ const CourseCard = ({ course }) => {
             alt={CourseTitle}
           />
           <CardContent sx={{ flex: 1, p: 2 }}>
+
+            <Typography gutterBottom variant="h6" component="div">
+            </Typography>
             <Typography gutterBottom variant="h6" component="div">
               {CourseTitle}
             </Typography>

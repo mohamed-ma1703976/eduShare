@@ -30,11 +30,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/Student/courses.js"
     ],
-    "/Student/mycourses": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Student/mycourses.js"
-    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
