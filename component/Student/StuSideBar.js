@@ -134,7 +134,7 @@ function StuSideBar() {
                         <ListItemIcon>
                             <MessageIcon />
                         </ListItemIcon>
-                        <ListItemText sx={{ color: "#909497" }} primary="Messages" />
+                        <ListItemText sx={{ color: "#909497" }} primary="Inbox" />
                     </ListItemButton>
                     </ListItem>
                 <ListItem disablePadding>

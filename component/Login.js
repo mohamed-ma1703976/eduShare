@@ -8,6 +8,7 @@ import {
   Typography,
   Link,
   Alert,
+  
 } from "@mui/material";
 import { Box } from "@mui/system";
 import Router, { useRouter } from "next/router";
@@ -154,7 +155,10 @@ export default function App() {
               name="password"
               onChange={handelChange}
               sx={{ margin: "10px 10px 10px 10px" }}
-
+              margin="normal"
+              placeholder="Password"
+              type="password"
+              fullWidth
             />
             <Button
               sx={{

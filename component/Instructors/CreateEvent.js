@@ -5,9 +5,20 @@ import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import { db, auth } from '../../Firebase/Firebase';
+import AddAPhoto from '@mui/icons-material/AddAPhoto';
+import { IconButton } from '@mui/material';
+import {
+    Grid,
+    Paper,
+    Stack,
+    TextField,
+    Typography,
+    Button,
+    Box,
+    Input,
+  } from '@mui/material';
+
 
 const CreateEvent = ({ closeModal, newEventStart }) => {
   const [newEventTitle, setNewEventTitle] = useState('');
@@ -65,13 +76,12 @@ const CreateEvent = ({ closeModal, newEventStart }) => {
         <uploadCoverImage />
         <Box display="flex" justifyContent="center" mb={2}>
               <label htmlFor="blogCover">
-                <Input
-                  id="blogCover"
-                  type="file"
-                  accept="image/*"
-                  style={{ display: 'none' }}
-                  onChange={(e) => handleImageChange(e)}
-                />
+              <input
+        id="blogCover"
+        type="file"
+        accept="image/*"
+        onChange={(e) => setCoverImage(e.target.files[0])}
+      />
 
                 <Button
                   component="span"

@@ -165,6 +165,10 @@ export default function Registration() {
                     name="password"
                     onChange={handleChange}
                     sx={{ flexGrow: 1 }}
+                    margin="normal"
+              placeholder="Password"
+              type="password"
+              fullWidth
                   />
                 </Stack>
 

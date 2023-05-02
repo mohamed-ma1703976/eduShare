@@ -219,6 +219,10 @@ export default function Registration() {
                                         name="password"
                                         onChange={handleChange}
                                         sx={{ margin: "10px 10px 10px 10px" }}
+                                        margin="normal"
+              placeholder="Password"
+              type="password"
+              fullWidth
 
 
                                     />
