@@ -7,6 +7,7 @@ import Groups3Icon from "@mui/icons-material/Groups3";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LocalActivityIcon from "@mui/icons-material/LocalActivity";
 import NewspaperIcon from '@mui/icons-material/Newspaper';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { motion, useAnimation } from 'framer-motion';
@@ -99,6 +100,20 @@ return (
               <NewspaperIcon />
             </ListItemIcon>
             <ListItemText sx={{ color: "#909497" }} primary="My Blogs" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton onClick={() => router.push("/Instructor/myCalendar")} sx={{
+            "&:hover": {
+              backgroundColor: "#1ABC9C",
+              color: "primary.contrastText",
+            },
+            transition: "background-color 0.3s ease-in-out",
+          }}>
+            <ListItemIcon>
+              <CalendarMonthIcon />
+            </ListItemIcon>
+            <ListItemText sx={{ color: "#909497" }} primary="My Calendar" />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
