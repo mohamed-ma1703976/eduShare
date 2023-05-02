@@ -9,7 +9,7 @@ import { app } from '../../Firebase/Firebase';
 
 function Messages({ userId }) {
   const [messages, setMessages] = useState([]);
-  userId = auth.currentUser.uid;
+  userId = auth?.currentUser?.uid;
 
   useEffect(() => {
     const fetchUserData = async (id, role) => {

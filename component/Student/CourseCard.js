@@ -78,7 +78,7 @@ const CourseCard = ({ course }) => {
             borderRadius: 2,
             overflow: "hidden",
             bgcolor: "#ffffff",
-            border: test ? "2px solid red" : "none",
+           // border: test ? "2px solid red" : "none",
             position: "relative", // Add position relative to the card
             "&::after": {
               content: "'registered'", // Set the text to display

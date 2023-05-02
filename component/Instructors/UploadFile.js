@@ -37,38 +37,49 @@ const UploadFile = ({ setFileList }) => {
                 Promise.all(promises).then((urls) => {
                     const files = urls.map((url, index) => ({ name: res.items[index].name, url }));
                     setFileList(files);
+                });
+            });
+        }
+    }, [currentInstructor, setFileList]);
+    if (loading)
+        return (
+            <div>
+                <CircularProgress size={100} color="success" sx={{ margin: '100px 0px 0 350px ' }} />
+            </div>
+        );
+
+    const handleFileChange = (e) => {
+        setFile(e.target.files[0]);
+    };
+
+    const handleUpload = () => {
+        if (file === null) return;
+        const fileRef = ref(storage, `${currentInstructor}/${file.name}`);
+        const fileListRef = ref(storage, `${currentInstructor}/`);
+        listAll(fileListRef).then((res) => {
+            const existingFile = res.items.find((item) => item.name === file.name);
+            if (existingFile) {
+                // File with the same name already exists
+                alert('File with the same name already exists');
+            } else {
+                // Upload the file
+                uploadBytes(fileRef, file).then((snapshot) => {
+                    getDownloadURL(snapshot.ref).then((url) => {
+                        setFileList((prev) => [...prev, { name: file.name, url }]);
                     });
-                    });
-                    }
-                    }, [currentInstructor, setFileList]);
-                    if (loading)
+                });
+            }
+        });
+    };
+
+
     return (
         <div>
-            <CircularProgress size={100} color="success" sx={{ margin: '100px 0px 0 350px ' }} />
+            <input type="file" onChange={handleFileChange} />
+            <Button variant="contained" color="primary" onClick={handleUpload}>
+                Upload File
+            </Button>
         </div>
     );
-
-const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-};
-
-const handleUpload = () => {
-    if (file === null) return;
-    const fileRef = ref(storage, `${currentInstructor}/${file.name + v4()}`);
-    uploadBytes(fileRef, file).then((snapshot) => {
-        getDownloadURL(snapshot.ref).then((url) => {
-            setFileList((prev) => [...prev, { name: file.name, url }]);
-        });
-    });
-};
-
-return (
-    <div>
-        <input type="file" onChange={handleFileChange} />
-        <Button variant="contained" color="primary" onClick={handleUpload}>
-            Upload File
-        </Button>
-    </div>
-);
 };
 export default UploadFile;

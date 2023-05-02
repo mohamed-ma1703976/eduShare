@@ -7,7 +7,7 @@ import StuSideBar from "../../component/Student/StuSideBar";
 
 function Messages({ userId }) {
   const [messages, setMessages] = useState([]);
-  userId = auth.currentUser.uid;
+  userId = auth?.currentUser?.uid;
 
   useEffect(() => {
     if (userId) {

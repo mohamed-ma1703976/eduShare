@@ -1,4 +1,4 @@
-import React ,{useEffect,useState }from 'react'
+import React, { useEffect, useState } from 'react'
 import Loading from '../../component/Loading ';
 import {
     Box,
@@ -17,20 +17,61 @@ import {
 import InstNav from '../../component/Instructors/InstNav';
 import InstSidebar from '../../component/Instructors/InstSidebarr';
 import UploadFile from '../../component/Instructors/UploadFile';
+import { getDownloadURL, listAll, ref, uploadBytes, deleteObject } from "firebase/storage";
+import { auth, collection, db, storage } from '../../Firebase/Firebase';
+import { getDocs } from 'firebase/firestore';
 
 function UploadContent() {
     const [fileList, setFileList] = React.useState([]);
     const [loading, setLoading] = useState(true);
+    const [instructors, setInstructors] = useState([]);
+
 
     useEffect(() => {
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000); // Set timeout to 5 seconds
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000); // Set timeout to 5 seconds
     }, []);
-  
+
+    const currentUser = auth?.currentUser?.uid;
+
+    let currentInstructor = instructors?.find(ins => ins.id === currentUser)?.attributes.myCourse?.[0]?.coursname?.[0]?.replace(/\s+/g, '');
+
+    useEffect(() => {
+        const fetchInstructors = async () => {
+            const instructorCollection = collection(db, 'Instructor');
+            const instructorSnapshot = await getDocs(instructorCollection);
+            const instructorsList = instructorSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                attributes: doc.data(),
+            }));
+            setInstructors(instructorsList);
+            setLoading(false);
+        };
+
+        fetchInstructors();
+    }, []);
     if (loading) {
-      return <Loading />; // Render Loading component
+        return <Loading />; // Render Loading component
     }
+
+    const handleDeleteFile = (file) => {
+        let confirmation = confirm("This file will be Deleted")
+        if (confirmation) {
+            const fileRef = ref(storage, `${currentInstructor}/${file.name}`);
+            deleteObject(fileRef)
+                .then(() => {
+                    setFileList((prev) => prev.filter((f) => f !== file));
+                })
+                .catch((error) => {
+                    console.error("Error deleting file", error);
+                });
+        } else {
+            return
+        }
+
+    };
+
     return (
         <div>
             <Box>
@@ -54,6 +95,8 @@ function UploadContent() {
                                     <TableRow>
                                         <TableCell>File Name</TableCell>
                                         <TableCell>Download Link</TableCell>
+                                        <TableCell>Delete</TableCell>
+
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -65,9 +108,15 @@ function UploadContent() {
                                                     Download
                                                 </Button>
                                             </TableCell>
+                                            <TableCell>
+                                                <Button variant="outlined" color="error" onClick={() => handleDeleteFile(file)}>
+                                                    Delete
+                                                </Button>
+                                            </TableCell>
                                         </TableRow>
                                     ))}
                                 </TableBody>
+
                             </Table>
                         </TableContainer>
                     </Box>
