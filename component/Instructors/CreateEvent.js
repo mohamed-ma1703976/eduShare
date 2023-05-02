@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
@@ -7,18 +8,31 @@ import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { db, auth } from '../../Firebase/Firebase';
+
 const CreateEvent = ({ closeModal, newEventStart }) => {
   const [newEventTitle, setNewEventTitle] = useState('');
   const [newEventStartState, setNewEventStartState] = useState(newEventStart);
   const [newEventEnd, setNewEventEnd] = useState('');
   const [newEventLink, setNewEventLink] = useState('');
   const [newEventDescription, setNewEventDescription] = useState('');
+  const [coverImage, setCoverImage] = useState(null);
   let userId = auth?.currentUser?.uid;
+
+  const storage = getStorage();
+
+  const uploadCoverImage = async () => {
+    const storageRef = ref(storage, `coverImages/${coverImage.name}`);
+    await uploadBytes(storageRef, coverImage);
+    return await getDownloadURL(storageRef);
+  };
+
   const createNewEvent = async () => {
     if (!newEventTitle || !newEventStartState || !newEventEnd) {
       alert('Please fill in all the fields.');
       return;
     }
+
+    const coverImageUrl = coverImage ? await uploadCoverImage() : '';
 
     const newEvent = {
       title: newEventTitle,
@@ -27,6 +41,7 @@ const CreateEvent = ({ closeModal, newEventStart }) => {
       link: newEventLink,
       description: newEventDescription,
       createdBy: userId,
+      coverImage: coverImageUrl,
     };
 
     try {
@@ -36,6 +51,7 @@ const CreateEvent = ({ closeModal, newEventStart }) => {
       setNewEventEnd('');
       setNewEventLink('');
       setNewEventDescription('');
+      setCoverImage(null);
       closeModal();
     } catch (e) {
       console.error('Error adding document: ', e);
@@ -46,6 +62,27 @@ const CreateEvent = ({ closeModal, newEventStart }) => {
     <Dialog open={true} onClose={closeModal}>
       <DialogTitle>Create an online Session</DialogTitle>
       <DialogContent>
+        <uploadCoverImage />
+        <Box display="flex" justifyContent="center" mb={2}>
+              <label htmlFor="blogCover">
+                <Input
+                  id="blogCover"
+                  type="file"
+                  accept="image/*"
+                  style={{ display: 'none' }}
+                  onChange={(e) => handleImageChange(e)}
+                />
+
+                <Button
+                  component="span"
+                  variant="outlined"
+                  color="primary"
+                  startIcon={<AddAPhoto />}
+                >
+                  Upload Cover Image
+                </Button>
+              </label>
+            </Box>
         <TextField
           autoFocus
           margin="dense"
@@ -53,8 +90,9 @@ const CreateEvent = ({ closeModal, newEventStart }) => {
           type="text"
           fullWidth
           value={newEventTitle}
-          onChange={(e) => setNewEventTitle(e.target.value)}
-        />
+          onChange={(e) => setNewEventTitle(e.target.value)}>
+
+          </TextField>
         <TextField
           margin="dense"
           label="Start time"

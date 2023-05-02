@@ -3,16 +3,22 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import Modal from 'react-modal';
-import { collection, query, onSnapshot, where } from 'firebase/firestore';
+import { collection, query, onSnapshot, where, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../Firebase/Firebase';
 import CreateEvent from './createEvent';
+import UpdateEvent from './UpdateEvent';
 import { useRouter } from 'next/router';
 import { getAuth } from 'firebase/auth';
+import { Box, Card, CardContent, Grid, Typography, Button, CardActions, IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 const MyCalendar = () => {
   const [events, setEvents] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
   const [newEventStart, setNewEventStart] = useState('');
+  const [eventToEdit, setEventToEdit] = useState(null);
   const router = useRouter();
   const auth = getAuth();
 
@@ -43,24 +49,95 @@ const MyCalendar = () => {
     setModalIsOpen(true);
   };
 
+  const handleEditClick = (event) => {
+    setEventToEdit(event);
+    setEditModalOpen(true);
+  };
+
+  const handleDeleteClick = async (id) => {
+    try {
+      await deleteDoc(doc(db, 'Events', id));
+    } catch (e) {
+      console.error('Error deleting document: ', e);
+    }
+  };
+
+  const handleCloseEditModal = () => {
+    setEditModalOpen(false);
+    setEventToEdit(null);
+  };
+
+  const handleEditEvent = async (updatedEvent) => {
+    try {
+      await updateDoc(doc(db, 'Events', updatedEvent.id), updatedEvent);
+    } catch (e) {
+      console.error('Error updating document: ', e);
+    }
+    setEditModalOpen(false);
+    setEventToEdit(null);
+  };
+
   return (
-    <div>
-      <FullCalendar
-        plugins={[dayGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
-        headerToolbar={{
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,dayGridWeek,dayGridDay',
-        }}
-        events={events}
-        dateClick={handleDateClick}
-        eventClick={handleEventClick}
-      />
-      <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
-        <CreateEvent closeModal={() => setModalIsOpen(false)} newEventStart={newEventStart} />
-      </Modal>
-    </div>
+    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' } }}>
+      <Box sx={{ flex: 1 }}>
+        <Button variant="contained"  sx={{ backgroundColor: '#1abc9c', marginRight: '16px' }} onClick={() => setModalIsOpen(true)}>
+          Create Event
+        </Button>
+        <FullCalendar
+          plugins={[dayGridPlugin, interactionPlugin]}
+          initialView="dayGridMonth"
+          headerToolbar={{
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,dayGridWeek,dayGridDay',
+          }}
+          events={events}
+          dateClick={handleDateClick}
+          eventClick={handleEventClick}
+        />
+                <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
+          <CreateEvent closeModal={() => setModalIsOpen(false)} newEventStart={newEventStart} />
+        </Modal>
+      </Box>
+      <Grid container item xs={12} md={4} sx={{ flexDirection: 'column', alignItems: 'center' }}>
+      {events.map((event) => (
+        <Card key={event.id} sx={{ mb: 2 }}>
+          <CardContent>
+            <Typography variant="h6" gutterBottom>
+              {event.title}
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              Start Time: {event.start}
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              End Time: {event.end}
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              description: {event.description}
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              Link: {event.link}
+            </Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
+              <IconButton
+                aria-label="edit"
+                sx={{ mr: 1 }}
+                onClick={() => handleEditClick(event)}
+              >
+                <EditIcon />
+              </IconButton>
+              <IconButton
+                aria-label="delete"
+                onClick={() => handleDeleteClick(event.id)}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </Box>
+          </CardContent>
+        </Card>
+      ))}
+      </Grid>
+    </Box>
   );
 };
 
