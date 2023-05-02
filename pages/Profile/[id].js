@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box } from "@mui/system";
+import SendMessage from "../../component/SendMessage";
 import {
   Card,
   CardContent,
@@ -21,9 +22,15 @@ const Profile = () => {
   const [user, setUser] = useState(null);
   const router = useRouter();
   const { id } = router.query;
-
+  const [sendMessageOpen, setSendMessageOpen] = useState(false);
   const [userRole, setUserRole] = useState("");
-
+  const handleSendMessageClick = () => {
+    setSendMessageOpen(true);
+  };
+  
+  const handleSendMessageClose = () => {
+    setSendMessageOpen(false);
+  };
   useEffect(() => {
     if (!id) {
       return;
@@ -134,15 +141,23 @@ return (
             marginTop: "24px",
           }}
         >
-          <IconButton sx={{ mr: 1 }}>
+          <IconButton sx={{ mr: 1 }} onClick={handleSendMessageClick}>
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <MessageOutlined fontSize="large" />
-            </motion.div>
-          </IconButton>
+             <MessageOutlined fontSize="large" />
+      </motion.div>
+    </IconButton>
+    {id && (
+      <SendMessage
+        open={sendMessageOpen}
+        handleClose={handleSendMessageClose}
+        toId={id}
+      />
+    )}
+          
           <IconButton>
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
