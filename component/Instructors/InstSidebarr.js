@@ -11,6 +11,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { motion, useAnimation } from 'framer-motion';
+import MessageIcon from '@mui/icons-material/Message';
 function InstSidebar() {
   const router = useRouter();
   const controls = useAnimation();
@@ -116,6 +117,24 @@ return (
             <ListItemText sx={{ color: "#909497" }} primary="My Calendar" />
           </ListItemButton>
         </ListItem>
+        <ListItem>
+        
+                <ListItemButton
+                        onClick={() => router.push('/Instructor/Messages')}
+                        sx={{
+                            "&:hover": {
+                                backgroundColor: "#1ABC9C",
+                                color: "primary.contrastText",
+                            },
+                            transition: "background-color 0.3s ease-in-out",
+                        }}
+                    >
+                        <ListItemIcon>
+                            <MessageIcon />
+                        </ListItemIcon>
+                        <ListItemText sx={{ color: "#909497" }} primary="Messages" />
+                    </ListItemButton>
+                    </ListItem>
         <ListItem disablePadding>
           <ListItemButton
             onClick={() => router.push("/Instructor/profile")}

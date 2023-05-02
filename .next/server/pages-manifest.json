@@ -2,6 +2,11 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+<<<<<<< Updated upstream
   "/": "pages/index.js",
   "/Instructor": "pages/Instructor.js"
+=======
+  "/Student": "pages/Student.js",
+  "/Student/course/[id]": "pages/Student/course/[id].js"
+>>>>>>> Stashed changes
 }
