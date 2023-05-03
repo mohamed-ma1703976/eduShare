@@ -86,7 +86,8 @@ const Form = ({ setOpen }) => {
       CourseDescription: formData.CourseDescription,
       CourseTitle: formData.CourseTitle,
       InstructorName: formData.InstructorName,
-      fileUrl: fileList[0]
+      fileUrl: fileList[0],
+      rates: []
     };
 
     try {
