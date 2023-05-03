@@ -13,7 +13,7 @@ import { auth, collection, db } from "../../Firebase/Firebase";
 import { getDocs } from "firebase/firestore";
 
 const CourseCard = ({ course }) => {
-  const { CourseTitle, InstructorName, CourseDescription, img, fileUrl } =
+  const { CourseTitle, InstructorName, CourseDescription, img, fileUrl ,rates} =
     course;
 
 
@@ -56,6 +56,15 @@ const CourseCard = ({ course }) => {
     hover: { scale: 1.05, boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.2)" },
   };
 
+  let sum = course?.rates?.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue.rating;
+  }, 0);
+  
+  let average = course?.rates?.length ? sum / course.rates.length : 0;
+  average = parseFloat(average.toFixed(2));
+
+  console.log(average);
+
   return (
     <Link href={router.pathname === "/Student/courses" ? `course/${course.id}` : `Student/course/${course.id}`} passHref>
       <ButtonBase
@@ -78,7 +87,7 @@ const CourseCard = ({ course }) => {
             borderRadius: 2,
             overflow: "hidden",
             bgcolor: "#ffffff",
-           // border: test ? "2px solid red" : "none",
+            // border: test ? "2px solid red" : "none",
             position: "relative", // Add position relative to the card
             "&::after": {
               content: "'registered'", // Set the text to display
@@ -128,6 +137,10 @@ const CourseCard = ({ course }) => {
                 {CourseDescription}
               </Typography>
             </Box>
+
+            <Typography gutterBottom  variant="body2" color="text.secondary">
+              Rate : {average}
+            </Typography>
           </CardContent>
         </Card>
       </ButtonBase>
