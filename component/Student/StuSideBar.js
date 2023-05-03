@@ -9,6 +9,7 @@ import MessageIcon from '@mui/icons-material/Message';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import { motion, useAnimation } from 'framer-motion';
+import EventIcon from '@mui/icons-material/Event';
 function StuSideBar() {
     const router = useRouter();
     const controls = useAnimation();
@@ -118,6 +119,23 @@ function StuSideBar() {
                             <NewspaperIcon />
                         </ListItemIcon>
                         <ListItemText sx={{ color: "#909497" }} primary="Blogs" />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton
+                        onClick={() => router.push('/Student/Events')}
+                        sx={{
+                            "&:hover": {
+                                backgroundColor: "#1ABC9C",
+                                color: "primary.contrastText",
+                            },
+                            transition: "background-color 0.3s ease-in-out",
+                        }}
+                    >
+                        <ListItemIcon>
+                            <EventIcon />
+                        </ListItemIcon>
+                        <ListItemText sx={{ color: "#909497" }} primary="Events" />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>

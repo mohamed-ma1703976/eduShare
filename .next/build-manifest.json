@@ -15,30 +15,15 @@
   ],
   "rootMainFiles": [],
   "pages": {
-    "/": [
+    "/Instructor/myCalendar": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/index.js"
+      "static/chunks/pages/Instructor/myCalendar.js"
     ],
-    "/Instructor/uploadcontanet": [
+    "/Student/Events": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Instructor/uploadcontanet.js"
-    ],
-    "/Student/course/[id]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Student/course/[id].js"
-    ],
-    "/Student/coursePage": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Student/coursePage.js"
-    ],
-    "/Student/courses": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Student/courses.js"
+      "static/chunks/pages/Student/Events.js"
     ],
     "/_app": [
       "static/chunks/webpack.js",
