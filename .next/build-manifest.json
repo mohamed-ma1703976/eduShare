@@ -20,6 +20,11 @@
       "static/chunks/main.js",
       "static/chunks/pages/Instructor.js"
     ],
+    "/Student/Event/[id]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/Student/Event/[id].js"
+    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
