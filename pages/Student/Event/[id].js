@@ -3,20 +3,38 @@ import { useRouter } from 'next/router';
 import { Box, Typography, Grid, Button } from '@mui/material';
 import StuNav from '../../../component/Student/StuNav';
 import StuSideBar from '../../../component/Student/StuSideBar';
-import { doc, getDoc, setDoc, collection } from 'firebase/firestore';
-import { db } from '../../../Firebase/Firebase';
+import { doc, getDoc, setDoc, collection, getDocs } from 'firebase/firestore';
+import { db ,auth} from '../../../Firebase/Firebase';
 import Loading from '../../../component/Loading ';
 import { CardMedia } from '@mui/material';
 
 const EventDetails = () => {
   const router = useRouter();
   const { id } = router.query;
+  
 
-  // Replace this with the actual student ID
-  const studentId = 'your_student_id';
+  const studentId = auth?.currentUser?.uid;
 
   const [eventDetails, setEventDetails] = useState(null);
-
+  const [showReg, setShowReg] = React.useState(false);
+  useEffect(() => {
+    const fetchAttendees = async () => {
+      if (id && studentId) {
+        const attendeesCollectionRef = collection(db, `Events/${id}/Attendees`);
+        const attendeesSnapshot = await getDocs(attendeesCollectionRef);
+        const attendeesList = attendeesSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          attributes: doc.data(),
+        }));
+  
+        if (attendeesList.some((attendee) => attendee.id === studentId)) {
+          setShowReg(true);
+        }
+      }
+    };
+  
+    fetchAttendees();
+  }, [id, studentId]);
   useEffect(() => {
     if (id) {
       const fetchEventDetails = async () => {
@@ -49,16 +67,18 @@ const EventDetails = () => {
       const studentDocRef = doc(db, 'Student', studentId);
       const studentDocSnap = await getDoc(studentDocRef);
       const studentData = studentDocSnap.data();
-
+  
       const attendeesCollectionRef = collection(db, `Events/${id}/Attendees`);
       await setDoc(doc(attendeesCollectionRef, studentId), studentData);
-
+  
       alert('You have successfully registered for the event.');
+      setShowReg(true); // Update the showReg state to disable the button
     } catch (error) {
       console.error('Error registering for the event:', error);
       alert('An error occurred while registering for the event.');
     }
   };
+  
 
   return (
     <div>
@@ -91,9 +111,9 @@ const EventDetails = () => {
               <Typography variant="body1" gutterBottom>
                 Description: {eventDetails.description}
               </Typography>
-              <Button variant="contained" color="primary" onClick={registerForEvent}>
-                Register for Event
-              </Button>
+                    <Button variant="contained" sx={{ backgroundColor: '#1ABC9C', marginRight: 2 }} onClick={() => registerForEvent()} disabled={showReg}>
+                  {showReg ? "Registerd" : "Register"}
+                </Button>
             </Box>
           </Grid>
         </Grid>
