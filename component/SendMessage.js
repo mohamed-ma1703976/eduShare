@@ -3,7 +3,7 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } 
 import { collection, addDoc, serverTimestamp, getDocs } from 'firebase/firestore';
 import { auth, db } from '../Firebase/Firebase';
 
-function SendMessage({ open, handleClose, toId }) {
+function SendMessage({ open, handleClose, toId, fN, lN }) {
   const [message, setMessage] = useState('');
   const [inst, setInstructor] = useState([]);
 
@@ -36,6 +36,8 @@ function SendMessage({ open, handleClose, toId }) {
       toId: toId,
       message: message,
       timestamp: serverTimestamp(),
+      toFirstName: fN,
+      toLastName: lN
     };
     // await addDoc(collection(db, 'Message'), messageData);
     const messagwColl = collection(db, 'Message');

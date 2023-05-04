@@ -14,6 +14,9 @@ function MyStudents() {
   const [instructor, setInstructor] = useState([]);
   const [selectedStudentId, setSelectedStudentId] = useState(null);
   const [sendMessageOpen, setSendMessageOpen] = useState(false);
+  const [firstName, setFirstName] = useState(null);
+  const [lastName, setLastName] = useState(null);
+
   const router = useRouter();
 
   let currentId = auth.currentUser.uid;
@@ -63,8 +66,10 @@ function MyStudents() {
     router.push(`/Profile/${id}`);
   };
 
-  const handleSendMessageClick = (id) => {
+  const handleSendMessageClick = (id,fName,lName) => {
     setSelectedStudentId(id);
+    setFirstName(fName)
+    setLastName(lName)
     setSendMessageOpen(true);
   };
 
@@ -103,7 +108,7 @@ function MyStudents() {
                         <Box sx={{ display: 'flex' }}>
                           <MessageIcon
                             sx={{ marginRight: 1 }}
-                            onClick={() => handleSendMessageClick(s.id)}
+                            onClick={() => handleSendMessageClick(s.id,s.attributes.firstName,s.attributes.lastName)}
                           />
                           <NotificationsIcon />
                         </Box>
@@ -127,6 +132,8 @@ function MyStudents() {
         open={sendMessageOpen}
         handleClose={handleSendMessageClose}
         toId={selectedStudentId}
+        fN={firstName}
+        lN={lastName}
       />
       )}
     </div>
