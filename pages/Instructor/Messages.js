@@ -116,9 +116,13 @@ function Messages({ userId }) {
                     <Typography variant="body1">{message.attributes.message}</Typography>
 
 
-                    <Typography variant="body1">{"replay from : " +message.attributes.toFirstName}, {message.attributes.toLastName}</Typography>
+                    <Typography variant="body1">{"replay from : " + message.attributes.toFirstName}, {message.attributes.toLastName}</Typography>
 
-                    <Typography variant="body1">{message.attributes.replays}</Typography>
+                    <Typography variant="body1">{message.attributes.replays.map((reply, index) => (
+                      <Typography key={index} variant="body1">
+                        {reply}
+                      </Typography>
+                    ))}</Typography>
 
                   </CardContent>
                 </Card>
