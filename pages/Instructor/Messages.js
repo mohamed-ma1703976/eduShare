@@ -40,7 +40,7 @@ function Messages({ userId }) {
         for (const doc of querySnapshot.docs) {
           const messageData = doc.data();
           const userData = await fetchUserData(messageData.fromId, messageData.fromRole);
-
+           console.log(messageData)
           messagesList.push({
             id: doc.id,
             data: {
@@ -57,6 +57,8 @@ function Messages({ userId }) {
 
     fetchMessages();
   }, [userId]);
+
+  console.log(messages)
 
   return (
     <div>
@@ -97,3 +99,4 @@ function Messages({ userId }) {
 }
 
 export default Messages;
+

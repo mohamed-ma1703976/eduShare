@@ -130,13 +130,13 @@ const Form = ({ setOpen }) => {
 
         id="outlined-error-helper-text"
         label="Course Title"
-        sx={{ margin: "10px 10px 10px 10px" }}
+        sx={{ margin: "10px 10px 10px 10px" ,width: '100%'}}
         name="CourseTitle"
         onChange={handleChange}
         value={formData.CourseTitle}
       />
 
-      <FormControl fullWidth variant="outlined" style={{ width: '50%', margin: "10px 10px 10px 10px" }}>
+      <FormControl fullWidth variant="outlined" style={{ width: '100%', margin: "10px 10px 10px 10px" }}>
         <InputLabel htmlFor="student-select">Instructor Name</InputLabel>
 
         <Select labelId="student-select"
@@ -150,36 +150,22 @@ const Form = ({ setOpen }) => {
       </FormControl>
 
 
-
-      {/* <TextField
-        id="outlined-multiline-flexible"
-        label="Course Description"
-        multiline
-        maxRows={4}
-        sx={{ margin: "10px 10px 10px 10px" }}
-        name="CourseDescription"
-        onChange={handleChange}
-        value={formData.CourseDescription}
-
-
-      /> */}
-
       <TextField
         id="outlined-multiline-static"
         label="Course Description"
         multiline
         rows={4}
-        sx={{ margin: "10px 10px 10px 10px" }}
+        sx={{ margin: "10px 10px 10px 10px",width:"100%" }}
         name="CourseDescription"
         onChange={handleChange}
         value={formData.CourseDescription}
       />
 
       <input type="file" onChange={handleFileUpload} style={{
-        margin: "50px 0px 0px 30px",
-        width: "47%",
+        margin: " 0 0 0 5px",
+        width: "100%",
         height: "50%",
-        border: "1px solid gray",
+       // border: "1px solid gray",
         padding: "5px" // Add border
       }} />
 

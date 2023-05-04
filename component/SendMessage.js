@@ -1,15 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp, getDocs } from 'firebase/firestore';
 import { auth, db } from '../Firebase/Firebase';
 
 function SendMessage({ open, handleClose, toId }) {
   const [message, setMessage] = useState('');
-  const senderId = auth.currentUser.uid;
-  const senderName = auth.currentUser.displayName;
+  const [inst, setInstructor] = useState([]);
 
+  //const senderName = auth.currentUser.displayName;
+
+
+  async function fetchInstructors() {
+    const instructorsCollection = collection(db, 'Instructor');
+    const instructorsSnapshot = await getDocs(instructorsCollection);
+    const instructorsList = instructorsSnapshot.docs.map((doc) => ({
+      id: doc.id,
+      attributes: doc.data(),
+    }));
+    setInstructor(instructorsList);
+  }
+
+  useEffect(() => {
+    fetchInstructors()
+  }, [])
+  const senderId = auth?.currentUser?.uid;
+  const senderName = inst.find(s => s.id === senderId)?.attributes?.displayName
+  console.log(auth?.currentUser)
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(senderName)
+
     const messageData = {
       fromId: senderId,
       fromName: senderName,
@@ -17,7 +37,9 @@ function SendMessage({ open, handleClose, toId }) {
       message: message,
       timestamp: serverTimestamp(),
     };
-    await addDoc(collection(db, 'Message'), messageData);
+    // await addDoc(collection(db, 'Message'), messageData);
+    const messagwColl = collection(db, 'Message');
+    await addDoc(messagwColl, messageData);
     setMessage('');
     handleClose();
   };
@@ -50,3 +72,5 @@ function SendMessage({ open, handleClose, toId }) {
 }
 
 export default SendMessage;
+
+
