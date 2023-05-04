@@ -2,8 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/Admin": "pages/Admin.js",
-  "/Instructor/mystudents": "pages/Instructor/mystudents.js",
   "/Student/Messages": "pages/Student/Messages.js",
-  "/Instructor/Messages": "pages/Instructor/Messages.js"
+  "/Instructor/mystudents": "pages/Instructor/mystudents.js"
 }

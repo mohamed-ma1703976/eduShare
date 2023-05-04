@@ -90,7 +90,7 @@ function Messages({ userId }) {
       const messageDoc = await getDoc(messageRef);
 
       // get the previous replies
-      const previousReplies = messageDoc.data().replays;
+      const previousReplies = messageDoc.data().replays || [];
       console.log(previousReplies)
       // merge the previous replies with the new reply
       const newReplies = [...previousReplies, rmassgae];
