@@ -1,5 +1,5 @@
 // DynamicForm.js
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import {
   Box,
   Button,
@@ -10,13 +10,14 @@ import {
   Checkbox,
   Select,
   MenuItem,
+
 } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
-const DynamicForm = ({ onSubmit }) => {
-    const [questions, setQuestions] = useState([
+const DynamicForm = ({ onSubmit, initialTitle = '', initialDescription = '', initialDueDate = '', initialQuestions = [] }) => {
+    const [questions, setQuestions] = useState(initialQuestions.length > 0 ? initialQuestions : [
         {
           id: uuidv4(),
           text: "",
@@ -24,7 +25,12 @@ const DynamicForm = ({ onSubmit }) => {
           answers: [{ id: uuidv4(), text: "", isCorrect: false }],
         },
       ]);
-
+    const [title, setTitle] = useState(initialTitle);
+    const [description, setDescription] = useState(initialDescription);
+    const [dueDate, setDueDate] = useState(initialDueDate);
+    useEffect(() => {
+        setQuestions(initialQuestions);
+      }, [initialQuestions]);
   const addQuestion = () => {
     setQuestions([
       ...questions,
@@ -111,17 +117,43 @@ const DynamicForm = ({ onSubmit }) => {
       )
     );
   };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onSubmit(questions);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = questions.map((q) => ({ question: q.text, answers: q.answers }));
+    onSubmit({ title, description, dueDate, questions: data });
   };
+    
 
   return (
-    <Box
-      component="form"
-      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-      onSubmit={handleSubmit}
-    >
+    <form onSubmit={handleSubmit}>
+        <TextField
+          label="Title"
+          fullWidth
+          margin="dense"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+        <TextField
+          label="Description"
+          fullWidth
+          multiline
+          rows={4}
+          margin="dense"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        />
+<TextField
+        label="Due Date"
+        type="datetime-local"
+        fullWidth
+        value={dueDate}
+        onChange={(e) => setDueDate(e.target.value)}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
       {questions.map((question, index) => (
         <Box key={question.id} sx={{ width: "100%", mb: 2 }}>
           <TextField
@@ -268,10 +300,10 @@ const DynamicForm = ({ onSubmit }) => {
         <Button sx={{ mb: 2 }} onClick={addQuestion}>
           Add Question
         </Button>
-        <Button variant="contained" type="submit">
+        <Button variant="contained" type="submit" sx={{ backgroundColor: '#1abc9c', marginRight: '16px' }}>
           Submit
         </Button>
-      </Box>
+      </form>
     );
   };
   

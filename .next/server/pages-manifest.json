@@ -2,6 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/Instructor/uploadcontanet": "pages/Instructor/uploadcontanet.js",
+  "/Instructor/Tests": "pages/Instructor/Tests.js",
+  "/": "pages/index.js",
   "/Instructor": "pages/Instructor.js"
 }

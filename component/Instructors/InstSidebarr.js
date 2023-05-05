@@ -85,7 +85,7 @@ function InstSidebar() {
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton
-            onClick={() => router.push("/Instructor/CreateTest")}
+            onClick={() => router.push("/Instructor/Tests")}
             sx={{
               "&:hover": {
                 backgroundColor: "#1ABC9C",
@@ -97,7 +97,7 @@ function InstSidebar() {
             <ListItemIcon>
               <QuizIcon />
             </ListItemIcon>
-            <ListItemText sx={{ color: "#909497" }} primary="Create Test" />
+            <ListItemText sx={{ color: "#909497" }} primary="Tests" />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>

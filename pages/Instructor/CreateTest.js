@@ -7,27 +7,29 @@ import Loading from "../../component/Loading ";
 import { Box, Typography, Stack } from "@mui/material";
 import { db, auth, collection } from "../../Firebase/Firebase";
 import { addDoc } from "firebase/firestore";
-
+import { useRouter } from "next/router";
 
 const CreateTest = () => {
     const [loading, setLoading] = useState(false);
-  
-    const handleFormSubmit = async (questions) => {
-      setLoading(true);
-      try {
-        const userId = auth.currentUser.uid;
-  
-        const testCollection = collection(db, "tests");
-        const docRef = await addDoc(testCollection, { questions, userId });
-        console.log("Test saved with ID: ", docRef.id);
-        setLoading(false);
-        // Redirect or show a success message
-      } catch (error) {
-        console.error("Error saving test: ", error);
-        setLoading(false);
-        // Show an error message
-      }
-    };
+    const router = useRouter();
+    const handleFormSubmit = async (testData) => {
+        setLoading(true);
+        try {
+          const userId = auth?.currentUser?.uid;
+      
+          const testCollection = collection(db, 'tests');
+          const docRef = await addDoc(testCollection, { ...testData, userId });
+          console.log('Test saved with ID: ', docRef.id);
+        router.push(`/Instructor/Tests`);
+          setLoading(false);
+          // Redirect or show a success message
+        } catch (error) {
+          console.error('Error saving test: ', error);
+          setLoading(false);
+          // Show an error message
+        }
+      };
+      
   
     if (loading) {
       return <Loading />;
@@ -46,7 +48,7 @@ const CreateTest = () => {
                 Create a Test
               </Typography>
   
-              <DynamicForm onSubmit={handleFormSubmit} />
+              <DynamicForm onSubmit={handleFormSubmit} initialQuestions={[]} />
             </Box>
           </Stack>
         </Box>
