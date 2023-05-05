@@ -13,6 +13,7 @@ import Groups2Icon from "@mui/icons-material/Groups2";
 import Groups3Icon from "@mui/icons-material/Groups3";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LocalActivityIcon from "@mui/icons-material/LocalActivity";
+import HomeIcon from '@mui/icons-material/Home';
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { useRouter } from "next/router";
@@ -59,7 +60,7 @@ function InstSidebar() {
             }}
           >
             <ListItemIcon>
-              <AccountCircleIcon />
+              <HomeIcon />
             </ListItemIcon>
             <ListItemText sx={{ color: "#909497" }} primary="Home" />
           </ListItemButton>
@@ -94,7 +95,7 @@ function InstSidebar() {
             }}
           >
             <ListItemIcon>
-              <MessageIcon />
+              <QuizIcon />
             </ListItemIcon>
             <ListItemText sx={{ color: "#909497" }} primary="Create Test" />
           </ListItemButton>
@@ -111,7 +112,7 @@ function InstSidebar() {
             }}
           >
             <ListItemIcon>
-              <QuizIcon />
+              <Groups3Icon />
             </ListItemIcon>
             <ListItemText sx={{ color: "#909497" }} primary="My Students" />
           </ListItemButton>

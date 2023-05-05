@@ -244,7 +244,8 @@ const DynamicForm = ({ onSubmit }) => {
       
       <IconButton onClick={() => removeAnswer(question.id, answer.id)}>
         <RemoveIcon />
-        <Button
+      </IconButton>
+      <Button
     sx={{ mt: 1 }}
     size="small"
     onClick={() => addAnswer(question.id)}
@@ -252,7 +253,6 @@ const DynamicForm = ({ onSubmit }) => {
   >
     Add Answer
   </Button>
-      </IconButton>
     </Box>
   ))}
             <Button
