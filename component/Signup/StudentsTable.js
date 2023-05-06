@@ -39,14 +39,19 @@ function StudentsTable() {
     if (loading) return <div><CircularProgress size={100} color="success" sx={{ margin: "200px 550px 0 0 " }} /></div>;
 
     async function handelDelete(id) {
+        if (confirm("Are you sure you want to continue?")) {
+            try {
+                const studentRef = doc(db, 'Student', id);
+                await deleteDoc(studentRef);
+                router.reload();
+            } catch (err) {
+                console.log(err);
+            }
 
-        try {
-            const studentRef = doc(db, 'Student', id);
-            await deleteDoc(studentRef);
-            router.reload();
-        } catch (err) {
-            console.log(err);
+        } else {
+            return
         }
+
 
     }
     return (

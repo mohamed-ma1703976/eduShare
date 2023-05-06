@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { db, doc, getDoc, updateDoc } from "../../../Firebase/Firebase";
+import { db } from "../../../Firebase/Firebase";
 import DynamicForm from "../../../component/Instructors/DynamicForm";
 import InstNav from "../../../component/Instructors/InstNav";
 import InstSidebar from "../../../component/Instructors/InstSidebarr";
 import Loading from "../../../component/Loading ";
 import { Box, Typography, Stack } from "@mui/material";
 import { useRouter } from "next/router";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 
 const UpdateTest = () => {
   const [loading, setLoading] = useState(true);
   const [fetchStatus, setFetchStatus] = useState(false); // Add this line
   const [testData, setTestData] = useState(null);
   const router = useRouter();
-  const { testId } = router.query;
-
+  const { myParam: testId } = router.query;
+  console.log(testId)
   useEffect(() => {
     const fetchTestData = async () => {
         console.log("testId:", testId);
@@ -35,9 +36,12 @@ const UpdateTest = () => {
       setLoading(false);
       setFetchStatus(true); // Add this line
     };
+    console.log(testData)
 
     if (testId) {
       fetchTestData();
+    }else{
+      console.log("error with test id")
     }
   }, [testId]);
 

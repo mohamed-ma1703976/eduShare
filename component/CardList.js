@@ -60,13 +60,19 @@ function CardList({ courseSearch }) {
   if (loading) return <div><Loading /></div>;
 
   async function handleDelete(id) {
-    try {
-      const courseRef = doc(db, 'Course', id);
-      await deleteDoc(courseRef);
-      router.reload();
-    } catch (err) {
-      console.log(err);
+    if (confirm("Are you sure you want to continue?")) {
+
+      try {
+        const courseRef = doc(db, 'Course', id);
+        await deleteDoc(courseRef);
+        router.reload();
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      return
     }
+
   }
 
   return (
@@ -132,12 +138,15 @@ function CardList({ courseSearch }) {
                     <TableCell align="right">
                       <Button onClick={() => handleDelete(s.id)}>Delete</Button>
                     </TableCell>
+
                   </TableRow>
                 );
               })}
           </TableBody>
         </Table>
       </TableContainer>
+
+
     </div>
   );
 }

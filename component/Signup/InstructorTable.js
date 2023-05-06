@@ -44,14 +44,20 @@ function InstructorTable() {
 
 
     async function handelDelete(id) {
+        if (confirm("Are you sure you want to continue?")) {
 
-        try {
-            const instructoreRef = doc(db, 'Instructor', id);
-            await deleteDoc(instructoreRef);
-            router.reload();
-        } catch (err) {
-            console.log(err);
+            try {
+                const instructoreRef = doc(db, 'Instructor', id);
+                await deleteDoc(instructoreRef);
+                router.reload();
+            } catch (err) {
+                console.log(err);
+            }
+        } else {
+            return
         }
+
+
     }
 
 

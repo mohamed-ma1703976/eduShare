@@ -47,32 +47,37 @@ export default function MycoursesCard({ courseTitle, InstName, id, userid }) {
     console.log(userid)
 
     async function handelDrop(id) {
-        try {
-            const index = currentCourses.findIndex(course => course === id);
-            if (index !== -1) {
-                const updatedCourses = [...currentCourses];
-                updatedCourses.splice(index, 1);
-                setCurrentCourses(updatedCourses);
-                try {
-                    if (userid) {
-                        const studentRef = doc(db, 'Student', userid);
-                        await updateDoc(studentRef, {
-                            registerdcourses
-                                : updatedCourses
-                        });
-                    }
-                } catch (err) {
-                    console.log(err);
-                }
-                if (!userid) {
-                    return <div>Loading...</div>;
-                }
-                console.log('Course dropped successfully');
-                router.reload()
+        if (confirm("Are you sure you want to continue?")) {
 
+            try {
+                const index = currentCourses.findIndex(course => course === id);
+                if (index !== -1) {
+                    const updatedCourses = [...currentCourses];
+                    updatedCourses.splice(index, 1);
+                    setCurrentCourses(updatedCourses);
+                    try {
+                        if (userid) {
+                            const studentRef = doc(db, 'Student', userid);
+                            await updateDoc(studentRef, {
+                                registerdcourses
+                                    : updatedCourses
+                            });
+                        }
+                    } catch (err) {
+                        console.log(err);
+                    }
+                    if (!userid) {
+                        return <div>Loading...</div>;
+                    }
+                    console.log('Course dropped successfully');
+                    router.reload()
+
+                }
+            } catch (error) {
+                console.error('Failed to drop course:', error);
             }
-        } catch (error) {
-            console.error('Failed to drop course:', error);
+        } else {
+            return
         }
     }
 
@@ -132,13 +137,14 @@ export default function MycoursesCard({ courseTitle, InstName, id, userid }) {
                             <TableCell component="th" scope="row">{courseTitle}</TableCell>
                             <TableCell align="right">{InstName}</TableCell>
                             <TableCell align="center">
-                                <Button size="small" sx={{ backgroundColor: '#1ABC9C', color: 'white', margin: '0 0 10px 0', border: '1px solid','&:hover': { backgroundColor: '#1ABC9C' } }} onClick={() => handelDrop(id)}>Drop course</Button>
+                                <Button size="small" sx={{ backgroundColor: '#1ABC9C', color: 'white', margin: '0 0 10px 0', border: '1px solid', '&:hover': { backgroundColor: '#1ABC9C' } }} onClick={() => handelDrop(id)}>Drop course</Button>
+
                             </TableCell>
 
 
                             <TableCell align="center">
 
-                                <Button size="small" sx={{ backgroundColor: '#1ABC9C', color: 'white', margin: '0 0 10px 0', border: '1px solid','&:hover': { backgroundColor: '#1ABC9C' } }} onClick={() => handelRoute(id, courseTitle)}>Course Page</Button>
+                                <Button size="small" sx={{ backgroundColor: '#1ABC9C', color: 'white', margin: '0 0 10px 0', border: '1px solid', '&:hover': { backgroundColor: '#1ABC9C' } }} onClick={() => handelRoute(id, courseTitle)}>Course Page</Button>
 
                             </TableCell>
 
