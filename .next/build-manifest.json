@@ -15,20 +15,15 @@
   ],
   "rootMainFiles": [],
   "pages": {
-    "/": [
+    "/Admin/course": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/index.js"
+      "static/chunks/pages/Admin/course.js"
     ],
-    "/Instructor": [
+    "/Instructor/myCalendar": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Instructor.js"
-    ],
-    "/Instructor/Tests": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Instructor/Tests.js"
+      "static/chunks/pages/Instructor/myCalendar.js"
     ],
     "/_app": [
       "static/chunks/webpack.js",

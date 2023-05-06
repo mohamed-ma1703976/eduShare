@@ -12,7 +12,7 @@ export default function DropCourse() {
     const [courses, setCourses] = useState([]);
     const [students, setStudents] = useState([]);
 
-    let userId = auth.currentUser.uid
+    let userId = auth?.currentUser?.uid
     useEffect(() => {
         const fetchStudents = async () => {
             const studentCollection = collection(db, 'Student');

@@ -2,7 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/Instructor/Tests": "pages/Instructor/Tests.js",
-  "/": "pages/index.js",
-  "/Instructor": "pages/Instructor.js"
+  "/Admin/course": "pages/Admin/course.js",
+  "/Instructor/myCalendar": "pages/Instructor/myCalendar.js"
 }

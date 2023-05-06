@@ -27,9 +27,14 @@ const Tests = () => {
   
     fetchTests();
   }, []);
-  
+  console.log(tests)
   const handleUpdateTest = (testId) => {
-    router.push(`updateTest/${testId}`);
+   // router.push(`updateTest/${testId}`);
+
+    router.push({
+      pathname: `updateTest/${testId}`,
+      query: { myParam: testId }
+  })
   };
 
   const handleDeleteTest = async (testId) => {
