@@ -2,6 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/Admin/course": "pages/Admin/course.js",
-  "/Instructor/myCalendar": "pages/Instructor/myCalendar.js"
+  "/Student/Profile": "pages/Student/Profile.js",
+  "/Instructor/myBlogs": "pages/Instructor/myBlogs.js",
+  "/Instructor/createBlog": "pages/Instructor/createBlog.js",
+  "/Admin/dashboard": "pages/Admin/dashboard.js"
 }

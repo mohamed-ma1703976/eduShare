@@ -24,28 +24,34 @@ const Tests = () => {
         setLoading(false);
       }
     };
-  
+
     fetchTests();
   }, []);
   console.log(tests)
   const handleUpdateTest = (testId) => {
-   // router.push(`updateTest/${testId}`);
+    // router.push(`updateTest/${testId}`);
 
     router.push({
       pathname: `updateTest/${testId}`,
       query: { myParam: testId }
-  })
+    })
   };
 
   const handleDeleteTest = async (testId) => {
-    try {
-      const testDoc = doc(db, "tests", testId);
-      await deleteDoc(testDoc);
-      setTests(tests.filter((test) => test.id !== testId));
-      console.log("Test deleted successfully");
-    } catch (error) {
-      console.error("Error deleting test: ", error);
+    if (confirm("Are you sure you want to continue?")) {
+      try {
+        const testDoc = doc(db, "tests", testId);
+        await deleteDoc(testDoc);
+        setTests(tests.filter((test) => test.id !== testId));
+        console.log("Test deleted successfully");
+      } catch (error) {
+        console.error("Error deleting test: ", error);
+      }
+    } else {
+      return
     }
+
+
   };
 
   if (loading) {
