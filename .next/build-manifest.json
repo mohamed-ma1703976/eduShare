@@ -20,15 +20,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/Instructor/Messages.js"
     ],
-    "/Instructor/myCalendar": [
+    "/Student/Messages": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Instructor/myCalendar.js"
-    ],
-    "/Student/Profile": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Student/Profile.js"
+      "static/chunks/pages/Student/Messages.js"
     ],
     "/_app": [
       "static/chunks/webpack.js",

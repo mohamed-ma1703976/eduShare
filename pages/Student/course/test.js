@@ -11,13 +11,14 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
-import { db, doc, getDoc, setDoc } from "../../Firebase/Firebase";
-import Loading from "../../component/Loading ";
+import { db, doc, getDoc, setDoc } from "firebase/firestore";
+import Loading from "../../../component/Loading ";
 
 const Test = () => {
   const router = useRouter();
   const { testId } = router.query;
-
+  //const { myParam: testId } = router.query;
+console.log(testId)
   const [loading, setLoading] = useState(true);
   const [testData, setTestData] = useState(null);
   const [score, setScore] = useState(null);

@@ -322,9 +322,9 @@ const CoursePage = ({ course }) => {
                 <Button variant="contained" sx={{ backgroundColor: '#1ABC9C', marginRight: 2 }} onClick={() => handelAddCourse(course.id, course.CourseTitle, course.InstructorName)} disabled={showReg}>
                   {showReg ? "Registerd" : "ENROLL"}
                 </Button>
-                <Button variant="contained" sx={{ backgroundColor: '#1ABC9C' }}>
+                {/* <Button variant="contained" sx={{ backgroundColor: '#1ABC9C' }}>
                   Join Live Session
-                </Button>
+                </Button> */}
               </Box>
             </Box>
           </Grid>

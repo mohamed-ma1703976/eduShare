@@ -1,17 +1,28 @@
-import { useState, useEffect } from 'react';
-import { collection, query, where, onSnapshot, getDocs } from 'firebase/firestore';
+import React, { useState, useEffect } from 'react';
+import { collection, query, where, onSnapshot, getDocs, updateDoc } from 'firebase/firestore';
 import { auth, db } from '../../Firebase/Firebase';
-import { Card, CardContent, Grid, Typography, Box } from '@mui/material';
+import { Card, CardContent, Grid, Typography, Box, CardActions, Button, Dialog, DialogContent, TextField, DialogTitle, DialogActions, Slide } from '@mui/material';
 import InstSidebar from '../../component/Instructors/InstSidebarr';
 import InstNav from '../../component/Instructors/InstNav';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { app } from '../../Firebase/Firebase';
+import { useRouter } from 'next/router';
 
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 function Messages({ userId }) {
   const [messages, setMessages] = useState([]);
   const [inst, setInst] = useState([])
   const [message, setMesaage] = useState([])
+  const [open, setOpen] = React.useState(false);
+  const [rmassgae, setRmassage] = React.useState({
+    rs: ""
+  });
+  const [mid, setMid] = React.useState(false);
 
+  const router = useRouter()
   userId = auth?.currentUser?.uid;
 
   useEffect(() => {
@@ -90,9 +101,44 @@ function Messages({ userId }) {
   console.log(myMessages)
   console.log(userId)
 
+  const handleClickOpen = (id) => {
+    console.log(id)
+    setMid(id)
+    setOpen(true);
+    console.log(mid)
+  };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleChange = (event) => {
+    setRmassage(event.target.value)
 
+  };
+  async function handelSendReplay() {
+    try {
+      // fetch the message document
+      const messageRef = doc(db, 'Message', mid);
+      const messageDoc = await getDoc(messageRef);
 
+      // get the previous replies
+      const previousReplies = messageDoc.data().InstructorReplays || [];
+      console.log(previousReplies)
+      // merge the previous replies with the new reply
+      const newReplies = [...previousReplies, rmassgae];
+      console.log(newReplies)
+
+      // update the message document with the new replies
+      await updateDoc(messageRef, { InstructorReplays: newReplies });
+
+      // clear the reply input and close the dialog
+      // setRmassage({ rs: '' });
+      setOpen(false);
+      router.reload()
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <div>
       <InstNav />
@@ -124,7 +170,76 @@ function Messages({ userId }) {
                       </Typography>
                     ))}</Typography>
 
+
+
+                    <Typography variant="body1">{"replay to : " + message.attributes.toFirstName}, {message.attributes.toLastName}</Typography>
+
+
+                    <Typography variant="body1">{message.attributes.InstructorReplays
+                      .map((reply, index) => (
+                        <Typography key={index} variant="body1">
+                          {reply}
+                        </Typography>
+                      ))}</Typography>
+
+
+
+
+
+
+
                   </CardContent>
+
+
+
+
+
+
+
+
+
+
+                  <CardActions>
+                    <Button onClick={() => handleClickOpen(message.id)}>
+
+                      replay
+                    </Button>
+                    <Dialog
+                      open={open}
+                      TransitionComponent={Transition}
+                      keepMounted
+                      onClose={handleClose}
+                      aria-describedby="alert-dialog-slide-description"
+
+
+
+                    >
+                      <DialogTitle sx={{ fontSize: "30px", textAlign: "center", fontWeight: "750" }}> Test</DialogTitle>
+
+                      <DialogContent>
+
+                        <TextField
+                          id="outlined-multiline-static"
+                          label="Replay Here ..."
+                          multiline
+                          rows={4}
+                          sx={{ margin: "10px 10px 10px 10px", width: "100%" }}
+                          name="rs"
+                          onChange={handleChange}
+                        //   value={rmassgae.rs}
+                        />
+                      </DialogContent>
+                      <DialogActions>
+                        <Button onClick={handleClose} color="primary">
+                          Cancel
+                        </Button>
+                        <Button color="primary" onClick={handelSendReplay}>
+                          send
+                        </Button>
+                      </DialogActions>
+
+                    </Dialog>
+                  </CardActions>
                 </Card>
               );
             })

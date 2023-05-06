@@ -13,7 +13,6 @@ import { useRouter } from 'next/router';
 
 
 
-
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -178,14 +177,35 @@ function Messages({ userId }) {
                     </Dialog>
                   </CardActions>
 
-                  <Toolbar sx={{ display: "flex", flexDirection: "column" }}>
+                  {/* <Toolbar sx={{ display: "flex", flexDirection: "column" }}> */}
 
-                    <span>replay from : {replayName}</span>
+                    <Typography variant="body2">Replay from: {replayName}</Typography>
+                    {/* <Typography variant="body2">{message.data.replays}</Typography> */}
 
-                    <span>{message.data.replays}</span>
-                  </Toolbar>
+                    <Typography variant="body1">{message.data.replays
+                      .map((reply, index) => (
+                        <Typography key={index} variant="body1">
+                          {reply}
+                        </Typography>
+                      ))}</Typography>
+                  {/* </Toolbar> */}
 
 
+
+                  {/* <Toolbar sx={{ display: "flex", flexDirection: "column" }}> */}
+
+                    <Typography variant="body2"> {'From Instructor :' + message.data.fromName}</Typography>
+                    {/* <Typography variant="body2">{message.data.InstructorReplays
+                    }</Typography>
+                  </Toolbar> */}
+
+
+                  <Typography variant="body1">{message.data.InstructorReplays
+                      .map((reply, index) => (
+                        <Typography key={index} variant="body1">
+                          {reply}
+                        </Typography>
+                      ))}</Typography>
                 </Card>
 
 
