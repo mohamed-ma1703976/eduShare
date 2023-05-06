@@ -45,6 +45,7 @@ const MyCalendar = () => {
   }, [auth.currentUser]);
 
   const handleDateClick = (info) => {
+
     setNewEventStart(info.dateStr);
     setModalIsOpen(true);
   };
@@ -55,11 +56,16 @@ const MyCalendar = () => {
   };
 
   const handleDeleteClick = async (id) => {
-    try {
-      await deleteDoc(doc(db, 'Events', id));
-    } catch (e) {
-      console.error('Error deleting document: ', e);
+    if (confirm("Are you sure you want to continue?")) {
+      try {
+        await deleteDoc(doc(db, 'Events', id));
+      } catch (e) {
+        console.error('Error deleting document: ', e);
+      }
+    } else {
+      return
     }
+
   };
 
   const handleCloseEditModal = () => {
@@ -80,7 +86,7 @@ const MyCalendar = () => {
   return (
     <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' } }}>
       <Box sx={{ flex: 1 }}>
-        <Button variant="contained"  sx={{ backgroundColor: '#1abc9c', marginRight: '16px' }} onClick={() => setModalIsOpen(true)}>
+        <Button variant="contained" sx={{ backgroundColor: '#1abc9c', marginRight: '16px' }} onClick={() => setModalIsOpen(true)}>
           Create Event
         </Button>
         <FullCalendar
@@ -95,47 +101,47 @@ const MyCalendar = () => {
           dateClick={handleDateClick}
           eventClick={handleEventClick}
         />
-                <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
+        <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
           <CreateEvent closeModal={() => setModalIsOpen(false)} newEventStart={newEventStart} />
         </Modal>
       </Box>
       <Grid container item xs={12} md={4} sx={{ flexDirection: 'column', alignItems: 'center' }}>
-      {events.map((event) => (
-        <Card key={event.id} sx={{ mb: 2 }}>
-          <CardContent>
-            <Typography variant="h6" gutterBottom>
-              {event.title}
-            </Typography>
-            <Typography variant="body1" gutterBottom>
-              Start Time: {event.start}
-            </Typography>
-            <Typography variant="body1" gutterBottom>
-              End Time: {event.end}
-            </Typography>
-            <Typography variant="body1" gutterBottom>
-              description: {event.description}
-            </Typography>
-            <Typography variant="body1" gutterBottom>
-              Link: {event.link}
-            </Typography>
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
-              <IconButton
-                aria-label="edit"
-                sx={{ mr: 1 }}
-                onClick={() => handleEditClick(event)}
-              >
-                <EditIcon />
-              </IconButton>
-              <IconButton
-                aria-label="delete"
-                onClick={() => handleDeleteClick(event.id)}
-              >
-                <DeleteIcon />
-              </IconButton>
-            </Box>
-          </CardContent>
-        </Card>
-      ))}
+        {events.map((event) => (
+          <Card key={event.id} sx={{ mb: 2 }}>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>
+                {event.title}
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                Start Time: {event.start}
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                End Time: {event.end}
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                description: {event.description}
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                Link: {event.link}
+              </Typography>
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
+                {/* <IconButton
+                  aria-label="edit"
+                  sx={{ mr: 1 }}
+                  onClick={() => handleEditClick(event)}
+                >
+                  <EditIcon />
+                </IconButton> */}
+                <IconButton
+                  aria-label="delete"
+                  onClick={() => handleDeleteClick(event.id)}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </Box>
+            </CardContent>
+          </Card>
+        ))}
       </Grid>
     </Box>
   );
