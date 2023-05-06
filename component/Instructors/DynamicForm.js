@@ -25,6 +25,7 @@ const DynamicForm = ({
     userId,
     fetchCourseName,
   }) => {
+    console.log(initialQuestions)
     const [questions, setQuestions] = useState(
       initialQuestions.length > 0
         ? initialQuestions
@@ -61,7 +62,7 @@ const DynamicForm = ({
   const updateQuestion = (id, newText) => {
     setQuestions(
       questions.map((question) =>
-        question.id === id ? { ...question, text: newText } : question
+        question.id === id ? { ...question, question: newText } : question
       )
     );
   };
@@ -177,7 +178,7 @@ const DynamicForm = ({
             fullWidth
             required
             label={`Question ${index + 1}`}
-            value={question.text}
+           // value={question.ques}
             onChange={(event) => updateQuestion(question.id, event.target.value)}
             />
             <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>

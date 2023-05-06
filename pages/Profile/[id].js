@@ -141,7 +141,7 @@ return (
             marginTop: "24px",
           }}
         >
-          <IconButton sx={{ mr: 1 }} onClick={handleSendMessageClick}>
+          {/* <IconButton sx={{ mr: 1 }} onClick={handleSendMessageClick}>
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -149,7 +149,7 @@ return (
             >
              <MessageOutlined fontSize="large" />
       </motion.div>
-    </IconButton>
+    </IconButton> */}
     {id && (
       <SendMessage
         open={sendMessageOpen}
@@ -158,7 +158,7 @@ return (
       />
     )}
           
-          <IconButton>
+          {/* <IconButton>
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -166,7 +166,7 @@ return (
             >
               <FavoriteOutlined fontSize="large" color="error" />
             </motion.div>
-          </IconButton>
+          </IconButton> */}
         </Box>
       </Box>
     </Box>

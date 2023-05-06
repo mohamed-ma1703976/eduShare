@@ -1,74 +1,151 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { collection, doc, getDoc, updateDoc } from 'firebase/firestore';
-import { db, auth } from '../../Firebase/Firebase';
-import Loading from '../../component/Loading';
-import DynamicForm from '../../component/Instructor/DynamicForm';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  Typography,
+} from "@mui/material";
+import { doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import { db, collection } from '../../Firebase/Firebase'
 
-export default function TakeTest() {
-  const { testId } = useParams();
-  const [testData, setTestData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [submissionData, setSubmissionData] = useState([]);
+import Loading from "../../component/Loading ";
 
+const Test = () => {
+  const router = useRouter();
+  // const { testId } = router.query;
+  //const { myParam: testId } = router.query;
+  //console.log(testId)
+  let testId = 'UT7VvQI3kawbvxQ24jJA'
+  const [loading, setLoading] = useState(false);
+  const [testData, setTestData] = useState([]);
+  const [score, setScore] = useState(null);
+  const [selectedAnswers, setSelectedAnswers] = useState({});
+
+  console.log(testId)
   useEffect(() => {
-    const getTest = async () => {
-      const docRef = doc(db, 'tests', testId);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        setTestData({ id: docSnap.id, data: docSnap.data() });
-      } else {
-        console.log('No such document!');
-      }
-
-      setLoading(false);
+    const fetchTest = async () => {
+      const studentCollection = collection(db, 'tests');
+      const studentSnapshot = await getDocs(studentCollection);
+      const studentList = studentSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        attributes: doc.data(),
+      }));
+      setTestData(studentList);
     };
 
-    getTest();
-  }, [testId]);
 
-  const handleFormSubmit = (data) => {
-    setSubmissionData(data);
+    fetchTest();
+  }, [])
+
+  console.log(testData)
+  const handleAnswerSelect = (questionId, answer) => {
+    setSelectedAnswers((prevState) => ({
+      ...prevState,
+      [questionId]: answer,
+    }));
   };
 
-  const handleSubmission = async () => {
-    const user = auth.currentUser;
-    const studentId = user.uid;
-    const { questions } = testData.data;
-    let score = 0;
+  const handleTestSubmit = async () => {
+    //setLoading(true);
+    const numCorrectAnswers = Object.values(selectedAnswers).reduce(
+      (acc, val, idx) => {
+        const question = testData.questions[idx];
+        const isCorrectAnswer = question.answer === val;
+        return isCorrectAnswer ? acc + 1 : acc;
+      },
+      0
+    );
 
-    for (let i = 0; i < submissionData.length; i++) {
-      const submittedAnswer = submissionData[i].answers.find((a) => a.isCorrect);
-      const correctAnswer = questions[i].answers.find((a) => a.isCorrect);
+    const scorePercentage = Math.round(
+      (numCorrectAnswers / testData.questions.length) * 100
+    );
 
-      if (submittedAnswer.text === correctAnswer.text) {
-        score += 1;
-      }
+    setScore(scorePercentage);
+
+    try {
+      const testDocRef = doc(db, "tests", testId);
+      await setDoc(testDocRef, {
+        score: scorePercentage,
+        completed: true,
+      }, { merge: true });
+    } catch (error) {
+      console.error("Error submitting test: ", error);
     }
 
-    const docRef = doc(db, 'tests', testId, 'submissions', studentId);
-    await updateDoc(docRef, {
-      score: score,
-      submittedAnswers: submissionData,
-      submittedAt: new Date(),
-    });
-
-    alert(`Your score is ${score}/${questions.length}`);
+    //setLoading(false);
   };
 
-  if (loading) {
+  if (loading || !testData) {
+    console.log(loading, testData)
     return <Loading />;
   }
 
-  const { title, description, questions } = testData.data;
-
+  //const { title, questions } = testData;
+  console.log(testData)
   return (
-    <div style={{ margin: '20px' }}>
-      <h2>{title}</h2>
-      <p>{description}</p>
-      <DynamicForm onSubmit={handleFormSubmit} initialQuestions={questions} />
-      <button onClick={handleSubmission}>Submit Test</button>
-    </div>
+    <Box sx={{ padding: 4 }}>
+
+
+      {testData.map((question) => (
+        <Box key={question.id} sx={{ marginBottom: 4 }}>
+          <Typography variant="h4" sx={{ marginBottom: 4 }}>
+            {question.attributes.title}
+          </Typography>
+          <Card variant="outlined">
+            <CardContent>
+              {question.attributes
+                .questions.map(questions => {
+                  return <div>
+                    <Typography variant="h6">{questions.title}</Typography>
+
+                    <FormControl component="fieldset">
+                      <RadioGroup
+                        aria-label={`question-${questions.id}-answers`}
+                        name={`question-${questions.id}-answers`}
+                        value={selectedAnswers[questions.id] || ""}
+                        onChange={(e) =>
+                          handleAnswerSelect(questions.id, e.target.value)
+                        }
+                      >
+                        {questions.answers.map((option) => (
+                          <FormControlLabel
+                            key={option.text}
+                            value={option.text}
+                            control={<Radio />}
+                            label={option.text}
+                          />
+                        ))}
+                      </RadioGroup>
+                    </FormControl>
+
+                  </div>
+
+                })}
+
+            </CardContent>
+          </Card>
+        </Box>
+      ))}
+
+      <Box sx={{ marginTop: 4 }}>
+        <Button variant="contained" onClick={handleTestSubmit}>
+          Submit Test
+        </Button>
+      </Box>
+
+      {score !== null && (
+        <Box sx={{ marginTop: 4 }}>
+          <Typography variant="h5">Your Score: {score}%</Typography>
+        </Box>
+      )}
+    </Box>
   );
-}
+};
+
+export default Test;

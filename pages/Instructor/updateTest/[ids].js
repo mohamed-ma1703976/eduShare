@@ -14,7 +14,7 @@ const UpdateTest = () => {
   const [testData, setTestData] = useState(null);
   const router = useRouter();
   const { myParam: testId } = router.query;
-  console.log(testId)
+  console.log(testData)
   useEffect(() => {
     const fetchTestData = async () => {
         console.log("testId:", testId);
@@ -52,6 +52,7 @@ const UpdateTest = () => {
       await updateDoc(testDoc, updatedData);
       console.log("Test updated successfully");
       setLoading(false);
+      router.push('/Instructor/Tests')
       // Redirect or show a success message
     } catch (error) {
       console.error("Error updating test: ", error);
