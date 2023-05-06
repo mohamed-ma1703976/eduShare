@@ -9,25 +9,31 @@ import { useRouter } from "next/router";
 
 const UpdateTest = () => {
   const [loading, setLoading] = useState(true);
+  const [fetchStatus, setFetchStatus] = useState(false); // Add this line
   const [testData, setTestData] = useState(null);
   const router = useRouter();
   const { testId } = router.query;
 
   useEffect(() => {
     const fetchTestData = async () => {
+        console.log("testId:", testId);
       setLoading(true);
       try {
+        console.log("Fetching test data...");
         const testDoc = doc(db, "tests", testId);
         const testSnapshot = await getDoc(testDoc);
         if (testSnapshot.exists()) {
-          setTestData({ ...testSnapshot.data(), id: testSnapshot.id });
-        } else {
-          console.error("Test not found");
-        }
+            console.log("Test data fetched successfully:", testSnapshot.data());
+            setTestData({ ...testSnapshot.data(), id: testSnapshot.id });
+            console.log("testData after setting:", testData); // Add this line
+          } else {
+            console.error("Test not found");
+          }
       } catch (error) {
         console.error("Error fetching test data: ", error);
       }
       setLoading(false);
+      setFetchStatus(true); // Add this line
     };
 
     if (testId) {
@@ -49,8 +55,9 @@ const UpdateTest = () => {
       // Show an error message
     }
   };
+  
 
-  if (loading) {
+  if (loading && !fetchStatus) { // Update this line
     return <Loading />;
   }
 
@@ -68,12 +75,12 @@ const UpdateTest = () => {
             </Typography>
 
             <DynamicForm
-  onSubmit={handleFormSubmit}
-  initialTitle={testData ? testData.title : ""}
-  initialDescription={testData ? testData.description : ""}
-  initialDueDate={testData ? testData.dueDate : ""}
-  initialQuestions={testData ? testData.questions : []}
-/>
+              onSubmit={handleFormSubmit}
+              initialTitle={testData ? testData.title : ""}
+              initialDescription={testData ? testData.description : ""}
+              initialDueDate={testData ? testData.dueDate : ""}
+              initialQuestions={testData ? testData.questions : []}
+            />
           </Box>
         </Stack>
       </Box>

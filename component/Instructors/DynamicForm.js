@@ -16,18 +16,34 @@ import { v4 as uuidv4 } from "uuid";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
-const DynamicForm = ({ onSubmit, initialTitle = '', initialDescription = '', initialDueDate = '', initialQuestions = [] }) => {
-    const [questions, setQuestions] = useState(initialQuestions.length > 0 ? initialQuestions : [
-        {
-          id: uuidv4(),
-          text: "",
-          type: "multiple_choice",
-          answers: [{ id: uuidv4(), text: "", isCorrect: false }],
-        },
-      ]);
+const DynamicForm = ({
+    onSubmit,
+    initialTitle = "",
+    initialDescription = "",
+    initialDueDate = "",
+    initialQuestions = [],
+    userId,
+    fetchCourseName,
+  }) => {
+    const [questions, setQuestions] = useState(
+      initialQuestions.length > 0
+        ? initialQuestions
+        : [
+            {
+              id: uuidv4(),
+              text: "",
+              type: "multiple_choice",
+              answers: [{ id: uuidv4(), text: "", isCorrect: false }],
+            },
+          ]
+    );
     const [title, setTitle] = useState(initialTitle);
     const [description, setDescription] = useState(initialDescription);
     const [dueDate, setDueDate] = useState(initialDueDate);
+    const [courseName, setCourseName] = useState("");  
+    useEffect(() => {
+      setQuestions(initialQuestions);
+    }, [initialQuestions]);
     useEffect(() => {
         setQuestions(initialQuestions);
       }, [initialQuestions]);
@@ -120,8 +136,9 @@ const DynamicForm = ({ onSubmit, initialTitle = '', initialDescription = '', ini
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = questions.map((q) => ({ question: q.text, answers: q.answers }));
-    onSubmit({ title, description, dueDate, questions: data });
+    onSubmit({ title, description, dueDate, courseName, questions: data });
   };
+
     
 
   return (
