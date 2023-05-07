@@ -35,12 +35,17 @@ const BlogCard = ({ blog }) => {
   return (
     <Grid item xs={12} sm={6} md={4}>
       <Link href={`/Student/blog/${id}`} passHref>
-        <motion.div variants={cardVariants} initial="hidden" animate="visible" style={{ textDecoration: 'none' }}>
-          <Card
+        
+      <motion.div
+    initial={{ opacity: 0, y: 20, scale: 1 }}
+    animate={{ opacity: 1, y: 0, scale: 1 }}
+    whileHover={{ scale: 1.05, boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.2)" }}
+  >
+             <Card
             sx={{
               minHeight: '100%',
               maxHeight: '400px',
-              minWidth: '300px',
+              minWidth: '250px',
               display: 'flex',
               flexDirection: 'column',
               boxShadow: 2,
