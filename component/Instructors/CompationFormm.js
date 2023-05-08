@@ -93,10 +93,10 @@ const CompationForm = ({ setOpen }) => {
 
 
             <FormControl fullWidth variant="outlined" style={{ width: '100%', margin: "10px 10px 10px 10px" }}>
-                <InputLabel htmlFor="student-select">Compation Type</InputLabel>
+                <InputLabel htmlFor="student-select">Competion Type</InputLabel>
 
                 <Select labelId="student-select"
-                    name="CompationType" label="Compation Type" value={formData.CompationType} onChange={handleChange}>
+                    name="CompationType" label="Competion Type" value={formData.CompationType} onChange={handleChange}>
 
                     <MenuItem value="Hours Of Teaching">
                         Hours Of Teaching

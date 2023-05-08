@@ -45,6 +45,7 @@ console.log(id);
                     <UpdateForm ids={id} titles={title} InstructorNames={InstructorName}
                     SesionTypes={SesionType}
                     CourseDescriptions={CourseDescription}
+                    setOpen={setOpen}
                     />
                 </DialogContent>
 

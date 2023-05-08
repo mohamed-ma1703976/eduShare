@@ -23,6 +23,7 @@ const UpdateForm = ({
   InstructorNames,
   SessionTypes,
   CourseDescriptions,
+  setOpen
 }) => {
   const router = useRouter();
 
@@ -157,6 +158,10 @@ const UpdateForm = ({
           type="submit"
         >
           Update
+        </Button>
+
+        <Button variant="outlined" sx={{ margin: "10px 0 0 340px", width: "13%" }} onClick={() => setOpen(false)}>
+          cancel
         </Button>
       </div>
     </form>

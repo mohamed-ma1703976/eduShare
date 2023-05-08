@@ -42,7 +42,7 @@ const Form = ({ setOpen }) => {
     fileUrl: ''
   });
 
-
+console.log(formData)
   React.useEffect(() => {
     const fetchInstructors = async () => {
       const instructorCollection = collection(db, 'Instructor');
@@ -82,6 +82,9 @@ const Form = ({ setOpen }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (formData.CourseDescription || formData.CourseTitle || formData.InstructorName || formData.fileUrl === "") {
+      alert('All Fields Are Required')
+    }
     let collectedData = {
       CourseDescription: formData.CourseDescription,
       CourseTitle: formData.CourseTitle,
@@ -130,7 +133,7 @@ const Form = ({ setOpen }) => {
 
         id="outlined-error-helper-text"
         label="Course Title"
-        sx={{ margin: "10px 10px 10px 10px" ,width: '100%'}}
+        sx={{ margin: "10px 10px 10px 10px", width: '100%' }}
         name="CourseTitle"
         onChange={handleChange}
         value={formData.CourseTitle}
@@ -155,7 +158,7 @@ const Form = ({ setOpen }) => {
         label="Course Description"
         multiline
         rows={4}
-        sx={{ margin: "10px 10px 10px 10px",width:"100%" }}
+        sx={{ margin: "10px 10px 10px 10px", width: "100%" }}
         name="CourseDescription"
         onChange={handleChange}
         value={formData.CourseDescription}
@@ -165,7 +168,7 @@ const Form = ({ setOpen }) => {
         margin: " 0 0 0 5px",
         width: "100%",
         height: "50%",
-       // border: "1px solid gray",
+        // border: "1px solid gray",
         padding: "5px" // Add border
       }} />
 

@@ -37,7 +37,7 @@ const EventDialog = () => {
                     fontSize: "18px",
                     margin:"0 0 0 5px"
                 }} onClick={handleClickOpen}>
-                    Create Compation
+                    Create Competion
                 </Button>
             </Typography>
             <Dialog
@@ -47,7 +47,7 @@ const EventDialog = () => {
                 onClose={handleClose}
                 aria-describedby="alert-dialog-slide-description"
             >
-                <DialogTitle sx={{ fontSize: "30px", textAlign: "center", fontWeight: "00", color: "#FEC64F" }}>{" Create Compation"}</DialogTitle>
+                <DialogTitle sx={{ fontSize: "30px", textAlign: "center", fontWeight: "00", color: "#FEC64F" }}>{" Create Competion"}</DialogTitle>
                 <DialogContent>
 
                     <CompationFormm setOpen={setOpen} />

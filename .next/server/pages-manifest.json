@@ -2,7 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/Student/InstructorAciveCard": "pages/Student/InstructorAciveCard.js",
-  "/Student/mycourses": "pages/Student/mycourses.js",
-  "/Profile/[id]": "pages/Profile/[id].js"
+  "/Student/course/[id]": "pages/Student/course/[id].js",
+  "/Instructor/mystudents": "pages/Instructor/mystudents.js",
+  "/Admin/dashboard": "pages/Admin/dashboard.js"
 }
