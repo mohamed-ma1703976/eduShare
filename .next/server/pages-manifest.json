@@ -2,6 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/Instructor/Messages": "pages/Instructor/Messages.js",
-  "/Instructor": "pages/Instructor.js"
+  "/Instructor": "pages/Instructor.js",
+  "/Instructor/uploadcontanet": "pages/Instructor/uploadcontanet.js",
+  "/Student": "pages/Student.js",
+  "/Admin/dashboard": "pages/Admin/dashboard.js"
 }

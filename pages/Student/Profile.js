@@ -23,7 +23,7 @@ const defaultProfileImage =
 
   const [useRole, setUseRole] = useState("");
 
-  const userid = auth.currentUser.uid
+  const userid = auth?.currentUser?.uid
   const handleEditClick = () => {
     router.push("/Student/updateProfile");
   };

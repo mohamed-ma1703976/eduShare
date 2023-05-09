@@ -111,14 +111,14 @@ const Profile = () => {
                         <Typography variant="subtitle1" component="div" sx={{ mb: 2 }}>
                           {user.title}
                         </Typography>
-                        {/* <IconButton
+                        <IconButton
                           color="primary"
                           aria-label="edit profile"
                           onClick={handleEditClick}
                           sx={{ position: "relative", top: "-150px" }}
                         >
                           <EditIcon />
-                        </IconButton> */}
+                        </IconButton>
                       </Box>
                       <Typography
                         variant="body1"

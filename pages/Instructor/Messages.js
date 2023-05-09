@@ -238,7 +238,7 @@ function Messages({ userId }) {
                           fontWeight: "750",
                         }}
                       >
-                        Test
+                        Your Message
                       </DialogTitle>
   
                       <DialogContent>

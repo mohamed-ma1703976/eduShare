@@ -15,15 +15,25 @@
   ],
   "rootMainFiles": [],
   "pages": {
+    "/Admin/dashboard": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/Admin/dashboard.js"
+    ],
     "/Instructor": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/Instructor.js"
     ],
-    "/Instructor/Messages": [
+    "/Instructor/uploadcontanet": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Instructor/Messages.js"
+      "static/chunks/pages/Instructor/uploadcontanet.js"
+    ],
+    "/Student": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/Student.js"
     ],
     "/_app": [
       "static/chunks/webpack.js",
