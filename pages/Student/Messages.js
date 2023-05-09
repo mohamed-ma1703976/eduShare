@@ -6,34 +6,22 @@ import StuNav from "../../component/Student/StuNav";
 import StuSideBar from "../../component/Student/StuSideBar";
 import { useRouter } from 'next/router';
 
-
-
-
-
-
-
-
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+
 function Messages({ userId }) {
+  const [selectedMessage, setSelectedMessage] = useState(null);
   const [messages, setMessages] = useState([]);
   const [mid, setMid] = React.useState(false);
-  const [data, setData] = React.useState(false);
   const [stu, setStudents] = useState([])
-  // console.log(reps)
   const [open, setOpen] = React.useState(false);
-  const [replayM, setReplayM] = React.useState({
-    replays: []
-  });
-  const [rmassgae, setRmassage] = React.useState({
-    rs: ""
-  });
-  //console.log(replayM)
+  const [rmassgae, setRmassage] = React.useState('');
+
   const router = useRouter();
-  const handleClickOpen = (id) => {
-    console.log(id)
-    setMid(id)
+  const handleClickOpen = (message) => {
+    setMid(message.id);
+    setSelectedMessage(message);
     setOpen(true);
   };
 
@@ -41,7 +29,6 @@ function Messages({ userId }) {
     setOpen(false);
   };
   userId = auth?.currentUser?.uid;
-
 
   React.useEffect(() => {
     const fetchStudents = async () => {
@@ -54,11 +41,8 @@ function Messages({ userId }) {
       setStudents(studentList);
     };
 
-
     fetchStudents();
-    // Set timeout to 5 seconds
   }, []);
-
 
   useEffect(() => {
     if (userId) {
@@ -70,7 +54,6 @@ function Messages({ userId }) {
           data: doc.data(),
         }));
         setMessages(messagesList);
-        // setData(messagesList[0].data.replays)
       });
 
       return () => unsubscribe();
@@ -78,155 +61,175 @@ function Messages({ userId }) {
   }, [userId]);
 
   const handleChange = (event) => {
-    setRmassage(event.target.value)
-
+    setRmassage(event.target.value);
   };
+  
+  
 
   async function handelSendReplay() {
     try {
-      // fetch the message document
       const messageRef = doc(db, 'Message', mid);
-      const messageDoc = await getDoc(messageRef);
-
+  
       // get the previous replies
-      const previousReplies = messageDoc.data().replays || [];
-      console.log(previousReplies)
+      const previousReplies = selectedMessage?.data?.replays || [];
+  
       // merge the previous replies with the new reply
       const newReplies = [...previousReplies, rmassgae];
-      console.log(newReplies)
-
+  
       // update the message document with the new replies
       await updateDoc(messageRef, { replays: newReplies });
-
+      
       // clear the reply input and close the dialog
-      setRmassage({ rs: '' });
+      setRmassage('');
       setOpen(false);
-      router.reload()
+      router.reload();
     } catch (err) {
       console.log(err);
     }
   }
-  let replayName = stu.find(s => s.id === userId)?.attributes?.displayName
+  
 
+  let replayName = stu.find(s => s.id === userId)?.attributes?.displayName
   return (
     <div>
       <StuNav />
-      <Grid container>
-        <Grid item xs={2}>
-          <StuSideBar />
-        </Grid>
-        <Grid item xs={10}>
-          <Typography variant="h5" gutterBottom style={{ fontSize: "30px", fontWeight: "1000", margin: "30px 0", color: "#454545" }}>
+      <Box sx={{ display: 'flex' }}>
+        <StuSideBar />
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <Toolbar />
+          <Typography
+            variant="h5"
+            sx={{
+              fontSize: "30px",
+              fontWeight: "1000",
+              mb: 3,
+              color: "#454545",
+            }}
+          >
             Messages
           </Typography>
-          {messages.length > 0 ? (
-            messages.map((message) => {
-              // const senderName = message.data.fromName;
-              // const senderRole = message.data.fromRole;
-              // const messageText = message.data.message;
+          <Box
+            sx={{
+              p: 2,
+              backgroundColor: "#f5f5f5",
+              borderRadius: 1,
+              minHeight: "70vh",
+            }}
+          >
+            {messages.length > 0 ? (
+              messages.map((message, index) => {
+                const isEven = index % 2 === 0;
 
-              return (
-                <Card key={message.id} sx={{ mb: 2 }}>
-                  <CardContent>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <Typography variant="body2">From Instructor :{message.data.fromName}</Typography>
-                      <Typography variant="subtitle2"></Typography>
-                    </Box>
-                    <Typography variant="body1">{message.data.message}</Typography>
-
-                  </CardContent>
-                  <CardActions>
-                    <Button onClick={() => handleClickOpen(message.id)}>
-
-                      replay
-                    </Button>
-                    <Dialog
-                      open={open}
-                      TransitionComponent={Transition}
-                      keepMounted
-                      onClose={handleClose}
-                      aria-describedby="alert-dialog-slide-description"
-
-
-
+                return (
+                  <Box key={message.id} sx={{ mb: 2, mx: 1 }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: isEven ? "row" : "row-reverse",
+                        alignItems: "flex-start",
+                      }}
                     >
-                      <DialogTitle sx={{ fontSize: "30px", textAlign: "center", fontWeight: "750" }}> To :{message.data.fromName}</DialogTitle>
-
-                      <DialogContent>
-
-                        <TextField
-                          id="outlined-multiline-static"
-                          label="Replay Here ..."
-                          multiline
-                          rows={4}
-                          sx={{ margin: "10px 10px 10px 10px", width: "100%" }}
-                          name="rs"
-                          onChange={handleChange}
-                        //   value={rmassgae.rs}
-                        />
-                      </DialogContent>
-                      <DialogActions>
-                        <Button onClick={handleClose} color="primary">
-                          Cancel
-                        </Button>
-                        <Button color="primary" onClick={handelSendReplay}>
-                          send
-                        </Button>
-                      </DialogActions>
-
-                    </Dialog>
-                  </CardActions>
-
-                  {/* <Toolbar sx={{ display: "flex", flexDirection: "column" }}> */}
-
-                    <Typography variant="body2">Replay from: {replayName}</Typography>
-                    {/* <Typography variant="body2">{message.data.replays}</Typography> */}
-
-                    <Typography variant="body1">{message.data.replays
-                      .map((reply, index) => (
-                        <Typography key={index} variant="body1">
-                          {reply}
+                      <Box
+                        sx={{
+                          borderRadius: 1,
+                          p: 1,
+                          mb: 1,
+                          minWidth: "50%",
+                          maxWidth: "80%",
+                          backgroundColor: isEven ? "#1ABC9C" : "#eee",
+                        }}
+                      >
+                        <Typography variant="body2">
+                          From Instructor: {message.data.fromName}
                         </Typography>
-                      ))}</Typography>
-                  {/* </Toolbar> */}
-
-
-
-                  {/* <Toolbar sx={{ display: "flex", flexDirection: "column" }}> */}
-
-                    <Typography variant="body2"> {'From Instructor :' + message.data.fromName}</Typography>
-                    {/* <Typography variant="body2">{message.data.InstructorReplays
-                    }</Typography>
-                  </Toolbar> */}
-
-
-                  <Typography variant="body1">{message.data.InstructorReplays
-                      .map((reply, index) => (
-                        <Typography key={index} variant="body1">
-                          {reply}
+                        <Typography variant="body1">
+                          {message.data.message}
                         </Typography>
-                      ))}</Typography>
-                </Card>
-
-
-
-
-
-
-
-              );
-
-            })
-
-          ) : (
-            <Typography variant="body1">No messages found.</Typography>
-          )}
-        </Grid>
-      </Grid>
+                      </Box>
+                      <Button
+                        onClick={() => handleClickOpen(message)}
+                        sx={{
+                          alignSelf: "center",
+                          ml: isEven ? 1 : "auto",
+                          mr: isEven ? "auto" : 1,
+                        }}
+                      >
+                        Reply
+                      </Button>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: isEven ? "row" : "row-reverse",
+                        alignItems: "flex-start",
+                        pl: isEven ? 2 : "auto",
+                        pr: isEven ? "auto" : 2,
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          borderRadius: 1,
+                          p: 1,
+                          minWidth: "50%",
+                          maxWidth: "80%",
+                          backgroundColor: isEven ? "#eee" : "#1ABC9C",
+                        }}
+                      >
+                        <Typography variant="body2">
+                          Replies from: {replayName}
+                        </Typography>
+                        <Typography variant="body1">
+                          {message.data.replays &&
+                            message.data.replays.map((reply, index) => (
+                              <Typography key={index} variant="body1">
+                                {reply}
+                              </Typography>
+                            ))}
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Box>
+                );
+              })
+            ) : (
+              <Typography variant="body1">No messages found.</Typography>
+            )}
+          </Box>
+          <Dialog
+            open={open}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={handleClose}
+            aria-describedby="alert-dialog-slide-description"
+          >
+            <DialogTitle sx={{ fontSize: "30px", textAlign: "center", fontWeight: "750" }}>
+              To: {selectedMessage?.data.fromName}
+            </DialogTitle>
+            <DialogContent>
+              <TextField
+                id="outlined-multiline-static"
+                label="Reply Here ..."
+                multiline
+                rows={4}
+                fullWidth
+                name="rs"
+                value={rmassgae}
+                onChange={handleChange}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary">
+                Cancel
+              </Button>
+              <Button color="primary" onClick={handelSendReplay}>
+                Send
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </Box>
+      </Box>
     </div>
   );
 }
 
 export default Messages;
-
-

@@ -61,6 +61,7 @@ function Messages({ userId }) {
               ...messageData,
               fromName: userData.name,
               fromRole: userData.role,
+              InstructorReplays: messageData.InstructorReplays || [], // Ensure InstructorReplays is an array
             },
           });
         }
@@ -112,7 +113,7 @@ function Messages({ userId }) {
     setOpen(false);
   };
   const handleChange = (event) => {
-    setRmassage(event.target.value)
+    setRmassage({ rs: event.target.value })
 
   };
   async function handelSendReplay() {
@@ -125,7 +126,7 @@ function Messages({ userId }) {
       const previousReplies = messageDoc.data().InstructorReplays || [];
       console.log(previousReplies)
       // merge the previous replies with the new reply
-      const newReplies = [...previousReplies, rmassgae];
+      const newReplies = [...previousReplies, rmassgae.rs];
       console.log(newReplies)
 
       // update the message document with the new replies
@@ -147,62 +148,81 @@ function Messages({ userId }) {
           <InstSidebar />
         </Grid>
         <Grid item xs={10}>
-          <Typography variant="h5" gutterBottom style={{ fontSize: "30px", fontWeight: "1000", margin: "30px 0", color: "#454545" }}>
+          <Typography
+            variant="h5"
+            gutterBottom
+            sx={{
+              fontSize: "30px",
+              fontWeight: "1000",
+              margin: "30px 0",
+              color: "#454545",
+            }}
+          >
             Messages
           </Typography>
           {myMessages.length > 0 ? (
             myMessages.map((message) => {
-
               return (
-                <Card key={message.id} sx={{ mb: 2 }}>
+                <Card
+                  key={message.id}
+                  sx={{
+                    mb: 2,
+                    backgroundColor: "#f5f5f5",
+                    borderRadius: "15px",
+                  }}
+                >
                   <CardContent>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <Typography variant="subtitle1">send to :{message.attributes.toFirstName}, {message.attributes.toLastName}</Typography>
-                    </Box>
-                    <Typography variant="body1">{message.attributes.message}</Typography>
-
-
-                    <Typography variant="body1">{"replay from : " + message.attributes.toFirstName}, {message.attributes.toLastName}</Typography>
-
-                    <Typography variant="body1">{message.attributes.replays.map((reply, index) => (
-                      <Typography key={index} variant="body1">
-                        {reply}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Typography
+                        variant="subtitle1"
+                        sx={{ fontWeight: "bold" }}
+                      >
+                        send to :{message.attributes.toFirstName},{" "}
+                        {message.attributes.toLastName}
                       </Typography>
-                    ))}</Typography>
-
-
-
-                    <Typography variant="body1">{"replay to : " + message.attributes.toFirstName}, {message.attributes.toLastName}</Typography>
-
-
-                    <Typography variant="body1">{message.attributes.InstructorReplays
-                      .map((reply, index) => (
-                        <Typography key={index} variant="body1">
-                          {reply}
-                        </Typography>
-                      ))}</Typography>
-
-
-
-
-
-
-
+                    </Box>
+                    <Typography
+                      variant="body1"
+                      sx={{ marginTop: "10px", marginBottom: "20px" }}
+                    >
+                      {message.attributes.message}
+                    </Typography>
+  
+                    <Typography variant="body1">
+                      {"replay from : " +
+                        message.attributes.toFirstName +
+                        ", " +
+                        message.attributes.toLastName}
+                    </Typography>
+  
+                    <Typography variant="body1">
+                      {message.attributes.InstructorReplays &&
+                      Array.isArray(message.attributes.InstructorReplays) ? (
+                        message.attributes.InstructorReplays.map(
+                          (reply, index) => (
+                            <Typography key={index} variant="body1">
+                              {reply}
+                            </Typography>
+                          )
+                        )
+                      ) : (
+                        <Typography variant="body1">No replies yet.</Typography>
+                      )}
+                    </Typography>
                   </CardContent>
-
-
-
-
-
-
-
-
-
-
                   <CardActions>
-                    <Button onClick={() => handleClickOpen(message.id)}>
-
-                      replay
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      onClick={() => handleClickOpen(message.id)}
+                    >
+                      Replay
                     </Button>
                     <Dialog
                       open={open}
@@ -210,14 +230,18 @@ function Messages({ userId }) {
                       keepMounted
                       onClose={handleClose}
                       aria-describedby="alert-dialog-slide-description"
-
-
-
                     >
-                      <DialogTitle sx={{ fontSize: "30px", textAlign: "center", fontWeight: "750" }}> Test</DialogTitle>
-
+                      <DialogTitle
+                        sx={{
+                          fontSize: "30px",
+                          textAlign: "center",
+                          fontWeight: "750",
+                        }}
+                      >
+                        Test
+                      </DialogTitle>
+  
                       <DialogContent>
-
                         <TextField
                           id="outlined-multiline-static"
                           label="Replay Here ..."
@@ -226,7 +250,6 @@ function Messages({ userId }) {
                           sx={{ margin: "10px 10px 10px 10px", width: "100%" }}
                           name="rs"
                           onChange={handleChange}
-                        //   value={rmassgae.rs}
                         />
                       </DialogContent>
                       <DialogActions>
@@ -234,17 +257,14 @@ function Messages({ userId }) {
                           Cancel
                         </Button>
                         <Button color="primary" onClick={handelSendReplay}>
-                          send
+                          Send
                         </Button>
                       </DialogActions>
-
                     </Dialog>
                   </CardActions>
                 </Card>
               );
             })
-
-
           ) : (
             <Typography variant="body1">No messages found.</Typography>
           )}
