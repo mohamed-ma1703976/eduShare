@@ -5,7 +5,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import Modal from 'react-modal';
 import { collection, query, onSnapshot, where, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../Firebase/Firebase';
-import CreateEvent from './createEvent';
+import CreateEvent from './CreateEvent';
 import UpdateEvent from './UpdateEvent';
 import { useRouter } from 'next/router';
 import { getAuth } from 'firebase/auth';

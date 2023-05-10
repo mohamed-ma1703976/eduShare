@@ -8,8 +8,8 @@ import { auth, db } from '../../../Firebase/Firebase';
 import { getAuth } from "firebase/auth";
 import { app } from "../../../Firebase/Firebase";
 import Loading from "../../../component/Loading "; // Import Loading component
-import StarIcon from '@material-ui/icons/Star';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 const CoursePage = ({ course }) => {
   const router = useRouter();
