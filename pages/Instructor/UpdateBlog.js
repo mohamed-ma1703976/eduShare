@@ -12,7 +12,6 @@ import {
 import AddAPhoto from '@mui/icons-material/AddAPhoto';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { AuthContext } from '../../hooks/AuthProvider';
 import { db } from '../../Firebase/Firebase';
 import { useRouter } from 'next/router';
 import { auth } from '../../Firebase/Firebase';
