@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { db } from '../../Firebase/Firebase';
 import { getAuth } from "firebase/auth";
 import { app } from "../../Firebase/Firebase";
+import WebBanner from "../../component/Instructors/webBanner";
 import InstNav from "../../component/Instructors/InstNav";
 import InstSidebar from "../../component/Instructors/InstSidebarr";
 import { Box, CircularProgress, Stack } from "@mui/material";
@@ -27,13 +28,6 @@ import Pending from "../../component/Instructors/Pending";
 import Loading from '../../component/Loading ';
 
 export default function instructorDashboard() {
-  const data = [
-    { date: "01-01", students: 10 },
-    { date: "01-02", students: 20 },
-    { date: "01-03", students: 15 },
-    { date: "01-04", students: 25 },
-    { date: "01-05", students: 30 },
-  ];
   const [competitions, setCompetitions] = useState([]);
   const [students, setStudents] = useState([]);
   const [coursess, setCoursess] = useState([]);
@@ -251,43 +245,11 @@ export default function instructorDashboard() {
         ) : (
           <Box>
             <InstNav />
-
+            <WebBanner />
             <Stack direction="row" spacing={2}>
               <InstSidebar />
 
               <Stack direction="column" spacing={2}>
-                <Card sx={{ minWidth: 900, margin: "5px 11px 2px 2px ", height: 400 }}>
-                  <CardContent>
-                    <Typography variant="h5" component="div">
-                      Student Registration Trend
-                    </Typography>
-                    <ResponsiveContainer width="100%" height={300}>
-                      <LineChart
-                        width={500}
-                        height={300}
-                        data={data}
-                        margin={{
-                          top: 5,
-                          right: 30,
-                          left: 20,
-                          bottom: 5,
-                        }}
-                      >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="date" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Line
-                          type="monotone"
-                          dataKey="students"
-                          stroke="#8884d8"
-                          activeDot={{ r: 8 }}
-                        />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  </CardContent>
-                </Card>
                 <Card sx={{ minWidth: 500, margin: 2, height: 170 }}>
                   <CardContent>
                     <Typography variant="h5" component="div">
