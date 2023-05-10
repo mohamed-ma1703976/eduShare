@@ -65,21 +65,6 @@ function Sidebar() {
                 </ListItem>
     
                 <ListItem disablePadding>
-                    <ListItemButton sx={{
-                        "&:hover": {
-                            backgroundColor: "#1ABC9C",
-                            color: "primary.contrastText",
-                        },
-                        transition: "background-color 0.3s ease-in-out",
-                    }}>
-                        <ListItemIcon>
-                            <EventNoteIcon />
-                        </ListItemIcon>
-                        <ListItemText sx={{ color: "#909497" }} primary="Schedule" />
-                    </ListItemButton>
-                </ListItem>
-    
-                <ListItem disablePadding>
                     <ListItemButton onClick={() => router.push("/Admin/instructors")} sx={{
                         "&:hover": {
                             backgroundColor: "#1ABC9C",
@@ -123,21 +108,7 @@ function Sidebar() {
                         <ListItemText sx={{ color: "#909497" }} primary="Profile" />
                     </ListItemButton>
                 </ListItem>
-    
-                <ListItem disablePadding>
-                    <ListItemButton sx={{
-                        "&:hover": {
-                            backgroundColor: "#1ABC9C",
-                            color: "primary.contrastText",
-                        },
-                        transition: "background-color 0.3s ease-in-out",
-                    }}>
-                        <ListItemIcon>
-                            <LocalActivityIcon />
-                        </ListItemIcon>
-                        <ListItemText sx={{ color: "#909497" }} primary="Activity" />
-                    </ListItemButton>
-                </ListItem>    
+   
 
 
 
