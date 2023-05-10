@@ -1,5 +1,5 @@
 import React from 'react';
-import { CircularProgress, Grid } from '@mui/material';
+import { CircularProgress, Grid ,Box,Typography ,ResponsiveContainer} from '@mui/material';
 import CourseDialog from './CourseDialog';
 import EventDialog from './EventDialog';
 import AnnounceDialog from './AnnounceDialog';
@@ -56,46 +56,39 @@ function Card() {
 
  // const numberOfCourses = courses;
 
-
-    return (
-        <Grid container spacing={1}>
-            <Grid container spacing={2} sx={{marginLeft:"9px"}}>
-                <Grid item xs={3}>
-                    <CourseDialog />
-                </Grid>
-                <Grid item xs={3}>
-                    <EventDialog />
-                </Grid>
-                <Grid item xs={3}>
-                    <AnnounceDialog />
-                </Grid>
-                <div style={{margin:"8px 10px 0 auto" ,width:"22%"}}  >
-                    <Calendar />
-                </div>
-                
-            </Grid>
-           
-            <Grid container alignContent={'center'} style={{ marginTop: '-250px' }}>
-      <Grid item xs={3} style={{margin:"30px 0 0 0"}}>
-        <AchievementCard
-          
-          number={courses.length}
-          description="Completed Courses"
-          color="#1ABC9C"
-        />
-      </Grid>
-                <Grid item xs={3} style={{margin:"30px 0 0 0"}}>
-                    <AchievementCard number={compat.length} description="Publised Compations" color="#FEC64F" />
-                </Grid>
-                <Grid item xs={3} style={{margin:"30px 0 0 0"}}>
-                    <AchievementCard number={admin.length} description="Numbers Of Admins" color="#374557" />
-                </Grid>
-            </Grid>
-            <Grid container style={{ marginLeft: "-200px" }}>
-                <TodoList />
-            </Grid>
+ return (
+  <Box sx={{ m: 2 }}>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Grid container justifyContent="space-around">
+          <CourseDialog />
+          <EventDialog />
+          <AnnounceDialog />
         </Grid>
-    )
-}
+      </Grid>
+
+      <Grid item xs={12}>
+        <Grid container justifyContent="space-around">
+          <Grid item xs={12} sm={6} md={4}>
+            <AchievementCard number={courses.length} description="Completed Courses" color="#1ABC9C" />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <AchievementCard number={compat.length} description="Published Competitions" color="#FEC64F" />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <AchievementCard number={admin.length} description="Numbers Of Admins" color="#374557" />
+          </Grid>
+        </Grid>
+      </Grid>
+
+      <Grid item xs={12}>
+        <Grid container justifyContent="center">
+          <TodoList />
+        </Grid>
+      </Grid>
+      </Grid>
+  </Box>
+);
+ }
 
 export default Card 
