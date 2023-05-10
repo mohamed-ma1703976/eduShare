@@ -36,7 +36,6 @@
     "react-firebase-hooks": "^5.1.1",
     "react-loading": "^2.0.3",
     "react-modal": "^3.16.1",
-    "react-responsive-datepicker": "^1.0.6",
     "react-slick": "^0.29.0",
     "react-spinners": "^0.13.8",
     "react-typewriter-hook": "^1.0.1",
