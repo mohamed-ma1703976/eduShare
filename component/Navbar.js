@@ -24,8 +24,8 @@ function Navbar({ setCourseSearch }) {
             <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }} >
 
                 <Toolbar >
-                    <Typography variant='h6' sx={{ color: "#454545", fontWeight: "800", margin: "0 0 0 -23px", cursor: "pointer" }}>Edu<span style={{ color: "#1ABC9C" }} onClick={() => router.push("/Admin/dashboard")}>Share</span></Typography>
-                    {router.pathname === "/Admin/dashboard" || router.pathname === "/Admin" ? <Typography variant='h6' sx={{ padding: "6px", margin: "0 0 0 66px", color: "#454545", fontWeight: "800", cursor: "pointer" }}>DashBoard</Typography> : <Typography variant='h6' sx={{ padding: "6px", margin: "0 0 0 66px", color: "#454545", fontWeight: "800", cursor: "pointer" }}>Courses</Typography>}
+                    <Typography variant='h6' sx={{ color: "#454545", fontWeight: "800", margin: "0 0 0 -23px", cursor: "pointer" }}>Edu<span style={{ color: "#1ABC9C" }} onClick={() => router.push("/Admin")}>Share</span></Typography>
+                    {router.pathname === "/Admin" || router.pathname === "/Admin" ? <Typography variant='h6' sx={{ padding: "6px", margin: "0 0 0 66px", color: "#454545", fontWeight: "800", cursor: "pointer" }}>DashBoard</Typography> : <Typography variant='h6' sx={{ padding: "6px", margin: "0 0 0 66px", color: "#454545", fontWeight: "800", cursor: "pointer" }}>Courses</Typography>}
                 </Toolbar>
 
 

@@ -35,7 +35,7 @@ function Sidebar() {
         >
             <List>
                 <ListItem disablePadding>
-                    <ListItemButton onClick={() => router.push("/Admin/dashboard")} sx={{
+                    <ListItemButton onClick={() => router.push("/Admin")} sx={{
                         "&:hover": {
                             backgroundColor: "#1ABC9C",
                             color: "primary.contrastText",
