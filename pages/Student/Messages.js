@@ -63,22 +63,22 @@ function Messages({ userId }) {
   const handleChange = (event) => {
     setRmassage(event.target.value);
   };
-  
-  
+
+
 
   async function handelSendReplay() {
     try {
       const messageRef = doc(db, 'Message', mid);
-  
+
       // get the previous replies
       const previousReplies = selectedMessage?.data?.replays || [];
-  
+
       // merge the previous replies with the new reply
       const newReplies = [...previousReplies, rmassgae];
-  
+
       // update the message document with the new replies
       await updateDoc(messageRef, { replays: newReplies });
-      
+
       // clear the reply input and close the dialog
       setRmassage('');
       setOpen(false);
@@ -87,7 +87,6 @@ function Messages({ userId }) {
       console.log(err);
     }
   }
-  
 
   let replayName = stu.find(s => s.id === userId)?.attributes?.displayName
   return (
@@ -119,7 +118,7 @@ function Messages({ userId }) {
             {messages.length > 0 ? (
               messages.map((message, index) => {
                 const isEven = index % 2 === 0;
-
+                console.log(message)
                 return (
                   <Box key={message.id} sx={{ mb: 2, mx: 1 }}>
                     <Box
@@ -144,8 +143,15 @@ function Messages({ userId }) {
                         </Typography>
                         <Typography variant="body1">
                           {message.data.message}
+
                         </Typography>
+                        {message.data && message?.data?.InstructorReplays?.map(m => {
+                          return <Typography variant="body1">{m} </Typography>
+
+                        })}
+
                       </Box>
+
                       <Button
                         onClick={() => handleClickOpen(message)}
                         sx={{

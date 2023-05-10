@@ -49,7 +49,7 @@ export default function Registration() {
             specialization: signUpData.specialization,
             personalInfo: signUpData.personalInfo,
             status: "Pending",
-            myCourse:[]
+            myCourse: []
         };
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, signUpData.email, signUpData.password);
@@ -220,9 +220,9 @@ export default function Registration() {
                                         onChange={handleChange}
                                         sx={{ margin: "10px 10px 10px 10px" }}
                                         margin="normal"
-              placeholder="Password"
-              type="password"
-              fullWidth
+                                        placeholder="Password"
+                                        type="password"
+                                        fullWidth
 
 
                                     />
@@ -254,5 +254,5 @@ export default function Registration() {
             </Grid >
         </Paper>
 
-    );
+    )
 }
