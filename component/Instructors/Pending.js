@@ -1,53 +1,52 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import * as React from 'react';
+import { styled } from '@mui/system';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import { useRouter } from 'next/router';
-const useStyles = makeStyles((theme) => ({
-    container: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        flexDirection: 'column',
-    },
-    heading: {
-        marginBottom: theme.spacing(2),
-        color: theme.palette.text.primary,
-    },
-    subheading: {
-        marginBottom: theme.spacing(2),
-        color: theme.palette.text.secondary,
-    },
-    button: {
-        marginTop: theme.spacing(2),
-    },
+
+const Container = styled('div')(({ theme }) => ({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+    flexDirection: 'column',
+}));
+
+const Heading = styled(Typography)(({ theme }) => ({
+    marginBottom: theme.spacing(2),
+    color: theme.palette.text.primary,
+}));
+
+const Subheading = styled(Typography)(({ theme }) => ({
+    marginBottom: theme.spacing(2),
+    color: theme.palette.text.secondary,
+}));
+
+const StyledButton = styled(Button)(({ theme }) => ({
+    marginTop: theme.spacing(2),
 }));
 
 const Pending = () => {
-    const classes = useStyles();
-    const router = useRouter()
+    const router = useRouter();
     return (
-        <div className={classes.container}>
-            <Typography variant="h4" className={classes.heading}>
+        <Container>
+            <Heading variant="h4">
                 Your Request under Processing
-            </Typography>
-            <Typography variant="h4" className={classes.subheading}>
+            </Heading>
+            <Subheading variant="h4">
                 Try Again Later
-            </Typography>
-            <Typography variant="body1" className={classes.subheading}>
+            </Subheading>
+            <Subheading variant="body1">
                 The page you are looking for is pending.
-            </Typography>
-            <Button
+            </Subheading>
+            <StyledButton
                 variant="contained"
                 color="primary"
-                className={classes.button}
-                onClick={() => router.push('/')
-                }
+                onClick={() => router.push('/')}
             >
                 Go Back
-            </Button>
-        </div>
+            </StyledButton>
+        </Container>
     );
 };
 

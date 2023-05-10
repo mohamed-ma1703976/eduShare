@@ -2,5 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/Admin": "pages/Admin.js"
+  "/Admin/instructors": "pages/Admin/instructors.js",
+  "/Admin": "pages/Admin.js",
+  "/Admin/course": "pages/Admin/course.js"
 }
