@@ -1,24 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Box,
-  Stack,
-  Grid,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Button,
-  Typography,
-  Divider,
-  Modal,
+  Button
 } from '@mui/material';
 import {
   collection,
-  getDocs,
-  doc,
-  deleteDoc,
   updateDoc,
-  setDoc,
 } from 'firebase/firestore';
 import { db } from '../Firebase/Firebase';
 

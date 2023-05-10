@@ -14,16 +14,6 @@ import {
   DialogActions, CardActions
 } from "@mui/material";
 import { getDocs, collection, where, query, doc, updateDoc, addDoc } from "firebase/firestore";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
 import Pending from "../../component/Instructors/Pending";
 import Loading from '../../component/Loading ';
 

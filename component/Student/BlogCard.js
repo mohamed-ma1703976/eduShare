@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, Typography, Grid, CardMedia } from '@mui/material';
-import { Box } from '@mui/system';
 import { doc, getDoc } from 'firebase/firestore';
 import { getFirestore } from 'firebase/firestore';
 import Link from 'next/link';

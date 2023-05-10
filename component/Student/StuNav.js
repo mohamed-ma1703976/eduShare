@@ -1,10 +1,9 @@
-import { AppBar, Toolbar, Typography, MenuItem, Menu, styled, InputBase } from '@mui/material'
+import { AppBar, Toolbar, Typography, MenuItem, Menu } from '@mui/material'
 import MapsUgcIcon from '@mui/icons-material/MapsUgc';
 import SettingsIcon from '@mui/icons-material/Settings';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import React, { useEffect, useState } from 'react'
 import { useRouter } from "next/router"
-import useFetch from '../../hooks/useFetch';
 import { auth, collection, db } from '../../Firebase/Firebase';
 import { getDocs } from 'firebase/firestore';
 function StuNav({ setCourseSearch }) {

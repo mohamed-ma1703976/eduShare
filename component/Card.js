@@ -1,12 +1,10 @@
 import React from 'react';
-import { CircularProgress, Grid ,Box,Typography ,ResponsiveContainer} from '@mui/material';
+import {Grid ,Box} from '@mui/material';
 import CourseDialog from './CourseDialog';
 import EventDialog from './EventDialog';
 import AnnounceDialog from './AnnounceDialog';
-import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import AchievementCard from './AchievementCard';
-import CheckCircleSharpIcon from '@mui/icons-material/CheckCircleSharp';
 import TodoList from './TodoList/TodoList';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../Firebase/Firebase';

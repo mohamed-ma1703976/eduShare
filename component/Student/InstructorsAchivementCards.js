@@ -2,7 +2,6 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { getAuth } from "firebase/auth";
 import { app, collection, db, storage } from "../../Firebase/Firebase";
 import { doc, getDocs, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/router";

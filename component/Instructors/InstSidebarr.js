@@ -6,13 +6,9 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
-import GridViewIcon from "@mui/icons-material/GridView";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
-import EventNoteIcon from "@mui/icons-material/EventNote";
-import Groups2Icon from "@mui/icons-material/Groups2";
 import Groups3Icon from "@mui/icons-material/Groups3";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import LocalActivityIcon from "@mui/icons-material/LocalActivity";
 import HomeIcon from '@mui/icons-material/Home';
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -20,7 +16,6 @@ import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import MessageIcon from "@mui/icons-material/Message";
-import QuizIcon from '@mui/icons-material/Quiz';
 function InstSidebar() {
   const router = useRouter();
   const controls = useAnimation();
