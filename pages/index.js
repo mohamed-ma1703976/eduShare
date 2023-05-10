@@ -1,8 +1,6 @@
 
 import { Paper } from "@mui/material"
-import styles from '../styles/Home.module.css'
 import Login from '../component/Login'
-import { image } from "../Assets/background.jpg"
 import { useState } from "react";
 
 
