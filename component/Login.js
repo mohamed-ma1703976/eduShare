@@ -175,7 +175,7 @@ export default function App() {
             </Button>
           </form>
         </Stack>
-        <Link href="signup/register" variant="body2" color="inherit"> Don't have an account? Register</Link>
+        <Link href="eduShare/signup/register" variant="body2" color="inherit"> Don't have an account? Register</Link>
       </Paper>
     </Grid >
   );
