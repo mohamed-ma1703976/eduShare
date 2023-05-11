@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Grid,
   Paper,
@@ -16,39 +16,22 @@ import { db } from '../../../Firebase/Firebase';
 import { useRouter } from 'next/router';
 import { auth } from '../../../Firebase/Firebase';
 
-function UpdateBlog() {
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
+function UpdateBlog({ blogData, userId }) {
+  const [title, setTitle] = useState(blogData.Title);
+  const [body, setBody] = useState(blogData.Body);
   const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [image, setImage] = useState(null);
-  const [imageUrl, setImageUrl] = useState('');
-  const [imagePreview, setImagePreview] = useState(null);
+  const [imageUrl, setImageUrl] = useState(blogData.img);
+  const [imagePreview, setImagePreview] = useState(blogData.img);
   const [error, setError] = useState(null);
   const router = useRouter();
   const { blogId } = router.query;
-  let userId = auth?.currentUser?.uid;
 
   useEffect(() => {
-    const fetchBlogData = async () => {
-      const blogRef = doc(db, 'Blog', blogId);
-      const blogSnapshot = await getDoc(blogRef);
-  
-      if (blogSnapshot.exists()) {
-        const blogData = blogSnapshot.data();
-        setTitle(blogData.Title);
-        setBody(blogData.Body);
-        setImagePreview(blogData.img);
-      } else {
-        setError('Blog not found');
-      }
-    };
-  
-    if (blogId) {
-      fetchBlogData();
-    }
-  }, [blogId]);
+    setImagePreview(preview);
+  }, [preview]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -81,6 +64,7 @@ function UpdateBlog() {
     // Navigate to the Instructor/myBlogs page after the blog is updated
     router.push('/Instructor/myBlogs');
   };
+
 
   useEffect(() => {
     setImagePreview(preview);
@@ -204,4 +188,28 @@ function UpdateBlog() {
 </Grid>
   );
 }
+export async function getServerSideProps(context) {
+  const { blogId } = context.query;
+  const blogRef = doc(db, 'Blog', blogId);
+  const blogSnapshot = await getDoc(blogRef);
+
+  if (!blogSnapshot.exists()) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const blogData = blogSnapshot.data();
+
+  // Fetch the instructor id
+  let userId = auth?.currentUser?.uid;
+
+  return {
+    props: {
+      blogData,
+      userId,
+    },
+  };
+}
+
 export default UpdateBlog;
