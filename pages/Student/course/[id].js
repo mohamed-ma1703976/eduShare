@@ -7,37 +7,35 @@ import { getFirestore, doc, getDoc, collection, getDocs, updateDoc } from 'fireb
 import { auth, db } from '../../../Firebase/Firebase';
 import { getAuth } from "firebase/auth";
 import { app } from "../../../Firebase/Firebase";
-import Loading from "../../../component/Loading "; // Import Loading component
+import Loading from "../../../component/Loading ";
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 const CoursePage = ({ course }) => {
   const router = useRouter();
 
-  if (router.isFallback) {
-    return <div>Loading...</div>;
+  // Handle fallback state
+  if (!course || router.isFallback) {
+    return <Loading />;
   }
+
   const [rating, setRating] = useState(0);
-
-  const [enrollButtonDisabled, setEnrollButtonDisabled] = React.useState(false);
-  const [showReg, setShowReg] = React.useState(false);
-  const [israted, setIsRated] = React.useState(false);
-
-  const [students, setStudents] = React.useState([]);
-  const [courses, setCourses] = React.useState([]);
+  const [enrollButtonDisabled, setEnrollButtonDisabled] = useState(false);
+  const [showReg, setShowReg] = useState(false);
+  const [israted, setIsRated] = useState(false);
+  const [students, setStudents] = useState([]);
+  const [courses, setCourses] = useState([]);
   const [showRating, setShowRating] = useState(true);
-
-  const [loading, setLoading] = React.useState(true);
-  const [userId, setUserId] = React.useState(null);
-  const [instructors, setInstructors] = React.useState([]);
-  const [enrolledCourse, setEnrolledCourse] = React.useState({
+  const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState(null);
+  const [instructors, setInstructors] = useState([]);
+  const [enrolledCourse, setEnrolledCourse] = useState({
     registerdcourses: []
   });
-
-  const [instructorCourses, setInstructorCourses] = React.useState({
+  const [instructorCourses, setInstructorCourses] = useState({
     myCourse: []
   });
-  const [courseRating, setCourseRating] = React.useState({
+  const [courseRating, setCourseRating] = useState({
     rates: course.rates
   });
 
@@ -345,9 +343,29 @@ export async function getServerSideProps({ params }) {
     };
   }
 
+  const courseData = courseSnapshot.data();
+
+  // Check if course data is not undefined
+  if (!courseData) {
+    return {
+      notFound: true,
+    };
+  }
+
+  // Fetch the instructor name
+  let instructorName = "Unknown";
+  if (courseData.Instructor) {
+    const instructorDoc = await getDoc(courseData.Instructor);
+    instructorName = instructorDoc.data().displayName;
+  }
+
   const course = {
     id: courseSnapshot.id,
-    ...courseSnapshot.data(),
+    CourseTitle: courseData.CourseTitle,
+    CourseDescription: courseData.CourseDescription,
+    InstructorName: instructorName,
+    fileUrl: courseData.fileUrl,
+    rates: courseData.rates || [],
   };
 
   return {
@@ -356,7 +374,6 @@ export async function getServerSideProps({ params }) {
     },
   };
 }
-
 export default CoursePage;
 
 
