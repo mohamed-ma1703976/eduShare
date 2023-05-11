@@ -28,7 +28,7 @@ function UpdateBlog() {
   const [error, setError] = useState(null);
   const router = useRouter();
   const { blogId } = router.query;
-  let userId = auth.currentUser.uid;
+  let userId = auth?.currentUser?.uid;
 
   useEffect(() => {
     const fetchBlogData = async () => {
