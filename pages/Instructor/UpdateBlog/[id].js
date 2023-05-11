@@ -76,7 +76,6 @@ function UpdateBlog({ blogData, userId }) {
       setImage(e.target.files[0]);
     }
   };
-
   return (
     <Grid
       container
@@ -98,118 +97,131 @@ function UpdateBlog({ blogData, userId }) {
           padding: 10,
           pb: 5,
           boxShadow: {
-            xs: "none",md: "0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)",
-        },
+            xs: "none",
+            md: "0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)",
+          },
         }}
-        >
+      >
         <Stack direction={"column"} gap={1}>
-        <Typography variant="h5" align="center">
-        Update Blog
-        </Typography>
-        <form onSubmit={handleSubmit}>
-        <Box display="flex" justifyContent="center" mb={2}>
-        <div
-        style={{
-        width: '100px',
-        height: '100px',
-        backgroundColor: '#f0f0f0',
-        cursor: 'pointer',
-        backgroundImage: `url(${imagePreview})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        borderRadius: '5px',
-        }}
-        onClick={() => document.getElementById("blogCover").click()}
-        />
-        </Box>
-        <Box display="flex" justifyContent="center" mb={2}>
-        <label htmlFor="blogCover">
-        <Input
-        id="blogCover"
-        type="file"
-        accept="image/*"
-        style={{ display: 'none' }}
-        onChange={(e) => handleImageChange(e)}
-        />
-                    <Button
-              component="span"
-              variant="outlined"
-              color="primary"
-              startIcon={<AddAPhoto />}
-            >
-              Change Cover Image
-            </Button>
-          </label>
-        </Box>
-        <TextField
-          id="title"
-          label="Title"
-          type="text"
-          fullWidth
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <Box mt={2}>
-          <TextField
-            id="content"
-            label="Content"
-            type="text"
-            fullWidth
-            multiline
-            rows={4}
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            required
-          />
-        </Box>
-        <Box mt={2}>
-          <Button type="submit" variant="contained" color="primary" fullWidth>
+          <Typography variant="h5" align="center">
             Update Blog
-          </Button>
-        </Box>
-      </form>
-    </Stack>
-    {loading && (
-      <Box mt={2}>
-        <Typography variant="body2" color="text.secondary">
-          Updating...
-        </Typography>
-      </Box>
-    )}
-    {error && (
-      <Box mt={2}>
-        <Typography variant="body2" color="text.secondary">
-          {error}
-        </Typography>
-      </Box>
-    )}
-  </Paper>
-</Grid>
+          </Typography>
+          <form onSubmit={handleSubmit}>
+            <Box display="flex" justifyContent="center" mb={2}>
+              <div
+                style={{
+                  width: '100px',
+                  height: '100px',
+                  backgroundColor: '#f0f0f0',
+                  cursor: 'pointer',
+                  backgroundImage: `url(${imagePreview})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  borderRadius: '5px',
+                }}
+                onClick={() => document.getElementById("blogCover").click()}
+              />
+            </Box>
+            <Box display="flex" justifyContent="center" mb={2}>
+              <label htmlFor="blogCover">
+                <Input
+                  id="blogCover"
+                  type="file"
+                  accept="image/*"
+                  style={{ display: 'none' }}
+                  onChange={(e) => handleImageChange(e)}
+                />
+                <Button
+                  component="span"
+                  variant="outlined"
+                  color="primary"
+                  startIcon={<AddAPhoto />}
+                >
+                  Change Cover Image
+                </Button>
+              </label>
+            </Box>
+            <TextField
+              id="title"
+              label="Title"
+              type="text"
+              fullWidth
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+            <Box mt={2}>
+              <TextField
+                id="content"
+                label="Content"
+                type="text"
+                fullWidth
+                multiline
+                rows={4}
+                value={body}
+                onChange={(e) => setBody(e.target.value)}
+                required
+              />
+            </Box>
+            <Box mt={2}>
+              <Button type="submit" variant="contained" color="primary" fullWidth>
+                Update Blog
+              </Button>
+            </Box>
+          </form>
+        </Stack>
+        {loading && (
+          <Box mt={2}>
+            <Typography variant="body2" color="text.secondary">
+              Updating...
+            </Typography>
+          </Box>
+        )}
+        {error && (
+          <Box mt={2}>
+            <Typography variant="body2" color="text.secondary">
+              {error}
+            </Typography>
+          </Box>
+        )}
+      </Paper>
+    </Grid>
   );
 }
-export async function getServerSideProps(context) {
-  const { blogId } = context.query;
-  const blogRef = doc(db, 'Blog', blogId);
-  const blogSnapshot = await getDoc(blogRef);
-
-  if (!blogSnapshot.exists()) {
+  export async function getStaticPaths() {
+    // Return an empty `paths` array to indicate that all possible paths should be statically generated
+    return { paths: [], fallback: 'blocking' };
+  }
+  
+  export async function getStaticProps({ params }) {
+    const { id } = params;
+  
+    const blogRef = doc(db, 'Blog', id);
+    const blogSnapshot = await getDoc(blogRef);
+  
+    if (!blogSnapshot.exists()) {
+      return {
+        notFound: true,
+      };
+    }
+  
+    const blogData = blogSnapshot.data();
+  
+    // Fetch the instructor id
+    let userId = auth?.currentUser?.uid;
+  
+    // Fetch the image URL
+    const imageUrl = await getDownloadURL(ref(getStorage(), blogData.img));
+  
     return {
-      notFound: true,
+      props: {
+        blogData: {
+          ...blogData,
+          img: imageUrl,
+        },
+        userId,
+      },
+      revalidate: 1,
     };
   }
-
-  const blogData = blogSnapshot.data();
-
-  // Fetch the instructor id
-  let userId = auth?.currentUser?.uid;
-
-  return {
-    props: {
-      blogData,
-      userId,
-    },
-  };
-}
-
 export default UpdateBlog;

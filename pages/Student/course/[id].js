@@ -331,49 +331,6 @@ const CoursePage = ({ course }) => {
     </div>
   );
 };
-
-export async function getServerSideProps({ params }) {
-  const courseId = params.id;
-  const courseRef = doc(db, 'Course', courseId);
-  const courseSnapshot = await getDoc(courseRef);
-
-  if (!courseSnapshot.exists()) {
-    return {
-      notFound: true,
-    };
-  }
-
-  const courseData = courseSnapshot.data();
-
-  // Check if course data is not undefined
-  if (!courseData) {
-    return {
-      notFound: true,
-    };
-  }
-
-  // Fetch the instructor name
-  let instructorName = "Unknown";
-  if (courseData.Instructor) {
-    const instructorDoc = await getDoc(courseData.Instructor);
-    instructorName = instructorDoc.data().displayName;
-  }
-
-  const course = {
-    id: courseSnapshot.id,
-    CourseTitle: courseData.CourseTitle,
-    CourseDescription: courseData.CourseDescription,
-    InstructorName: instructorName,
-    fileUrl: courseData.fileUrl,
-    rates: courseData.rates || [],
-  };
-
-  return {
-    props: {
-      course,
-    },
-  };
-}
 export default CoursePage;
 
 
