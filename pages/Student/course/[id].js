@@ -331,6 +331,42 @@ const CoursePage = ({ course }) => {
     </div>
   );
 };
+export async function getStaticPaths() {
+  const courseCollection = collection(getFirestore(), 'Course');
+  const courseSnapshot = await getDocs(courseCollection);
+
+  const paths = courseSnapshot.docs.map((doc) => ({
+    params: { id: doc.id }
+  }));
+
+  return {
+    paths,
+    fallback: true
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const courseDoc = doc(getFirestore(), 'Course', params.id);
+  const courseSnap = await getDoc(courseDoc);
+
+  if (!courseSnap.exists()) {
+    return {
+      notFound: true
+    };
+  }
+
+  const courseData = courseSnap.data();
+
+  return {
+    props: {
+      course: {
+        id: courseSnap.id,
+        ...courseData
+      }
+    },
+    revalidate: 60
+  };
+}
 export default CoursePage;
 
 
