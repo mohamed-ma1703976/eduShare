@@ -13,7 +13,6 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc, addDoc } from "firebase/firestore";
 import { db, collection } from "../../Firebase/Firebase"
 import { app } from "../../Firebase/Firebase";
-import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
 
 export default function Registration() {
     const router = useRouter();
@@ -70,7 +69,6 @@ export default function Registration() {
 
 
 
-        <PrivateRoute path="/secure">
 
             <Paper
                 style={{
@@ -257,7 +255,6 @@ export default function Registration() {
                     </Paper>
                 </Grid >
             </Paper>
-        </PrivateRoute>
 
     )
 }

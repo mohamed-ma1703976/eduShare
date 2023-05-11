@@ -20,16 +20,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/index.js"
     ],
-    "/Instructor": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Instructor.js"
-    ],
-    "/Instructor/myBlogs": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Instructor/myBlogs.js"
-    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

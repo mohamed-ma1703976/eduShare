@@ -12,7 +12,6 @@ import { useRouter } from 'next/router';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { app } from "../../Firebase/Firebase";
-import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
 
 export default function Registration() {
   const router = useRouter();
@@ -61,7 +60,6 @@ export default function Registration() {
 
 
 
-    <PrivateRoute path="/secure">
       <Paper
         style={{
           backgroundImage: `url(${"https://i.ibb.co/6bJ0VFb/Background.jpg"})`,
@@ -200,7 +198,6 @@ export default function Registration() {
           </Paper>
         </Grid>
       </Paper>
-    </PrivateRoute>
 
 
   );
