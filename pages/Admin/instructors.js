@@ -4,29 +4,33 @@ import InstructorTable from '../../component/Signup/InstructorTable'
 import { Box, Stack } from "@mui/material"
 
 import React from 'react'
+import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
 
 function instructors() {
-   // const [search, setSearch] = React.useState("")
+    // const [search, setSearch] = React.useState("")
 
     return (
-        <Box>
+        <PrivateRoute path="/secure">
+            <Box>
 
-            <Navbar />
-
-
-            <Stack direction="row" spacing={2} justifyContent="space-between">
-
-                <Sidebar />
-
-                <Box flexGrow={1}>
-                <InstructorTable />
-                </Box>
+                <Navbar />
 
 
-            </Stack>
+                <Stack direction="row" spacing={2} justifyContent="space-between">
+
+                    <Sidebar />
+
+                    <Box flexGrow={1}>
+                        <InstructorTable />
+                    </Box>
 
 
-        </Box>
+                </Stack>
+
+
+            </Box>
+        </PrivateRoute>
+
 
 
     )

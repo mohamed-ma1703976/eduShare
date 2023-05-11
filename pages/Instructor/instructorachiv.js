@@ -4,30 +4,34 @@ import StuNav from "../../component/Student/StuNav";
 import StuSideBar from "../../component/Student/StuSideBar";
 import InstructorsAchivementCards from "../../component/Student/InstructorsAchivementCards";
 import Loading from "../../component/Loading "; // Import Loading component
+import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
+
 export default function coursePage() {
-    const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000); // Set timeout to 5 seconds
-    }, []);
-  
-    if (loading) {
-      return <Loading />; // Render Loading component
-    }
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000); // Set timeout to 5 seconds
+  }, []);
 
-    return (
-        <Box>
+  if (loading) {
+    return <Loading />; // Render Loading component
+  }
 
-            <StuNav />
+  return (
+    <Box>
+      <PrivateRoute path="/secure">
 
-            <Stack direction="row" spacing={2} >
+        <StuNav />
 
-                <StuSideBar />
-                <InstructorsAchivementCards />
-            </Stack>
+        <Stack direction="row" spacing={2} >
 
-        </Box>
-    );
+          <StuSideBar />
+          <InstructorsAchivementCards />
+        </Stack>
+      </PrivateRoute>
+
+    </Box>
+  );
 }

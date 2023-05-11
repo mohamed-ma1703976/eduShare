@@ -16,6 +16,7 @@ import {
 import { getDocs, collection, where, query, doc, updateDoc, addDoc } from "firebase/firestore";
 import Pending from "../../component/Instructors/Pending";
 import Loading from '../../component/Loading ';
+import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
 
 export default function instructorDashboard() {
   const [competitions, setCompetitions] = useState([]);
@@ -230,107 +231,111 @@ export default function instructorDashboard() {
       <Loading />
     ) : (
       <div>
-        {statusCheck ? (
-          <Pending />
-        ) : (
-          <Box>
-            <InstNav />
-            <WebBanner />
-            <Stack direction="row" spacing={2}>
-              <InstSidebar />
+        <PrivateRoute path="/secure">
 
-              <Stack direction="column" spacing={2}>
-                <Card sx={{ minWidth: 500, margin: 2, height: 170 }}>
-                  <CardContent>
-                    <Typography variant="h5" component="div">
-                      Total Students
-                    </Typography>
-                    <Typography variant="h2" component="div">
-                      {studentNumber}
-                    </Typography>
-                  </CardContent>
-                </Card>
+          {statusCheck ? (
+            <Pending />
+          ) : (
+            <Box>
+              <InstNav />
+              <WebBanner />
+              <Stack direction="row" spacing={2}>
+                <InstSidebar />
 
-
-                {showname ? <Card sx={{ minWidth: 500, margin: 2, height: 170 }}>
-                  <CardContent>
+                <Stack direction="column" spacing={2}>
+                  <Card sx={{ minWidth: 500, margin: 2, height: 170 }}>
+                    <CardContent>
+                      <Typography variant="h5" component="div">
+                        Total Students
+                      </Typography>
+                      <Typography variant="h2" component="div">
+                        {studentNumber}
+                      </Typography>
+                    </CardContent>
+                  </Card>
 
 
-
-                    <Typography variant="h5" component="div">
-                      My Course
-                    </Typography>
-                    <Typography variant="h4" component="div" sx={{ margin: "10px 0 0 0 " }}>
-                      {nameOfCourse}
-                    </Typography>
+                  {showname ? <Card sx={{ minWidth: 500, margin: 2, height: 170 }}>
+                    <CardContent>
 
 
-                  </CardContent>
 
-                </Card> : ""}
-
-
-                <Grid item xs={12} sm={6} md={6}>
-                  <Typography
-                    variant="h4"
-                    component="div"
-                    sx={{ marginBottom: 2 }}
-                  >
-                    Competitions
-                  </Typography>
-                  <Grid container spacing={2}>
-                    {competitions.map((competition) => (
-                      <Grid item xs={12} sm={6} md={4} key={competition.id}>
-                        <Card>
-                          <CardContent>
-                            <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '1000' }}>
-                              Competition Type: {competition.attributes.CompationType}
-                            </Typography>
-                            <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '1000' }}>
-                              {competition.attributes.CompationQuestion}
-                            </Typography>
-                          </CardContent>
-                          <CardActions>
-                            <Button
-                              size="small"
-                              onClick={() => handleJoinCompation(competition)}
-                            >
-                              Join This Competition
-                            </Button>
-                          </CardActions>
-                        </Card>
-                      </Grid>
-                    ))}
-                  </Grid>
-                </Grid>
+                      <Typography variant="h5" component="div">
+                        My Course
+                      </Typography>
+                      <Typography variant="h4" component="div" sx={{ margin: "10px 0 0 0 " }}>
+                        {nameOfCourse}
+                      </Typography>
 
 
-                <Dialog open={openDialog} onClose={handleCloseDialog}>
-                  <DialogTitle>Join Competition</DialogTitle>
-                  <DialogContent>
-                    <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '700' }}>
-                      Competition Type: {selectedCompation?.attributes?.CompationType}
-                    </Typography>
-                    <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '700' }}>
-                      Question: {selectedCompation?.attributes?.CompationQuestion}
-                    </Typography>
-                    {/* Add additional form fields for joining the competition */}
-                  </DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleCloseDialog}>No</Button>
-                    <Button
-                      onClick={() => handleJoinSubmit(selectedCompation?.id, selectedCompation?.attributes.AchivmentCard)}
-                      variant="contained"
-                      color="primary"
+                    </CardContent>
+
+                  </Card> : ""}
+
+
+                  <Grid item xs={12} sm={6} md={6}>
+                    <Typography
+                      variant="h4"
+                      component="div"
+                      sx={{ marginBottom: 2 }}
                     >
-                      Yes
-                    </Button>
-                  </DialogActions>
-                </Dialog>
+                      Competitions
+                    </Typography>
+                    <Grid container spacing={2}>
+                      {competitions.map((competition) => (
+                        <Grid item xs={12} sm={6} md={4} key={competition.id}>
+                          <Card>
+                            <CardContent>
+                              <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '1000' }}>
+                                Competition Type: {competition.attributes.CompationType}
+                              </Typography>
+                              <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '1000' }}>
+                                {competition.attributes.CompationQuestion}
+                              </Typography>
+                            </CardContent>
+                            <CardActions>
+                              <Button
+                                size="small"
+                                onClick={() => handleJoinCompation(competition)}
+                              >
+                                Join This Competition
+                              </Button>
+                            </CardActions>
+                          </Card>
+                        </Grid>
+                      ))}
+                    </Grid>
+                  </Grid>
+
+
+                  <Dialog open={openDialog} onClose={handleCloseDialog}>
+                    <DialogTitle>Join Competition</DialogTitle>
+                    <DialogContent>
+                      <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '700' }}>
+                        Competition Type: {selectedCompation?.attributes?.CompationType}
+                      </Typography>
+                      <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: '700' }}>
+                        Question: {selectedCompation?.attributes?.CompationQuestion}
+                      </Typography>
+                      {/* Add additional form fields for joining the competition */}
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={handleCloseDialog}>No</Button>
+                      <Button
+                        onClick={() => handleJoinSubmit(selectedCompation?.id, selectedCompation?.attributes.AchivmentCard)}
+                        variant="contained"
+                        color="primary"
+                      >
+                        Yes
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
+                </Stack>
               </Stack>
-            </Stack>
-          </Box>
-        )}
+            </Box>
+          )}
+        </PrivateRoute>
+
       </div>
     )
   );

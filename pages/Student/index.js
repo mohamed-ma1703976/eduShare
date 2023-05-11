@@ -16,7 +16,7 @@ import EventCard from "../../component/Student/EventCard";
 import Loading from "../../component/Loading ";
 import useIsMounted from "../../hooks/useIsMounted";
 import WebBanner from "../../component/Student/WebBanner";
-
+import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute";
 export default function StudentDashboard() {
   const { userId } = useContext(AuthContext);
 
@@ -80,6 +80,7 @@ export default function StudentDashboard() {
 
   return (
     <>
+    <PrivateRoute path="/secure">
       {loading || instructorsLoading || blogsLoading ? (
         <Loading />
       ) : (
@@ -287,6 +288,8 @@ export default function StudentDashboard() {
     </Typography>
   </Box>
    )}
+   </PrivateRoute>
    </>
+   
  );
 }

@@ -9,6 +9,7 @@ import StuNav from '../../component/Student/StuNav';
 import StuSideBar from '../../component/Student/StuSideBar';
 import { useRouter } from 'next/router';
 import { getAuth } from 'firebase/auth';
+import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
 
 const MyCalendar = () => {
   const router = useRouter();
@@ -37,6 +38,7 @@ const MyCalendar = () => {
   return (
     <>
       <Box>
+      <PrivateRoute path="/secure">
         <StuNav />
 
         <Grid container>
@@ -63,6 +65,8 @@ const MyCalendar = () => {
             </Box>
           </Grid>
         </Grid>
+        </PrivateRoute>
+
       </Box>
     </>
   );

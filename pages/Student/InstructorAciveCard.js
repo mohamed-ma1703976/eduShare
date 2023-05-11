@@ -4,6 +4,7 @@ import StuNav from "../../component/Student/StuNav";
 import StuSideBar from "../../component/Student/StuSideBar";
 import InstructorsAchivementCards from "../../component/Student/InstructorsAchivementCards";
 import Loading from "../../component/Loading "; // Import Loading component
+import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute";
 
 export default function coursePage() {
   const [loading, setLoading] = useState(true);
@@ -20,12 +21,15 @@ export default function coursePage() {
 
   return (
     <Box>
-      <StuNav />
+      <PrivateRoute path="/secure">
+        <StuNav />
 
-      <Stack direction="row" spacing={2}>
-        <StuSideBar />
-        <InstructorsAchivementCards />
-      </Stack>
+        <Stack direction="row" spacing={2}>
+          <StuSideBar />
+          <InstructorsAchivementCards />
+        </Stack>
+      </PrivateRoute>
+
     </Box>
   );
 }

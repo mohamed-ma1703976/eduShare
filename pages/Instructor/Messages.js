@@ -8,6 +8,7 @@ import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { app } from '../../Firebase/Firebase';
 import { useRouter } from 'next/router';
 import { deepOrange, deepPurple } from '@mui/material/colors';
+import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -155,191 +156,194 @@ function Messages({ userId }) {
   }
   return (
     <div>
-      <InstNav />
-      <Grid container>
-        <Grid item xs={2}>
-          <InstSidebar />
-        </Grid>
-        <Grid item xs={10}>
-          <Typography
-            variant="h5"
-            gutterBottom
-            sx={{
-              fontSize: "30px",
-              fontWeight: "1000",
-              margin: "30px 0",
-              color: "#454545",
-            }}
-          >
-            Messages
-          </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'column', overflowY: 'scroll', padding: 2, height: '70vh' }}>
-            {myMessages.length > 0 ? (
-              myMessages.map((message) => (
+      <PrivateRoute path="/secure">
+        <InstNav />
+        <Grid container>
+          <Grid item xs={2}>
+            <InstSidebar />
+          </Grid>
+          <Grid item xs={10}>
+            <Typography
+              variant="h5"
+              gutterBottom
+              sx={{
+                fontSize: "30px",
+                fontWeight: "1000",
+                margin: "30px 0",
+                color: "#454545",
+              }}
+            >
+              Messages
+            </Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'column', overflowY: 'scroll', padding: 2, height: '70vh' }}>
+              {myMessages.length > 0 ? (
+                myMessages.map((message) => (
 
-                <Box key={message.id} sx={{ marginBottom: 2 }}>
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      margin: '0 auto 10px auto',
-                      fontFamily: 'Arial, sans-serif',
-                      color: 'white',
-                      backgroundColor:"#5D6D7E",
-                      padding:"10px",
-                      borderRadius:"0.5rem",
-                      width:"30%",
-                      fontWeight:"700"
-                    }}
-                  >
-                    Chat with Student: {`${message.attributes.toFirstName} ${message.attributes.toLastName}`}
-                  </Typography>
-
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      justifyContent: message.attributes.fromId === userId ? 'flex-end' : 'flex-start',
-                      marginBottom: 1,
-                    }}
-                  >
-
-
+                  <Box key={message.id} sx={{ marginBottom: 2 }}>
                     <Typography
-                      variant="body1"
+                      variant="body2"
                       sx={{
-                        backgroundColor: message.attributes.fromId === userId ? 'primary.light' : 'grey.500',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        margin: '0 auto 10px auto',
+                        fontFamily: 'Arial, sans-serif',
                         color: 'white',
-                        borderRadius: '18px',
-                        padding: '10px',
+                        backgroundColor: "#5D6D7E",
+                        padding: "10px",
+                        borderRadius: "0.5rem",
+                        width: "30%",
+                        fontWeight: "700"
                       }}
                     >
-                      {isMyMessage(message.attributes.fromId) ? message.attributes.fromName : message.attributes.toFirstName}: {message.attributes.message}
+                      Chat with Student: {`${message.attributes.toFirstName} ${message.attributes.toLastName}`}
                     </Typography>
-                  </Box>
-                  {message.attributes.InstructorReplays &&
-                    Array.isArray(message.attributes.InstructorReplays) ? (
-                    message.attributes.InstructorReplays.map((reply, index) => (
-                      <Box
+
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        justifyContent: message.attributes.fromId === userId ? 'flex-end' : 'flex-start',
+                        marginBottom: 1,
+                      }}
+                    >
+
+
+                      <Typography
+                        variant="body1"
+                        sx={{
+                          backgroundColor: message.attributes.fromId === userId ? 'primary.light' : 'grey.500',
+                          color: 'white',
+                          borderRadius: '18px',
+                          padding: '10px',
+                        }}
+                      >
+                        {isMyMessage(message.attributes.fromId) ? message.attributes.fromName : message.attributes.toFirstName}: {message.attributes.message}
+                      </Typography>
+                    </Box>
+                    {message.attributes.InstructorReplays &&
+                      Array.isArray(message.attributes.InstructorReplays) ? (
+                      message.attributes.InstructorReplays.map((reply, index) => (
+                        <Box
+                          key={index}
+                          sx={{
+                            display: 'flex',
+                            justifyContent: message.attributes.fromId === userId ? 'flex-end' : 'flex-start',
+                            marginBottom: 1,
+                          }}
+                        >
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              backgroundColor: message.attributes.fromId === userId ? 'primary.light' : 'grey.500',
+                              color: 'white',
+                              borderRadius: '18px',
+                              padding: '10px',
+                            }}
+                          >
+                            {message.attributes.fromName}: {reply}
+                          </Typography>
+
+
+
+
+
+
+                        </Box>
+
+
+
+
+
+
+                      ))
+
+
+                    )
+
+
+
+                      : null}
+
+                    {message.attributes?.replays?.map((r, index) => {
+                      return <Box
                         key={index}
                         sx={{
                           display: 'flex',
-                          justifyContent: message.attributes.fromId === userId ? 'flex-end' : 'flex-start',
+                          justifyContent: 'flex-start',
                           marginBottom: 1,
                         }}
                       >
                         <Typography
                           variant="body2"
                           sx={{
-                            backgroundColor: message.attributes.fromId === userId ? 'primary.light' : 'grey.500',
+                            backgroundColor: 'grey.500',
                             color: 'white',
                             borderRadius: '18px',
                             padding: '10px',
                           }}
                         >
-                          {message.attributes.fromName}: {reply}
+                          {message.attributes.toFirstName + "" + message.attributes.toLastName}: {r}
                         </Typography>
 
 
 
-
-
-
                       </Box>
+                    })}
 
-
-
-
-
-
-                    ))
-
-
-                  )
-
-
-
-                    : null}
-
-                  {message.attributes?.replays?.map((r, index) => {
-                    return <Box
-                      key={index}
-                      sx={{
-                        display: 'flex',
-                        justifyContent: 'flex-start',
-                        marginBottom: 1,
-                      }}
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      onClick={() => handleClickOpen(message.id)}
+                      sx={{ alignSelf: 'flex-end', marginBottom: 2 }}
                     >
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          backgroundColor: 'grey.500',
-                          color: 'white',
-                          borderRadius: '18px',
-                          padding: '10px',
-                        }}
-                      >
-                        {message.attributes.toFirstName + "" + message.attributes.toLastName}: {r}
-                      </Typography>
-
-
-
-                    </Box>
-                  })}
-
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={() => handleClickOpen(message.id)}
-                    sx={{ alignSelf: 'flex-end', marginBottom: 2 }}
-                  >
-                    Reply
-                  </Button>
-                  <Divider sx={{ marginBottom: 2 }} />
-                </Box>
-              ))
-            ) : (
-              <Typography variant="body1">No messages found.</Typography>
-            )}
-          </Box>
-          <Dialog
-            open={open}
-            TransitionComponent={Transition}
-            keepMounted
-            onClose={handleClose}
-            aria-describedby="alert-dialog-slide-description"
-          >
-            <DialogTitle
-              sx={{
-                fontSize: "30px",
-                textAlign: "center",
-                fontWeight: "750",
-              }}
+                      Reply
+                    </Button>
+                    <Divider sx={{ marginBottom: 2 }} />
+                  </Box>
+                ))
+              ) : (
+                <Typography variant="body1">No messages found.</Typography>
+              )}
+            </Box>
+            <Dialog
+              open={open}
+              TransitionComponent={Transition}
+              keepMounted
+              onClose={handleClose}
+              aria-describedby="alert-dialog-slide-description"
             >
-              Your Message
-            </DialogTitle>
-            <DialogContent>
-              <TextField
-                id="outlined-multiline-static"
-                label="Reply Here ..."
-                multiline
-                rows={4}
-                sx={{ margin: "10px 10px 10px 10px", width: "100%" }}
-                name="rs"
-                onChange={handleChange}
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose} color="primary">
-                Cancel
-              </Button>
-              <Button color="primary" onClick={handelSendReplay}>
-                Send
-              </Button>
-            </DialogActions>
-          </Dialog>
+              <DialogTitle
+                sx={{
+                  fontSize: "30px",
+                  textAlign: "center",
+                  fontWeight: "750",
+                }}
+              >
+                Your Message
+              </DialogTitle>
+              <DialogContent>
+                <TextField
+                  id="outlined-multiline-static"
+                  label="Reply Here ..."
+                  multiline
+                  rows={4}
+                  sx={{ margin: "10px 10px 10px 10px", width: "100%" }}
+                  name="rs"
+                  onChange={handleChange}
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose} color="primary">
+                  Cancel
+                </Button>
+                <Button color="primary" onClick={handelSendReplay}>
+                  Send
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </Grid>
         </Grid>
-      </Grid>
+      </PrivateRoute>
+
     </div>
   );
 }

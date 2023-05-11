@@ -20,6 +20,7 @@ import UploadFile from '../../component/Instructors/UploadFile';
 import { getDownloadURL, listAll, ref, uploadBytes, deleteObject } from "firebase/storage";
 import { auth, collection, db, storage } from '../../Firebase/Firebase';
 import { getDocs } from 'firebase/firestore';
+import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
 
 function UploadContent() {
     const [fileList, setFileList] = React.useState([]);
@@ -74,54 +75,57 @@ function UploadContent() {
 
     return (
         <div>
-            <Box>
-                <InstNav />
+            <PrivateRoute path="/secure">
+                <Box>
+                    <InstNav />
 
-                <Stack direction="row" justifyContent="center">
-                    <InstSidebar />
+                    <Stack direction="row" justifyContent="center">
+                        <InstSidebar />
 
-                    <Box sx={{ flexGrow: 1, marginLeft: 2, marginRight: 2 }}>
-                        {/* <Typography variant="h5" sx={{ flexGrow: 1, padding: 2 }}>
+                        <Box sx={{ flexGrow: 1, marginLeft: 2, marginRight: 2 }}>
+                            {/* <Typography variant="h5" sx={{ flexGrow: 1, padding: 2 }}>
                             Upload Content
                         </Typography> */}
 
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '20px 0 0 0' }}>
-                            <UploadFile setFileList={setFileList} />
-                        </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '20px 0 0 0' }}>
+                                <UploadFile setFileList={setFileList} />
+                            </div>
 
-                        <TableContainer component={Paper} sx={{ marginTop: 2, marginBottom: 2, marginLeft: 1, width: '100%' }}>
-                            <Table>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>File Name</TableCell>
-                                        <TableCell>Download Link</TableCell>
-                                        <TableCell>Delete</TableCell>
+                            <TableContainer component={Paper} sx={{ marginTop: 2, marginBottom: 2, marginLeft: 1, width: '100%' }}>
+                                <Table>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>File Name</TableCell>
+                                            <TableCell>Download Link</TableCell>
+                                            <TableCell>Delete</TableCell>
 
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {fileList.map((file, index) => (
-                                        <TableRow key={index}>
-                                            <TableCell>{file.name}</TableCell>
-                                            <TableCell>
-                                                <Button variant="outlined" color="primary" href={file.url} target="_blank" rel="noopener noreferrer">
-                                                    Download
-                                                </Button>
-                                            </TableCell>
-                                            <TableCell>
-                                                <Button variant="outlined" color="error" onClick={() => handleDeleteFile(file)}>
-                                                    Delete
-                                                </Button>
-                                            </TableCell>
                                         </TableRow>
-                                    ))}
-                                </TableBody>
+                                    </TableHead>
+                                    <TableBody>
+                                        {fileList.map((file, index) => (
+                                            <TableRow key={index}>
+                                                <TableCell>{file.name}</TableCell>
+                                                <TableCell>
+                                                    <Button variant="outlined" color="primary" href={file.url} target="_blank" rel="noopener noreferrer">
+                                                        Download
+                                                    </Button>
+                                                </TableCell>
+                                                <TableCell>
+                                                    <Button variant="outlined" color="error" onClick={() => handleDeleteFile(file)}>
+                                                        Delete
+                                                    </Button>
+                                                </TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
 
-                            </Table>
-                        </TableContainer>
-                    </Box>
-                </Stack>
-            </Box>
+                                </Table>
+                            </TableContainer>
+                        </Box>
+                    </Stack>
+                </Box>
+            </PrivateRoute>
+
         </div>
     );
 }

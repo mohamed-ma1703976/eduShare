@@ -6,6 +6,7 @@ import BlogCard from '../../component/Student/BlogCard';
 import { db, collection } from '../../Firebase/Firebase';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import Loading from '../../component/Loading ';
+import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute";
 
 export default function Blogs() {
   const [blogsSnapshot, loading, error] = useCollection(collection(db, 'Blog'));
@@ -34,33 +35,36 @@ export default function Blogs() {
   return (
     <>
       <Box>
-        <StuNav />
-        <Grid container>
-          <Grid item xs={2}>
-            <StuSideBar />
-          </Grid>
-          <Grid item xs={10}>
-            <Typography
-              variant="h5"
-              gutterBottom
-              style={{
-                fontSize: '30px',
-                fontWeight: '1000',
-                margin: '30px 0',
-                color: '#454545',
-              }}
-            >
-              Blogs
-            </Typography>
-            <Grid container spacing={2}>
-              {blogs.map((blog) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} key={blog.id}>
-                  <BlogCard blog={blog} />
-                </Grid>
-              ))}
+        <PrivateRoute path="/secure">
+          <StuNav />
+          <Grid container>
+            <Grid item xs={2}>
+              <StuSideBar />
+            </Grid>
+            <Grid item xs={10}>
+              <Typography
+                variant="h5"
+                gutterBottom
+                style={{
+                  fontSize: '30px',
+                  fontWeight: '1000',
+                  margin: '30px 0',
+                  color: '#454545',
+                }}
+              >
+                Blogs
+              </Typography>
+              <Grid container spacing={2}>
+                {blogs.map((blog) => (
+                  <Grid item xs={12} sm={6} md={4} lg={3} key={blog.id}>
+                    <BlogCard blog={blog} />
+                  </Grid>
+                ))}
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
+        </PrivateRoute>
+
       </Box>
     </>
   );

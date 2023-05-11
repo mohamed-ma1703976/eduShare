@@ -1,45 +1,50 @@
-import React ,{useEffect,useState }from 'react'
+import React, { useEffect, useState } from 'react'
 import InstSidebar from '../../component/Instructors/InstSidebarr'
 import InstNav from '../../component/Instructors/InstNav'
 import Card from '../../component/Card'
 import { Box, Stack } from "@mui/material"
 import MyStudents from '../../component/Instructors/MyStudents'
 import Loading from '../../component/Loading '
+import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
+
 function mystudents() {
-    const [search, setSearch] = React.useState("")
-    const [loading, setLoading] = useState(true);
+  const [search, setSearch] = React.useState("")
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000); // Set timeout to 5 seconds
-    }, []);
-  
-    if (loading) {
-      return <Loading />; // Render Loading component
-    }
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000); // Set timeout to 5 seconds
+  }, []);
 
-    return (
+  if (loading) {
+    return <Loading />; // Render Loading component
+  }
 
-        <div >
-            <Box>
+  return (
 
-                <InstNav setCourseSearch={setSearch} />
+    <div >
+      <PrivateRoute path="/secure">
+        <Box>
 
-                <Stack direction="row">
+          <InstNav setCourseSearch={setSearch} />
 
-                    <InstSidebar />
+          <Stack direction="row">
 
-                    <div style={{ display: "flex", alignItems: "center", margin: "px 0 0 0" }}>
-                    <Box flexGrow={1}>
-                        <MyStudents />
-                    </Box>
-                    </div>
-                </Stack>
+            <InstSidebar />
 
-            </Box>
-        </div>
-    )
+            <div style={{ display: "flex", alignItems: "center", margin: "px 0 0 0" }}>
+              <Box flexGrow={1}>
+                <MyStudents />
+              </Box>
+            </div>
+          </Stack>
+
+        </Box>
+      </PrivateRoute>
+
+    </div>
+  )
 }
 
 export default mystudents

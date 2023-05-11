@@ -6,32 +6,34 @@ import Loading from '../../component/Loading ';
 import StuNav from '../../component/Student/StuNav';
 import StuSideBar from '../../component/Student/StuSideBar';
 import EventCard from '../../component/Student/EventCard'; // You will create this component later
+import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute";
 
 export default function Events() {
-    const [eventsSnapshot, loading, error] = useCollection(collection(db, 'Events'));
-    const events = eventsSnapshot?.docs.map((doc) => ({ id: doc.id, ...doc.data() })) || [];
-  
-    if (loading) {
-      return <Loading />;
-    }
-  
-    if (error) {
-      return (
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '50vh',
-          }}
-        >
-          <Typography variant="h5">Error: {error.message}</Typography>
-        </Box>
-      );
-    }
-  
+  const [eventsSnapshot, loading, error] = useCollection(collection(db, 'Events'));
+  const events = eventsSnapshot?.docs.map((doc) => ({ id: doc.id, ...doc.data() })) || [];
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (error) {
     return (
-      <>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '50vh',
+        }}
+      >
+        <Typography variant="h5">Error: {error.message}</Typography>
+      </Box>
+    );
+  }
+
+  return (
+    <>
+      <PrivateRoute path="/secure">
         <Box>
           <StuNav />
           <Grid container>
@@ -61,6 +63,8 @@ export default function Events() {
             </Grid>
           </Grid>
         </Box>
-      </>
-    );
-  };
+      </PrivateRoute>
+
+    </>
+  );
+};

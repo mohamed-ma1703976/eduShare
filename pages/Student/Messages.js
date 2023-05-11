@@ -5,6 +5,7 @@ import { Card, CardContent, Grid, Typography, Box, CardActions, Button, Dialog, 
 import StuNav from "../../component/Student/StuNav";
 import StuSideBar from "../../component/Student/StuSideBar";
 import { useRouter } from 'next/router';
+import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -91,149 +92,152 @@ function Messages({ userId }) {
   let replayName = stu.find(s => s.id === userId)?.attributes?.displayName
   return (
     <div>
-      <StuNav />
-      <Box sx={{ display: 'flex' }}>
-        <StuSideBar />
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <Toolbar />
-          <Typography
-            variant="h5"
-            sx={{
-              fontSize: "30px",
-              fontWeight: "1000",
-              mb: 3,
-              color: "#454545",
-            }}
-          >
-            Messages
-          </Typography>
-          <Box
-            sx={{
-              p: 2,
-              backgroundColor: "#f5f5f5",
-              borderRadius: 1,
-              minHeight: "70vh",
-            }}
-          >
-            {messages.length > 0 ? (
-              messages.map((message, index) => {
-                const isEven = index % 2 === 0;
-                console.log(message)
-                return (
-                  <Box key={message.id} sx={{ mb: 2, mx: 1 }}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: isEven ? "row" : "row-reverse",
-                        alignItems: "flex-start",
-                      }}
-                    >
+      <PrivateRoute path="/secure">
+        <StuNav />
+        <Box sx={{ display: 'flex' }}>
+          <StuSideBar />
+          <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+            <Toolbar />
+            <Typography
+              variant="h5"
+              sx={{
+                fontSize: "30px",
+                fontWeight: "1000",
+                mb: 3,
+                color: "#454545",
+              }}
+            >
+              Messages
+            </Typography>
+            <Box
+              sx={{
+                p: 2,
+                backgroundColor: "#f5f5f5",
+                borderRadius: 1,
+                minHeight: "70vh",
+              }}
+            >
+              {messages.length > 0 ? (
+                messages.map((message, index) => {
+                  const isEven = index % 2 === 0;
+                  console.log(message)
+                  return (
+                    <Box key={message.id} sx={{ mb: 2, mx: 1 }}>
                       <Box
                         sx={{
-                          borderRadius: 1,
-                          p: 1,
-                          mb: 1,
-                          minWidth: "50%",
-                          maxWidth: "80%",
-                          backgroundColor: isEven ? "#1ABC9C" : "#eee",
+                          display: "flex",
+                          flexDirection: isEven ? "row" : "row-reverse",
+                          alignItems: "flex-start",
                         }}
                       >
-                        <Typography variant="body2">
-                          From Instructor: {message.data.fromName}
-                        </Typography>
-                        <Typography variant="body1">
-                          {message.data.message}
+                        <Box
+                          sx={{
+                            borderRadius: 1,
+                            p: 1,
+                            mb: 1,
+                            minWidth: "50%",
+                            maxWidth: "80%",
+                            backgroundColor: isEven ? "#1ABC9C" : "#eee",
+                          }}
+                        >
+                          <Typography variant="body2">
+                            From Instructor: {message.data.fromName}
+                          </Typography>
+                          <Typography variant="body1">
+                            {message.data.message}
 
-                        </Typography>
-                        {message.data && message?.data?.InstructorReplays?.map(m => {
-                          return <Typography variant="body1">{m} </Typography>
+                          </Typography>
+                          {message.data && message?.data?.InstructorReplays?.map(m => {
+                            return <Typography variant="body1">{m} </Typography>
 
-                        })}
+                          })}
 
+                        </Box>
+
+                        <Button
+                          onClick={() => handleClickOpen(message)}
+                          sx={{
+                            alignSelf: "center",
+                            ml: isEven ? 1 : "auto",
+                            mr: isEven ? "auto" : 1,
+                          }}
+                        >
+                          Reply
+                        </Button>
                       </Box>
-
-                      <Button
-                        onClick={() => handleClickOpen(message)}
-                        sx={{
-                          alignSelf: "center",
-                          ml: isEven ? 1 : "auto",
-                          mr: isEven ? "auto" : 1,
-                        }}
-                      >
-                        Reply
-                      </Button>
-                    </Box>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: isEven ? "row" : "row-reverse",
-                        alignItems: "flex-start",
-                        pl: isEven ? 2 : "auto",
-                        pr: isEven ? "auto" : 2,
-                      }}
-                    >
                       <Box
                         sx={{
-                          borderRadius: 1,
-                          p: 1,
-                          minWidth: "50%",
-                          maxWidth: "80%",
-                          backgroundColor: isEven ? "#eee" : "#1ABC9C",
+                          display: "flex",
+                          flexDirection: isEven ? "row" : "row-reverse",
+                          alignItems: "flex-start",
+                          pl: isEven ? 2 : "auto",
+                          pr: isEven ? "auto" : 2,
                         }}
                       >
-                        <Typography variant="body2">
-                          Replies from: {replayName}
-                        </Typography>
-                        <Typography variant="body1">
-                          {message.data.replays &&
-                            message.data.replays.map((reply, index) => (
-                              <Typography key={index} variant="body1">
-                                {reply}
-                              </Typography>
-                            ))}
-                        </Typography>
+                        <Box
+                          sx={{
+                            borderRadius: 1,
+                            p: 1,
+                            minWidth: "50%",
+                            maxWidth: "80%",
+                            backgroundColor: isEven ? "#eee" : "#1ABC9C",
+                          }}
+                        >
+                          <Typography variant="body2">
+                            Replies from: {replayName}
+                          </Typography>
+                          <Typography variant="body1">
+                            {message.data.replays &&
+                              message.data.replays.map((reply, index) => (
+                                <Typography key={index} variant="body1">
+                                  {reply}
+                                </Typography>
+                              ))}
+                          </Typography>
+                        </Box>
                       </Box>
                     </Box>
-                  </Box>
-                );
-              })
-            ) : (
-              <Typography variant="body1">No messages found.</Typography>
-            )}
+                  );
+                })
+              ) : (
+                <Typography variant="body1">No messages found.</Typography>
+              )}
+            </Box>
+            <Dialog
+              open={open}
+              TransitionComponent={Transition}
+              keepMounted
+              onClose={handleClose}
+              aria-describedby="alert-dialog-slide-description"
+            >
+              <DialogTitle sx={{ fontSize: "30px", textAlign: "center", fontWeight: "750" }}>
+                To: {selectedMessage?.data.fromName}
+              </DialogTitle>
+              <DialogContent>
+                <TextField
+                  id="outlined-multiline-static"
+                  label="Reply Here ..."
+                  multiline
+                  rows={4}
+                  fullWidth
+                  name="rs"
+                  value={rmassgae}
+                  onChange={handleChange}
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose} color="primary">
+                  Cancel
+                </Button>
+                <Button color="primary" onClick={handelSendReplay}>
+                  Send
+                </Button>
+              </DialogActions>
+            </Dialog>
           </Box>
-          <Dialog
-            open={open}
-            TransitionComponent={Transition}
-            keepMounted
-            onClose={handleClose}
-            aria-describedby="alert-dialog-slide-description"
-          >
-            <DialogTitle sx={{ fontSize: "30px", textAlign: "center", fontWeight: "750" }}>
-              To: {selectedMessage?.data.fromName}
-            </DialogTitle>
-            <DialogContent>
-              <TextField
-                id="outlined-multiline-static"
-                label="Reply Here ..."
-                multiline
-                rows={4}
-                fullWidth
-                name="rs"
-                value={rmassgae}
-                onChange={handleChange}
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose} color="primary">
-                Cancel
-              </Button>
-              <Button color="primary" onClick={handelSendReplay}>
-                Send
-              </Button>
-            </DialogActions>
-          </Dialog>
         </Box>
-      </Box>
+      </PrivateRoute>
+
     </div>
   );
 }

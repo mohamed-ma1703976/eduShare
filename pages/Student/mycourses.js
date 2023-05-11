@@ -5,6 +5,7 @@ import StuSideBar from "../../component/Student/StuSideBar";
 import DropCourse from "../../component/Student/DropCourse";
 import { auth } from "../../Firebase/Firebase";
 import Loading from "../../component/Loading ";
+import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
 
 export default function mycourses() {
   const [userId, setUserId] = useState(null);
@@ -34,16 +35,19 @@ export default function mycourses() {
 
   return (
     <Box>
-      {loading && <Loading />}
-      {!loading && (
-        <>
-          <StuNav />
-          <Stack direction="row" spacing={2}>
-            <StuSideBar />
-            <DropCourse userId={userId} />
-          </Stack>
-        </>
-      )}
+      <PrivateRoute path="/secure">
+        {loading && <Loading />}
+        {!loading && (
+          <>
+            <StuNav />
+            <Stack direction="row" spacing={2}>
+              <StuSideBar />
+              <DropCourse userId={userId} />
+            </Stack>
+          </>
+        )}
+      </PrivateRoute>
+
     </Box>
   );
 }

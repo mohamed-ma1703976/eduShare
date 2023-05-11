@@ -82,9 +82,7 @@ console.log(formData)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (formData.CourseDescription || formData.CourseTitle || formData.InstructorName || formData.fileUrl === "") {
-      alert('All Fields Are Required')
-    }
+   
     let collectedData = {
       CourseDescription: formData.CourseDescription,
       CourseTitle: formData.CourseTitle,

@@ -4,6 +4,7 @@ import InstNav from '../../component/Instructors/InstNav';
 import { Box, Stack } from '@mui/material';
 import MyCalendar from '../../component/Instructors/Calendar';
 import Loading from '../../component/Loading ';
+import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
 
 const CalendarPage = () => {
   const [search, setSearch] = useState('');
@@ -22,6 +23,7 @@ const CalendarPage = () => {
   return (
     <div>
       <Box>
+      <PrivateRoute path="/secure">
         <InstNav setCourseSearch={setSearch} />
 
         <Stack direction="row">
@@ -34,6 +36,8 @@ const CalendarPage = () => {
             </Box>
           </div>
         </Stack>
+        </PrivateRoute>
+
       </Box>
     </div>
   );

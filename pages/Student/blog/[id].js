@@ -18,37 +18,38 @@ function BlogPage({ blog }) {
 
   return (
     <div>
-      <Box>
-        <StuNav />
-        <Grid container>
-          <Grid item xs={2}>
-            <StuSideBar />
+        <Box>
+          <StuNav />
+          <Grid container>
+            <Grid item xs={2}>
+              <StuSideBar />
+            </Grid>
+            <Grid item xs={10}>
+              <Box>
+                <img
+                  src={imageSrc}
+                  alt={blog.Title}
+                  style={{
+                    width: '100%',
+                    minHeight: '300px',
+                    maxHeight: '600px',
+                    objectFit: 'cover',
+                  }}
+                />
+                <Typography variant="h4" gutterBottom>
+                  {blog.Title}
+                </Typography>
+                <Typography variant="h6" gutterBottom>
+                  By: {blog.InstructorName}
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  {blog.Body}
+                </Typography>
+              </Box>
+            </Grid>
           </Grid>
-          <Grid item xs={10}>
-            <Box>
-              <img
-                src={imageSrc}
-                alt={blog.Title}
-                style={{
-                  width: '100%',
-                  minHeight: '300px',
-                  maxHeight: '600px',
-                  objectFit: 'cover',
-                }}
-              />
-              <Typography variant="h4" gutterBottom>
-                {blog.Title}
-              </Typography>
-              <Typography variant="h6" gutterBottom>
-                By: {blog.InstructorName}
-              </Typography>
-              <Typography variant="body1" gutterBottom>
-                {blog.Body}
-              </Typography>
-            </Box>
-          </Grid>
-        </Grid>
-      </Box>
+        </Box>
+
     </div>
   );
 }

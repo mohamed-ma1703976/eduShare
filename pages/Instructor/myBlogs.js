@@ -20,6 +20,7 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore, collection, query, where, onSnapshot, doc, deleteDoc } from 'firebase/firestore';
 import InstSidebar from '../../component/Instructors/InstSidebarr';
 import InstNav from '../../component/Instructors/InstNav';
+import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
 
 function MyBlogs() {
   const router = useRouter();
@@ -76,61 +77,66 @@ function MyBlogs() {
 
   return (
     <div>
-      <Box>
-        <InstNav />
+      <PrivateRoute path="/secure">
 
-        <Stack direction="row">
-          <InstSidebar />
+        <Box>
+          <InstNav />
 
-          <Box flexGrow={1}>
-            <Box display="flex" justifyContent="center" mb={3}>
-              <Button
-                variant="contained"
-                sx={{ backgroundColor: '#1abc9c', marginRight: '16px' }}
-                onClick={handleCreateBlog}
-              >
-                Add New Blog
-              </Button>
+          <Stack direction="row">
+            <InstSidebar />
+
+            <Box flexGrow={1}>
+              <Box display="flex" justifyContent="center" mb={3}>
+                <Button
+                  variant="contained"
+                  sx={{ backgroundColor: '#1abc9c', marginRight: '16px' }}
+                  onClick={handleCreateBlog}
+                >
+                  Add New Blog
+                </Button>
+              </Box>
+              <Grid container spacing={3}>
+                {blogs.map((blog) => (
+                  <Grid item xs={12} sm={6} key={blog.id}>
+                    <Card sx={{ width: '60%', margin: '0 auto' }}>
+                      <CardMedia
+                        component="img"
+                        height="140"
+                        image={blog.img ? blog.img : defaultImage} // Use the provided image, or use the default image if not provided
+                        alt={blog.Title}
+                      />
+                      <CardContent>
+                        <Typography variant="h5" component="div">
+                          {blog.Title}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {blog.Body.slice(0, 100)}...
+                        </Typography>
+                      </CardContent>
+                      <CardActions>
+                        <IconButton
+                          aria-label="update"
+                          onClick={() => handleUpdateBlog(blog.id)}
+                        >
+                          <EditIcon />
+                        </IconButton>
+                        <IconButton
+                          aria-label="delete"
+                          onClick={() => handleDeleteBlog(blog.id)}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
             </Box>
-            <Grid container spacing={3}>
-              {blogs.map((blog) => (
-                <Grid item xs={12} sm={6} key={blog.id}>
-                  <Card sx={{ width: '60%', margin: '0 auto' }}>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image={blog.img ? blog.img : defaultImage} // Use the provided image, or use the default image if not provided
-                      alt={blog.Title}
-                    />
-                    <CardContent>
-                      <Typography variant="h5" component="div">
-                        {blog.Title}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {blog.Body.slice(0, 100)}...
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <IconButton
-                        aria-label="update"
-                        onClick={() => handleUpdateBlog(blog.id)}
-                      >
-                        <EditIcon />
-                      </IconButton>
-                      <IconButton
-                        aria-label="delete"
-                        onClick={() => handleDeleteBlog(blog.id)}
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                    </CardActions>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-        </Stack>
-      </Box>
+          </Stack>
+
+        </Box>
+      </PrivateRoute>
+
     </div>
   );
 }

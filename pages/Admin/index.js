@@ -10,6 +10,7 @@ import LineChartComponent from '../../component/Admin/LineChartComponent';
 import InstructorCard from "../../component/Student/InstructorCard";
 import StudentCard from "../../component/Admin/StudentCard";
 import { db } from '../../Firebase/Firebase';
+import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
 
 function AdminDashBoard() {
   const [isLoading, setIsLoading] = useState(true);
@@ -32,69 +33,72 @@ function AdminDashBoard() {
 
   return (
     <div>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <Box>
-          <Navbar />
-          <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-            <Sidebar />
-            <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-              <Card />
-              <Box sx={{ mt: 2 }}>
-                {instructors.length > 0 && (
-                  <>
-                    <Typography
-                      variant="h5"
-                      mt={4}
-                      gutterBottom
-                      sx={{
-                        fontSize: "30px",
-                        fontWeight: "1000",
-                        color: "#454545",
-                      }}
-                    >
-                      Top Instructors
-                    </Typography>
-                    <Grid container spacing={2}>
-                      {instructors.map((instructor) => (
-                        <Grid item xs={12} sm={6} md={4} key={instructor.id}>
-                          <InstructorCard instructor={instructor} />
-                        </Grid>
-                      ))}
-                    </Grid>
-                  </>
-                )}
-              </Box>
-              <Box sx={{ mt: 2 }}>
-                {students.length > 0 && (
-                  <>
-                    <Typography
-                      variant="h5"
-                      mt={4}
-                      gutterBottom
-                      sx={{
-                        fontSize: "30px",
-                        fontWeight: "1000",
-                        color: "#454545",
-                      }}
-                    >
-                      Latest Students
-                    </Typography>
-                    <Grid container spacing={2}>
-                      {students.map((student) => (
-                        <Grid item xs={12} sm={6} md={4} key={student.id}>
-                          <StudentCard student={student} />
-                        </Grid>
-                      ))}
-                    </Grid>
-                  </>
-                )}
+      <PrivateRoute path="/secure">
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <Box>
+            <Navbar />
+            <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+              <Sidebar />
+              <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                <Card />
+                <Box sx={{ mt: 2 }}>
+                  {instructors.length > 0 && (
+                    <>
+                      <Typography
+                        variant="h5"
+                        mt={4}
+                        gutterBottom
+                        sx={{
+                          fontSize: "30px",
+                          fontWeight: "1000",
+                          color: "#454545",
+                        }}
+                      >
+                        Top Instructors
+                      </Typography>
+                      <Grid container spacing={2}>
+                        {instructors.map((instructor) => (
+                          <Grid item xs={12} sm={6} md={4} key={instructor.id}>
+                            <InstructorCard instructor={instructor} />
+                          </Grid>
+                        ))}
+                      </Grid>
+                    </>
+                  )}
+                </Box>
+                <Box sx={{ mt: 2 }}>
+                  {students.length > 0 && (
+                    <>
+                      <Typography
+                        variant="h5"
+                        mt={4}
+                        gutterBottom
+                        sx={{
+                          fontSize: "30px",
+                          fontWeight: "1000",
+                          color: "#454545",
+                        }}
+                      >
+                        Latest Students
+                      </Typography>
+                      <Grid container spacing={2}>
+                        {students.map((student) => (
+                          <Grid item xs={12} sm={6} md={4} key={student.id}>
+                            <StudentCard student={student} />
+                          </Grid>
+                        ))}
+                      </Grid>
+                    </>
+                  )}
+                </Box>
               </Box>
             </Box>
           </Box>
-        </Box>
-      )}
+        )}
+      </PrivateRoute>
+
     </div>
   );
 }

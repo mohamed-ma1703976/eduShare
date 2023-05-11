@@ -3,11 +3,13 @@ import Sidebar from '../../component/Sidebar'
 import { Box, Stack, Grid, Card, CardActions, CardContent, CardMedia, Button, Typography } from "@mui/material"
 import CardList from '../../component/CardList'
 import React from 'react'
+import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
 
 function course() {
     const [search, setSearch] = React.useState("")
 
     return (
+        <PrivateRoute path="/secure">
         <Box>
 
             <Navbar setCourseSearch={setSearch}/>
@@ -27,6 +29,7 @@ function course() {
 
 
         </Box>
+        </PrivateRoute>
 
 
     )

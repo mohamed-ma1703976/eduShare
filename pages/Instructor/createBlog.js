@@ -16,6 +16,7 @@ import { AuthContext } from '../../hooks/AuthProvider';
 import { db } from '../../Firebase/Firebase';
 import { useRouter } from 'next/router';
 import { auth } from '../../Firebase/Firebase';
+import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
 
 function CreateBlog() {
 
@@ -95,123 +96,126 @@ function CreateBlog() {
   };
 
   return (
-    <Grid
-      container
-      justifyContent="center"
-      alignItems="center"
-      style={{
-        backgroundImage: `url(${"https://i.ibb.co/6bJ0VFb/Background.jpg"})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        height: "100%",
-        width: "100%",
-      }}
-    >
-      <Paper
-        sx={{
-          width: { xs: '90%', sm: 500 },
-          minHeight: { xs: '80%', sm: 750 },
-          padding: 10,
-          pb: 5,
-          boxShadow: {
-            xs: "none",
-            md: "0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)",
-          },
+    <PrivateRoute path="/secure">
+      <Grid
+        container
+        justifyContent="center"
+        alignItems="center"
+        style={{
+          backgroundImage: `url(${"https://i.ibb.co/6bJ0VFb/Background.jpg"})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          height: "100%",
+          width: "100%",
         }}
       >
-        <Stack direction={"column"} gap={1} >
-          <Typography variant="h5" align="center">
-            Create Blog
-          </Typography>
-          <form onSubmit={handleSubmit}>
-            <Box display="flex" justifyContent="center" mb={2}>
-              <div
-                style={{
-                  width: '100px',
-                  height: '100px',
-                  backgroundColor: '#f0f0f0',
-                  cursor: 'pointer',
-                  backgroundImage: `url(${imagePreview})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  borderRadius: '5px',
-                }}
-                onClick={() => document.getElementById("blogCover").click()}
-              />
-            </Box>
-            <Box display="flex" justifyContent="center" mb={2}>
-              <label htmlFor="blogCover">
-                <Input
-                  id="blogCover"
-                  type="file"
-                  accept="image/*"
-                  style={{ display: 'none' }}
-                  onChange={(e) => handleImageChange(e)}
+        <Paper
+          sx={{
+            width: { xs: '90%', sm: 500 },
+            minHeight: { xs: '80%', sm: 750 },
+            padding: 10,
+            pb: 5,
+            boxShadow: {
+              xs: "none",
+              md: "0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)",
+            },
+          }}
+        >
+          <Stack direction={"column"} gap={1} >
+            <Typography variant="h5" align="center">
+              Create Blog
+            </Typography>
+            <form onSubmit={handleSubmit}>
+              <Box display="flex" justifyContent="center" mb={2}>
+                <div
+                  style={{
+                    width: '100px',
+                    height: '100px',
+                    backgroundColor: '#f0f0f0',
+                    cursor: 'pointer',
+                    backgroundImage: `url(${imagePreview})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    borderRadius: '5px',
+                  }}
+                  onClick={() => document.getElementById("blogCover").click()}
                 />
+              </Box>
+              <Box display="flex" justifyContent="center" mb={2}>
+                <label htmlFor="blogCover">
+                  <Input
+                    id="blogCover"
+                    type="file"
+                    accept="image/*"
+                    style={{ display: 'none' }}
+                    onChange={(e) => handleImageChange(e)}
+                  />
 
-                <Button
-                  component="span"
-                  variant="outlined"
-                  color="primary"
-                  startIcon={<AddAPhoto />}
-                >
-                  Upload Cover Image
-                </Button>
-              </label>
-            </Box>
-            <TextField
-              id="title"
-              label="Title"
-              type="text"
-              fullWidth
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-            <Box mt={2}>
+                  <Button
+                    component="span"
+                    variant="outlined"
+                    color="primary"
+                    startIcon={<AddAPhoto />}
+                  >
+                    Upload Cover Image
+                  </Button>
+                </label>
+              </Box>
               <TextField
-                id="content"
-                label="Content"
+                id="title"
+                label="Title"
                 type="text"
                 fullWidth
-                multiline
-                rows={4}
-                value={body}
-                onChange={(e) => setBody(e.target.value)}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 required
               />
-            </Box>
+              <Box mt={2}>
+                <TextField
+                  id="content"
+                  label="Content"
+                  type="text"
+                  fullWidth
+                  multiline
+                  rows={4}
+                  value={body}
+                  onChange={(e) => setBody(e.target.value)}
+                  required
+                />
+              </Box>
+              <Box mt={2}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                >
+                  Save Blog
+                </Button>
+              </Box>
+            </form>
+          </Stack>
+          {loading && (
             <Box mt={2}>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                fullWidth
-              >
-                Save Blog
-              </Button>
+              <Typography variant="body2" color="text.secondary">
+                Uploading...
+              </Typography>
             </Box>
-          </form>
-        </Stack>
-        {loading && (
-          <Box mt={2}>
-            <Typography variant="body2" color="text.secondary">
-              Uploading...
-            </Typography>
-          </Box>
-        )}
-        {error && (
-          <Box mt={2}>
-            <Typography variant="body2" color="text.secondary">
-              {error}
-            </Typography>
-          </Box>
-        )}
-      </Paper>
-    </Grid>
+          )}
+          {error && (
+            <Box mt={2}>
+              <Typography variant="body2" color="text.secondary">
+                {error}
+              </Typography>
+            </Box>
+          )}
+        </Paper>
+      </Grid>
+    </PrivateRoute>
+
   );
 }
 
-export default CreateBlog;  
+export default CreateBlog;
 
