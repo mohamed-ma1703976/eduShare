@@ -240,7 +240,9 @@ export default function instructorDashboard() {
               <InstNav />
               <WebBanner />
               <Stack direction="row" spacing={2}>
+              <Grid item xs={2}>
                 <InstSidebar />
+              </Grid>
 
                 <Stack direction="column" spacing={2}>
                   <Card sx={{ minWidth: 500, margin: 2, height: 170 }}>

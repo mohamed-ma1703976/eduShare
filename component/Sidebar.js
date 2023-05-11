@@ -9,6 +9,8 @@ import LocalActivityIcon from '@mui/icons-material/LocalActivity';
 import { useRouter } from "next/router"
 import React, { useEffect } from 'react'
 import { motion, useAnimation } from 'framer-motion';
+import { useMediaQuery } from '@mui/material';
+
 function Sidebar() {
     const router = useRouter()
     const controls = useAnimation();
@@ -45,7 +47,7 @@ function Sidebar() {
                         <ListItemIcon>
                             <GridViewIcon />
                         </ListItemIcon>
-                        <ListItemText sx={{ color: "#909497" }} primary="Dashboard" />
+                        <ListItemText sx={{ color: "#909497" }} primary={useMediaQuery('(min-width:769px)') ? "Dashboard": null} />
                     </ListItemButton>
                 </ListItem>
     
@@ -60,7 +62,7 @@ function Sidebar() {
                         <ListItemIcon>
                             <AutoStoriesIcon />
                         </ListItemIcon>
-                        <ListItemText sx={{ color: "#909497" }} primary="Courses" />
+                        <ListItemText sx={{ color: "#909497" }} primary={useMediaQuery('(min-width:769px)') ? "Courses": null} />
                     </ListItemButton>
                 </ListItem>
     
@@ -75,7 +77,7 @@ function Sidebar() {
                         <ListItemIcon>
                             <Groups2Icon />
                         </ListItemIcon>
-                        <ListItemText sx={{ color: "#909497" }} primary="Instructors" />
+                        <ListItemText sx={{ color: "#909497" }} primary={useMediaQuery('(min-width:769px)') ? "Instructors": null} />
                     </ListItemButton>
                 </ListItem>
     
@@ -90,7 +92,7 @@ function Sidebar() {
                         <ListItemIcon>
                             <Groups3Icon />
                         </ListItemIcon>
-                        <ListItemText sx={{ color: "#909497" }} primary="Students" />
+                        <ListItemText sx={{ color: "#909497" }} primary={useMediaQuery('(min-width:769px)') ? "Students": null} />
                     </ListItemButton>
                 </ListItem>
     
@@ -105,7 +107,7 @@ function Sidebar() {
                         <ListItemIcon>
                             <AccountCircleIcon />
                         </ListItemIcon>
-                        <ListItemText sx={{ color: "#909497" }} primary="Profile" />
+                        <ListItemText sx={{ color: "#909497" }} primary={useMediaQuery('(min-width:769px)') ? "Profile": null} />
                     </ListItemButton>
                 </ListItem>
    

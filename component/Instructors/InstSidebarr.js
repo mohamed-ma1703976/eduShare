@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import Groups3Icon from "@mui/icons-material/Groups3";
+import { useMediaQuery } from '@mui/material';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import HomeIcon from '@mui/icons-material/Home';
 import NewspaperIcon from "@mui/icons-material/Newspaper";
@@ -57,7 +58,7 @@ function InstSidebar() {
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
-            <ListItemText sx={{ color: "#909497" }} primary="Home" />
+            <ListItemText sx={{ color: "#909497" }}  primary={useMediaQuery('(min-width:769px)') ? "Home": null } />
           </ListItemButton>
         </ListItem>
 
@@ -75,7 +76,7 @@ function InstSidebar() {
             <ListItemIcon>
               <AutoStoriesIcon />
             </ListItemIcon>
-            <ListItemText sx={{ color: "#909497" }} primary="Upload Content" />
+            <ListItemText sx={{ color: "#909497" }} primary={useMediaQuery('(min-width:769px)') ? "Upload Content": null } />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -92,7 +93,7 @@ function InstSidebar() {
             <ListItemIcon>
               <Groups3Icon />
             </ListItemIcon>
-            <ListItemText sx={{ color: "#909497" }} primary="My Students" />
+            <ListItemText sx={{ color: "#909497" }}  primary={useMediaQuery('(min-width:769px)') ? "My Students": null } />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -109,7 +110,7 @@ function InstSidebar() {
             <ListItemIcon>
               <NewspaperIcon />
             </ListItemIcon>
-            <ListItemText sx={{ color: "#909497" }} primary="My Blogs" />
+            <ListItemText sx={{ color: "#909497" }} primary={useMediaQuery('(min-width:769px)') ? "My Blogs": null } /> 
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -126,7 +127,7 @@ function InstSidebar() {
             <ListItemIcon>
               <CalendarMonthIcon />
             </ListItemIcon>
-            <ListItemText sx={{ color: "#909497" }} primary="My Calendar" />
+            <ListItemText sx={{ color: "#909497" }} primary={useMediaQuery('(min-width:769px)') ? "My Calendar": null } />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -143,7 +144,7 @@ function InstSidebar() {
             <ListItemIcon>
               <MessageIcon />
             </ListItemIcon>
-            <ListItemText sx={{ color: "#909497" }} primary="Inbox" />
+            <ListItemText sx={{ color: "#909497" }}  primary={useMediaQuery('(min-width:769px)') ? "Inbox": null } />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -160,7 +161,7 @@ function InstSidebar() {
             <ListItemIcon>
               <AccountCircleIcon />
             </ListItemIcon>
-            <ListItemText sx={{ color: "#909497" }} primary="Profile" />
+            <ListItemText sx={{ color: "#909497" }}primary={useMediaQuery('(min-width:769px)') ? "Profile": null }  />
           </ListItemButton>
         </ListItem>
       </List>
