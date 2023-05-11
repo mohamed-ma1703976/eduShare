@@ -9,11 +9,12 @@ import Loading from '../../../component/Loading ';
 
 function BlogPage({ blog }) {
   const router = useRouter();
-  const imageSrc = blog.img ? blog.img : 'https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png';
-
-  if (router.isFallback) {
+  if (router.isFallback || !blog) {
     return <Loading />;
   }
+
+  const imageSrc = blog.img ? blog.img : 'https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png';
+
 
   return (
     <div>
