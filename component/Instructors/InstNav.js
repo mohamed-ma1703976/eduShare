@@ -7,6 +7,8 @@ import { useRouter } from "next/router"
 import useFetch from '../../hooks/useFetch';
 import { auth, collection, db } from '../../Firebase/Firebase';
 import { getDocs } from 'firebase/firestore';
+import { signOut } from 'firebase/auth';
+
 function InstNav({ setCourseSearch }) {
     const { data, loading, error } = useFetch('http://localhost:1337/api/logins')
 
@@ -35,6 +37,20 @@ function InstNav({ setCourseSearch }) {
     let name = instructors.find(s => s.id === idOfCurrentUser)?.attributes.displayName
 
     console.log(name)
+
+    function handelSignOut() {
+
+        signOut(auth)
+            .then(() => {
+                // Sign-out successful.
+                console.log('User signed out.');
+            })
+            .catch((error) => {
+                // An error happened.
+                console.error(error);
+            });
+        router.push('/')
+    }
     return (
 
         <AppBar position='sticky' sx={{ backgroundColor: "#FDFEFE" }}>
@@ -70,7 +86,7 @@ function InstNav({ setCourseSearch }) {
                 }}
                 sx={{ margin: "30px 0 0 0", cursor: "pointer" }}
             >
-                <MenuItem onClick={() => router.push('/')} sx={{ cursor: "pointer" }}>Logout</MenuItem>
+                <MenuItem onClick={handelSignOut} sx={{ cursor: "pointer" }}>Logout</MenuItem>
             </Menu>
         </AppBar>
     )

@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from "next/router"
 import { auth, collection, db } from '../../Firebase/Firebase';
 import { getDocs } from 'firebase/firestore';
+import { signOut } from 'firebase/auth';
 function StuNav({ setCourseSearch }) {
 
     const router = useRouter()
@@ -34,6 +35,20 @@ function StuNav({ setCourseSearch }) {
 
     const idOfCurrentUser = auth?.currentUser?.uid
     let name = students.find(s => s.id === idOfCurrentUser)?.attributes.displayName
+
+    function handelSignOut() {
+
+        signOut(auth)
+            .then(() => {
+                // Sign-out successful.
+                console.log('User signed out.');
+            })
+            .catch((error) => {
+                // An error happened.
+                console.error(error);
+            });
+        router.push('/')
+    }
     return (
 
         <AppBar position='sticky' sx={{ backgroundColor: "#FDFEFE" }}>
@@ -65,7 +80,7 @@ function StuNav({ setCourseSearch }) {
                 }}
                 sx={{ margin: "30px 0 0 0", cursor: "pointer" }}
             >
-                <MenuItem onClick={() => router.push('/')} sx={{ cursor: "pointer" }}>Logout</MenuItem>
+                <MenuItem onClick={handelSignOut} sx={{ cursor: "pointer" }}>Logout</MenuItem>
             </Menu>
         </AppBar>
     )

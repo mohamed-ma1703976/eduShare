@@ -9,6 +9,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import React, { useState } from 'react'
 import { useRouter } from "next/router"
 import useFetch from '../hooks/useFetch';
+import { signOut } from 'firebase/auth';
+import { auth } from '../Firebase/Firebase';
 function Navbar({ setCourseSearch }) {
     const router = useRouter()
 
@@ -16,7 +18,19 @@ function Navbar({ setCourseSearch }) {
     const [path, setPath] = useState("Admin/course")
 
 
+    function handelSignOut() {
 
+        signOut(auth)
+            .then(() => {
+                // Sign-out successful.
+                console.log('User signed out.');
+            })
+            .catch((error) => {
+                // An error happened.
+                console.error(error);
+            });
+        router.push('/')
+    }
 
     return (
 
@@ -72,7 +86,7 @@ function Navbar({ setCourseSearch }) {
                 }}
                 sx={{ margin: "30px 0 0 0", cursor: "pointer" }}
             >
-                <MenuItem onClick={() => router.push('/')} sx={{ cursor: "pointer" }}>Logout</MenuItem>
+                <MenuItem onClick={handelSignOut} sx={{ cursor: "pointer" }}>Logout</MenuItem>
             </Menu>
         </AppBar>
     )
