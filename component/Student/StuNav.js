@@ -37,22 +37,18 @@ function StuNav({ setCourseSearch }) {
     return (
 
         <AppBar position='sticky' sx={{ backgroundColor: "#FDFEFE" }}>
-            <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }} >
-
-                <Toolbar >
-                    <Typography variant='h6' sx={{ color: "#454545", fontWeight: "800", margin: "0 0 0 -23px", cursor: "pointer" }}>Edu<span style={{ color: "#1ABC9C" }} onClick={() => router.push("/Student")}>Share</span></Typography>
-                    <Typography variant='h6' sx={{ padding: "6px", margin: "0 0 0 66px", color: "#454545", fontWeight: "800", cursor: "pointer" }}>Wellcome  {name} !  </Typography>
-                </Toolbar>
-
-
-
-                <Toolbar >
-                    <MapsUgcIcon sx={{ margin: "0 10px 0 10px", color: "#B2BABB", cursor: "pointer" }} />
-                    <NotificationsNoneIcon sx={{ margin: "0 10px 0 10px", color: "#B2BABB", cursor: "pointer" }} />
+            <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <Typography variant='h6' sx={{ color: "#454545", fontWeight: "800", margin: "0 0 0 -23px", cursor: "pointer" }}>
+                    Edu<span style={{ color: "#1ABC9C" }} onClick={() => router.push("/Student")}>Share</span>
+                </Typography>
+                <Typography variant='h6' sx={{ padding: "6px", margin: "0 0 0 66px", color: "#454545", fontWeight: "800", cursor: "pointer" }}>
+                    Welcome {name}!
+                </Typography>
+                <div>
+                    {/* <MapsUgcIcon sx={{ margin: "0 10px 0 10px", color: "#B2BABB", cursor: "pointer" }} />
+                    <NotificationsNoneIcon sx={{ margin: "0 10px 0 10px", color: "#B2BABB", cursor: "pointer" }} /> */}
                     <SettingsIcon onClick={(e) => setOpen(true)} sx={{ margin: "0 10px 0 10px", color: "#B2BABB", cursor: "pointer" }} />
-
-                </Toolbar>
-
+                </div>
             </Toolbar>
             <Menu
                 id="demo-positioned-menu"

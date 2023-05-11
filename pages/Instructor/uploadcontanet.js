@@ -81,9 +81,9 @@ function UploadContent() {
                     <InstSidebar />
 
                     <Box sx={{ flexGrow: 1, marginLeft: 2, marginRight: 2 }}>
-                        <Typography variant="h5" sx={{ flexGrow: 1, padding: 2 }}>
+                        {/* <Typography variant="h5" sx={{ flexGrow: 1, padding: 2 }}>
                             Upload Content
-                        </Typography>
+                        </Typography> */}
 
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '20px 0 0 0' }}>
                             <UploadFile setFileList={setFileList} />

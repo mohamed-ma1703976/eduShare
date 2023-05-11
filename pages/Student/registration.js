@@ -166,9 +166,9 @@ export default function Registration() {
                     onChange={handleChange}
                     sx={{ flexGrow: 1 }}
                     margin="normal"
-              placeholder="Password"
-              type="password"
-              fullWidth
+                    placeholder="Password"
+                    type="password"
+                    fullWidth
                   />
                 </Stack>
 
@@ -192,8 +192,8 @@ export default function Registration() {
               {/* <Link href="/" variant="body2" color="inherit"> Back to login page</Link> */}
 
               <Typography variant="body2" color="inherit" sx={{
-             textDecoration: 'underline', cursor:"pointer"
-          }} onClick={()=>router.push('/')}> Back to login page</Typography>
+                textDecoration: 'underline', cursor: "pointer"
+              }} onClick={() => router.push('/')}> Back to login page</Typography>
             </div>
           </Stack>
         </Paper>

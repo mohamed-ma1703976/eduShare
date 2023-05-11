@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 import { app } from "../../Firebase/Firebase";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import getUserRole from "../../hooks/getRole";
-import { MessageOutlined, FavoriteOutlined } from "@mui/icons-material";
+// import { MessageOutlined, FavoriteOutlined } from "@mui/icons-material";
 import { motion } from "framer-motion";
 
 const Profile = () => {
@@ -24,6 +24,7 @@ const Profile = () => {
   const { id } = router.query;
   const [sendMessageOpen, setSendMessageOpen] = useState(false);
   const [userRole, setUserRole] = useState("");
+  
   const handleSendMessageClick = () => {
     setSendMessageOpen(true);
   };

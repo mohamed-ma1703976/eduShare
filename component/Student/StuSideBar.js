@@ -10,6 +10,8 @@ import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import { motion, useAnimation } from 'framer-motion';
 import EventIcon from '@mui/icons-material/Event';
+import { useMediaQuery } from '@mui/material';
+
 function StuSideBar() {
     const router = useRouter();
     const controls = useAnimation();
@@ -31,7 +33,14 @@ function StuSideBar() {
             flex={1}
             p={1}
             position="sticky"
-            sx={{ maxWidth: '250px' }}
+            sx={{
+                maxWidth: '250px',
+                '@media (max-width: 768px)': {
+                    position: 'static',
+                    maxWidth: '100%',
+                    marginBottom: '1rem'
+                }
+            }}
         >
             <List>
                 <ListItem disablePadding>
@@ -48,7 +57,7 @@ function StuSideBar() {
                         <ListItemIcon>
                             <HomeIcon />
                         </ListItemIcon>
-                        <ListItemText sx={{ color: "#909497" }} primary="Home" />
+                        <ListItemText sx={{ color: "#909497" }} primary={useMediaQuery('(min-width:769px)') ? 'Home' : null} />
                     </ListItemButton>
                 </ListItem>
 
@@ -66,7 +75,7 @@ function StuSideBar() {
                         <ListItemIcon>
                             <AutoStoriesIcon />
                         </ListItemIcon>
-                        <ListItemText sx={{ color: "#909497" }} primary="My Courses" />
+                        <ListItemText sx={{ color: "#909497" }} primary={useMediaQuery('(min-width:769px)') ? 'My Courses' : null} />
                     </ListItemButton>
                 </ListItem>
 
@@ -83,8 +92,8 @@ function StuSideBar() {
                     >
                         <ListItemIcon>
                             <Groups3Icon />
-                        </ListItemIcon>
-                        <ListItemText sx={{ color: "#909497" }} primary="Instructors Achievements" />
+                        </ListItemIcon>   
+                        <ListItemText sx={{ color: "#909497" }} primary={useMediaQuery('(min-width:769px)') ? 'Instructors Achievements' : null}/>
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
@@ -101,7 +110,7 @@ function StuSideBar() {
                         <ListItemIcon>
                             <LibraryBooksIcon />
                         </ListItemIcon>
-                        <ListItemText sx={{ color: "#909497" }} primary="Courses" />
+                        <ListItemText sx={{ color: "#909497" }} primary={useMediaQuery('(min-width:769px)') ? 'Courses' : null} />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
@@ -118,7 +127,7 @@ function StuSideBar() {
                         <ListItemIcon>
                             <NewspaperIcon />
                         </ListItemIcon>
-                        <ListItemText sx={{ color: "#909497" }} primary="Blogs" />
+                        <ListItemText sx={{ color: "#909497" }} primary={useMediaQuery('(min-width:769px)') ? 'Blogs' : null} />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
@@ -135,11 +144,12 @@ function StuSideBar() {
                         <ListItemIcon>
                             <EventIcon />
                         </ListItemIcon>
-                        <ListItemText sx={{ color: "#909497" }} primary="Events" />
+                        <ListItemText sx={{ color: "#909497" }} primary
+                            ={useMediaQuery('(min-width:769px)') ? 'Events' : null} />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
-                <ListItemButton
+                    <ListItemButton
                         onClick={() => router.push('/Student/Messages')}
                         sx={{
                             "&:hover": {
@@ -152,9 +162,9 @@ function StuSideBar() {
                         <ListItemIcon>
                             <MessageIcon />
                         </ListItemIcon>
-                        <ListItemText sx={{ color: "#909497" }} primary="Inbox" />
+                        <ListItemText sx={{ color: "#909497" }} primary={useMediaQuery('(min-width:769px)') ? 'Inbox' : null} />
                     </ListItemButton>
-                    </ListItem>
+                </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton
                         onClick={() => router.push('/Student/Profile')}
@@ -169,7 +179,7 @@ function StuSideBar() {
                         <ListItemIcon>
                             <AccountCircleIcon />
                         </ListItemIcon>
-                        <ListItemText sx={{ color: "#909497" }} primary="Profile" />
+                        <ListItemText sx={{ color: "#909497" }} primary={useMediaQuery('(min-width:769px)') ? 'Profile' : null} />
                     </ListItemButton>
                 </ListItem>
             </List>

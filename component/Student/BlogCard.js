@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 const BlogCard = ({ blog }) => {
     const { id, Title, Instructor,instruuctorName, img } = blog;
     const [InstructorName, setInstructorName] = useState('');
-  
+  console.log(instruuctorName)
     useEffect(() => {
       const fetchInstructorName = async () => {
         const db = getFirestore();

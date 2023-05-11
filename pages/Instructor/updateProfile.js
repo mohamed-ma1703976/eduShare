@@ -28,7 +28,7 @@ import {
 
 export default function UpdateInstructorProfile() {
   const router = useRouter();
-  const { userId } = useContext(AuthContext);
+  // const { userId } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [profileData, setProfileData] = useState({
     displayName: '',
@@ -39,7 +39,7 @@ export default function UpdateInstructorProfile() {
   });
   const [profilePicturePreview, setProfilePicturePreview] = useState(null);
   const [coverPicturePreview, setCoverPicturePreview] = useState(null);
-
+  let userId = auth?.currentUser?.uid
   // Fetch user data and set the initial state
   useEffect(() => {
     async function fetchUserData() {
@@ -116,7 +116,7 @@ export default function UpdateInstructorProfile() {
   const handleUpdateProfile = async () => {
     setLoading(true);
     const userRole = await getUserRole(userId, app);
-  
+
     const profilePictureURL = await uploadImage(
       profileData.profilePicture,
       `${userRole}/${userId}/profilePicture`
@@ -125,21 +125,21 @@ export default function UpdateInstructorProfile() {
       profileData.coverPicture,
       `${userRole}/${userId}/coverPicture`
     );
-  
+
     const updatedProfileData = {
       ...profileData,
       profilePicture: profilePictureURL,
       coverPicture: coverPictureURL,
     };
-  
+
     const db = getFirestore(app);
     const userDocRef = doc(db, userRole, userId);
     await updateDoc(userDocRef, updatedProfileData);
-  
+
     setLoading(false);
     router.push('/Instructor/profile');
   };
-    
+
   return (
     <Grid
       container
@@ -187,82 +187,84 @@ export default function UpdateInstructorProfile() {
           >
             <Stack spacing={3} padding={3}>
 
-        <Box sx={{ textAlign: 'center' }}>
-          <img
-            src={coverPicturePreview}
-            alt="Cover Picture"
-            style={{ width: '100%', height: 'auto', cursor: 'pointer' }}
-            onClick={() => document.getElementById('coverPictureInput').click()}
-          />
-          <input
-            type="file"
-            accept="image/*"
-            id="coverPictureInput"
-            hidden
-            onChange={handleCoverPictureChange}
-          />
-        </Box>
-        <Box sx={{ textAlign: 'center' }}>
-          <Avatar
-            src={profilePicturePreview}
-            alt="Profile Picture"
-            sx={{ width: 140,
-                height: 140,
-                marginBottom: 2,
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                border: "4px solid #ffffff",
-                position: "relative",
-                top: "-70px", }}
-            onClick={() => document.getElementById('profilePictureInput').click()}
-            
-          />
-          <input
-            type="file"
-            accept="image/*"
-            id="profilePictureInput"
-            hidden
-            onChange={handleProfilePictureChange}
-          />
-        </Box>
-        <TextField
-          fullWidth
-          name="displayName"
-          label="Display Name"
-          value={profileData.displayName}
-          onChange={handleChange}
-        />
+              <Box sx={{ textAlign: 'center' }}>
+                <img
+                  src={coverPicturePreview}
+                  alt="Cover Picture"
+                  style={{ width: '100%', height: 'auto', cursor: 'pointer' }}
+                  onClick={() => document.getElementById('coverPictureInput').click()}
+                />
+                <input
+                  type="file"
+                  accept="image/*"
+                  id="coverPictureInput"
+                  hidden
+                  onChange={handleCoverPictureChange}
+                />
+              </Box>
+              <Box sx={{ textAlign: 'center' }}>
+                <Avatar
+                  src={profilePicturePreview}
+                  alt="Profile Picture"
+                  sx={{
+                    width: 140,
+                    height: 140,
+                    marginBottom: 2,
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                    border: "4px solid #ffffff",
+                    position: "relative",
+                    top: "-70px",
+                  }}
+                  onClick={() => document.getElementById('profilePictureInput').click()}
 
-        <TextField
-          fullWidth
-          name="title"
-          label="Title"
-          value={profileData.title}
-          onChange={handleChange}
-        />
+                />
+                <input
+                  type="file"
+                  accept="image/*"
+                  id="profilePictureInput"
+                  hidden
+                  onChange={handleProfilePictureChange}
+                />
+              </Box>
+              <TextField
+                fullWidth
+                name="displayName"
+                label="Display Name"
+                value={profileData.displayName}
+                onChange={handleChange}
+              />
 
-        <TextField
-          fullWidth
-          name="bio"
-          label="Bio"
-          multiline
-          rows={4}
-          value={profileData.bio}
-          onChange={handleChange}
-        />
+              <TextField
+                fullWidth
+                name="title"
+                label="Title"
+                value={profileData.title}
+                onChange={handleChange}
+              />
 
-        <Button
-          fullWidth
-          variant="contained"
-          color="primary"
-          disabled={loading}
-          onClick={handleUpdateProfile}
-        >
-          Update Profile
-        </Button>
+              <TextField
+                fullWidth
+                name="bio"
+                label="Bio"
+                multiline
+                rows={4}
+                value={profileData.bio}
+                onChange={handleChange}
+              />
+
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                disabled={loading}
+                onClick={handleUpdateProfile}
+              >
+                Update Profile
+              </Button>
+            </Stack>
+          </form>
         </Stack>
-        </form>
-      </Stack>
-    </Paper>
-  </Grid>
-    );
-    }
+      </Paper>
+    </Grid>
+  );
+}

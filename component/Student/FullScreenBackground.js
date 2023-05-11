@@ -1,6 +1,7 @@
 // FullScreenBackground.js
 import React from 'react';
 import { Box, Button, Typography } from '@mui/material';
+import { useMediaQuery } from '@mui/material';
 
 const FullScreenBackground = ({ imageUrl, title, subTitle, buttonText }) => {
   return (

@@ -70,7 +70,7 @@ function CreateBlog() {
       Title: title,
       Body: body,
       AuthorId: userId,
-      img: imageUrl,
+      img: url,
       instruuctorName: nameOfInst
     });
 

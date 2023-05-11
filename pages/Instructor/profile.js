@@ -15,7 +15,7 @@ const Profile = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-  const { userId, userRole } = useContext(AuthContext);
+  const {userRole } = useContext(AuthContext);
 
   const [useRole, setUseRole] = useState("");
 

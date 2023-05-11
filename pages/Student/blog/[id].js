@@ -90,7 +90,7 @@ export async function getStaticProps({ params }) {
     Title: blogData.Title,
     Body: blogData.Body,
     img: blogData.img,
-    InstructorName: instructorName,
+    InstructorName: blogData.instruuctorName,
   };
 
   return {

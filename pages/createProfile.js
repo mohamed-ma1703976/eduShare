@@ -1,5 +1,4 @@
 // createProfile.js
-import { AuthContext } from "../hooks/AuthProvider";
 import {
   Button,
   Grid,
@@ -11,21 +10,23 @@ import {
   Alert,
   InputAdornment,
   IconButton,
+  Avatar
 } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+// import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Box } from "@mui/system";
+import { AuthContext } from "../hooks/AuthProvider";
 import { useRouter } from "next/router";
 import { app, auth } from "../Firebase/Firebase";
 import getUserRole from '../hooks/getRole';
 
 import { getFirestore, doc, setDoc, getDoc, updateDoc, collection } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { Avatar } from "@mui/material";
+// import { Avatar } from "@mui/material";
 import AddAPhoto from "@mui/icons-material/AddAPhoto";
 import React, { useContext, useState, useEffect } from "react";
 export default function CreateProfile() {
   const router = useRouter();
-  const { userId } = useContext(AuthContext); // Move this line here  
+  //const { userId } = useContext(AuthContext); // Move this line here  
   const [profilePicturePreview, setProfilePicturePreview] = useState(null);
   const [coverPicturePreview, setCoverPicturePreview] = useState(null);
   const [error, setError] = useState(null);

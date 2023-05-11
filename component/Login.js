@@ -137,7 +137,7 @@ export default function App() {
             display: "flex", flexDirection: "column", margin: "10px 10px 10px 10px"
           }} onSubmit={handelLogin}>
 
-            {loginError && <Alert severity="error" sx={{ width: "85%", margin: "0 0 0 16px" }}>Email or Password is Wrong !</Alert>}
+            {loginError && <Alert severity="error" sx={{ width: "89%", margin: "0 0 0 10px" }}>Email or Password is Wrong !</Alert>}
             <TextField
               id="outlined-basic"
               label="Enter Email"
@@ -158,14 +158,16 @@ export default function App() {
               margin="normal"
               placeholder="Password"
               type="password"
-              fullWidth
+              //fullWidth
             />
             <Button
               sx={{
                 backgroundColor: "#00adb5",
                 height: 45,
                 fontSize: 22,
-                fontWeight: "bold"
+                fontWeight: "bold",
+                margin:"0 0 0 10px",
+                width:"96.5%"
               }}
               variant="contained"
               type="submit"
@@ -178,7 +180,7 @@ export default function App() {
         {/* <Link href="signup/register" variant="body2" color="inherit"> Don't have an account? Register</Link> */}
 
         <Typography variant="body2" color="inherit" sx={{
-          textDecoration: 'underline', cursor: "pointer"
+          textDecoration: 'underline', cursor: "pointer" ,margin:"0 0 0 18px"
         }} onClick={() => router.push('/signup/register')}>Don't have an account? Register</Typography>
       </Paper>
     </Grid >

@@ -143,7 +143,7 @@ export default function Registration() {
                                         variant="outlined"
                                         name="firstName"
                                         onChange={handleChange}
-                                        sx={{ margin: "10px 10px 10px 10px" }}
+                                        sx={{ margin: "10px 10px 10px 10px" ,width:"50%"}}
 
 
 
@@ -155,7 +155,7 @@ export default function Registration() {
                                         variant="outlined"
                                         name="lastName"
                                         onChange={handleChange}
-                                        sx={{ margin: "10px 10px 10px 10px" }}
+                                        sx={{ margin: "10px 10px 10px 10px" ,width:"50%"}}
 
 
                                     />
@@ -170,7 +170,7 @@ export default function Registration() {
                                         variant="outlined"
                                         name="phone"
                                         onChange={handleChange}
-                                        sx={{ margin: "10px 10px 10px 10px" }}
+                                        sx={{ margin: "10px 10px 10px 10px",width:"50%" }}
 
 
                                     />
@@ -181,7 +181,7 @@ export default function Registration() {
                                         variant="outlined"
                                         name="specialization"
                                         onChange={handleChange}
-                                        sx={{ margin: "10px 10px 10px 10px" }}
+                                        sx={{ margin: "10px 10px 10px 10px",width:"50%" }}
 
 
 
@@ -195,7 +195,7 @@ export default function Registration() {
                                         variant="outlined"
                                         name="personalInfo"
                                         onChange={handleChange}
-                                        sx={{ margin: "10px 10px 10px 10px" }}
+                                        sx={{ margin: "10px 10px 10px 10px",width:"50%" }}
 
 
                                     />
@@ -205,7 +205,7 @@ export default function Registration() {
                                         variant="outlined"
                                         name="email"
                                         onChange={handleChange}
-                                        sx={{ margin: "10px 10px 10px 10px" }}
+                                        sx={{ margin: "10px 10px 10px 10px",width:"50%" }}
 
 
                                     />

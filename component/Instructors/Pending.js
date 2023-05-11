@@ -14,16 +14,16 @@ const Container = styled('div')(({ theme }) => ({
 
 const Heading = styled(Typography)(({ theme }) => ({
     marginBottom: theme.spacing(2),
-    color: theme.palette.text.primary,
+    color: 'Black',
 }));
 
 const Subheading = styled(Typography)(({ theme }) => ({
     marginBottom: theme.spacing(2),
-    color: theme.palette.text.secondary,
+    color: 'Black',
 }));
 
 const StyledButton = styled(Button)(({ theme }) => ({
-    marginTop: theme.spacing(2),
+    marginTop:'2px',
 }));
 
 const Pending = () => {

@@ -9,10 +9,12 @@ import { Box, ButtonBase, CardMedia, CircularProgress } from "@mui/material";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
+
+
 export default function InstructorsAchivementCards() {
   const [achivment, setAchivment] = React.useState([]);
   const [instructor, setInstructor] = React.useState([]);
-
+  
   React.useEffect(() => {
     const fetchAchivment = async () => {
       const studentCollection = collection(db, "AchievementCard");
@@ -119,7 +121,7 @@ export default function InstructorsAchivementCards() {
                         flexDirection: "column",
                         Height: "100",
                         cursor: "pointer",
-                        Width: "300px",
+                        Width:  '300px' ,
                         margin: "10px 20px 0 0",
                         backgroundColor: "#f5f5f5",
                       }}

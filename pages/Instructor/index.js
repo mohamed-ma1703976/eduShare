@@ -38,7 +38,7 @@ export default function instructorDashboard() {
   const [selectedCompation, setSelectedCompation] = useState(null);
   const instructorFirstName = instructors.find(s => s.id === userId)?.attributes.firstName
   const instructorLastName = instructors.find(s => s.id === userId)?.attributes.lastName
-  const JoindComputionByInst = instructors.find(s => s.id === userId)?.attributes.joinedCompations ?? []
+  const JoindComputionByInst = instructors.find(s => s.id === userId)?.attributes.joinedCompations || []
   const handleJoinCompation = (compation) => {
     setSelectedCompation(compation);
     setOpenDialog(true);
