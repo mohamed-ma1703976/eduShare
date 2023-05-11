@@ -8,7 +8,7 @@ import {
   Typography,
   Link,
   Alert,
-  
+
 } from "@mui/material";
 import { Box } from "@mui/system";
 import Router, { useRouter } from "next/router";
@@ -178,8 +178,8 @@ export default function App() {
         {/* <Link href="signup/register" variant="body2" color="inherit"> Don't have an account? Register</Link> */}
 
         <Typography variant="body2" color="inherit" sx={{
-             textDecoration: 'underline', cursor:"pointer"
-          }} onClick={()=>router.push('signup/register')}>Don't have an account? Register</Typography>
+          textDecoration: 'underline', cursor: "pointer"
+        }} onClick={() => router.push('/signup/register')}>Don't have an account? Register</Typography>
       </Paper>
     </Grid >
   );
