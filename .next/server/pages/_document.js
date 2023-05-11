@@ -1,819 +1,112 @@
 "use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
 (() => {
 var exports = {};
-exports.id = 660;
-exports.ids = [660];
+exports.id = "pages/_document";
+exports.ids = ["pages/_document"];
 exports.modules = {
 
-/***/ 7081:
+/***/ "./node_modules/next/dist/pages/_document.js":
+/*!***************************************************!*\
+  !*** ./node_modules/next/dist/pages/_document.js ***!
+  \***************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-
-Object.defineProperty(exports, "__esModule", ({
-    value: true
-}));
-exports.Html = Html;
-exports.Main = Main;
-exports["default"] = void 0;
-var _react = _interopRequireWildcard(__webpack_require__(6689));
-var _constants = __webpack_require__(6724);
-var _getPageFiles = __webpack_require__(4140);
-var _htmlescape = __webpack_require__(9716);
-var _isError = _interopRequireDefault(__webpack_require__(676));
-var _htmlContext = __webpack_require__(8743);
-class Document extends _react.default.Component {
-    /**
-   * `getInitialProps` hook returns the context object with the addition of `renderPage`.
-   * `renderPage` callback executes `React` rendering logic synchronously to support server-rendering wrappers
-   */ static getInitialProps(ctx) {
-        return ctx.defaultGetInitialProps(ctx);
-    }
-    render() {
-        return /*#__PURE__*/ _react.default.createElement(Html, null, /*#__PURE__*/ _react.default.createElement(Head, null), /*#__PURE__*/ _react.default.createElement("body", null, /*#__PURE__*/ _react.default.createElement(Main, null), /*#__PURE__*/ _react.default.createElement(NextScript, null)));
-    }
-}
-exports["default"] = Document;
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : {
-        default: obj
-    };
-}
-function _getRequireWildcardCache() {
-    if (typeof WeakMap !== "function") return null;
-    var cache = new WeakMap();
-    _getRequireWildcardCache = function() {
-        return cache;
-    };
-    return cache;
-}
-function _interopRequireWildcard(obj) {
-    if (obj && obj.__esModule) {
-        return obj;
-    }
-    if (obj === null || typeof obj !== "object" && typeof obj !== "function") {
-        return {
-            default: obj
-        };
-    }
-    var cache = _getRequireWildcardCache();
-    if (cache && cache.has(obj)) {
-        return cache.get(obj);
-    }
-    var newObj = {};
-    var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
-    for(var key in obj){
-        if (Object.prototype.hasOwnProperty.call(obj, key)) {
-            var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
-            if (desc && (desc.get || desc.set)) {
-                Object.defineProperty(newObj, key, desc);
-            } else {
-                newObj[key] = obj[key];
-            }
-        }
-    }
-    newObj.default = obj;
-    if (cache) {
-        cache.set(obj, newObj);
-    }
-    return newObj;
-}
-function getDocumentFiles(buildManifest, pathname, inAmpMode) {
-    const sharedFiles = (0, _getPageFiles).getPageFiles(buildManifest, "/_app");
-    const pageFiles =  true && inAmpMode ? [] : (0, _getPageFiles).getPageFiles(buildManifest, pathname);
-    return {
-        sharedFiles,
-        pageFiles,
-        allFiles: [
-            ...new Set([
-                ...sharedFiles,
-                ...pageFiles
-            ])
-        ]
-    };
-}
-function getPolyfillScripts(context, props) {
-    // polyfills.js has to be rendered as nomodule without async
-    // It also has to be the first script to load
-    const { assetPrefix , buildManifest , devOnlyCacheBusterQueryString , disableOptimizedLoading , crossOrigin  } = context;
-    return buildManifest.polyfillFiles.filter((polyfill)=>polyfill.endsWith(".js") && !polyfill.endsWith(".module.js")).map((polyfill)=>/*#__PURE__*/ _react.default.createElement("script", {
-            key: polyfill,
-            defer: !disableOptimizedLoading,
-            nonce: props.nonce,
-            crossOrigin: props.crossOrigin || crossOrigin,
-            noModule: true,
-            src: `${assetPrefix}/_next/${polyfill}${devOnlyCacheBusterQueryString}`
-        }));
-}
-function hasComponentProps(child) {
-    return !!child && !!child.props;
-}
-function AmpStyles({ styles  }) {
-    if (!styles) return null;
-    // try to parse styles from fragment for backwards compat
-    const curStyles = Array.isArray(styles) ? styles : [];
-    if (styles.props && // @ts-ignore Property 'props' does not exist on type ReactElement
-    Array.isArray(styles.props.children)) {
-        const hasStyles = (el)=>{
-            var ref, ref1;
-            return el == null ? void 0 : (ref = el.props) == null ? void 0 : (ref1 = ref.dangerouslySetInnerHTML) == null ? void 0 : ref1.__html;
-        };
-        // @ts-ignore Property 'props' does not exist on type ReactElement
-        styles.props.children.forEach((child)=>{
-            if (Array.isArray(child)) {
-                child.forEach((el)=>hasStyles(el) && curStyles.push(el));
-            } else if (hasStyles(child)) {
-                curStyles.push(child);
-            }
-        });
-    }
-    /* Add custom styles before AMP styles to prevent accidental overrides */ return /*#__PURE__*/ _react.default.createElement("style", {
-        "amp-custom": "",
-        dangerouslySetInnerHTML: {
-            __html: curStyles.map((style)=>style.props.dangerouslySetInnerHTML.__html).join("").replace(/\/\*# sourceMappingURL=.*\*\//g, "").replace(/\/\*@ sourceURL=.*?\*\//g, "")
-        }
-    });
-}
-function getDynamicChunks(context, props, files) {
-    const { dynamicImports , assetPrefix , isDevelopment , devOnlyCacheBusterQueryString , disableOptimizedLoading , crossOrigin  } = context;
-    return dynamicImports.map((file)=>{
-        if (!file.endsWith(".js") || files.allFiles.includes(file)) return null;
-        return /*#__PURE__*/ _react.default.createElement("script", {
-            async: !isDevelopment && disableOptimizedLoading,
-            defer: !disableOptimizedLoading,
-            key: file,
-            src: `${assetPrefix}/_next/${encodeURI(file)}${devOnlyCacheBusterQueryString}`,
-            nonce: props.nonce,
-            crossOrigin: props.crossOrigin || crossOrigin
-        });
-    });
-}
-function getScripts(context, props, files) {
-    var ref;
-    const { assetPrefix , buildManifest , isDevelopment , devOnlyCacheBusterQueryString , disableOptimizedLoading , crossOrigin  } = context;
-    const normalScripts = files.allFiles.filter((file)=>file.endsWith(".js"));
-    const lowPriorityScripts = (ref = buildManifest.lowPriorityFiles) == null ? void 0 : ref.filter((file)=>file.endsWith(".js"));
-    return [
-        ...normalScripts,
-        ...lowPriorityScripts
-    ].map((file)=>{
-        return /*#__PURE__*/ _react.default.createElement("script", {
-            key: file,
-            src: `${assetPrefix}/_next/${encodeURI(file)}${devOnlyCacheBusterQueryString}`,
-            nonce: props.nonce,
-            async: !isDevelopment && disableOptimizedLoading,
-            defer: !disableOptimizedLoading,
-            crossOrigin: props.crossOrigin || crossOrigin
-        });
-    });
-}
-function getPreNextWorkerScripts(context, props) {
-    const { assetPrefix , scriptLoader , crossOrigin , nextScriptWorkers  } = context;
-    // disable `nextScriptWorkers` in edge runtime
-    if (!nextScriptWorkers || "nodejs" === "edge") return null;
-    try {
-        let { partytownSnippet  } = require("@builder.io/partytown/integration");
-        const children = Array.isArray(props.children) ? props.children : [
-            props.children
-        ];
-        // Check to see if the user has defined their own Partytown configuration
-        const userDefinedConfig = children.find((child)=>{
-            var ref, ref2;
-            return hasComponentProps(child) && (child == null ? void 0 : (ref = child.props) == null ? void 0 : (ref2 = ref.dangerouslySetInnerHTML) == null ? void 0 : ref2.__html.length) && "data-partytown-config" in child.props;
-        });
-        return /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, !userDefinedConfig && /*#__PURE__*/ _react.default.createElement("script", {
-            "data-partytown-config": "",
-            dangerouslySetInnerHTML: {
-                __html: `
-            partytown = {
-              lib: "${assetPrefix}/_next/static/~partytown/"
-            };
-          `
-            }
-        }), /*#__PURE__*/ _react.default.createElement("script", {
-            "data-partytown": "",
-            dangerouslySetInnerHTML: {
-                __html: partytownSnippet()
-            }
-        }), (scriptLoader.worker || []).map((file, index)=>{
-            const { strategy , src , children: scriptChildren , dangerouslySetInnerHTML , ...scriptProps } = file;
-            let srcProps = {};
-            if (src) {
-                // Use external src if provided
-                srcProps.src = src;
-            } else if (dangerouslySetInnerHTML && dangerouslySetInnerHTML.__html) {
-                // Embed inline script if provided with dangerouslySetInnerHTML
-                srcProps.dangerouslySetInnerHTML = {
-                    __html: dangerouslySetInnerHTML.__html
-                };
-            } else if (scriptChildren) {
-                // Embed inline script if provided with children
-                srcProps.dangerouslySetInnerHTML = {
-                    __html: typeof scriptChildren === "string" ? scriptChildren : Array.isArray(scriptChildren) ? scriptChildren.join("") : ""
-                };
-            } else {
-                throw new Error("Invalid usage of next/script. Did you forget to include a src attribute or an inline script? https://nextjs.org/docs/messages/invalid-script");
-            }
-            return /*#__PURE__*/ _react.default.createElement("script", Object.assign({}, srcProps, scriptProps, {
-                type: "text/partytown",
-                key: src || index,
-                nonce: props.nonce,
-                "data-nscript": "worker",
-                crossOrigin: props.crossOrigin || crossOrigin
-            }));
-        }));
-    } catch (err) {
-        if ((0, _isError).default(err) && err.code !== "MODULE_NOT_FOUND") {
-            console.warn(`Warning: ${err.message}`);
-        }
-        return null;
-    }
-}
-function getPreNextScripts(context, props) {
-    const { scriptLoader , disableOptimizedLoading , crossOrigin  } = context;
-    const webWorkerScripts = getPreNextWorkerScripts(context, props);
-    const beforeInteractiveScripts = (scriptLoader.beforeInteractive || []).filter((script)=>script.src).map((file, index)=>{
-        const { strategy , ...scriptProps } = file;
-        return /*#__PURE__*/ _react.default.createElement("script", Object.assign({}, scriptProps, {
-            key: scriptProps.src || index,
-            defer: scriptProps.defer ?? !disableOptimizedLoading,
-            nonce: props.nonce,
-            "data-nscript": "beforeInteractive",
-            crossOrigin: props.crossOrigin || crossOrigin
-        }));
-    });
-    return /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, webWorkerScripts, beforeInteractiveScripts);
-}
-function getHeadHTMLProps(props) {
-    const { crossOrigin , nonce , ...restProps } = props;
-    // This assignment is necessary for additional type checking to avoid unsupported attributes in <head>
-    const headProps = restProps;
-    return headProps;
-}
-function getAmpPath(ampPath, asPath) {
-    return ampPath || `${asPath}${asPath.includes("?") ? "&" : "?"}amp=1`;
-}
-function getFontLoaderLinks(fontLoaderManifest, dangerousAsPath, assetPrefix = "") {
-    if (!fontLoaderManifest) {
-        return {
-            preconnect: null,
-            preload: null
-        };
-    }
-    const appFontsEntry = fontLoaderManifest.pages["/_app"];
-    const pageFontsEntry = fontLoaderManifest.pages[dangerousAsPath];
-    const preloadedFontFiles = [
-        ...appFontsEntry ?? [],
-        ...pageFontsEntry ?? []
-    ];
-    // If no font files should preload but there's an entry for the path, add a preconnect tag.
-    const preconnectToSelf = !!(preloadedFontFiles.length === 0 && (appFontsEntry || pageFontsEntry));
-    return {
-        preconnect: preconnectToSelf ? /*#__PURE__*/ _react.default.createElement("link", {
-            rel: "preconnect",
-            href: "/",
-            crossOrigin: "anonymous"
-        }) : null,
-        preload: preloadedFontFiles ? preloadedFontFiles.map((fontFile)=>{
-            const ext = /\.(woff|woff2|eot|ttf|otf)$/.exec(fontFile)[1];
-            return /*#__PURE__*/ _react.default.createElement("link", {
-                key: fontFile,
-                rel: "preload",
-                href: `${assetPrefix}/_next/${encodeURI(fontFile)}`,
-                as: "font",
-                type: `font/${ext}`,
-                crossOrigin: "anonymous"
-            });
-        }) : null
-    };
-}
-class Head extends _react.default.Component {
-    static contextType = _htmlContext.HtmlContext;
-    getCssLinks(files) {
-        const { assetPrefix , devOnlyCacheBusterQueryString , dynamicImports , crossOrigin , optimizeCss , optimizeFonts  } = this.context;
-        const cssFiles = files.allFiles.filter((f)=>f.endsWith(".css"));
-        const sharedFiles = new Set(files.sharedFiles);
-        // Unmanaged files are CSS files that will be handled directly by the
-        // webpack runtime (`mini-css-extract-plugin`).
-        let unmangedFiles = new Set([]);
-        let dynamicCssFiles = Array.from(new Set(dynamicImports.filter((file)=>file.endsWith(".css"))));
-        if (dynamicCssFiles.length) {
-            const existing = new Set(cssFiles);
-            dynamicCssFiles = dynamicCssFiles.filter((f)=>!(existing.has(f) || sharedFiles.has(f)));
-            unmangedFiles = new Set(dynamicCssFiles);
-            cssFiles.push(...dynamicCssFiles);
-        }
-        let cssLinkElements = [];
-        cssFiles.forEach((file)=>{
-            const isSharedFile = sharedFiles.has(file);
-            if (!optimizeCss) {
-                cssLinkElements.push(/*#__PURE__*/ _react.default.createElement("link", {
-                    key: `${file}-preload`,
-                    nonce: this.props.nonce,
-                    rel: "preload",
-                    href: `${assetPrefix}/_next/${encodeURI(file)}${devOnlyCacheBusterQueryString}`,
-                    as: "style",
-                    crossOrigin: this.props.crossOrigin || crossOrigin
-                }));
-            }
-            const isUnmanagedFile = unmangedFiles.has(file);
-            cssLinkElements.push(/*#__PURE__*/ _react.default.createElement("link", {
-                key: file,
-                nonce: this.props.nonce,
-                rel: "stylesheet",
-                href: `${assetPrefix}/_next/${encodeURI(file)}${devOnlyCacheBusterQueryString}`,
-                crossOrigin: this.props.crossOrigin || crossOrigin,
-                "data-n-g": isUnmanagedFile ? undefined : isSharedFile ? "" : undefined,
-                "data-n-p": isUnmanagedFile ? undefined : isSharedFile ? undefined : ""
-            }));
-        });
-        if ( true && optimizeFonts) {
-            cssLinkElements = this.makeStylesheetInert(cssLinkElements);
-        }
-        return cssLinkElements.length === 0 ? null : cssLinkElements;
-    }
-    getPreloadDynamicChunks() {
-        const { dynamicImports , assetPrefix , devOnlyCacheBusterQueryString , crossOrigin  } = this.context;
-        return dynamicImports.map((file)=>{
-            if (!file.endsWith(".js")) {
-                return null;
-            }
-            return /*#__PURE__*/ _react.default.createElement("link", {
-                rel: "preload",
-                key: file,
-                href: `${assetPrefix}/_next/${encodeURI(file)}${devOnlyCacheBusterQueryString}`,
-                as: "script",
-                nonce: this.props.nonce,
-                crossOrigin: this.props.crossOrigin || crossOrigin
-            });
-        }) // Filter out nulled scripts
-        .filter(Boolean);
-    }
-    getPreloadMainLinks(files) {
-        const { assetPrefix , devOnlyCacheBusterQueryString , scriptLoader , crossOrigin  } = this.context;
-        const preloadFiles = files.allFiles.filter((file)=>{
-            return file.endsWith(".js");
-        });
-        return [
-            ...(scriptLoader.beforeInteractive || []).map((file)=>/*#__PURE__*/ _react.default.createElement("link", {
-                    key: file.src,
-                    nonce: this.props.nonce,
-                    rel: "preload",
-                    href: file.src,
-                    as: "script",
-                    crossOrigin: this.props.crossOrigin || crossOrigin
-                })),
-            ...preloadFiles.map((file)=>/*#__PURE__*/ _react.default.createElement("link", {
-                    key: file,
-                    nonce: this.props.nonce,
-                    rel: "preload",
-                    href: `${assetPrefix}/_next/${encodeURI(file)}${devOnlyCacheBusterQueryString}`,
-                    as: "script",
-                    crossOrigin: this.props.crossOrigin || crossOrigin
-                }))
-        ];
-    }
-    getBeforeInteractiveInlineScripts() {
-        const { scriptLoader  } = this.context;
-        const { nonce , crossOrigin  } = this.props;
-        return (scriptLoader.beforeInteractive || []).filter((script)=>!script.src && (script.dangerouslySetInnerHTML || script.children)).map((file, index)=>{
-            const { strategy , children , dangerouslySetInnerHTML , src , ...scriptProps } = file;
-            let html = "";
-            if (dangerouslySetInnerHTML && dangerouslySetInnerHTML.__html) {
-                html = dangerouslySetInnerHTML.__html;
-            } else if (children) {
-                html = typeof children === "string" ? children : Array.isArray(children) ? children.join("") : "";
-            }
-            return /*#__PURE__*/ _react.default.createElement("script", Object.assign({}, scriptProps, {
-                dangerouslySetInnerHTML: {
-                    __html: html
-                },
-                key: scriptProps.id || index,
-                nonce: nonce,
-                "data-nscript": "beforeInteractive",
-                crossOrigin: crossOrigin || undefined
-            }));
-        });
-    }
-    getDynamicChunks(files) {
-        return getDynamicChunks(this.context, this.props, files);
-    }
-    getPreNextScripts() {
-        return getPreNextScripts(this.context, this.props);
-    }
-    getScripts(files) {
-        return getScripts(this.context, this.props, files);
-    }
-    getPolyfillScripts() {
-        return getPolyfillScripts(this.context, this.props);
-    }
-    makeStylesheetInert(node) {
-        return _react.default.Children.map(node, (c)=>{
-            var ref5, ref3;
-            if ((c == null ? void 0 : c.type) === "link" && (c == null ? void 0 : (ref5 = c.props) == null ? void 0 : ref5.href) && _constants.OPTIMIZED_FONT_PROVIDERS.some(({ url  })=>{
-                var ref, ref4;
-                return c == null ? void 0 : (ref = c.props) == null ? void 0 : (ref4 = ref.href) == null ? void 0 : ref4.startsWith(url);
-            })) {
-                const newProps = {
-                    ...c.props || {},
-                    "data-href": c.props.href,
-                    href: undefined
-                };
-                return /*#__PURE__*/ _react.default.cloneElement(c, newProps);
-            } else if (c == null ? void 0 : (ref3 = c.props) == null ? void 0 : ref3.children) {
-                const newProps1 = {
-                    ...c.props || {},
-                    children: this.makeStylesheetInert(c.props.children)
-                };
-                return /*#__PURE__*/ _react.default.cloneElement(c, newProps1);
-            }
-            return c;
-        }).filter(Boolean);
-    }
-    render() {
-        const { styles , ampPath , inAmpMode , hybridAmp , canonicalBase , __NEXT_DATA__ , dangerousAsPath , headTags , unstable_runtimeJS , unstable_JsPreload , disableOptimizedLoading , optimizeCss , optimizeFonts , assetPrefix , fontLoaderManifest  } = this.context;
-        const disableRuntimeJS = unstable_runtimeJS === false;
-        const disableJsPreload = unstable_JsPreload === false || !disableOptimizedLoading;
-        this.context.docComponentsRendered.Head = true;
-        let { head  } = this.context;
-        let cssPreloads = [];
-        let otherHeadElements = [];
-        if (head) {
-            head.forEach((c)=>{
-                if (c && c.type === "link" && c.props["rel"] === "preload" && c.props["as"] === "style") {
-                    cssPreloads.push(c);
-                } else {
-                    c && otherHeadElements.push(c);
-                }
-            });
-            head = cssPreloads.concat(otherHeadElements);
-        }
-        let children = _react.default.Children.toArray(this.props.children).filter(Boolean);
-        // show a warning if Head contains <title> (only in development)
-        if (false) {}
-        if ( true && optimizeFonts && !( true && inAmpMode)) {
-            children = this.makeStylesheetInert(children);
-        }
-        let hasAmphtmlRel = false;
-        let hasCanonicalRel = false;
-        // show warning and remove conflicting amp head tags
-        head = _react.default.Children.map(head || [], (child)=>{
-            if (!child) return child;
-            const { type , props  } = child;
-            if ( true && inAmpMode) {
-                let badProp = "";
-                if (type === "meta" && props.name === "viewport") {
-                    badProp = 'name="viewport"';
-                } else if (type === "link" && props.rel === "canonical") {
-                    hasCanonicalRel = true;
-                } else if (type === "script") {
-                    // only block if
-                    // 1. it has a src and isn't pointing to ampproject's CDN
-                    // 2. it is using dangerouslySetInnerHTML without a type or
-                    // a type of text/javascript
-                    if (props.src && props.src.indexOf("ampproject") < -1 || props.dangerouslySetInnerHTML && (!props.type || props.type === "text/javascript")) {
-                        badProp = "<script";
-                        Object.keys(props).forEach((prop)=>{
-                            badProp += ` ${prop}="${props[prop]}"`;
-                        });
-                        badProp += "/>";
-                    }
-                }
-                if (badProp) {
-                    console.warn(`Found conflicting amp tag "${child.type}" with conflicting prop ${badProp} in ${__NEXT_DATA__.page}. https://nextjs.org/docs/messages/conflicting-amp-tag`);
-                    return null;
-                }
-            } else {
-                // non-amp mode
-                if (type === "link" && props.rel === "amphtml") {
-                    hasAmphtmlRel = true;
-                }
-            }
-            return child;
-        });
-        const files = getDocumentFiles(this.context.buildManifest, this.context.__NEXT_DATA__.page,  true && inAmpMode);
-        const fontLoaderLinks = getFontLoaderLinks(fontLoaderManifest, dangerousAsPath, assetPrefix);
-        return /*#__PURE__*/ _react.default.createElement("head", Object.assign({}, getHeadHTMLProps(this.props)), this.context.isDevelopment && /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/ _react.default.createElement("style", {
-            "data-next-hide-fouc": true,
-            "data-ampdevmode":  true && inAmpMode ? "true" : undefined,
-            dangerouslySetInnerHTML: {
-                __html: `body{display:none}`
-            }
-        }), /*#__PURE__*/ _react.default.createElement("noscript", {
-            "data-next-hide-fouc": true,
-            "data-ampdevmode":  true && inAmpMode ? "true" : undefined
-        }, /*#__PURE__*/ _react.default.createElement("style", {
-            dangerouslySetInnerHTML: {
-                __html: `body{display:block}`
-            }
-        }))), head, /*#__PURE__*/ _react.default.createElement("meta", {
-            name: "next-head-count",
-            content: _react.default.Children.count(head || []).toString()
-        }), children, optimizeFonts && /*#__PURE__*/ _react.default.createElement("meta", {
-            name: "next-font-preconnect"
-        }), fontLoaderLinks.preconnect, fontLoaderLinks.preload,  true && inAmpMode && /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/ _react.default.createElement("meta", {
-            name: "viewport",
-            content: "width=device-width,minimum-scale=1,initial-scale=1"
-        }), !hasCanonicalRel && /*#__PURE__*/ _react.default.createElement("link", {
-            rel: "canonical",
-            href: canonicalBase + (__webpack_require__(6368).cleanAmpPath)(dangerousAsPath)
-        }), /*#__PURE__*/ _react.default.createElement("link", {
-            rel: "preload",
-            as: "script",
-            href: "https://cdn.ampproject.org/v0.js"
-        }), /*#__PURE__*/ _react.default.createElement(AmpStyles, {
-            styles: styles
-        }), /*#__PURE__*/ _react.default.createElement("style", {
-            "amp-boilerplate": "",
-            dangerouslySetInnerHTML: {
-                __html: `body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}`
-            }
-        }), /*#__PURE__*/ _react.default.createElement("noscript", null, /*#__PURE__*/ _react.default.createElement("style", {
-            "amp-boilerplate": "",
-            dangerouslySetInnerHTML: {
-                __html: `body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}`
-            }
-        })), /*#__PURE__*/ _react.default.createElement("script", {
-            async: true,
-            src: "https://cdn.ampproject.org/v0.js"
-        })), !( true && inAmpMode) && /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, !hasAmphtmlRel && hybridAmp && /*#__PURE__*/ _react.default.createElement("link", {
-            rel: "amphtml",
-            href: canonicalBase + getAmpPath(ampPath, dangerousAsPath)
-        }), this.getBeforeInteractiveInlineScripts(), !optimizeCss && this.getCssLinks(files), !optimizeCss && /*#__PURE__*/ _react.default.createElement("noscript", {
-            "data-n-css": this.props.nonce ?? ""
-        }), !disableRuntimeJS && !disableJsPreload && this.getPreloadDynamicChunks(), !disableRuntimeJS && !disableJsPreload && this.getPreloadMainLinks(files), !disableOptimizedLoading && !disableRuntimeJS && this.getPolyfillScripts(), !disableOptimizedLoading && !disableRuntimeJS && this.getPreNextScripts(), !disableOptimizedLoading && !disableRuntimeJS && this.getDynamicChunks(files), !disableOptimizedLoading && !disableRuntimeJS && this.getScripts(files), optimizeCss && this.getCssLinks(files), optimizeCss && /*#__PURE__*/ _react.default.createElement("noscript", {
-            "data-n-css": this.props.nonce ?? ""
-        }), this.context.isDevelopment && // this element is used to mount development styles so the
-        // ordering matches production
-        // (by default, style-loader injects at the bottom of <head />)
-        /*#__PURE__*/ _react.default.createElement("noscript", {
-            id: "__next_css__DO_NOT_USE__"
-        }), styles || null), /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, {}, ...headTags || []));
-    }
-}
-exports.Head = Head;
-function handleDocumentScriptLoaderItems(scriptLoader, __NEXT_DATA__, props) {
-    var ref10, ref7, ref8, ref9;
-    if (!props.children) return;
-    const scriptLoaderItems = [];
-    const children = Array.isArray(props.children) ? props.children : [
-        props.children
-    ];
-    const headChildren = (ref10 = children.find((child)=>child.type === Head)) == null ? void 0 : (ref7 = ref10.props) == null ? void 0 : ref7.children;
-    const bodyChildren = (ref8 = children.find((child)=>child.type === "body")) == null ? void 0 : (ref9 = ref8.props) == null ? void 0 : ref9.children;
-    // Scripts with beforeInteractive can be placed inside Head or <body> so children of both needs to be traversed
-    const combinedChildren = [
-        ...Array.isArray(headChildren) ? headChildren : [
-            headChildren
-        ],
-        ...Array.isArray(bodyChildren) ? bodyChildren : [
-            bodyChildren
-        ]
-    ];
-    _react.default.Children.forEach(combinedChildren, (child)=>{
-        var ref;
-        if (!child) return;
-        // When using the `next/script` component, register it in script loader.
-        if ((ref = child.type) == null ? void 0 : ref.__nextScript) {
-            if (child.props.strategy === "beforeInteractive") {
-                scriptLoader.beforeInteractive = (scriptLoader.beforeInteractive || []).concat([
-                    {
-                        ...child.props
-                    }
-                ]);
-                return;
-            } else if ([
-                "lazyOnload",
-                "afterInteractive",
-                "worker"
-            ].includes(child.props.strategy)) {
-                scriptLoaderItems.push(child.props);
-                return;
-            }
-        }
-    });
-    __NEXT_DATA__.scriptLoader = scriptLoaderItems;
-}
-class NextScript extends _react.default.Component {
-    static contextType = _htmlContext.HtmlContext;
-    getDynamicChunks(files) {
-        return getDynamicChunks(this.context, this.props, files);
-    }
-    getPreNextScripts() {
-        return getPreNextScripts(this.context, this.props);
-    }
-    getScripts(files) {
-        return getScripts(this.context, this.props, files);
-    }
-    getPolyfillScripts() {
-        return getPolyfillScripts(this.context, this.props);
-    }
-    static getInlineScriptSource(context) {
-        const { __NEXT_DATA__ , largePageDataBytes  } = context;
-        try {
-            const data = JSON.stringify(__NEXT_DATA__);
-            const bytes =  false ? 0 : Buffer.from(data).byteLength;
-            const prettyBytes = (__webpack_require__(5955)/* ["default"] */ .Z);
-            if (largePageDataBytes && bytes > largePageDataBytes) {
-                console.warn(`Warning: data for page "${__NEXT_DATA__.page}"${__NEXT_DATA__.page === context.dangerousAsPath ? "" : ` (path "${context.dangerousAsPath}")`} is ${prettyBytes(bytes)} which exceeds the threshold of ${prettyBytes(largePageDataBytes)}, this amount of data can reduce performance.\nSee more info here: https://nextjs.org/docs/messages/large-page-data`);
-            }
-            return (0, _htmlescape).htmlEscapeJsonString(data);
-        } catch (err) {
-            if ((0, _isError).default(err) && err.message.indexOf("circular structure") !== -1) {
-                throw new Error(`Circular structure in "getInitialProps" result of page "${__NEXT_DATA__.page}". https://nextjs.org/docs/messages/circular-structure`);
-            }
-            throw err;
-        }
-    }
-    render() {
-        const { assetPrefix , inAmpMode , buildManifest , unstable_runtimeJS , docComponentsRendered , devOnlyCacheBusterQueryString , disableOptimizedLoading , crossOrigin  } = this.context;
-        const disableRuntimeJS = unstable_runtimeJS === false;
-        docComponentsRendered.NextScript = true;
-        if ( true && inAmpMode) {
-            if (true) {
-                return null;
-            }
-            const ampDevFiles = [
-                ...buildManifest.devFiles,
-                ...buildManifest.polyfillFiles,
-                ...buildManifest.ampDevFiles
-            ];
-            return /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, disableRuntimeJS ? null : /*#__PURE__*/ _react.default.createElement("script", {
-                id: "__NEXT_DATA__",
-                type: "application/json",
-                nonce: this.props.nonce,
-                crossOrigin: this.props.crossOrigin || crossOrigin,
-                dangerouslySetInnerHTML: {
-                    __html: NextScript.getInlineScriptSource(this.context)
-                },
-                "data-ampdevmode": true
-            }), ampDevFiles.map((file)=>/*#__PURE__*/ _react.default.createElement("script", {
-                    key: file,
-                    src: `${assetPrefix}/_next/${file}${devOnlyCacheBusterQueryString}`,
-                    nonce: this.props.nonce,
-                    crossOrigin: this.props.crossOrigin || crossOrigin,
-                    "data-ampdevmode": true
-                })));
-        }
-        if (false) {}
-        const files = getDocumentFiles(this.context.buildManifest, this.context.__NEXT_DATA__.page,  true && inAmpMode);
-        return /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, !disableRuntimeJS && buildManifest.devFiles ? buildManifest.devFiles.map((file)=>/*#__PURE__*/ _react.default.createElement("script", {
-                key: file,
-                src: `${assetPrefix}/_next/${encodeURI(file)}${devOnlyCacheBusterQueryString}`,
-                nonce: this.props.nonce,
-                crossOrigin: this.props.crossOrigin || crossOrigin
-            })) : null, disableRuntimeJS ? null : /*#__PURE__*/ _react.default.createElement("script", {
-            id: "__NEXT_DATA__",
-            type: "application/json",
-            nonce: this.props.nonce,
-            crossOrigin: this.props.crossOrigin || crossOrigin,
-            dangerouslySetInnerHTML: {
-                __html: NextScript.getInlineScriptSource(this.context)
-            }
-        }), disableOptimizedLoading && !disableRuntimeJS && this.getPolyfillScripts(), disableOptimizedLoading && !disableRuntimeJS && this.getPreNextScripts(), disableOptimizedLoading && !disableRuntimeJS && this.getDynamicChunks(files), disableOptimizedLoading && !disableRuntimeJS && this.getScripts(files));
-    }
-}
-exports.NextScript = NextScript;
-function Html(props) {
-    const { inAmpMode , docComponentsRendered , locale , scriptLoader , __NEXT_DATA__  } = (0, _react).useContext(_htmlContext.HtmlContext);
-    docComponentsRendered.Html = true;
-    handleDocumentScriptLoaderItems(scriptLoader, __NEXT_DATA__, props);
-    return /*#__PURE__*/ _react.default.createElement("html", Object.assign({}, props, {
-        lang: props.lang || locale || undefined,
-        amp:  true && inAmpMode ? "" : undefined,
-        "data-ampdevmode":  true && inAmpMode && "production" !== "production" ? 0 : undefined
-    }));
-}
-function Main() {
-    const { docComponentsRendered  } = (0, _react).useContext(_htmlContext.HtmlContext);
-    docComponentsRendered.Main = true;
-    // @ts-ignore
-    return /*#__PURE__*/ _react.default.createElement("next-js-internal-body-render-target", null);
-}
-// Add a special property to the built-in `Document` component so later we can
-// identify if a user customized `Document` is used or not.
-const InternalFunctionDocument = function InternalFunctionDocument() {
-    return /*#__PURE__*/ _react.default.createElement(Html, null, /*#__PURE__*/ _react.default.createElement(Head, null), /*#__PURE__*/ _react.default.createElement("body", null, /*#__PURE__*/ _react.default.createElement(Main, null), /*#__PURE__*/ _react.default.createElement(NextScript, null)));
-};
-Document[_constants.NEXT_BUILTIN_DOCUMENT] = InternalFunctionDocument; //# sourceMappingURL=_document.js.map
-
+eval("\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nexports.Html = Html;\nexports.Main = Main;\nexports[\"default\"] = void 0;\nvar _react = _interopRequireWildcard(__webpack_require__(/*! react */ \"react\"));\nvar _constants = __webpack_require__(/*! ../shared/lib/constants */ \"../shared/lib/constants\");\nvar _getPageFiles = __webpack_require__(/*! ../server/get-page-files */ \"../server/get-page-files\");\nvar _htmlescape = __webpack_require__(/*! ../server/htmlescape */ \"../server/htmlescape\");\nvar _isError = _interopRequireDefault(__webpack_require__(/*! ../lib/is-error */ \"./node_modules/next/dist/lib/is-error.js\"));\nvar _htmlContext = __webpack_require__(/*! ../shared/lib/html-context */ \"../shared/lib/html-context\");\nclass Document extends _react.default.Component {\n    /**\r\n   * `getInitialProps` hook returns the context object with the addition of `renderPage`.\r\n   * `renderPage` callback executes `React` rendering logic synchronously to support server-rendering wrappers\r\n   */ static getInitialProps(ctx) {\n        return ctx.defaultGetInitialProps(ctx);\n    }\n    render() {\n        return /*#__PURE__*/ _react.default.createElement(Html, null, /*#__PURE__*/ _react.default.createElement(Head, null), /*#__PURE__*/ _react.default.createElement(\"body\", null, /*#__PURE__*/ _react.default.createElement(Main, null), /*#__PURE__*/ _react.default.createElement(NextScript, null)));\n    }\n}\nexports[\"default\"] = Document;\nfunction _interopRequireDefault(obj) {\n    return obj && obj.__esModule ? obj : {\n        default: obj\n    };\n}\nfunction _getRequireWildcardCache() {\n    if (typeof WeakMap !== \"function\") return null;\n    var cache = new WeakMap();\n    _getRequireWildcardCache = function() {\n        return cache;\n    };\n    return cache;\n}\nfunction _interopRequireWildcard(obj) {\n    if (obj && obj.__esModule) {\n        return obj;\n    }\n    if (obj === null || typeof obj !== \"object\" && typeof obj !== \"function\") {\n        return {\n            default: obj\n        };\n    }\n    var cache = _getRequireWildcardCache();\n    if (cache && cache.has(obj)) {\n        return cache.get(obj);\n    }\n    var newObj = {};\n    var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;\n    for(var key in obj){\n        if (Object.prototype.hasOwnProperty.call(obj, key)) {\n            var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;\n            if (desc && (desc.get || desc.set)) {\n                Object.defineProperty(newObj, key, desc);\n            } else {\n                newObj[key] = obj[key];\n            }\n        }\n    }\n    newObj.default = obj;\n    if (cache) {\n        cache.set(obj, newObj);\n    }\n    return newObj;\n}\nfunction getDocumentFiles(buildManifest, pathname, inAmpMode) {\n    const sharedFiles = (0, _getPageFiles).getPageFiles(buildManifest, \"/_app\");\n    const pageFiles =  true && inAmpMode ? [] : (0, _getPageFiles).getPageFiles(buildManifest, pathname);\n    return {\n        sharedFiles,\n        pageFiles,\n        allFiles: [\n            ...new Set([\n                ...sharedFiles,\n                ...pageFiles\n            ])\n        ]\n    };\n}\nfunction getPolyfillScripts(context, props) {\n    // polyfills.js has to be rendered as nomodule without async\n    // It also has to be the first script to load\n    const { assetPrefix , buildManifest , devOnlyCacheBusterQueryString , disableOptimizedLoading , crossOrigin  } = context;\n    return buildManifest.polyfillFiles.filter((polyfill)=>polyfill.endsWith(\".js\") && !polyfill.endsWith(\".module.js\")).map((polyfill)=>/*#__PURE__*/ _react.default.createElement(\"script\", {\n            key: polyfill,\n            defer: !disableOptimizedLoading,\n            nonce: props.nonce,\n            crossOrigin: props.crossOrigin || crossOrigin,\n            noModule: true,\n            src: `${assetPrefix}/_next/${polyfill}${devOnlyCacheBusterQueryString}`\n        }));\n}\nfunction hasComponentProps(child) {\n    return !!child && !!child.props;\n}\nfunction AmpStyles({ styles  }) {\n    if (!styles) return null;\n    // try to parse styles from fragment for backwards compat\n    const curStyles = Array.isArray(styles) ? styles : [];\n    if (styles.props && // @ts-ignore Property 'props' does not exist on type ReactElement\n    Array.isArray(styles.props.children)) {\n        const hasStyles = (el)=>{\n            var ref, ref1;\n            return el == null ? void 0 : (ref = el.props) == null ? void 0 : (ref1 = ref.dangerouslySetInnerHTML) == null ? void 0 : ref1.__html;\n        };\n        // @ts-ignore Property 'props' does not exist on type ReactElement\n        styles.props.children.forEach((child)=>{\n            if (Array.isArray(child)) {\n                child.forEach((el)=>hasStyles(el) && curStyles.push(el));\n            } else if (hasStyles(child)) {\n                curStyles.push(child);\n            }\n        });\n    }\n    /* Add custom styles before AMP styles to prevent accidental overrides */ return /*#__PURE__*/ _react.default.createElement(\"style\", {\n        \"amp-custom\": \"\",\n        dangerouslySetInnerHTML: {\n            __html: curStyles.map((style)=>style.props.dangerouslySetInnerHTML.__html).join(\"\").replace(/\\/\\*# sourceMappingURL=.*\\*\\//g, \"\").replace(/\\/\\*@ sourceURL=.*?\\*\\//g, \"\")\n        }\n    });\n}\nfunction getDynamicChunks(context, props, files) {\n    const { dynamicImports , assetPrefix , isDevelopment , devOnlyCacheBusterQueryString , disableOptimizedLoading , crossOrigin  } = context;\n    return dynamicImports.map((file)=>{\n        if (!file.endsWith(\".js\") || files.allFiles.includes(file)) return null;\n        return /*#__PURE__*/ _react.default.createElement(\"script\", {\n            async: !isDevelopment && disableOptimizedLoading,\n            defer: !disableOptimizedLoading,\n            key: file,\n            src: `${assetPrefix}/_next/${encodeURI(file)}${devOnlyCacheBusterQueryString}`,\n            nonce: props.nonce,\n            crossOrigin: props.crossOrigin || crossOrigin\n        });\n    });\n}\nfunction getScripts(context, props, files) {\n    var ref;\n    const { assetPrefix , buildManifest , isDevelopment , devOnlyCacheBusterQueryString , disableOptimizedLoading , crossOrigin  } = context;\n    const normalScripts = files.allFiles.filter((file)=>file.endsWith(\".js\"));\n    const lowPriorityScripts = (ref = buildManifest.lowPriorityFiles) == null ? void 0 : ref.filter((file)=>file.endsWith(\".js\"));\n    return [\n        ...normalScripts,\n        ...lowPriorityScripts\n    ].map((file)=>{\n        return /*#__PURE__*/ _react.default.createElement(\"script\", {\n            key: file,\n            src: `${assetPrefix}/_next/${encodeURI(file)}${devOnlyCacheBusterQueryString}`,\n            nonce: props.nonce,\n            async: !isDevelopment && disableOptimizedLoading,\n            defer: !disableOptimizedLoading,\n            crossOrigin: props.crossOrigin || crossOrigin\n        });\n    });\n}\nfunction getPreNextWorkerScripts(context, props) {\n    const { assetPrefix , scriptLoader , crossOrigin , nextScriptWorkers  } = context;\n    // disable `nextScriptWorkers` in edge runtime\n    if (!nextScriptWorkers || \"nodejs\" === \"edge\") return null;\n    try {\n        let { partytownSnippet  } = require(\"@builder.io/partytown/integration\");\n        const children = Array.isArray(props.children) ? props.children : [\n            props.children\n        ];\n        // Check to see if the user has defined their own Partytown configuration\n        const userDefinedConfig = children.find((child)=>{\n            var ref, ref2;\n            return hasComponentProps(child) && (child == null ? void 0 : (ref = child.props) == null ? void 0 : (ref2 = ref.dangerouslySetInnerHTML) == null ? void 0 : ref2.__html.length) && \"data-partytown-config\" in child.props;\n        });\n        return /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, !userDefinedConfig && /*#__PURE__*/ _react.default.createElement(\"script\", {\n            \"data-partytown-config\": \"\",\n            dangerouslySetInnerHTML: {\n                __html: `\r\n            partytown = {\r\n              lib: \"${assetPrefix}/_next/static/~partytown/\"\r\n            };\r\n          `\n            }\n        }), /*#__PURE__*/ _react.default.createElement(\"script\", {\n            \"data-partytown\": \"\",\n            dangerouslySetInnerHTML: {\n                __html: partytownSnippet()\n            }\n        }), (scriptLoader.worker || []).map((file, index)=>{\n            const { strategy , src , children: scriptChildren , dangerouslySetInnerHTML , ...scriptProps } = file;\n            let srcProps = {};\n            if (src) {\n                // Use external src if provided\n                srcProps.src = src;\n            } else if (dangerouslySetInnerHTML && dangerouslySetInnerHTML.__html) {\n                // Embed inline script if provided with dangerouslySetInnerHTML\n                srcProps.dangerouslySetInnerHTML = {\n                    __html: dangerouslySetInnerHTML.__html\n                };\n            } else if (scriptChildren) {\n                // Embed inline script if provided with children\n                srcProps.dangerouslySetInnerHTML = {\n                    __html: typeof scriptChildren === \"string\" ? scriptChildren : Array.isArray(scriptChildren) ? scriptChildren.join(\"\") : \"\"\n                };\n            } else {\n                throw new Error(\"Invalid usage of next/script. Did you forget to include a src attribute or an inline script? https://nextjs.org/docs/messages/invalid-script\");\n            }\n            return /*#__PURE__*/ _react.default.createElement(\"script\", Object.assign({}, srcProps, scriptProps, {\n                type: \"text/partytown\",\n                key: src || index,\n                nonce: props.nonce,\n                \"data-nscript\": \"worker\",\n                crossOrigin: props.crossOrigin || crossOrigin\n            }));\n        }));\n    } catch (err) {\n        if ((0, _isError).default(err) && err.code !== \"MODULE_NOT_FOUND\") {\n            console.warn(`Warning: ${err.message}`);\n        }\n        return null;\n    }\n}\nfunction getPreNextScripts(context, props) {\n    const { scriptLoader , disableOptimizedLoading , crossOrigin  } = context;\n    const webWorkerScripts = getPreNextWorkerScripts(context, props);\n    const beforeInteractiveScripts = (scriptLoader.beforeInteractive || []).filter((script)=>script.src).map((file, index)=>{\n        const { strategy , ...scriptProps } = file;\n        return /*#__PURE__*/ _react.default.createElement(\"script\", Object.assign({}, scriptProps, {\n            key: scriptProps.src || index,\n            defer: scriptProps.defer ?? !disableOptimizedLoading,\n            nonce: props.nonce,\n            \"data-nscript\": \"beforeInteractive\",\n            crossOrigin: props.crossOrigin || crossOrigin\n        }));\n    });\n    return /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, webWorkerScripts, beforeInteractiveScripts);\n}\nfunction getHeadHTMLProps(props) {\n    const { crossOrigin , nonce , ...restProps } = props;\n    // This assignment is necessary for additional type checking to avoid unsupported attributes in <head>\n    const headProps = restProps;\n    return headProps;\n}\nfunction getAmpPath(ampPath, asPath) {\n    return ampPath || `${asPath}${asPath.includes(\"?\") ? \"&\" : \"?\"}amp=1`;\n}\nfunction getFontLoaderLinks(fontLoaderManifest, dangerousAsPath, assetPrefix = \"\") {\n    if (!fontLoaderManifest) {\n        return {\n            preconnect: null,\n            preload: null\n        };\n    }\n    const appFontsEntry = fontLoaderManifest.pages[\"/_app\"];\n    const pageFontsEntry = fontLoaderManifest.pages[dangerousAsPath];\n    const preloadedFontFiles = [\n        ...appFontsEntry ?? [],\n        ...pageFontsEntry ?? []\n    ];\n    // If no font files should preload but there's an entry for the path, add a preconnect tag.\n    const preconnectToSelf = !!(preloadedFontFiles.length === 0 && (appFontsEntry || pageFontsEntry));\n    return {\n        preconnect: preconnectToSelf ? /*#__PURE__*/ _react.default.createElement(\"link\", {\n            rel: \"preconnect\",\n            href: \"/\",\n            crossOrigin: \"anonymous\"\n        }) : null,\n        preload: preloadedFontFiles ? preloadedFontFiles.map((fontFile)=>{\n            const ext = /\\.(woff|woff2|eot|ttf|otf)$/.exec(fontFile)[1];\n            return /*#__PURE__*/ _react.default.createElement(\"link\", {\n                key: fontFile,\n                rel: \"preload\",\n                href: `${assetPrefix}/_next/${encodeURI(fontFile)}`,\n                as: \"font\",\n                type: `font/${ext}`,\n                crossOrigin: \"anonymous\"\n            });\n        }) : null\n    };\n}\nclass Head extends _react.default.Component {\n    static contextType = _htmlContext.HtmlContext;\n    getCssLinks(files) {\n        const { assetPrefix , devOnlyCacheBusterQueryString , dynamicImports , crossOrigin , optimizeCss , optimizeFonts  } = this.context;\n        const cssFiles = files.allFiles.filter((f)=>f.endsWith(\".css\"));\n        const sharedFiles = new Set(files.sharedFiles);\n        // Unmanaged files are CSS files that will be handled directly by the\n        // webpack runtime (`mini-css-extract-plugin`).\n        let unmangedFiles = new Set([]);\n        let dynamicCssFiles = Array.from(new Set(dynamicImports.filter((file)=>file.endsWith(\".css\"))));\n        if (dynamicCssFiles.length) {\n            const existing = new Set(cssFiles);\n            dynamicCssFiles = dynamicCssFiles.filter((f)=>!(existing.has(f) || sharedFiles.has(f)));\n            unmangedFiles = new Set(dynamicCssFiles);\n            cssFiles.push(...dynamicCssFiles);\n        }\n        let cssLinkElements = [];\n        cssFiles.forEach((file)=>{\n            const isSharedFile = sharedFiles.has(file);\n            if (!optimizeCss) {\n                cssLinkElements.push(/*#__PURE__*/ _react.default.createElement(\"link\", {\n                    key: `${file}-preload`,\n                    nonce: this.props.nonce,\n                    rel: \"preload\",\n                    href: `${assetPrefix}/_next/${encodeURI(file)}${devOnlyCacheBusterQueryString}`,\n                    as: \"style\",\n                    crossOrigin: this.props.crossOrigin || crossOrigin\n                }));\n            }\n            const isUnmanagedFile = unmangedFiles.has(file);\n            cssLinkElements.push(/*#__PURE__*/ _react.default.createElement(\"link\", {\n                key: file,\n                nonce: this.props.nonce,\n                rel: \"stylesheet\",\n                href: `${assetPrefix}/_next/${encodeURI(file)}${devOnlyCacheBusterQueryString}`,\n                crossOrigin: this.props.crossOrigin || crossOrigin,\n                \"data-n-g\": isUnmanagedFile ? undefined : isSharedFile ? \"\" : undefined,\n                \"data-n-p\": isUnmanagedFile ? undefined : isSharedFile ? undefined : \"\"\n            }));\n        });\n        if (false) {}\n        return cssLinkElements.length === 0 ? null : cssLinkElements;\n    }\n    getPreloadDynamicChunks() {\n        const { dynamicImports , assetPrefix , devOnlyCacheBusterQueryString , crossOrigin  } = this.context;\n        return dynamicImports.map((file)=>{\n            if (!file.endsWith(\".js\")) {\n                return null;\n            }\n            return /*#__PURE__*/ _react.default.createElement(\"link\", {\n                rel: \"preload\",\n                key: file,\n                href: `${assetPrefix}/_next/${encodeURI(file)}${devOnlyCacheBusterQueryString}`,\n                as: \"script\",\n                nonce: this.props.nonce,\n                crossOrigin: this.props.crossOrigin || crossOrigin\n            });\n        }) // Filter out nulled scripts\n        .filter(Boolean);\n    }\n    getPreloadMainLinks(files) {\n        const { assetPrefix , devOnlyCacheBusterQueryString , scriptLoader , crossOrigin  } = this.context;\n        const preloadFiles = files.allFiles.filter((file)=>{\n            return file.endsWith(\".js\");\n        });\n        return [\n            ...(scriptLoader.beforeInteractive || []).map((file)=>/*#__PURE__*/ _react.default.createElement(\"link\", {\n                    key: file.src,\n                    nonce: this.props.nonce,\n                    rel: \"preload\",\n                    href: file.src,\n                    as: \"script\",\n                    crossOrigin: this.props.crossOrigin || crossOrigin\n                })),\n            ...preloadFiles.map((file)=>/*#__PURE__*/ _react.default.createElement(\"link\", {\n                    key: file,\n                    nonce: this.props.nonce,\n                    rel: \"preload\",\n                    href: `${assetPrefix}/_next/${encodeURI(file)}${devOnlyCacheBusterQueryString}`,\n                    as: \"script\",\n                    crossOrigin: this.props.crossOrigin || crossOrigin\n                }))\n        ];\n    }\n    getBeforeInteractiveInlineScripts() {\n        const { scriptLoader  } = this.context;\n        const { nonce , crossOrigin  } = this.props;\n        return (scriptLoader.beforeInteractive || []).filter((script)=>!script.src && (script.dangerouslySetInnerHTML || script.children)).map((file, index)=>{\n            const { strategy , children , dangerouslySetInnerHTML , src , ...scriptProps } = file;\n            let html = \"\";\n            if (dangerouslySetInnerHTML && dangerouslySetInnerHTML.__html) {\n                html = dangerouslySetInnerHTML.__html;\n            } else if (children) {\n                html = typeof children === \"string\" ? children : Array.isArray(children) ? children.join(\"\") : \"\";\n            }\n            return /*#__PURE__*/ _react.default.createElement(\"script\", Object.assign({}, scriptProps, {\n                dangerouslySetInnerHTML: {\n                    __html: html\n                },\n                key: scriptProps.id || index,\n                nonce: nonce,\n                \"data-nscript\": \"beforeInteractive\",\n                crossOrigin: crossOrigin || undefined\n            }));\n        });\n    }\n    getDynamicChunks(files) {\n        return getDynamicChunks(this.context, this.props, files);\n    }\n    getPreNextScripts() {\n        return getPreNextScripts(this.context, this.props);\n    }\n    getScripts(files) {\n        return getScripts(this.context, this.props, files);\n    }\n    getPolyfillScripts() {\n        return getPolyfillScripts(this.context, this.props);\n    }\n    makeStylesheetInert(node) {\n        return _react.default.Children.map(node, (c)=>{\n            var ref5, ref3;\n            if ((c == null ? void 0 : c.type) === \"link\" && (c == null ? void 0 : (ref5 = c.props) == null ? void 0 : ref5.href) && _constants.OPTIMIZED_FONT_PROVIDERS.some(({ url  })=>{\n                var ref, ref4;\n                return c == null ? void 0 : (ref = c.props) == null ? void 0 : (ref4 = ref.href) == null ? void 0 : ref4.startsWith(url);\n            })) {\n                const newProps = {\n                    ...c.props || {},\n                    \"data-href\": c.props.href,\n                    href: undefined\n                };\n                return /*#__PURE__*/ _react.default.cloneElement(c, newProps);\n            } else if (c == null ? void 0 : (ref3 = c.props) == null ? void 0 : ref3.children) {\n                const newProps1 = {\n                    ...c.props || {},\n                    children: this.makeStylesheetInert(c.props.children)\n                };\n                return /*#__PURE__*/ _react.default.cloneElement(c, newProps1);\n            }\n            return c;\n        }).filter(Boolean);\n    }\n    render() {\n        const { styles , ampPath , inAmpMode , hybridAmp , canonicalBase , __NEXT_DATA__ , dangerousAsPath , headTags , unstable_runtimeJS , unstable_JsPreload , disableOptimizedLoading , optimizeCss , optimizeFonts , assetPrefix , fontLoaderManifest  } = this.context;\n        const disableRuntimeJS = unstable_runtimeJS === false;\n        const disableJsPreload = unstable_JsPreload === false || !disableOptimizedLoading;\n        this.context.docComponentsRendered.Head = true;\n        let { head  } = this.context;\n        let cssPreloads = [];\n        let otherHeadElements = [];\n        if (head) {\n            head.forEach((c)=>{\n                if (c && c.type === \"link\" && c.props[\"rel\"] === \"preload\" && c.props[\"as\"] === \"style\") {\n                    cssPreloads.push(c);\n                } else {\n                    c && otherHeadElements.push(c);\n                }\n            });\n            head = cssPreloads.concat(otherHeadElements);\n        }\n        let children = _react.default.Children.toArray(this.props.children).filter(Boolean);\n        // show a warning if Head contains <title> (only in development)\n        if (true) {\n            children = _react.default.Children.map(children, (child)=>{\n                var ref;\n                const isReactHelmet = child == null ? void 0 : (ref = child.props) == null ? void 0 : ref[\"data-react-helmet\"];\n                if (!isReactHelmet) {\n                    var ref6;\n                    if ((child == null ? void 0 : child.type) === \"title\") {\n                        console.warn(\"Warning: <title> should not be used in _document.js's <Head>. https://nextjs.org/docs/messages/no-document-title\");\n                    } else if ((child == null ? void 0 : child.type) === \"meta\" && (child == null ? void 0 : (ref6 = child.props) == null ? void 0 : ref6.name) === \"viewport\") {\n                        console.warn(\"Warning: viewport meta tags should not be used in _document.js's <Head>. https://nextjs.org/docs/messages/no-document-viewport-meta\");\n                    }\n                }\n                return child;\n            });\n            if (this.props.crossOrigin) console.warn(\"Warning: `Head` attribute `crossOrigin` is deprecated. https://nextjs.org/docs/messages/doc-crossorigin-deprecated\");\n        }\n        if (false) {}\n        let hasAmphtmlRel = false;\n        let hasCanonicalRel = false;\n        // show warning and remove conflicting amp head tags\n        head = _react.default.Children.map(head || [], (child)=>{\n            if (!child) return child;\n            const { type , props  } = child;\n            if ( true && inAmpMode) {\n                let badProp = \"\";\n                if (type === \"meta\" && props.name === \"viewport\") {\n                    badProp = 'name=\"viewport\"';\n                } else if (type === \"link\" && props.rel === \"canonical\") {\n                    hasCanonicalRel = true;\n                } else if (type === \"script\") {\n                    // only block if\n                    // 1. it has a src and isn't pointing to ampproject's CDN\n                    // 2. it is using dangerouslySetInnerHTML without a type or\n                    // a type of text/javascript\n                    if (props.src && props.src.indexOf(\"ampproject\") < -1 || props.dangerouslySetInnerHTML && (!props.type || props.type === \"text/javascript\")) {\n                        badProp = \"<script\";\n                        Object.keys(props).forEach((prop)=>{\n                            badProp += ` ${prop}=\"${props[prop]}\"`;\n                        });\n                        badProp += \"/>\";\n                    }\n                }\n                if (badProp) {\n                    console.warn(`Found conflicting amp tag \"${child.type}\" with conflicting prop ${badProp} in ${__NEXT_DATA__.page}. https://nextjs.org/docs/messages/conflicting-amp-tag`);\n                    return null;\n                }\n            } else {\n                // non-amp mode\n                if (type === \"link\" && props.rel === \"amphtml\") {\n                    hasAmphtmlRel = true;\n                }\n            }\n            return child;\n        });\n        const files = getDocumentFiles(this.context.buildManifest, this.context.__NEXT_DATA__.page,  true && inAmpMode);\n        const fontLoaderLinks = getFontLoaderLinks(fontLoaderManifest, dangerousAsPath, assetPrefix);\n        return /*#__PURE__*/ _react.default.createElement(\"head\", Object.assign({}, getHeadHTMLProps(this.props)), this.context.isDevelopment && /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/ _react.default.createElement(\"style\", {\n            \"data-next-hide-fouc\": true,\n            \"data-ampdevmode\":  true && inAmpMode ? \"true\" : undefined,\n            dangerouslySetInnerHTML: {\n                __html: `body{display:none}`\n            }\n        }), /*#__PURE__*/ _react.default.createElement(\"noscript\", {\n            \"data-next-hide-fouc\": true,\n            \"data-ampdevmode\":  true && inAmpMode ? \"true\" : undefined\n        }, /*#__PURE__*/ _react.default.createElement(\"style\", {\n            dangerouslySetInnerHTML: {\n                __html: `body{display:block}`\n            }\n        }))), head, /*#__PURE__*/ _react.default.createElement(\"meta\", {\n            name: \"next-head-count\",\n            content: _react.default.Children.count(head || []).toString()\n        }), children, optimizeFonts && /*#__PURE__*/ _react.default.createElement(\"meta\", {\n            name: \"next-font-preconnect\"\n        }), fontLoaderLinks.preconnect, fontLoaderLinks.preload,  true && inAmpMode && /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/ _react.default.createElement(\"meta\", {\n            name: \"viewport\",\n            content: \"width=device-width,minimum-scale=1,initial-scale=1\"\n        }), !hasCanonicalRel && /*#__PURE__*/ _react.default.createElement(\"link\", {\n            rel: \"canonical\",\n            href: canonicalBase + (__webpack_require__(/*! ../server/utils */ \"../server/utils\").cleanAmpPath)(dangerousAsPath)\n        }), /*#__PURE__*/ _react.default.createElement(\"link\", {\n            rel: \"preload\",\n            as: \"script\",\n            href: \"https://cdn.ampproject.org/v0.js\"\n        }), /*#__PURE__*/ _react.default.createElement(AmpStyles, {\n            styles: styles\n        }), /*#__PURE__*/ _react.default.createElement(\"style\", {\n            \"amp-boilerplate\": \"\",\n            dangerouslySetInnerHTML: {\n                __html: `body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}`\n            }\n        }), /*#__PURE__*/ _react.default.createElement(\"noscript\", null, /*#__PURE__*/ _react.default.createElement(\"style\", {\n            \"amp-boilerplate\": \"\",\n            dangerouslySetInnerHTML: {\n                __html: `body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}`\n            }\n        })), /*#__PURE__*/ _react.default.createElement(\"script\", {\n            async: true,\n            src: \"https://cdn.ampproject.org/v0.js\"\n        })), !( true && inAmpMode) && /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, !hasAmphtmlRel && hybridAmp && /*#__PURE__*/ _react.default.createElement(\"link\", {\n            rel: \"amphtml\",\n            href: canonicalBase + getAmpPath(ampPath, dangerousAsPath)\n        }), this.getBeforeInteractiveInlineScripts(), !optimizeCss && this.getCssLinks(files), !optimizeCss && /*#__PURE__*/ _react.default.createElement(\"noscript\", {\n            \"data-n-css\": this.props.nonce ?? \"\"\n        }), !disableRuntimeJS && !disableJsPreload && this.getPreloadDynamicChunks(), !disableRuntimeJS && !disableJsPreload && this.getPreloadMainLinks(files), !disableOptimizedLoading && !disableRuntimeJS && this.getPolyfillScripts(), !disableOptimizedLoading && !disableRuntimeJS && this.getPreNextScripts(), !disableOptimizedLoading && !disableRuntimeJS && this.getDynamicChunks(files), !disableOptimizedLoading && !disableRuntimeJS && this.getScripts(files), optimizeCss && this.getCssLinks(files), optimizeCss && /*#__PURE__*/ _react.default.createElement(\"noscript\", {\n            \"data-n-css\": this.props.nonce ?? \"\"\n        }), this.context.isDevelopment && // this element is used to mount development styles so the\n        // ordering matches production\n        // (by default, style-loader injects at the bottom of <head />)\n        /*#__PURE__*/ _react.default.createElement(\"noscript\", {\n            id: \"__next_css__DO_NOT_USE__\"\n        }), styles || null), /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, {}, ...headTags || []));\n    }\n}\nexports.Head = Head;\nfunction handleDocumentScriptLoaderItems(scriptLoader, __NEXT_DATA__, props) {\n    var ref10, ref7, ref8, ref9;\n    if (!props.children) return;\n    const scriptLoaderItems = [];\n    const children = Array.isArray(props.children) ? props.children : [\n        props.children\n    ];\n    const headChildren = (ref10 = children.find((child)=>child.type === Head)) == null ? void 0 : (ref7 = ref10.props) == null ? void 0 : ref7.children;\n    const bodyChildren = (ref8 = children.find((child)=>child.type === \"body\")) == null ? void 0 : (ref9 = ref8.props) == null ? void 0 : ref9.children;\n    // Scripts with beforeInteractive can be placed inside Head or <body> so children of both needs to be traversed\n    const combinedChildren = [\n        ...Array.isArray(headChildren) ? headChildren : [\n            headChildren\n        ],\n        ...Array.isArray(bodyChildren) ? bodyChildren : [\n            bodyChildren\n        ]\n    ];\n    _react.default.Children.forEach(combinedChildren, (child)=>{\n        var ref;\n        if (!child) return;\n        // When using the `next/script` component, register it in script loader.\n        if ((ref = child.type) == null ? void 0 : ref.__nextScript) {\n            if (child.props.strategy === \"beforeInteractive\") {\n                scriptLoader.beforeInteractive = (scriptLoader.beforeInteractive || []).concat([\n                    {\n                        ...child.props\n                    }\n                ]);\n                return;\n            } else if ([\n                \"lazyOnload\",\n                \"afterInteractive\",\n                \"worker\"\n            ].includes(child.props.strategy)) {\n                scriptLoaderItems.push(child.props);\n                return;\n            }\n        }\n    });\n    __NEXT_DATA__.scriptLoader = scriptLoaderItems;\n}\nclass NextScript extends _react.default.Component {\n    static contextType = _htmlContext.HtmlContext;\n    getDynamicChunks(files) {\n        return getDynamicChunks(this.context, this.props, files);\n    }\n    getPreNextScripts() {\n        return getPreNextScripts(this.context, this.props);\n    }\n    getScripts(files) {\n        return getScripts(this.context, this.props, files);\n    }\n    getPolyfillScripts() {\n        return getPolyfillScripts(this.context, this.props);\n    }\n    static getInlineScriptSource(context) {\n        const { __NEXT_DATA__ , largePageDataBytes  } = context;\n        try {\n            const data = JSON.stringify(__NEXT_DATA__);\n            const bytes =  false ? 0 : Buffer.from(data).byteLength;\n            const prettyBytes = (__webpack_require__(/*! ../lib/pretty-bytes */ \"./node_modules/next/dist/lib/pretty-bytes.js\")[\"default\"]);\n            if (largePageDataBytes && bytes > largePageDataBytes) {\n                console.warn(`Warning: data for page \"${__NEXT_DATA__.page}\"${__NEXT_DATA__.page === context.dangerousAsPath ? \"\" : ` (path \"${context.dangerousAsPath}\")`} is ${prettyBytes(bytes)} which exceeds the threshold of ${prettyBytes(largePageDataBytes)}, this amount of data can reduce performance.\\nSee more info here: https://nextjs.org/docs/messages/large-page-data`);\n            }\n            return (0, _htmlescape).htmlEscapeJsonString(data);\n        } catch (err) {\n            if ((0, _isError).default(err) && err.message.indexOf(\"circular structure\") !== -1) {\n                throw new Error(`Circular structure in \"getInitialProps\" result of page \"${__NEXT_DATA__.page}\". https://nextjs.org/docs/messages/circular-structure`);\n            }\n            throw err;\n        }\n    }\n    render() {\n        const { assetPrefix , inAmpMode , buildManifest , unstable_runtimeJS , docComponentsRendered , devOnlyCacheBusterQueryString , disableOptimizedLoading , crossOrigin  } = this.context;\n        const disableRuntimeJS = unstable_runtimeJS === false;\n        docComponentsRendered.NextScript = true;\n        if ( true && inAmpMode) {\n            if (false) {}\n            const ampDevFiles = [\n                ...buildManifest.devFiles,\n                ...buildManifest.polyfillFiles,\n                ...buildManifest.ampDevFiles\n            ];\n            return /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, disableRuntimeJS ? null : /*#__PURE__*/ _react.default.createElement(\"script\", {\n                id: \"__NEXT_DATA__\",\n                type: \"application/json\",\n                nonce: this.props.nonce,\n                crossOrigin: this.props.crossOrigin || crossOrigin,\n                dangerouslySetInnerHTML: {\n                    __html: NextScript.getInlineScriptSource(this.context)\n                },\n                \"data-ampdevmode\": true\n            }), ampDevFiles.map((file)=>/*#__PURE__*/ _react.default.createElement(\"script\", {\n                    key: file,\n                    src: `${assetPrefix}/_next/${file}${devOnlyCacheBusterQueryString}`,\n                    nonce: this.props.nonce,\n                    crossOrigin: this.props.crossOrigin || crossOrigin,\n                    \"data-ampdevmode\": true\n                })));\n        }\n        if (true) {\n            if (this.props.crossOrigin) console.warn(\"Warning: `NextScript` attribute `crossOrigin` is deprecated. https://nextjs.org/docs/messages/doc-crossorigin-deprecated\");\n        }\n        const files = getDocumentFiles(this.context.buildManifest, this.context.__NEXT_DATA__.page,  true && inAmpMode);\n        return /*#__PURE__*/ _react.default.createElement(_react.default.Fragment, null, !disableRuntimeJS && buildManifest.devFiles ? buildManifest.devFiles.map((file)=>/*#__PURE__*/ _react.default.createElement(\"script\", {\n                key: file,\n                src: `${assetPrefix}/_next/${encodeURI(file)}${devOnlyCacheBusterQueryString}`,\n                nonce: this.props.nonce,\n                crossOrigin: this.props.crossOrigin || crossOrigin\n            })) : null, disableRuntimeJS ? null : /*#__PURE__*/ _react.default.createElement(\"script\", {\n            id: \"__NEXT_DATA__\",\n            type: \"application/json\",\n            nonce: this.props.nonce,\n            crossOrigin: this.props.crossOrigin || crossOrigin,\n            dangerouslySetInnerHTML: {\n                __html: NextScript.getInlineScriptSource(this.context)\n            }\n        }), disableOptimizedLoading && !disableRuntimeJS && this.getPolyfillScripts(), disableOptimizedLoading && !disableRuntimeJS && this.getPreNextScripts(), disableOptimizedLoading && !disableRuntimeJS && this.getDynamicChunks(files), disableOptimizedLoading && !disableRuntimeJS && this.getScripts(files));\n    }\n}\nexports.NextScript = NextScript;\nfunction Html(props) {\n    const { inAmpMode , docComponentsRendered , locale , scriptLoader , __NEXT_DATA__  } = (0, _react).useContext(_htmlContext.HtmlContext);\n    docComponentsRendered.Html = true;\n    handleDocumentScriptLoaderItems(scriptLoader, __NEXT_DATA__, props);\n    return /*#__PURE__*/ _react.default.createElement(\"html\", Object.assign({}, props, {\n        lang: props.lang || locale || undefined,\n        amp:  true && inAmpMode ? \"\" : undefined,\n        \"data-ampdevmode\":  true && inAmpMode && \"development\" !== \"production\" ? \"\" : undefined\n    }));\n}\nfunction Main() {\n    const { docComponentsRendered  } = (0, _react).useContext(_htmlContext.HtmlContext);\n    docComponentsRendered.Main = true;\n    // @ts-ignore\n    return /*#__PURE__*/ _react.default.createElement(\"next-js-internal-body-render-target\", null);\n}\n// Add a special property to the built-in `Document` component so later we can\n// identify if a user customized `Document` is used or not.\nconst InternalFunctionDocument = function InternalFunctionDocument() {\n    return /*#__PURE__*/ _react.default.createElement(Html, null, /*#__PURE__*/ _react.default.createElement(Head, null), /*#__PURE__*/ _react.default.createElement(\"body\", null, /*#__PURE__*/ _react.default.createElement(Main, null), /*#__PURE__*/ _react.default.createElement(NextScript, null)));\n};\nDocument[_constants.NEXT_BUILTIN_DOCUMENT] = InternalFunctionDocument; //# sourceMappingURL=_document.js.map\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9ub2RlX21vZHVsZXMvbmV4dC9kaXN0L3BhZ2VzL19kb2N1bWVudC5qcy5qcyIsIm1hcHBpbmdzIjoiQUFBYTtBQUNiQSw4Q0FBNkM7SUFDekNHLE9BQU8sSUFBSTtBQUNmLENBQUMsRUFBQztBQUNGRCxZQUFZLEdBQUdFO0FBQ2ZGLFlBQVksR0FBR0c7QUFDZkgsa0JBQWUsR0FBRyxLQUFLO0FBQ3ZCLElBQUlLLFNBQVNDLHdCQUF3QkMsbUJBQU9BLENBQUMsb0JBQU87QUFDcEQsSUFBSUMsYUFBYUQsbUJBQU9BLENBQUMsd0RBQXlCO0FBQ2xELElBQUlFLGdCQUFnQkYsbUJBQU9BLENBQUMsMERBQTBCO0FBQ3RELElBQUlHLGNBQWNILG1CQUFPQSxDQUFDLGtEQUFzQjtBQUNoRCxJQUFJSSxXQUFXQyx1QkFBdUJMLG1CQUFPQSxDQUFDLGlFQUFpQjtBQUMvRCxJQUFJTSxlQUFlTixtQkFBT0EsQ0FBQyw4REFBNEI7QUFDdkQsTUFBTU8saUJBQWlCVCxPQUFPRCxPQUFPLENBQUNXLFNBQVM7SUFDM0M7UUFJSSxPQUFPRSxJQUFJQyxzQkFBc0IsQ0FBQ0Q7SUFDdEM7SUFDQUUsU0FBUztRQUNMLE9BQU8sV0FBVyxHQUFHZCxPQUFPRCxPQUFPLENBQUNnQjtJQUN4QztBQUNKO0FBQ0FwQixRQUFRSSxPQUFPLEdBQUdVO0FBQ2xCOztrQkFFZVYsRUFBRW1CO0lBQ2IsQ0FBQztBQUNMO0FBQ0EsU0FBU0U7SUFDTDs7SUFFQUEsMkJBQTJCO1FBQ3ZCLE9BQU9FO0lBQ1g7SUFDQSxPQUFPQTtBQUNYO0FBQ0E7SUFDSSxJQUFJSixPQUFPQTs7SUFFWCxDQUFDO0lBQ0QsSUFBSUEsUUFBUSxJQUFJLElBQUksT0FBT0E7UUFDdkIsT0FBTzs7UUFFUDtJQUNKLENBQUM7SUFDRCxJQUFJSSxRQUFRRjtJQUNaLElBQUlFOztJQUVKLENBQUM7SUFDRCxJQUFJRyxTQUFTLENBQUM7SUFDZCxJQUFJQztJQUNKO1FBQ0ksSUFBSWpDLE9BQU9vQztZQUNQLElBQUlHLE9BQU9OLHdC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QUFDSixLQUFLLENBQUNJLFdBQVcsSUFBSUE7O1lBRTNDa0gsSUFBSTtZQUNKdkQsTUFBTTtZQUNOcEQsT0FBTyxJQUFJLENBQUNYO1lBQ1pJLGFBQWEsSUFBSSxDQUFDSixLQUFLLENBQUNJLFdBQVcsSUFBSUE7WUFDdkNzQix5QkFBeUI7Z0JBQ3JCQyxRQUFRMUQsV0FBVzBNLHFCQUFxQixDQUFDLElBQUksQ0FBQzVLO1lBQ2xEO1FBQ0osRUFBRSxFQUFFSTtJQUNSO0FBQ0o7QUFDQXhELFFBQVFzQixVQUFVLEdBQUdBO0FBQ3JCLFNBQVNwQixLQUFLbUQsS0FBSyxFQUFFO0lBQ2pCLE1BQU0sRUFBRVgsVUFBUyxFQUFHdUosc0JBQXFCLEVBQUc4QyxPQUFNLEVBQUc1SSxhQUFZO0lBQ2pFOEY7SUFDQXFCLGdDQUFnQ25ILGNBQWN3RixlQUFldEk7SUFDN0Q7O2tCQUVTUCxHQUFRQyxHQUFHLENBQUNDO1FBQ2pCO0lBQ0o7QUFDSjtBQUNBLFNBQVM3QyxPQUFPO0lBQ1osTUFBTSxFQUFFOEwsc0JBQXFCLEVBQUcsR0FBRyxDQUFDLEdBQUc1TCxNQUFNLEVBQUUyTyxVQUFVLENBQUNuTyxhQUFheUksV0FBVztJQUNsRjJDLHNCQUFzQjlMLElBQUksR0FBRyxJQUFJO0lBQ2pDLGNBQWE7SUFDYixPQUFPLFdBQVcsR0FBR0UsRUFBQUEsS0FBNkIsK0JBQXVDLElBQUk7QUFDakc7QUFDQTtBQUNBO0FBQ0EsTUFBTThPLDJCQUEyQixTQUFTQSwyQkFBMkI7SUFDakUsT0FBTyxXQUFXLEdBQUc5TyxPQUFPRDtBQUNoQztBQUNBVSxRQUFRLENBQUNOLFdBQVc0TyxxQkFBcUIsQ0FBQyxHQUFHRCwwQkFFN0MiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9lZHVzaGFyZS8uL25vZGVfbW9kdWxlcy9uZXh0L2Rpc3QvcGFnZXMvX2RvY3VtZW50LmpzPzNiOGMiXSwic291cmNlc0NvbnRlbnQiOlsiXCJ1c2Ugc3RyaWN0XCI7XHJcbk9iamVjdC5kZWZpbmVQcm9wZXJ0eShleHBvcnRzLCBcIl9fZXNNb2R1bGVcIiwge1xyXG4gICAgdmFsdWU6IHRydWVcclxufSk7XHJcbmV4cG9ydHMuSHRtbCA9IEh0bWw7XHJcbmV4cG9ydHMuTWFpbiA9IE1haW47XHJcbmV4cG9ydHMuZGVmYXVsdCA9IHZvaWQgMDtcclxudmFyIF9yZWFjdCA9IF9pbnRlcm9wUmVxdWlyZVdpbGRjYXJkKHJlcXVpcmUoXCJyZWFjdFwiKSk7XHJcbnZhciBfY29uc3RhbnRzID0gcmVxdWlyZShcIi4uL3NoYXJlZC9saWIvY29uc3RhbnRzXCIpO1xyXG52YXIgX2dldFBhZ2VGaWxlcyA9IHJlcXVpcmUoXCIuLi9zZXJ2ZXIvZ2V0LXBhZ2UtZmlsZXNcIik7XHJcbnZhciBfaHRtbGVzY2FwZSA9IHJlcXVpcmUoXCIuLi9zZXJ2ZXIvaHRtbGVzY2FwZVwiKTtcclxudmFyIF9pc0Vycm9yID0gX2ludGVyb3BSZXF1aXJlRGVmYXVsdChyZXF1aXJlKFwiLi4vbGliL2lzLWVycm9yXCIpKTtcclxudmFyIF9odG1sQ29udGV4dCA9IHJlcXVpcmUoXCIuLi9zaGFyZWQvbGliL2h0bWwtY29udGV4dFwiKTtcclxuY2xhc3MgRG9jdW1lbnQgZXh0ZW5kcyBfcmVhY3QuZGVmYXVsdC5Db21wb25lbnQge1xyXG4gICAgLyoqXHJcbiAgICogYGdldEluaXRpYWxQcm9wc2AgaG9vayByZXR1cm5zIHRoZSBjb250ZXh0IG9iamVjdCB3aXRoIHRoZSBhZGRpdGlvbiBvZiBgcmVuZGVyUGFnZWAuXHJcbiAgICogYHJlbmRlclBhZ2VgIGNhbGxiYWNrIGV4ZWN1dGVzIGBSZWFjdGAgcmVuZGVyaW5nIGxvZ2ljIHN5bmNocm9ub3VzbHkgdG8gc3VwcG9ydCBzZXJ2ZXItcmVuZGVyaW5nIHdyYXBwZXJzXHJcbiAgICovIHN0YXRpYyBnZXRJbml0aWFsUHJvcHMoY3R4KSB7XHJcbiAgICAgICAgcmV0dXJuIGN0eC5kZWZhdWx0R2V0SW5pdGlhbFByb3BzKGN0eCk7XHJcbiAgICB9XHJcbiAgICByZW5kZXIoKSB7XHJcbiAgICAgICAgcmV0dXJuIC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChIdG1sLCBudWxsLCAvKiNfX1BVUkVfXyovIF9yZWFjdC5kZWZhdWx0LmNyZWF0ZUVsZW1lbnQoSGVhZCwgbnVsbCksIC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChcImJvZHlcIiwgbnVsbCwgLyojX19QVVJFX18qLyBfcmVhY3QuZGVmYXVsdC5jcmVhdGVFbGVtZW50KE1haW4sIG51bGwpLCAvKiNfX1BVUkVfXyovIF9yZWFjdC5kZWZhdWx0LmNyZWF0ZUVsZW1lbnQoTmV4dFNjcmlwdCwgbnVsbCkpKTtcclxuICAgIH1cclxufVxyXG5leHBvcnRzLmRlZmF1bHQgPSBEb2N1bWVudDtcclxuZnVuY3Rpb24gX2ludGVyb3BSZXF1aXJlRGVmYXVsdChvYmopIHtcclxuICAgIHJldHVybiBvYmogJiYgb2JqLl9fZXNNb2R1bGUgPyBvYmogOiB7XHJcbiAgICAgICAgZGVmYXVsdDogb2JqXHJcbiAgICB9O1xyXG59XHJcbmZ1bmN0aW9uIF9nZXRSZXF1aXJlV2lsZGNhcmRDYWNoZSgpIHtcclxuICAgIGlmICh0eXBlb2YgV2Vha01hcCAhPT0gXCJmdW5jdGlvblwiKSByZXR1cm4gbnVsbDtcclxuICAgIHZhciBjYWNoZSA9IG5ldyBXZWFrTWFwKCk7XHJcbiAgICBfZ2V0UmVxdWlyZVdpbGRjYXJkQ2FjaGUgPSBmdW5jdGlvbigpIHtcclxuICAgICAgICByZXR1cm4gY2FjaGU7XHJcbiAgICB9O1xyXG4gICAgcmV0dXJuIGNhY2hlO1xyXG59XHJcbmZ1bmN0aW9uIF9pbnRlcm9wUmVxdWlyZVdpbGRjYXJkKG9iaikge1xyXG4gICAgaWYgKG9iaiAmJiBvYmouX19lc01vZHVsZSkge1xyXG4gICAgICAgIHJldHVybiBvYmo7XHJcbiAgICB9XHJcbiAgICBpZiAob2JqID09PSBudWxsIHx8IHR5cGVvZiBvYmogIT09IFwib2JqZWN0XCIgJiYgdHlwZW9mIG9iaiAhPT0gXCJmdW5jdGlvblwiKSB7XHJcbiAgICAgICAgcmV0dXJuIHtcclxuICAgICAgICAgICAgZGVmYXVsdDogb2JqXHJcbiAgICAgICAgfTtcclxuICAgIH1cclxuICAgIHZhciBjYWNoZSA9IF9nZXRSZXF1aXJlV2lsZGNhcmRDYWNoZSgpO1xyXG4gICAgaWYgKGNhY2hlICYmIGNhY2hlLmhhcyhvYmopKSB7XHJcbiAgICAgICAgcmV0dXJuIGNhY2hlLmdldChvYmopO1xyXG4gICAgfVxyXG4gICAgdmFyIG5ld09iaiA9IHt9O1xyXG4gICAgdmFyIGhhc1Byb3BlcnR5RGVzY3JpcHRvciA9IE9iamVjdC5kZWZpbmVQcm9wZXJ0eSAmJiBPYmplY3QuZ2V0T3duUHJvcGVydHlEZXNjcmlwdG9yO1xyXG4gICAgZm9yKHZhciBrZXkgaW4gb2JqKXtcclxuICAgICAgICBpZiAoT2JqZWN0LnByb3RvdHlwZS5oYXNPd25Qcm9wZXJ0eS5jYWxsKG9iaiwga2V5KSkge1xyXG4gICAgICAgICAgICB2YXIgZGVzYyA9IGhhc1Byb3BlcnR5RGVzY3JpcHRvciA/IE9iamVjdC5nZXRPd25Qcm9wZXJ0eURlc2NyaXB0b3Iob2JqLCBrZXkpIDogbnVsbDtcclxuICAgICAgICAgICAgaWYgKGRlc2MgJiYgKGRlc2MuZ2V0IHx8IGRlc2Muc2V0KSkge1xyXG4gICAgICAgICAgICAgICAgT2JqZWN0LmRlZmluZVByb3BlcnR5KG5ld09iaiwga2V5LCBkZXNjKTtcclxuICAgICAgICAgICAgfSBlbHNlIHtcclxuICAgICAgICAgICAgICAgIG5ld09ialtrZXldID0gb2JqW2tleV07XHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICB9XHJcbiAgICB9XHJcbiAgICBuZXdPYmouZGVmYXVsdCA9IG9iajtcclxuICAgIGlmIChjYWNoZSkge1xyXG4gICAgICAgIGNhY2hlLnNldChvYmosIG5ld09iaik7XHJcbiAgICB9XHJcbiAgICByZXR1cm4gbmV3T2JqO1xyXG59XHJcbmZ1bmN0aW9uIGdldERvY3VtZW50RmlsZXMoYnVpbGRNYW5pZmVzdCwgcGF0aG5hbWUsIGluQW1wTW9kZSkge1xyXG4gICAgY29uc3Qgc2hhcmVkRmlsZXMgPSAoMCwgX2dldFBhZ2VGaWxlcykuZ2V0UGFnZUZpbGVzKGJ1aWxkTWFuaWZlc3QsIFwiL19hcHBcIik7XHJcbiAgICBjb25zdCBwYWdlRmlsZXMgPSBwcm9jZXNzLmVudi5ORVhUX1JVTlRJTUUgIT09IFwiZWRnZVwiICYmIGluQW1wTW9kZSA/IFtdIDogKDAsIF9nZXRQYWdlRmlsZXMpLmdldFBhZ2VGaWxlcyhidWlsZE1hbmlmZXN0LCBwYXRobmFtZSk7XHJcbiAgICByZXR1cm4ge1xyXG4gICAgICAgIHNoYXJlZEZpbGVzLFxyXG4gICAgICAgIHBhZ2VGaWxlcyxcclxuICAgICAgICBhbGxGaWxlczogW1xyXG4gICAgICAgICAgICAuLi5uZXcgU2V0KFtcclxuICAgICAgICAgICAgICAgIC4uLnNoYXJlZEZpbGVzLFxyXG4gICAgICAgICAgICAgICAgLi4ucGFnZUZpbGVzXHJcbiAgICAgICAgICAgIF0pXHJcbiAgICAgICAgXVxyXG4gICAgfTtcclxufVxyXG5mdW5jdGlvbiBnZXRQb2x5ZmlsbFNjcmlwdHMoY29udGV4dCwgcHJvcHMpIHtcclxuICAgIC8vIHBvbHlmaWxscy5qcyBoYXMgdG8gYmUgcmVuZGVyZWQgYXMgbm9tb2R1bGUgd2l0aG91dCBhc3luY1xyXG4gICAgLy8gSXQgYWxzbyBoYXMgdG8gYmUgdGhlIGZpcnN0IHNjcmlwdCB0byBsb2FkXHJcbiAgICBjb25zdCB7IGFzc2V0UHJlZml4ICwgYnVpbGRNYW5pZmVzdCAsIGRldk9ubHlDYWNoZUJ1c3RlclF1ZXJ5U3RyaW5nICwgZGlzYWJsZU9wdGltaXplZExvYWRpbmcgLCBjcm9zc09yaWdpbiAsICB9ID0gY29udGV4dDtcclxuICAgIHJldHVybiBidWlsZE1hbmlmZXN0LnBvbHlmaWxsRmlsZXMuZmlsdGVyKChwb2x5ZmlsbCk9PnBvbHlmaWxsLmVuZHNXaXRoKFwiLmpzXCIpICYmICFwb2x5ZmlsbC5lbmRzV2l0aChcIi5tb2R1bGUuanNcIikpLm1hcCgocG9seWZpbGwpPT4vKiNfX1BVUkVfXyovIF9yZWFjdC5kZWZhdWx0LmNyZWF0ZUVsZW1lbnQoXCJzY3JpcHRcIiwge1xyXG4gICAgICAgICAgICBrZXk6IHBvbHlmaWxsLFxyXG4gICAgICAgICAgICBkZWZlcjogIWRpc2FibGVPcHRpbWl6ZWRMb2FkaW5nLFxyXG4gICAgICAgICAgICBub25jZTogcHJvcHMubm9uY2UsXHJcbiAgICAgICAgICAgIGNyb3NzT3JpZ2luOiBwcm9wcy5jcm9zc09yaWdpbiB8fCBjcm9zc09yaWdpbixcclxuICAgICAgICAgICAgbm9Nb2R1bGU6IHRydWUsXHJcbiAgICAgICAgICAgIHNyYzogYCR7YXNzZXRQcmVmaXh9L19uZXh0LyR7cG9seWZpbGx9JHtkZXZPbmx5Q2FjaGVCdXN0ZXJRdWVyeVN0cmluZ31gXHJcbiAgICAgICAgfSkpO1xyXG59XHJcbmZ1bmN0aW9uIGhhc0NvbXBvbmVudFByb3BzKGNoaWxkKSB7XHJcbiAgICByZXR1cm4gISFjaGlsZCAmJiAhIWNoaWxkLnByb3BzO1xyXG59XHJcbmZ1bmN0aW9uIEFtcFN0eWxlcyh7IHN0eWxlcyAgfSkge1xyXG4gICAgaWYgKCFzdHlsZXMpIHJldHVybiBudWxsO1xyXG4gICAgLy8gdHJ5IHRvIHBhcnNlIHN0eWxlcyBmcm9tIGZyYWdtZW50IGZvciBiYWNrd2FyZHMgY29tcGF0XHJcbiAgICBjb25zdCBjdXJTdHlsZXMgPSBBcnJheS5pc0FycmF5KHN0eWxlcykgPyBzdHlsZXMgOiBbXTtcclxuICAgIGlmICgvLyBAdHMtaWdub3JlIFByb3BlcnR5ICdwcm9wcycgZG9lcyBub3QgZXhpc3Qgb24gdHlwZSBSZWFjdEVsZW1lbnRcclxuICAgIHN0eWxlcy5wcm9wcyAmJiAvLyBAdHMtaWdub3JlIFByb3BlcnR5ICdwcm9wcycgZG9lcyBub3QgZXhpc3Qgb24gdHlwZSBSZWFjdEVsZW1lbnRcclxuICAgIEFycmF5LmlzQXJyYXkoc3R5bGVzLnByb3BzLmNoaWxkcmVuKSkge1xyXG4gICAgICAgIGNvbnN0IGhhc1N0eWxlcyA9IChlbCk9PntcclxuICAgICAgICAgICAgdmFyIHJlZiwgcmVmMTtcclxuICAgICAgICAgICAgcmV0dXJuIGVsID09IG51bGwgPyB2b2lkIDAgOiAocmVmID0gZWwucHJvcHMpID09IG51bGwgPyB2b2lkIDAgOiAocmVmMSA9IHJlZi5kYW5nZXJvdXNseVNldElubmVySFRNTCkgPT0gbnVsbCA/IHZvaWQgMCA6IHJlZjEuX19odG1sO1xyXG4gICAgICAgIH07XHJcbiAgICAgICAgLy8gQHRzLWlnbm9yZSBQcm9wZXJ0eSAncHJvcHMnIGRvZXMgbm90IGV4aXN0IG9uIHR5cGUgUmVhY3RFbGVtZW50XHJcbiAgICAgICAgc3R5bGVzLnByb3BzLmNoaWxkcmVuLmZvckVhY2goKGNoaWxkKT0+e1xyXG4gICAgICAgICAgICBpZiAoQXJyYXkuaXNBcnJheShjaGlsZCkpIHtcclxuICAgICAgICAgICAgICAgIGNoaWxkLmZvckVhY2goKGVsKT0+aGFzU3R5bGVzKGVsKSAmJiBjdXJTdHlsZXMucHVzaChlbCkpO1xyXG4gICAgICAgICAgICB9IGVsc2UgaWYgKGhhc1N0eWxlcyhjaGlsZCkpIHtcclxuICAgICAgICAgICAgICAgIGN1clN0eWxlcy5wdXNoKGNoaWxkKTtcclxuICAgICAgICAgICAgfVxyXG4gICAgICAgIH0pO1xyXG4gICAgfVxyXG4gICAgLyogQWRkIGN1c3RvbSBzdHlsZXMgYmVmb3JlIEFNUCBzdHlsZXMgdG8gcHJldmVudCBhY2NpZGVudGFsIG92ZXJyaWRlcyAqLyByZXR1cm4gLyojX19QVVJFX18qLyBfcmVhY3QuZGVmYXVsdC5jcmVhdGVFbGVtZW50KFwic3R5bGVcIiwge1xyXG4gICAgICAgIFwiYW1wLWN1c3RvbVwiOiBcIlwiLFxyXG4gICAgICAgIGRhbmdlcm91c2x5U2V0SW5uZXJIVE1MOiB7XHJcbiAgICAgICAgICAgIF9faHRtbDogY3VyU3R5bGVzLm1hcCgoc3R5bGUpPT5zdHlsZS5wcm9wcy5kYW5nZXJvdXNseVNldElubmVySFRNTC5fX2h0bWwpLmpvaW4oXCJcIikucmVwbGFjZSgvXFwvXFwqIyBzb3VyY2VNYXBwaW5nVVJMPS4qXFwqXFwvL2csIFwiXCIpLnJlcGxhY2UoL1xcL1xcKkAgc291cmNlVVJMPS4qP1xcKlxcLy9nLCBcIlwiKVxyXG4gICAgICAgIH1cclxuICAgIH0pO1xyXG59XHJcbmZ1bmN0aW9uIGdldER5bmFtaWNDaHVua3MoY29udGV4dCwgcHJvcHMsIGZpbGVzKSB7XHJcbiAgICBjb25zdCB7IGR5bmFtaWNJbXBvcnRzICwgYXNzZXRQcmVmaXggLCBpc0RldmVsb3BtZW50ICwgZGV2T25seUNhY2hlQnVzdGVyUXVlcnlTdHJpbmcgLCBkaXNhYmxlT3B0aW1pemVkTG9hZGluZyAsIGNyb3NzT3JpZ2luICwgIH0gPSBjb250ZXh0O1xyXG4gICAgcmV0dXJuIGR5bmFtaWNJbXBvcnRzLm1hcCgoZmlsZSk9PntcclxuICAgICAgICBpZiAoIWZpbGUuZW5kc1dpdGgoXCIuanNcIikgfHwgZmlsZXMuYWxsRmlsZXMuaW5jbHVkZXMoZmlsZSkpIHJldHVybiBudWxsO1xyXG4gICAgICAgIHJldHVybiAvKiNfX1BVUkVfXyovIF9yZWFjdC5kZWZhdWx0LmNyZWF0ZUVsZW1lbnQoXCJzY3JpcHRcIiwge1xyXG4gICAgICAgICAgICBhc3luYzogIWlzRGV2ZWxvcG1lbnQgJiYgZGlzYWJsZU9wdGltaXplZExvYWRpbmcsXHJcbiAgICAgICAgICAgIGRlZmVyOiAhZGlzYWJsZU9wdGltaXplZExvYWRpbmcsXHJcbiAgICAgICAgICAgIGtleTogZmlsZSxcclxuICAgICAgICAgICAgc3JjOiBgJHthc3NldFByZWZpeH0vX25leHQvJHtlbmNvZGVVUkkoZmlsZSl9JHtkZXZPbmx5Q2FjaGVCdXN0ZXJRdWVyeVN0cmluZ31gLFxyXG4gICAgICAgICAgICBub25jZTogcHJvcHMubm9uY2UsXHJcbiAgICAgICAgICAgIGNyb3NzT3JpZ2luOiBwcm9wcy5jcm9zc09yaWdpbiB8fCBjcm9zc09yaWdpblxyXG4gICAgICAgIH0pO1xyXG4gICAgfSk7XHJcbn1cclxuZnVuY3Rpb24gZ2V0U2NyaXB0cyhjb250ZXh0LCBwcm9wcywgZmlsZXMpIHtcclxuICAgIHZhciByZWY7XHJcbiAgICBjb25zdCB7IGFzc2V0UHJlZml4ICwgYnVpbGRNYW5pZmVzdCAsIGlzRGV2ZWxvcG1lbnQgLCBkZXZPbmx5Q2FjaGVCdXN0ZXJRdWVyeVN0cmluZyAsIGRpc2FibGVPcHRpbWl6ZWRMb2FkaW5nICwgY3Jvc3NPcmlnaW4gLCAgfSA9IGNvbnRleHQ7XHJcbiAgICBjb25zdCBub3JtYWxTY3JpcHRzID0gZmlsZXMuYWxsRmlsZXMuZmlsdGVyKChmaWxlKT0+ZmlsZS5lbmRzV2l0aChcIi5qc1wiKSk7XHJcbiAgICBjb25zdCBsb3dQcmlvcml0eVNjcmlwdHMgPSAocmVmID0gYnVpbGRNYW5pZmVzdC5sb3dQcmlvcml0eUZpbGVzKSA9PSBudWxsID8gdm9pZCAwIDogcmVmLmZpbHRlcigoZmlsZSk9PmZpbGUuZW5kc1dpdGgoXCIuanNcIikpO1xyXG4gICAgcmV0dXJuIFtcclxuICAgICAgICAuLi5ub3JtYWxTY3JpcHRzLFxyXG4gICAgICAgIC4uLmxvd1ByaW9yaXR5U2NyaXB0c1xyXG4gICAgXS5tYXAoKGZpbGUpPT57XHJcbiAgICAgICAgcmV0dXJuIC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChcInNjcmlwdFwiLCB7XHJcbiAgICAgICAgICAgIGtleTogZmlsZSxcclxuICAgICAgICAgICAgc3JjOiBgJHthc3NldFByZWZpeH0vX25leHQvJHtlbmNvZGVVUkkoZmlsZSl9JHtkZXZPbmx5Q2FjaGVCdXN0ZXJRdWVyeVN0cmluZ31gLFxyXG4gICAgICAgICAgICBub25jZTogcHJvcHMubm9uY2UsXHJcbiAgICAgICAgICAgIGFzeW5jOiAhaXNEZXZlbG9wbWVudCAmJiBkaXNhYmxlT3B0aW1pemVkTG9hZGluZyxcclxuICAgICAgICAgICAgZGVmZXI6ICFkaXNhYmxlT3B0aW1pemVkTG9hZGluZyxcclxuICAgICAgICAgICAgY3Jvc3NPcmlnaW46IHByb3BzLmNyb3NzT3JpZ2luIHx8IGNyb3NzT3JpZ2luXHJcbiAgICAgICAgfSk7XHJcbiAgICB9KTtcclxufVxyXG5mdW5jdGlvbiBnZXRQcmVOZXh0V29ya2VyU2NyaXB0cyhjb250ZXh0LCBwcm9wcykge1xyXG4gICAgY29uc3QgeyBhc3NldFByZWZpeCAsIHNjcmlwdExvYWRlciAsIGNyb3NzT3JpZ2luICwgbmV4dFNjcmlwdFdvcmtlcnMgIH0gPSBjb250ZXh0O1xyXG4gICAgLy8gZGlzYWJsZSBgbmV4dFNjcmlwdFdvcmtlcnNgIGluIGVkZ2UgcnVudGltZVxyXG4gICAgaWYgKCFuZXh0U2NyaXB0V29ya2VycyB8fCBwcm9jZXNzLmVudi5ORVhUX1JVTlRJTUUgPT09IFwiZWRnZVwiKSByZXR1cm4gbnVsbDtcclxuICAgIHRyeSB7XHJcbiAgICAgICAgbGV0IHsgcGFydHl0b3duU25pcHBldCAgfSA9IF9fbm9uX3dlYnBhY2tfcmVxdWlyZV9fKFwiQGJ1aWxkZXIuaW8vcGFydHl0b3duL2ludGVncmF0aW9uXCIpO1xyXG4gICAgICAgIGNvbnN0IGNoaWxkcmVuID0gQXJyYXkuaXNBcnJheShwcm9wcy5jaGlsZHJlbikgPyBwcm9wcy5jaGlsZHJlbiA6IFtcclxuICAgICAgICAgICAgcHJvcHMuY2hpbGRyZW5cclxuICAgICAgICBdO1xyXG4gICAgICAgIC8vIENoZWNrIHRvIHNlZSBpZiB0aGUgdXNlciBoYXMgZGVmaW5lZCB0aGVpciBvd24gUGFydHl0b3duIGNvbmZpZ3VyYXRpb25cclxuICAgICAgICBjb25zdCB1c2VyRGVmaW5lZENvbmZpZyA9IGNoaWxkcmVuLmZpbmQoKGNoaWxkKT0+e1xyXG4gICAgICAgICAgICB2YXIgcmVmLCByZWYyO1xyXG4gICAgICAgICAgICByZXR1cm4gaGFzQ29tcG9uZW50UHJvcHMoY2hpbGQpICYmIChjaGlsZCA9PSBudWxsID8gdm9pZCAwIDogKHJlZiA9IGNoaWxkLnByb3BzKSA9PSBudWxsID8gdm9pZCAwIDogKHJlZjIgPSByZWYuZGFuZ2Vyb3VzbHlTZXRJbm5lckhUTUwpID09IG51bGwgPyB2b2lkIDAgOiByZWYyLl9faHRtbC5sZW5ndGgpICYmIFwiZGF0YS1wYXJ0eXRvd24tY29uZmlnXCIgaW4gY2hpbGQucHJvcHM7XHJcbiAgICAgICAgfSk7XHJcbiAgICAgICAgcmV0dXJuIC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChfcmVhY3QuZGVmYXVsdC5GcmFnbWVudCwgbnVsbCwgIXVzZXJEZWZpbmVkQ29uZmlnICYmIC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChcInNjcmlwdFwiLCB7XHJcbiAgICAgICAgICAgIFwiZGF0YS1wYXJ0eXRvd24tY29uZmlnXCI6IFwiXCIsXHJcbiAgICAgICAgICAgIGRhbmdlcm91c2x5U2V0SW5uZXJIVE1MOiB7XHJcbiAgICAgICAgICAgICAgICBfX2h0bWw6IGBcclxuICAgICAgICAgICAgcGFydHl0b3duID0ge1xyXG4gICAgICAgICAgICAgIGxpYjogXCIke2Fzc2V0UHJlZml4fS9fbmV4dC9zdGF0aWMvfnBhcnR5dG93bi9cIlxyXG4gICAgICAgICAgICB9O1xyXG4gICAgICAgICAgYFxyXG4gICAgICAgICAgICB9XHJcbiAgICAgICAgfSksIC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChcInNjcmlwdFwiLCB7XHJcbiAgICAgICAgICAgIFwiZGF0YS1wYXJ0eXRvd25cIjogXCJcIixcclxuICAgICAgICAgICAgZGFuZ2Vyb3VzbHlTZXRJbm5lckhUTUw6IHtcclxuICAgICAgICAgICAgICAgIF9faHRtbDogcGFydHl0b3duU25pcHBldCgpXHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICB9KSwgKHNjcmlwdExvYWRlci53b3JrZXIgfHwgW10pLm1hcCgoZmlsZSwgaW5kZXgpPT57XHJcbiAgICAgICAgICAgIGNvbnN0IHsgc3RyYXRlZ3kgLCBzcmMgLCBjaGlsZHJlbjogc2NyaXB0Q2hpbGRyZW4gLCBkYW5nZXJvdXNseVNldElubmVySFRNTCAsIC4uLnNjcmlwdFByb3BzIH0gPSBmaWxlO1xyXG4gICAgICAgICAgICBsZXQgc3JjUHJvcHMgPSB7fTtcclxuICAgICAgICAgICAgaWYgKHNyYykge1xyXG4gICAgICAgICAgICAgICAgLy8gVXNlIGV4dGVybmFsIHNyYyBpZiBwcm92aWRlZFxyXG4gICAgICAgICAgICAgICAgc3JjUHJvcHMuc3JjID0gc3JjO1xyXG4gICAgICAgICAgICB9IGVsc2UgaWYgKGRhbmdlcm91c2x5U2V0SW5uZXJIVE1MICYmIGRhbmdlcm91c2x5U2V0SW5uZXJIVE1MLl9faHRtbCkge1xyXG4gICAgICAgICAgICAgICAgLy8gRW1iZWQgaW5saW5lIHNjcmlwdCBpZiBwcm92aWRlZCB3aXRoIGRhbmdlcm91c2x5U2V0SW5uZXJIVE1MXHJcbiAgICAgICAgICAgICAgICBzcmNQcm9wcy5kYW5nZXJvdXNseVNldElubmVySFRNTCA9IHtcclxuICAgICAgICAgICAgICAgICAgICBfX2h0bWw6IGRhbmdlcm91c2x5U2V0SW5uZXJIVE1MLl9faHRtbFxyXG4gICAgICAgICAgICAgICAgfTtcclxuICAgICAgICAgICAgfSBlbHNlIGlmIChzY3JpcHRDaGlsZHJlbikge1xyXG4gICAgICAgICAgICAgICAgLy8gRW1iZWQgaW5saW5lIHNjcmlwdCBpZiBwcm92aWRlZCB3aXRoIGNoaWxkcmVuXHJcbiAgICAgICAgICAgICAgICBzcmNQcm9wcy5kYW5nZXJvdXNseVNldElubmVySFRNTCA9IHtcclxuICAgICAgICAgICAgICAgICAgICBfX2h0bWw6IHR5cGVvZiBzY3JpcHRDaGlsZHJlbiA9PT0gXCJzdHJpbmdcIiA/IHNjcmlwdENoaWxkcmVuIDogQXJyYXkuaXNBcnJheShzY3JpcHRDaGlsZHJlbikgPyBzY3JpcHRDaGlsZHJlbi5qb2luKFwiXCIpIDogXCJcIlxyXG4gICAgICAgICAgICAgICAgfTtcclxuICAgICAgICAgICAgfSBlbHNlIHtcclxuICAgICAgICAgICAgICAgIHRocm93IG5ldyBFcnJvcihcIkludmFsaWQgdXNhZ2Ugb2YgbmV4dC9zY3JpcHQuIERpZCB5b3UgZm9yZ2V0IHRvIGluY2x1ZGUgYSBzcmMgYXR0cmlidXRlIG9yIGFuIGlubGluZSBzY3JpcHQ/IGh0dHBzOi8vbmV4dGpzLm9yZy9kb2NzL21lc3NhZ2VzL2ludmFsaWQtc2NyaXB0XCIpO1xyXG4gICAgICAgICAgICB9XHJcbiAgICAgICAgICAgIHJldHVybiAvKiNfX1BVUkVfXyovIF9yZWFjdC5kZWZhdWx0LmNyZWF0ZUVsZW1lbnQoXCJzY3JpcHRcIiwgT2JqZWN0LmFzc2lnbih7fSwgc3JjUHJvcHMsIHNjcmlwdFByb3BzLCB7XHJcbiAgICAgICAgICAgICAgICB0eXBlOiBcInRleHQvcGFydHl0b3duXCIsXHJcbiAgICAgICAgICAgICAgICBrZXk6IHNyYyB8fCBpbmRleCxcclxuICAgICAgICAgICAgICAgIG5vbmNlOiBwcm9wcy5ub25jZSxcclxuICAgICAgICAgICAgICAgIFwiZGF0YS1uc2NyaXB0XCI6IFwid29ya2VyXCIsXHJcbiAgICAgICAgICAgICAgICBjcm9zc09yaWdpbjogcHJvcHMuY3Jvc3NPcmlnaW4gfHwgY3Jvc3NPcmlnaW5cclxuICAgICAgICAgICAgfSkpO1xyXG4gICAgICAgIH0pKTtcclxuICAgIH0gY2F0Y2ggKGVycikge1xyXG4gICAgICAgIGlmICgoMCwgX2lzRXJyb3IpLmRlZmF1bHQoZXJyKSAmJiBlcnIuY29kZSAhPT0gXCJNT0RVTEVfTk9UX0ZPVU5EXCIpIHtcclxuICAgICAgICAgICAgY29uc29sZS53YXJuKGBXYXJuaW5nOiAke2Vyci5tZXNzYWdlfWApO1xyXG4gICAgICAgIH1cclxuICAgICAgICByZXR1cm4gbnVsbDtcclxuICAgIH1cclxufVxyXG5mdW5jdGlvbiBnZXRQcmVOZXh0U2NyaXB0cyhjb250ZXh0LCBwcm9wcykge1xyXG4gICAgY29uc3QgeyBzY3JpcHRMb2FkZXIgLCBkaXNhYmxlT3B0aW1pemVkTG9hZGluZyAsIGNyb3NzT3JpZ2luICB9ID0gY29udGV4dDtcclxuICAgIGNvbnN0IHdlYldvcmtlclNjcmlwdHMgPSBnZXRQcmVOZXh0V29ya2VyU2NyaXB0cyhjb250ZXh0LCBwcm9wcyk7XHJcbiAgICBjb25zdCBiZWZvcmVJbnRlcmFjdGl2ZVNjcmlwdHMgPSAoc2NyaXB0TG9hZGVyLmJlZm9yZUludGVyYWN0aXZlIHx8IFtdKS5maWx0ZXIoKHNjcmlwdCk9PnNjcmlwdC5zcmMpLm1hcCgoZmlsZSwgaW5kZXgpPT57XHJcbiAgICAgICAgY29uc3QgeyBzdHJhdGVneSAsIC4uLnNjcmlwdFByb3BzIH0gPSBmaWxlO1xyXG4gICAgICAgIHJldHVybiAvKiNfX1BVUkVfXyovIF9yZWFjdC5kZWZhdWx0LmNyZWF0ZUVsZW1lbnQoXCJzY3JpcHRcIiwgT2JqZWN0LmFzc2lnbih7fSwgc2NyaXB0UHJvcHMsIHtcclxuICAgICAgICAgICAga2V5OiBzY3JpcHRQcm9wcy5zcmMgfHwgaW5kZXgsXHJcbiAgICAgICAgICAgIGRlZmVyOiBzY3JpcHRQcm9wcy5kZWZlciA/PyAhZGlzYWJsZU9wdGltaXplZExvYWRpbmcsXHJcbiAgICAgICAgICAgIG5vbmNlOiBwcm9wcy5ub25jZSxcclxuICAgICAgICAgICAgXCJkYXRhLW5zY3JpcHRcIjogXCJiZWZvcmVJbnRlcmFjdGl2ZVwiLFxyXG4gICAgICAgICAgICBjcm9zc09yaWdpbjogcHJvcHMuY3Jvc3NPcmlnaW4gfHwgY3Jvc3NPcmlnaW5cclxuICAgICAgICB9KSk7XHJcbiAgICB9KTtcclxuICAgIHJldHVybiAvKiNfX1BVUkVfXyovIF9yZWFjdC5kZWZhdWx0LmNyZWF0ZUVsZW1lbnQoX3JlYWN0LmRlZmF1bHQuRnJhZ21lbnQsIG51bGwsIHdlYldvcmtlclNjcmlwdHMsIGJlZm9yZUludGVyYWN0aXZlU2NyaXB0cyk7XHJcbn1cclxuZnVuY3Rpb24gZ2V0SGVhZEhUTUxQcm9wcyhwcm9wcykge1xyXG4gICAgY29uc3QgeyBjcm9zc09yaWdpbiAsIG5vbmNlICwgLi4ucmVzdFByb3BzIH0gPSBwcm9wcztcclxuICAgIC8vIFRoaXMgYXNzaWdubWVudCBpcyBuZWNlc3NhcnkgZm9yIGFkZGl0aW9uYWwgdHlwZSBjaGVja2luZyB0byBhdm9pZCB1bnN1cHBvcnRlZCBhdHRyaWJ1dGVzIGluIDxoZWFkPlxyXG4gICAgY29uc3QgaGVhZFByb3BzID0gcmVzdFByb3BzO1xyXG4gICAgcmV0dXJuIGhlYWRQcm9wcztcclxufVxyXG5mdW5jdGlvbiBnZXRBbXBQYXRoKGFtcFBhdGgsIGFzUGF0aCkge1xyXG4gICAgcmV0dXJuIGFtcFBhdGggfHwgYCR7YXNQYXRofSR7YXNQYXRoLmluY2x1ZGVzKFwiP1wiKSA/IFwiJlwiIDogXCI/XCJ9YW1wPTFgO1xyXG59XHJcbmZ1bmN0aW9uIGdldEZvbnRMb2FkZXJMaW5rcyhmb250TG9hZGVyTWFuaWZlc3QsIGRhbmdlcm91c0FzUGF0aCwgYXNzZXRQcmVmaXggPSBcIlwiKSB7XHJcbiAgICBpZiAoIWZvbnRMb2FkZXJNYW5pZmVzdCkge1xyXG4gICAgICAgIHJldHVybiB7XHJcbiAgICAgICAgICAgIHByZWNvbm5lY3Q6IG51bGwsXHJcbiAgICAgICAgICAgIHByZWxvYWQ6IG51bGxcclxuICAgICAgICB9O1xyXG4gICAgfVxyXG4gICAgY29uc3QgYXBwRm9udHNFbnRyeSA9IGZvbnRMb2FkZXJNYW5pZmVzdC5wYWdlc1tcIi9fYXBwXCJdO1xyXG4gICAgY29uc3QgcGFnZUZvbnRzRW50cnkgPSBmb250TG9hZGVyTWFuaWZlc3QucGFnZXNbZGFuZ2Vyb3VzQXNQYXRoXTtcclxuICAgIGNvbnN0IHByZWxvYWRlZEZvbnRGaWxlcyA9IFtcclxuICAgICAgICAuLi5hcHBGb250c0VudHJ5ID8/IFtdLFxyXG4gICAgICAgIC4uLnBhZ2VGb250c0VudHJ5ID8/IFtdLCBcclxuICAgIF07XHJcbiAgICAvLyBJZiBubyBmb250IGZpbGVzIHNob3VsZCBwcmVsb2FkIGJ1dCB0aGVyZSdzIGFuIGVudHJ5IGZvciB0aGUgcGF0aCwgYWRkIGEgcHJlY29ubmVjdCB0YWcuXHJcbiAgICBjb25zdCBwcmVjb25uZWN0VG9TZWxmID0gISEocHJlbG9hZGVkRm9udEZpbGVzLmxlbmd0aCA9PT0gMCAmJiAoYXBwRm9udHNFbnRyeSB8fCBwYWdlRm9udHNFbnRyeSkpO1xyXG4gICAgcmV0dXJuIHtcclxuICAgICAgICBwcmVjb25uZWN0OiBwcmVjb25uZWN0VG9TZWxmID8gLyojX19QVVJFX18qLyBfcmVhY3QuZGVmYXVsdC5jcmVhdGVFbGVtZW50KFwibGlua1wiLCB7XHJcbiAgICAgICAgICAgIHJlbDogXCJwcmVjb25uZWN0XCIsXHJcbiAgICAgICAgICAgIGhyZWY6IFwiL1wiLFxyXG4gICAgICAgICAgICBjcm9zc09yaWdpbjogXCJhbm9ueW1vdXNcIlxyXG4gICAgICAgIH0pIDogbnVsbCxcclxuICAgICAgICBwcmVsb2FkOiBwcmVsb2FkZWRGb250RmlsZXMgPyBwcmVsb2FkZWRGb250RmlsZXMubWFwKChmb250RmlsZSk9PntcclxuICAgICAgICAgICAgY29uc3QgZXh0ID0gL1xcLih3b2ZmfHdvZmYyfGVvdHx0dGZ8b3RmKSQvLmV4ZWMoZm9udEZpbGUpWzFdO1xyXG4gICAgICAgICAgICByZXR1cm4gLyojX19QVVJFX18qLyBfcmVhY3QuZGVmYXVsdC5jcmVhdGVFbGVtZW50KFwibGlua1wiLCB7XHJcbiAgICAgICAgICAgICAgICBrZXk6IGZvbnRGaWxlLFxyXG4gICAgICAgICAgICAgICAgcmVsOiBcInByZWxvYWRcIixcclxuICAgICAgICAgICAgICAgIGhyZWY6IGAke2Fzc2V0UHJlZml4fS9fbmV4dC8ke2VuY29kZVVSSShmb250RmlsZSl9YCxcclxuICAgICAgICAgICAgICAgIGFzOiBcImZvbnRcIixcclxuICAgICAgICAgICAgICAgIHR5cGU6IGBmb250LyR7ZXh0fWAsXHJcbiAgICAgICAgICAgICAgICBjcm9zc09yaWdpbjogXCJhbm9ueW1vdXNcIlxyXG4gICAgICAgICAgICB9KTtcclxuICAgICAgICB9KSA6IG51bGxcclxuICAgIH07XHJcbn1cclxuY2xhc3MgSGVhZCBleHRlbmRzIF9yZWFjdC5kZWZhdWx0LkNvbXBvbmVudCB7XHJcbiAgICBzdGF0aWMgY29udGV4dFR5cGUgPSBfaHRtbENvbnRleHQuSHRtbENvbnRleHQ7XHJcbiAgICBnZXRDc3NMaW5rcyhmaWxlcykge1xyXG4gICAgICAgIGNvbnN0IHsgYXNzZXRQcmVmaXggLCBkZXZPbmx5Q2FjaGVCdXN0ZXJRdWVyeVN0cmluZyAsIGR5bmFtaWNJbXBvcnRzICwgY3Jvc3NPcmlnaW4gLCBvcHRpbWl6ZUNzcyAsIG9wdGltaXplRm9udHMgLCAgfSA9IHRoaXMuY29udGV4dDtcclxuICAgICAgICBjb25zdCBjc3NGaWxlcyA9IGZpbGVzLmFsbEZpbGVzLmZpbHRlcigoZik9PmYuZW5kc1dpdGgoXCIuY3NzXCIpKTtcclxuICAgICAgICBjb25zdCBzaGFyZWRGaWxlcyA9IG5ldyBTZXQoZmlsZXMuc2hhcmVkRmlsZXMpO1xyXG4gICAgICAgIC8vIFVubWFuYWdlZCBmaWxlcyBhcmUgQ1NTIGZpbGVzIHRoYXQgd2lsbCBiZSBoYW5kbGVkIGRpcmVjdGx5IGJ5IHRoZVxyXG4gICAgICAgIC8vIHdlYnBhY2sgcnVudGltZSAoYG1pbmktY3NzLWV4dHJhY3QtcGx1Z2luYCkuXHJcbiAgICAgICAgbGV0IHVubWFuZ2VkRmlsZXMgPSBuZXcgU2V0KFtdKTtcclxuICAgICAgICBsZXQgZHluYW1pY0Nzc0ZpbGVzID0gQXJyYXkuZnJvbShuZXcgU2V0KGR5bmFtaWNJbXBvcnRzLmZpbHRlcigoZmlsZSk9PmZpbGUuZW5kc1dpdGgoXCIuY3NzXCIpKSkpO1xyXG4gICAgICAgIGlmIChkeW5hbWljQ3NzRmlsZXMubGVuZ3RoKSB7XHJcbiAgICAgICAgICAgIGNvbnN0IGV4aXN0aW5nID0gbmV3IFNldChjc3NGaWxlcyk7XHJcbiAgICAgICAgICAgIGR5bmFtaWNDc3NGaWxlcyA9IGR5bmFtaWNDc3NGaWxlcy5maWx0ZXIoKGYpPT4hKGV4aXN0aW5nLmhhcyhmKSB8fCBzaGFyZWRGaWxlcy5oYXMoZikpKTtcclxuICAgICAgICAgICAgdW5tYW5nZWRGaWxlcyA9IG5ldyBTZXQoZHluYW1pY0Nzc0ZpbGVzKTtcclxuICAgICAgICAgICAgY3NzRmlsZXMucHVzaCguLi5keW5hbWljQ3NzRmlsZXMpO1xyXG4gICAgICAgIH1cclxuICAgICAgICBsZXQgY3NzTGlua0VsZW1lbnRzID0gW107XHJcbiAgICAgICAgY3NzRmlsZXMuZm9yRWFjaCgoZmlsZSk9PntcclxuICAgICAgICAgICAgY29uc3QgaXNTaGFyZWRGaWxlID0gc2hhcmVkRmlsZXMuaGFzKGZpbGUpO1xyXG4gICAgICAgICAgICBpZiAoIW9wdGltaXplQ3NzKSB7XHJcbiAgICAgICAgICAgICAgICBjc3NMaW5rRWxlbWVudHMucHVzaCgvKiNfX1BVUkVfXyovIF9yZWFjdC5kZWZhdWx0LmNyZWF0ZUVsZW1lbnQoXCJsaW5rXCIsIHtcclxuICAgICAgICAgICAgICAgICAgICBrZXk6IGAke2ZpbGV9LXByZWxvYWRgLFxyXG4gICAgICAgICAgICAgICAgICAgIG5vbmNlOiB0aGlzLnByb3BzLm5vbmNlLFxyXG4gICAgICAgICAgICAgICAgICAgIHJlbDogXCJwcmVsb2FkXCIsXHJcbiAgICAgICAgICAgICAgICAgICAgaHJlZjogYCR7YXNzZXRQcmVmaXh9L19uZXh0LyR7ZW5jb2RlVVJJKGZpbGUpfSR7ZGV2T25seUNhY2hlQnVzdGVyUXVlcnlTdHJpbmd9YCxcclxuICAgICAgICAgICAgICAgICAgICBhczogXCJzdHlsZVwiLFxyXG4gICAgICAgICAgICAgICAgICAgIGNyb3NzT3JpZ2luOiB0aGlzLnByb3BzLmNyb3NzT3JpZ2luIHx8IGNyb3NzT3JpZ2luXHJcbiAgICAgICAgICAgICAgICB9KSk7XHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgY29uc3QgaXNVbm1hbmFnZWRGaWxlID0gdW5tYW5nZWRGaWxlcy5oYXMoZmlsZSk7XHJcbiAgICAgICAgICAgIGNzc0xpbmtFbGVtZW50cy5wdXNoKC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChcImxpbmtcIiwge1xyXG4gICAgICAgICAgICAgICAga2V5OiBmaWxlLFxyXG4gICAgICAgICAgICAgICAgbm9uY2U6IHRoaXMucHJvcHMubm9uY2UsXHJcbiAgICAgICAgICAgICAgICByZWw6IFwic3R5bGVzaGVldFwiLFxyXG4gICAgICAgICAgICAgICAgaHJlZjogYCR7YXNzZXRQcmVmaXh9L19uZXh0LyR7ZW5jb2RlVVJJKGZpbGUpfSR7ZGV2T25seUNhY2hlQnVzdGVyUXVlcnlTdHJpbmd9YCxcclxuICAgICAgICAgICAgICAgIGNyb3NzT3JpZ2luOiB0aGlzLnByb3BzLmNyb3NzT3JpZ2luIHx8IGNyb3NzT3JpZ2luLFxyXG4gICAgICAgICAgICAgICAgXCJkYXRhLW4tZ1wiOiBpc1VubWFuYWdlZEZpbGUgPyB1bmRlZmluZWQgOiBpc1NoYXJlZEZpbGUgPyBcIlwiIDogdW5kZWZpbmVkLFxyXG4gICAgICAgICAgICAgICAgXCJkYXRhLW4tcFwiOiBpc1VubWFuYWdlZEZpbGUgPyB1bmRlZmluZWQgOiBpc1NoYXJlZEZpbGUgPyB1bmRlZmluZWQgOiBcIlwiXHJcbiAgICAgICAgICAgIH0pKTtcclxuICAgICAgICB9KTtcclxuICAgICAgICBpZiAocHJvY2Vzcy5lbnYuTk9ERV9FTlYgIT09IFwiZGV2ZWxvcG1lbnRcIiAmJiBvcHRpbWl6ZUZvbnRzKSB7XHJcbiAgICAgICAgICAgIGNzc0xpbmtFbGVtZW50cyA9IHRoaXMubWFrZVN0eWxlc2hlZXRJbmVydChjc3NMaW5rRWxlbWVudHMpO1xyXG4gICAgICAgIH1cclxuICAgICAgICByZXR1cm4gY3NzTGlua0VsZW1lbnRzLmxlbmd0aCA9PT0gMCA/IG51bGwgOiBjc3NMaW5rRWxlbWVudHM7XHJcbiAgICB9XHJcbiAgICBnZXRQcmVsb2FkRHluYW1pY0NodW5rcygpIHtcclxuICAgICAgICBjb25zdCB7IGR5bmFtaWNJbXBvcnRzICwgYXNzZXRQcmVmaXggLCBkZXZPbmx5Q2FjaGVCdXN0ZXJRdWVyeVN0cmluZyAsIGNyb3NzT3JpZ2luICwgIH0gPSB0aGlzLmNvbnRleHQ7XHJcbiAgICAgICAgcmV0dXJuIGR5bmFtaWNJbXBvcnRzLm1hcCgoZmlsZSk9PntcclxuICAgICAgICAgICAgaWYgKCFmaWxlLmVuZHNXaXRoKFwiLmpzXCIpKSB7XHJcbiAgICAgICAgICAgICAgICByZXR1cm4gbnVsbDtcclxuICAgICAgICAgICAgfVxyXG4gICAgICAgICAgICByZXR1cm4gLyojX19QVVJFX18qLyBfcmVhY3QuZGVmYXVsdC5jcmVhdGVFbGVtZW50KFwibGlua1wiLCB7XHJcbiAgICAgICAgICAgICAgICByZWw6IFwicHJlbG9hZFwiLFxyXG4gICAgICAgICAgICAgICAga2V5OiBmaWxlLFxyXG4gICAgICAgICAgICAgICAgaHJlZjogYCR7YXNzZXRQcmVmaXh9L19uZXh0LyR7ZW5jb2RlVVJJKGZpbGUpfSR7ZGV2T25seUNhY2hlQnVzdGVyUXVlcnlTdHJpbmd9YCxcclxuICAgICAgICAgICAgICAgIGFzOiBcInNjcmlwdFwiLFxyXG4gICAgICAgICAgICAgICAgbm9uY2U6IHRoaXMucHJvcHMubm9uY2UsXHJcbiAgICAgICAgICAgICAgICBjcm9zc09yaWdpbjogdGhpcy5wcm9wcy5jcm9zc09yaWdpbiB8fCBjcm9zc09yaWdpblxyXG4gICAgICAgICAgICB9KTtcclxuICAgICAgICB9KS8vIEZpbHRlciBvdXQgbnVsbGVkIHNjcmlwdHNcclxuICAgICAgICAuZmlsdGVyKEJvb2xlYW4pO1xyXG4gICAgfVxyXG4gICAgZ2V0UHJlbG9hZE1haW5MaW5rcyhmaWxlcykge1xyXG4gICAgICAgIGNvbnN0IHsgYXNzZXRQcmVmaXggLCBkZXZPbmx5Q2FjaGVCdXN0ZXJRdWVyeVN0cmluZyAsIHNjcmlwdExvYWRlciAsIGNyb3NzT3JpZ2luICwgIH0gPSB0aGlzLmNvbnRleHQ7XHJcbiAgICAgICAgY29uc3QgcHJlbG9hZEZpbGVzID0gZmlsZXMuYWxsRmlsZXMuZmlsdGVyKChmaWxlKT0+e1xyXG4gICAgICAgICAgICByZXR1cm4gZmlsZS5lbmRzV2l0aChcIi5qc1wiKTtcclxuICAgICAgICB9KTtcclxuICAgICAgICByZXR1cm4gW1xyXG4gICAgICAgICAgICAuLi4oc2NyaXB0TG9hZGVyLmJlZm9yZUludGVyYWN0aXZlIHx8IFtdKS5tYXAoKGZpbGUpPT4vKiNfX1BVUkVfXyovIF9yZWFjdC5kZWZhdWx0LmNyZWF0ZUVsZW1lbnQoXCJsaW5rXCIsIHtcclxuICAgICAgICAgICAgICAgICAgICBrZXk6IGZpbGUuc3JjLFxyXG4gICAgICAgICAgICAgICAgICAgIG5vbmNlOiB0aGlzLnByb3BzLm5vbmNlLFxyXG4gICAgICAgICAgICAgICAgICAgIHJlbDogXCJwcmVsb2FkXCIsXHJcbiAgICAgICAgICAgICAgICAgICAgaHJlZjogZmlsZS5zcmMsXHJcbiAgICAgICAgICAgICAgICAgICAgYXM6IFwic2NyaXB0XCIsXHJcbiAgICAgICAgICAgICAgICAgICAgY3Jvc3NPcmlnaW46IHRoaXMucHJvcHMuY3Jvc3NPcmlnaW4gfHwgY3Jvc3NPcmlnaW5cclxuICAgICAgICAgICAgICAgIH0pKSxcclxuICAgICAgICAgICAgLi4ucHJlbG9hZEZpbGVzLm1hcCgoZmlsZSk9Pi8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChcImxpbmtcIiwge1xyXG4gICAgICAgICAgICAgICAgICAgIGtleTogZmlsZSxcclxuICAgICAgICAgICAgICAgICAgICBub25jZTogdGhpcy5wcm9wcy5ub25jZSxcclxuICAgICAgICAgICAgICAgICAgICByZWw6IFwicHJlbG9hZFwiLFxyXG4gICAgICAgICAgICAgICAgICAgIGhyZWY6IGAke2Fzc2V0UHJlZml4fS9fbmV4dC8ke2VuY29kZVVSSShmaWxlKX0ke2Rldk9ubHlDYWNoZUJ1c3RlclF1ZXJ5U3RyaW5nfWAsXHJcbiAgICAgICAgICAgICAgICAgICAgYXM6IFwic2NyaXB0XCIsXHJcbiAgICAgICAgICAgICAgICAgICAgY3Jvc3NPcmlnaW46IHRoaXMucHJvcHMuY3Jvc3NPcmlnaW4gfHwgY3Jvc3NPcmlnaW5cclxuICAgICAgICAgICAgICAgIH0pKSwgXHJcbiAgICAgICAgXTtcclxuICAgIH1cclxuICAgIGdldEJlZm9yZUludGVyYWN0aXZlSW5saW5lU2NyaXB0cygpIHtcclxuICAgICAgICBjb25zdCB7IHNjcmlwdExvYWRlciAgfSA9IHRoaXMuY29udGV4dDtcclxuICAgICAgICBjb25zdCB7IG5vbmNlICwgY3Jvc3NPcmlnaW4gIH0gPSB0aGlzLnByb3BzO1xyXG4gICAgICAgIHJldHVybiAoc2NyaXB0TG9hZGVyLmJlZm9yZUludGVyYWN0aXZlIHx8IFtdKS5maWx0ZXIoKHNjcmlwdCk9PiFzY3JpcHQuc3JjICYmIChzY3JpcHQuZGFuZ2Vyb3VzbHlTZXRJbm5lckhUTUwgfHwgc2NyaXB0LmNoaWxkcmVuKSkubWFwKChmaWxlLCBpbmRleCk9PntcclxuICAgICAgICAgICAgY29uc3QgeyBzdHJhdGVneSAsIGNoaWxkcmVuICwgZGFuZ2Vyb3VzbHlTZXRJbm5lckhUTUwgLCBzcmMgLCAuLi5zY3JpcHRQcm9wcyB9ID0gZmlsZTtcclxuICAgICAgICAgICAgbGV0IGh0bWwgPSBcIlwiO1xyXG4gICAgICAgICAgICBpZiAoZGFuZ2Vyb3VzbHlTZXRJbm5lckhUTUwgJiYgZGFuZ2Vyb3VzbHlTZXRJbm5lckhUTUwuX19odG1sKSB7XHJcbiAgICAgICAgICAgICAgICBodG1sID0gZGFuZ2Vyb3VzbHlTZXRJbm5lckhUTUwuX19odG1sO1xyXG4gICAgICAgICAgICB9IGVsc2UgaWYgKGNoaWxkcmVuKSB7XHJcbiAgICAgICAgICAgICAgICBodG1sID0gdHlwZW9mIGNoaWxkcmVuID09PSBcInN0cmluZ1wiID8gY2hpbGRyZW4gOiBBcnJheS5pc0FycmF5KGNoaWxkcmVuKSA/IGNoaWxkcmVuLmpvaW4oXCJcIikgOiBcIlwiO1xyXG4gICAgICAgICAgICB9XHJcbiAgICAgICAgICAgIHJldHVybiAvKiNfX1BVUkVfXyovIF9yZWFjdC5kZWZhdWx0LmNyZWF0ZUVsZW1lbnQoXCJzY3JpcHRcIiwgT2JqZWN0LmFzc2lnbih7fSwgc2NyaXB0UHJvcHMsIHtcclxuICAgICAgICAgICAgICAgIGRhbmdlcm91c2x5U2V0SW5uZXJIVE1MOiB7XHJcbiAgICAgICAgICAgICAgICAgICAgX19odG1sOiBodG1sXHJcbiAgICAgICAgICAgICAgICB9LFxyXG4gICAgICAgICAgICAgICAga2V5OiBzY3JpcHRQcm9wcy5pZCB8fCBpbmRleCxcclxuICAgICAgICAgICAgICAgIG5vbmNlOiBub25jZSxcclxuICAgICAgICAgICAgICAgIFwiZGF0YS1uc2NyaXB0XCI6IFwiYmVmb3JlSW50ZXJhY3RpdmVcIixcclxuICAgICAgICAgICAgICAgIGNyb3NzT3JpZ2luOiBjcm9zc09yaWdpbiB8fCBwcm9jZXNzLmVudi5fX05FWFRfQ1JPU1NfT1JJR0lOXHJcbiAgICAgICAgICAgIH0pKTtcclxuICAgICAgICB9KTtcclxuICAgIH1cclxuICAgIGdldER5bmFtaWNDaHVua3MoZmlsZXMpIHtcclxuICAgICAgICByZXR1cm4gZ2V0RHluYW1pY0NodW5rcyh0aGlzLmNvbnRleHQsIHRoaXMucHJvcHMsIGZpbGVzKTtcclxuICAgIH1cclxuICAgIGdldFByZU5leHRTY3JpcHRzKCkge1xyXG4gICAgICAgIHJldHVybiBnZXRQcmVOZXh0U2NyaXB0cyh0aGlzLmNvbnRleHQsIHRoaXMucHJvcHMpO1xyXG4gICAgfVxyXG4gICAgZ2V0U2NyaXB0cyhmaWxlcykge1xyXG4gICAgICAgIHJldHVybiBnZXRTY3JpcHRzKHRoaXMuY29udGV4dCwgdGhpcy5wcm9wcywgZmlsZXMpO1xyXG4gICAgfVxyXG4gICAgZ2V0UG9seWZpbGxTY3JpcHRzKCkge1xyXG4gICAgICAgIHJldHVybiBnZXRQb2x5ZmlsbFNjcmlwdHModGhpcy5jb250ZXh0LCB0aGlzLnByb3BzKTtcclxuICAgIH1cclxuICAgIG1ha2VTdHlsZXNoZWV0SW5lcnQobm9kZSkge1xyXG4gICAgICAgIHJldHVybiBfcmVhY3QuZGVmYXVsdC5DaGlsZHJlbi5tYXAobm9kZSwgKGMpPT57XHJcbiAgICAgICAgICAgIHZhciByZWY1LCByZWYzO1xyXG4gICAgICAgICAgICBpZiAoKGMgPT0gbnVsbCA/IHZvaWQgMCA6IGMudHlwZSkgPT09IFwibGlua1wiICYmIChjID09IG51bGwgPyB2b2lkIDAgOiAocmVmNSA9IGMucHJvcHMpID09IG51bGwgPyB2b2lkIDAgOiByZWY1LmhyZWYpICYmIF9jb25zdGFudHMuT1BUSU1JWkVEX0ZPTlRfUFJPVklERVJTLnNvbWUoKHsgdXJsICB9KT0+e1xyXG4gICAgICAgICAgICAgICAgdmFyIHJlZiwgcmVmNDtcclxuICAgICAgICAgICAgICAgIHJldHVybiBjID09IG51bGwgPyB2b2lkIDAgOiAocmVmID0gYy5wcm9wcykgPT0gbnVsbCA/IHZvaWQgMCA6IChyZWY0ID0gcmVmLmhyZWYpID09IG51bGwgPyB2b2lkIDAgOiByZWY0LnN0YXJ0c1dpdGgodXJsKTtcclxuICAgICAgICAgICAgfSkpIHtcclxuICAgICAgICAgICAgICAgIGNvbnN0IG5ld1Byb3BzID0ge1xyXG4gICAgICAgICAgICAgICAgICAgIC4uLmMucHJvcHMgfHwge30sXHJcbiAgICAgICAgICAgICAgICAgICAgXCJkYXRhLWhyZWZcIjogYy5wcm9wcy5ocmVmLFxyXG4gICAgICAgICAgICAgICAgICAgIGhyZWY6IHVuZGVmaW5lZFxyXG4gICAgICAgICAgICAgICAgfTtcclxuICAgICAgICAgICAgICAgIHJldHVybiAvKiNfX1BVUkVfXyovIF9yZWFjdC5kZWZhdWx0LmNsb25lRWxlbWVudChjLCBuZXdQcm9wcyk7XHJcbiAgICAgICAgICAgIH0gZWxzZSBpZiAoYyA9PSBudWxsID8gdm9pZCAwIDogKHJlZjMgPSBjLnByb3BzKSA9PSBudWxsID8gdm9pZCAwIDogcmVmMy5jaGlsZHJlbikge1xyXG4gICAgICAgICAgICAgICAgY29uc3QgbmV3UHJvcHMgPSB7XHJcbiAgICAgICAgICAgICAgICAgICAgLi4uYy5wcm9wcyB8fCB7fSxcclxuICAgICAgICAgICAgICAgICAgICBjaGlsZHJlbjogdGhpcy5tYWtlU3R5bGVzaGVldEluZXJ0KGMucHJvcHMuY2hpbGRyZW4pXHJcbiAgICAgICAgICAgICAgICB9O1xyXG4gICAgICAgICAgICAgICAgcmV0dXJuIC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY2xvbmVFbGVtZW50KGMsIG5ld1Byb3BzKTtcclxuICAgICAgICAgICAgfVxyXG4gICAgICAgICAgICByZXR1cm4gYztcclxuICAgICAgICB9KS5maWx0ZXIoQm9vbGVhbik7XHJcbiAgICB9XHJcbiAgICByZW5kZXIoKSB7XHJcbiAgICAgICAgY29uc3QgeyBzdHlsZXMgLCBhbXBQYXRoICwgaW5BbXBNb2RlICwgaHlicmlkQW1wICwgY2Fub25pY2FsQmFzZSAsIF9fTkVYVF9EQVRBX18gLCBkYW5nZXJvdXNBc1BhdGggLCBoZWFkVGFncyAsIHVuc3RhYmxlX3J1bnRpbWVKUyAsIHVuc3RhYmxlX0pzUHJlbG9hZCAsIGRpc2FibGVPcHRpbWl6ZWRMb2FkaW5nICwgb3B0aW1pemVDc3MgLCBvcHRpbWl6ZUZvbnRzICwgYXNzZXRQcmVmaXggLCBmb250TG9hZGVyTWFuaWZlc3QgLCAgfSA9IHRoaXMuY29udGV4dDtcclxuICAgICAgICBjb25zdCBkaXNhYmxlUnVudGltZUpTID0gdW5zdGFibGVfcnVudGltZUpTID09PSBmYWxzZTtcclxuICAgICAgICBjb25zdCBkaXNhYmxlSnNQcmVsb2FkID0gdW5zdGFibGVfSnNQcmVsb2FkID09PSBmYWxzZSB8fCAhZGlzYWJsZU9wdGltaXplZExvYWRpbmc7XHJcbiAgICAgICAgdGhpcy5jb250ZXh0LmRvY0NvbXBvbmVudHNSZW5kZXJlZC5IZWFkID0gdHJ1ZTtcclxuICAgICAgICBsZXQgeyBoZWFkICB9ID0gdGhpcy5jb250ZXh0O1xyXG4gICAgICAgIGxldCBjc3NQcmVsb2FkcyA9IFtdO1xyXG4gICAgICAgIGxldCBvdGhlckhlYWRFbGVtZW50cyA9IFtdO1xyXG4gICAgICAgIGlmIChoZWFkKSB7XHJcbiAgICAgICAgICAgIGhlYWQuZm9yRWFjaCgoYyk9PntcclxuICAgICAgICAgICAgICAgIGlmIChjICYmIGMudHlwZSA9PT0gXCJsaW5rXCIgJiYgYy5wcm9wc1tcInJlbFwiXSA9PT0gXCJwcmVsb2FkXCIgJiYgYy5wcm9wc1tcImFzXCJdID09PSBcInN0eWxlXCIpIHtcclxuICAgICAgICAgICAgICAgICAgICBjc3NQcmVsb2Fkcy5wdXNoKGMpO1xyXG4gICAgICAgICAgICAgICAgfSBlbHNlIHtcclxuICAgICAgICAgICAgICAgICAgICBjICYmIG90aGVySGVhZEVsZW1lbnRzLnB1c2goYyk7XHJcbiAgICAgICAgICAgICAgICB9XHJcbiAgICAgICAgICAgIH0pO1xyXG4gICAgICAgICAgICBoZWFkID0gY3NzUHJlbG9hZHMuY29uY2F0KG90aGVySGVhZEVsZW1lbnRzKTtcclxuICAgICAgICB9XHJcbiAgICAgICAgbGV0IGNoaWxkcmVuID0gX3JlYWN0LmRlZmF1bHQuQ2hpbGRyZW4udG9BcnJheSh0aGlzLnByb3BzLmNoaWxkcmVuKS5maWx0ZXIoQm9vbGVhbik7XHJcbiAgICAgICAgLy8gc2hvdyBhIHdhcm5pbmcgaWYgSGVhZCBjb250YWlucyA8dGl0bGU+IChvbmx5IGluIGRldmVsb3BtZW50KVxyXG4gICAgICAgIGlmIChwcm9jZXNzLmVudi5OT0RFX0VOViAhPT0gXCJwcm9kdWN0aW9uXCIpIHtcclxuICAgICAgICAgICAgY2hpbGRyZW4gPSBfcmVhY3QuZGVmYXVsdC5DaGlsZHJlbi5tYXAoY2hpbGRyZW4sIChjaGlsZCk9PntcclxuICAgICAgICAgICAgICAgIHZhciByZWY7XHJcbiAgICAgICAgICAgICAgICBjb25zdCBpc1JlYWN0SGVsbWV0ID0gY2hpbGQgPT0gbnVsbCA/IHZvaWQgMCA6IChyZWYgPSBjaGlsZC5wcm9wcykgPT0gbnVsbCA/IHZvaWQgMCA6IHJlZltcImRhdGEtcmVhY3QtaGVsbWV0XCJdO1xyXG4gICAgICAgICAgICAgICAgaWYgKCFpc1JlYWN0SGVsbWV0KSB7XHJcbiAgICAgICAgICAgICAgICAgICAgdmFyIHJlZjY7XHJcbiAgICAgICAgICAgICAgICAgICAgaWYgKChjaGlsZCA9PSBudWxsID8gdm9pZCAwIDogY2hpbGQudHlwZSkgPT09IFwidGl0bGVcIikge1xyXG4gICAgICAgICAgICAgICAgICAgICAgICBjb25zb2xlLndhcm4oXCJXYXJuaW5nOiA8dGl0bGU+IHNob3VsZCBub3QgYmUgdXNlZCBpbiBfZG9jdW1lbnQuanMncyA8SGVhZD4uIGh0dHBzOi8vbmV4dGpzLm9yZy9kb2NzL21lc3NhZ2VzL25vLWRvY3VtZW50LXRpdGxlXCIpO1xyXG4gICAgICAgICAgICAgICAgICAgIH0gZWxzZSBpZiAoKGNoaWxkID09IG51bGwgPyB2b2lkIDAgOiBjaGlsZC50eXBlKSA9PT0gXCJtZXRhXCIgJiYgKGNoaWxkID09IG51bGwgPyB2b2lkIDAgOiAocmVmNiA9IGNoaWxkLnByb3BzKSA9PSBudWxsID8gdm9pZCAwIDogcmVmNi5uYW1lKSA9PT0gXCJ2aWV3cG9ydFwiKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGNvbnNvbGUud2FybihcIldhcm5pbmc6IHZpZXdwb3J0IG1ldGEgdGFncyBzaG91bGQgbm90IGJlIHVzZWQgaW4gX2RvY3VtZW50LmpzJ3MgPEhlYWQ+LiBodHRwczovL25leHRqcy5vcmcvZG9jcy9tZXNzYWdlcy9uby1kb2N1bWVudC12aWV3cG9ydC1tZXRhXCIpO1xyXG4gICAgICAgICAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgICAgIHJldHVybiBjaGlsZDtcclxuICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgICAgIGlmICh0aGlzLnByb3BzLmNyb3NzT3JpZ2luKSBjb25zb2xlLndhcm4oXCJXYXJuaW5nOiBgSGVhZGAgYXR0cmlidXRlIGBjcm9zc09yaWdpbmAgaXMgZGVwcmVjYXRlZC4gaHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvbWVzc2FnZXMvZG9jLWNyb3Nzb3JpZ2luLWRlcHJlY2F0ZWRcIik7XHJcbiAgICAgICAgfVxyXG4gICAgICAgIGlmIChwcm9jZXNzLmVudi5OT0RFX0VOViAhPT0gXCJkZXZlbG9wbWVudFwiICYmIG9wdGltaXplRm9udHMgJiYgIShwcm9jZXNzLmVudi5ORVhUX1JVTlRJTUUgIT09IFwiZWRnZVwiICYmIGluQW1wTW9kZSkpIHtcclxuICAgICAgICAgICAgY2hpbGRyZW4gPSB0aGlzLm1ha2VTdHlsZXNoZWV0SW5lcnQoY2hpbGRyZW4pO1xyXG4gICAgICAgIH1cclxuICAgICAgICBsZXQgaGFzQW1waHRtbFJlbCA9IGZhbHNlO1xyXG4gICAgICAgIGxldCBoYXNDYW5vbmljYWxSZWwgPSBmYWxzZTtcclxuICAgICAgICAvLyBzaG93IHdhcm5pbmcgYW5kIHJlbW92ZSBjb25mbGljdGluZyBhbXAgaGVhZCB0YWdzXHJcbiAgICAgICAgaGVhZCA9IF9yZWFjdC5kZWZhdWx0LkNoaWxkcmVuLm1hcChoZWFkIHx8IFtdLCAoY2hpbGQpPT57XHJcbiAgICAgICAgICAgIGlmICghY2hpbGQpIHJldHVybiBjaGlsZDtcclxuICAgICAgICAgICAgY29uc3QgeyB0eXBlICwgcHJvcHMgIH0gPSBjaGlsZDtcclxuICAgICAgICAgICAgaWYgKHByb2Nlc3MuZW52Lk5FWFRfUlVOVElNRSAhPT0gXCJlZGdlXCIgJiYgaW5BbXBNb2RlKSB7XHJcbiAgICAgICAgICAgICAgICBsZXQgYmFkUHJvcCA9IFwiXCI7XHJcbiAgICAgICAgICAgICAgICBpZiAodHlwZSA9PT0gXCJtZXRhXCIgJiYgcHJvcHMubmFtZSA9PT0gXCJ2aWV3cG9ydFwiKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgYmFkUHJvcCA9ICduYW1lPVwidmlld3BvcnRcIic7XHJcbiAgICAgICAgICAgICAgICB9IGVsc2UgaWYgKHR5cGUgPT09IFwibGlua1wiICYmIHByb3BzLnJlbCA9PT0gXCJjYW5vbmljYWxcIikge1xyXG4gICAgICAgICAgICAgICAgICAgIGhhc0Nhbm9uaWNhbFJlbCA9IHRydWU7XHJcbiAgICAgICAgICAgICAgICB9IGVsc2UgaWYgKHR5cGUgPT09IFwic2NyaXB0XCIpIHtcclxuICAgICAgICAgICAgICAgICAgICAvLyBvbmx5IGJsb2NrIGlmXHJcbiAgICAgICAgICAgICAgICAgICAgLy8gMS4gaXQgaGFzIGEgc3JjIGFuZCBpc24ndCBwb2ludGluZyB0byBhbXBwcm9qZWN0J3MgQ0ROXHJcbiAgICAgICAgICAgICAgICAgICAgLy8gMi4gaXQgaXMgdXNpbmcgZGFuZ2Vyb3VzbHlTZXRJbm5lckhUTUwgd2l0aG91dCBhIHR5cGUgb3JcclxuICAgICAgICAgICAgICAgICAgICAvLyBhIHR5cGUgb2YgdGV4dC9qYXZhc2NyaXB0XHJcbiAgICAgICAgICAgICAgICAgICAgaWYgKHByb3BzLnNyYyAmJiBwcm9wcy5zcmMuaW5kZXhPZihcImFtcHByb2plY3RcIikgPCAtMSB8fCBwcm9wcy5kYW5nZXJvdXNseVNldElubmVySFRNTCAmJiAoIXByb3BzLnR5cGUgfHwgcHJvcHMudHlwZSA9PT0gXCJ0ZXh0L2phdmFzY3JpcHRcIikpIHtcclxuICAgICAgICAgICAgICAgICAgICAgICAgYmFkUHJvcCA9IFwiPHNjcmlwdFwiO1xyXG4gICAgICAgICAgICAgICAgICAgICAgICBPYmplY3Qua2V5cyhwcm9wcykuZm9yRWFjaCgocHJvcCk9PntcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJhZFByb3AgKz0gYCAke3Byb3B9PVwiJHtwcm9wc1twcm9wXX1cImA7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIH0pO1xyXG4gICAgICAgICAgICAgICAgICAgICAgICBiYWRQcm9wICs9IFwiLz5cIjtcclxuICAgICAgICAgICAgICAgICAgICB9XHJcbiAgICAgICAgICAgICAgICB9XHJcbiAgICAgICAgICAgICAgICBpZiAoYmFkUHJvcCkge1xyXG4gICAgICAgICAgICAgICAgICAgIGNvbnNvbGUud2FybihgRm91bmQgY29uZmxpY3RpbmcgYW1wIHRhZyBcIiR7Y2hpbGQudHlwZX1cIiB3aXRoIGNvbmZsaWN0aW5nIHByb3AgJHtiYWRQcm9wfSBpbiAke19fTkVYVF9EQVRBX18ucGFnZX0uIGh0dHBzOi8vbmV4dGpzLm9yZy9kb2NzL21lc3NhZ2VzL2NvbmZsaWN0aW5nLWFtcC10YWdgKTtcclxuICAgICAgICAgICAgICAgICAgICByZXR1cm4gbnVsbDtcclxuICAgICAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgfSBlbHNlIHtcclxuICAgICAgICAgICAgICAgIC8vIG5vbi1hbXAgbW9kZVxyXG4gICAgICAgICAgICAgICAgaWYgKHR5cGUgPT09IFwibGlua1wiICYmIHByb3BzLnJlbCA9PT0gXCJhbXBodG1sXCIpIHtcclxuICAgICAgICAgICAgICAgICAgICBoYXNBbXBodG1sUmVsID0gdHJ1ZTtcclxuICAgICAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgfVxyXG4gICAgICAgICAgICByZXR1cm4gY2hpbGQ7XHJcbiAgICAgICAgfSk7XHJcbiAgICAgICAgY29uc3QgZmlsZXMgPSBnZXREb2N1bWVudEZpbGVzKHRoaXMuY29udGV4dC5idWlsZE1hbmlmZXN0LCB0aGlzLmNvbnRleHQuX19ORVhUX0RBVEFfXy5wYWdlLCBwcm9jZXNzLmVudi5ORVhUX1JVTlRJTUUgIT09IFwiZWRnZVwiICYmIGluQW1wTW9kZSk7XHJcbiAgICAgICAgY29uc3QgZm9udExvYWRlckxpbmtzID0gZ2V0Rm9udExvYWRlckxpbmtzKGZvbnRMb2FkZXJNYW5pZmVzdCwgZGFuZ2Vyb3VzQXNQYXRoLCBhc3NldFByZWZpeCk7XHJcbiAgICAgICAgcmV0dXJuIC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChcImhlYWRcIiwgT2JqZWN0LmFzc2lnbih7fSwgZ2V0SGVhZEhUTUxQcm9wcyh0aGlzLnByb3BzKSksIHRoaXMuY29udGV4dC5pc0RldmVsb3BtZW50ICYmIC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChfcmVhY3QuZGVmYXVsdC5GcmFnbWVudCwgbnVsbCwgLyojX19QVVJFX18qLyBfcmVhY3QuZGVmYXVsdC5jcmVhdGVFbGVtZW50KFwic3R5bGVcIiwge1xyXG4gICAgICAgICAgICBcImRhdGEtbmV4dC1oaWRlLWZvdWNcIjogdHJ1ZSxcclxuICAgICAgICAgICAgXCJkYXRhLWFtcGRldm1vZGVcIjogcHJvY2Vzcy5lbnYuTkVYVF9SVU5USU1FICE9PSBcImVkZ2VcIiAmJiBpbkFtcE1vZGUgPyBcInRydWVcIiA6IHVuZGVmaW5lZCxcclxuICAgICAgICAgICAgZGFuZ2Vyb3VzbHlTZXRJbm5lckhUTUw6IHtcclxuICAgICAgICAgICAgICAgIF9faHRtbDogYGJvZHl7ZGlzcGxheTpub25lfWBcclxuICAgICAgICAgICAgfVxyXG4gICAgICAgIH0pLCAvKiNfX1BVUkVfXyovIF9yZWFjdC5kZWZhdWx0LmNyZWF0ZUVsZW1lbnQoXCJub3NjcmlwdFwiLCB7XHJcbiAgICAgICAgICAgIFwiZGF0YS1uZXh0LWhpZGUtZm91Y1wiOiB0cnVlLFxyXG4gICAgICAgICAgICBcImRhdGEtYW1wZGV2bW9kZVwiOiBwcm9jZXNzLmVudi5ORVhUX1JVTlRJTUUgIT09IFwiZWRnZVwiICYmIGluQW1wTW9kZSA/IFwidHJ1ZVwiIDogdW5kZWZpbmVkXHJcbiAgICAgICAgfSwgLyojX19QVVJFX18qLyBfcmVhY3QuZGVmYXVsdC5jcmVhdGVFbGVtZW50KFwic3R5bGVcIiwge1xyXG4gICAgICAgICAgICBkYW5nZXJvdXNseVNldElubmVySFRNTDoge1xyXG4gICAgICAgICAgICAgICAgX19odG1sOiBgYm9keXtkaXNwbGF5OmJsb2NrfWBcclxuICAgICAgICAgICAgfVxyXG4gICAgICAgIH0pKSksIGhlYWQsIC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChcIm1ldGFcIiwge1xyXG4gICAgICAgICAgICBuYW1lOiBcIm5leHQtaGVhZC1jb3VudFwiLFxyXG4gICAgICAgICAgICBjb250ZW50OiBfcmVhY3QuZGVmYXVsdC5DaGlsZHJlbi5jb3VudChoZWFkIHx8IFtdKS50b1N0cmluZygpXHJcbiAgICAgICAgfSksIGNoaWxkcmVuLCBvcHRpbWl6ZUZvbnRzICYmIC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChcIm1ldGFcIiwge1xyXG4gICAgICAgICAgICBuYW1lOiBcIm5leHQtZm9udC1wcmVjb25uZWN0XCJcclxuICAgICAgICB9KSwgZm9udExvYWRlckxpbmtzLnByZWNvbm5lY3QsIGZvbnRMb2FkZXJMaW5rcy5wcmVsb2FkLCBwcm9jZXNzLmVudi5ORVhUX1JVTlRJTUUgIT09IFwiZWRnZVwiICYmIGluQW1wTW9kZSAmJiAvKiNfX1BVUkVfXyovIF9yZWFjdC5kZWZhdWx0LmNyZWF0ZUVsZW1lbnQoX3JlYWN0LmRlZmF1bHQuRnJhZ21lbnQsIG51bGwsIC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChcIm1ldGFcIiwge1xyXG4gICAgICAgICAgICBuYW1lOiBcInZpZXdwb3J0XCIsXHJcbiAgICAgICAgICAgIGNvbnRlbnQ6IFwid2lkdGg9ZGV2aWNlLXdpZHRoLG1pbmltdW0tc2NhbGU9MSxpbml0aWFsLXNjYWxlPTFcIlxyXG4gICAgICAgIH0pLCAhaGFzQ2Fub25pY2FsUmVsICYmIC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChcImxpbmtcIiwge1xyXG4gICAgICAgICAgICByZWw6IFwiY2Fub25pY2FsXCIsXHJcbiAgICAgICAgICAgIGhyZWY6IGNhbm9uaWNhbEJhc2UgKyByZXF1aXJlKFwiLi4vc2VydmVyL3V0aWxzXCIpLmNsZWFuQW1wUGF0aChkYW5nZXJvdXNBc1BhdGgpXHJcbiAgICAgICAgfSksIC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChcImxpbmtcIiwge1xyXG4gICAgICAgICAgICByZWw6IFwicHJlbG9hZFwiLFxyXG4gICAgICAgICAgICBhczogXCJzY3JpcHRcIixcclxuICAgICAgICAgICAgaHJlZjogXCJodHRwczovL2Nkbi5hbXBwcm9qZWN0Lm9yZy92MC5qc1wiXHJcbiAgICAgICAgfSksIC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChBbXBTdHlsZXMsIHtcclxuICAgICAgICAgICAgc3R5bGVzOiBzdHlsZXNcclxuICAgICAgICB9KSwgLyojX19QVVJFX18qLyBfcmVhY3QuZGVmYXVsdC5jcmVhdGVFbGVtZW50KFwic3R5bGVcIiwge1xyXG4gICAgICAgICAgICBcImFtcC1ib2lsZXJwbGF0ZVwiOiBcIlwiLFxyXG4gICAgICAgICAgICBkYW5nZXJvdXNseVNldElubmVySFRNTDoge1xyXG4gICAgICAgICAgICAgICAgX19odG1sOiBgYm9keXstd2Via2l0LWFuaW1hdGlvbjotYW1wLXN0YXJ0IDhzIHN0ZXBzKDEsZW5kKSAwcyAxIG5vcm1hbCBib3RoOy1tb3otYW5pbWF0aW9uOi1hbXAtc3RhcnQgOHMgc3RlcHMoMSxlbmQpIDBzIDEgbm9ybWFsIGJvdGg7LW1zLWFuaW1hdGlvbjotYW1wLXN0YXJ0IDhzIHN0ZXBzKDEsZW5kKSAwcyAxIG5vcm1hbCBib3RoO2FuaW1hdGlvbjotYW1wLXN0YXJ0IDhzIHN0ZXBzKDEsZW5kKSAwcyAxIG5vcm1hbCBib3RofUAtd2Via2l0LWtleWZyYW1lcyAtYW1wLXN0YXJ0e2Zyb217dmlzaWJpbGl0eTpoaWRkZW59dG97dmlzaWJpbGl0eTp2aXNpYmxlfX1ALW1vei1rZXlmcmFtZXMgLWFtcC1zdGFydHtmcm9te3Zpc2liaWxpdHk6aGlkZGVufXRve3Zpc2liaWxpdHk6dmlzaWJsZX19QC1tcy1rZXlmcmFtZXMgLWFtcC1zdGFydHtmcm9te3Zpc2liaWxpdHk6aGlkZGVufXRve3Zpc2liaWxpdHk6dmlzaWJsZX19QC1vLWtleWZyYW1lcyAtYW1wLXN0YXJ0e2Zyb217dmlzaWJpbGl0eTpoaWRkZW59dG97dmlzaWJpbGl0eTp2aXNpYmxlfX1Aa2V5ZnJhbWVzIC1hbXAtc3RhcnR7ZnJvbXt2aXNpYmlsaXR5OmhpZGRlbn10b3t2aXNpYmlsaXR5OnZpc2libGV9fWBcclxuICAgICAgICAgICAgfVxyXG4gICAgICAgIH0pLCAvKiNfX1BVUkVfXyovIF9yZWFjdC5kZWZhdWx0LmNyZWF0ZUVsZW1lbnQoXCJub3NjcmlwdFwiLCBudWxsLCAvKiNfX1BVUkVfXyovIF9yZWFjdC5kZWZhdWx0LmNyZWF0ZUVsZW1lbnQoXCJzdHlsZVwiLCB7XHJcbiAgICAgICAgICAgIFwiYW1wLWJvaWxlcnBsYXRlXCI6IFwiXCIsXHJcbiAgICAgICAgICAgIGRhbmdlcm91c2x5U2V0SW5uZXJIVE1MOiB7XHJcbiAgICAgICAgICAgICAgICBfX2h0bWw6IGBib2R5ey13ZWJraXQtYW5pbWF0aW9uOm5vbmU7LW1vei1hbmltYXRpb246bm9uZTstbXMtYW5pbWF0aW9uOm5vbmU7YW5pbWF0aW9uOm5vbmV9YFxyXG4gICAgICAgICAgICB9XHJcbiAgICAgICAgfSkpLCAvKiNfX1BVUkVfXyovIF9yZWFjdC5kZWZhdWx0LmNyZWF0ZUVsZW1lbnQoXCJzY3JpcHRcIiwge1xyXG4gICAgICAgICAgICBhc3luYzogdHJ1ZSxcclxuICAgICAgICAgICAgc3JjOiBcImh0dHBzOi8vY2RuLmFtcHByb2plY3Qub3JnL3YwLmpzXCJcclxuICAgICAgICB9KSksICEocHJvY2Vzcy5lbnYuTkVYVF9SVU5USU1FICE9PSBcImVkZ2VcIiAmJiBpbkFtcE1vZGUpICYmIC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChfcmVhY3QuZGVmYXVsdC5GcmFnbWVudCwgbnVsbCwgIWhhc0FtcGh0bWxSZWwgJiYgaHlicmlkQW1wICYmIC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChcImxpbmtcIiwge1xyXG4gICAgICAgICAgICByZWw6IFwiYW1waHRtbFwiLFxyXG4gICAgICAgICAgICBocmVmOiBjYW5vbmljYWxCYXNlICsgZ2V0QW1wUGF0aChhbXBQYXRoLCBkYW5nZXJvdXNBc1BhdGgpXHJcbiAgICAgICAgfSksIHRoaXMuZ2V0QmVmb3JlSW50ZXJhY3RpdmVJbmxpbmVTY3JpcHRzKCksICFvcHRpbWl6ZUNzcyAmJiB0aGlzLmdldENzc0xpbmtzKGZpbGVzKSwgIW9wdGltaXplQ3NzICYmIC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChcIm5vc2NyaXB0XCIsIHtcclxuICAgICAgICAgICAgXCJkYXRhLW4tY3NzXCI6IHRoaXMucHJvcHMubm9uY2UgPz8gXCJcIlxyXG4gICAgICAgIH0pLCAhZGlzYWJsZVJ1bnRpbWVKUyAmJiAhZGlzYWJsZUpzUHJlbG9hZCAmJiB0aGlzLmdldFByZWxvYWREeW5hbWljQ2h1bmtzKCksICFkaXNhYmxlUnVudGltZUpTICYmICFkaXNhYmxlSnNQcmVsb2FkICYmIHRoaXMuZ2V0UHJlbG9hZE1haW5MaW5rcyhmaWxlcyksICFkaXNhYmxlT3B0aW1pemVkTG9hZGluZyAmJiAhZGlzYWJsZVJ1bnRpbWVKUyAmJiB0aGlzLmdldFBvbHlmaWxsU2NyaXB0cygpLCAhZGlzYWJsZU9wdGltaXplZExvYWRpbmcgJiYgIWRpc2FibGVSdW50aW1lSlMgJiYgdGhpcy5nZXRQcmVOZXh0U2NyaXB0cygpLCAhZGlzYWJsZU9wdGltaXplZExvYWRpbmcgJiYgIWRpc2FibGVSdW50aW1lSlMgJiYgdGhpcy5nZXREeW5hbWljQ2h1bmtzKGZpbGVzKSwgIWRpc2FibGVPcHRpbWl6ZWRMb2FkaW5nICYmICFkaXNhYmxlUnVudGltZUpTICYmIHRoaXMuZ2V0U2NyaXB0cyhmaWxlcyksIG9wdGltaXplQ3NzICYmIHRoaXMuZ2V0Q3NzTGlua3MoZmlsZXMpLCBvcHRpbWl6ZUNzcyAmJiAvKiNfX1BVUkVfXyovIF9yZWFjdC5kZWZhdWx0LmNyZWF0ZUVsZW1lbnQoXCJub3NjcmlwdFwiLCB7XHJcbiAgICAgICAgICAgIFwiZGF0YS1uLWNzc1wiOiB0aGlzLnByb3BzLm5vbmNlID8/IFwiXCJcclxuICAgICAgICB9KSwgdGhpcy5jb250ZXh0LmlzRGV2ZWxvcG1lbnQgJiYgLy8gdGhpcyBlbGVtZW50IGlzIHVzZWQgdG8gbW91bnQgZGV2ZWxvcG1lbnQgc3R5bGVzIHNvIHRoZVxyXG4gICAgICAgIC8vIG9yZGVyaW5nIG1hdGNoZXMgcHJvZHVjdGlvblxyXG4gICAgICAgIC8vIChieSBkZWZhdWx0LCBzdHlsZS1sb2FkZXIgaW5qZWN0cyBhdCB0aGUgYm90dG9tIG9mIDxoZWFkIC8+KVxyXG4gICAgICAgIC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChcIm5vc2NyaXB0XCIsIHtcclxuICAgICAgICAgICAgaWQ6IFwiX19uZXh0X2Nzc19fRE9fTk9UX1VTRV9fXCJcclxuICAgICAgICB9KSwgc3R5bGVzIHx8IG51bGwpLCAvKiNfX1BVUkVfXyovIF9yZWFjdC5kZWZhdWx0LmNyZWF0ZUVsZW1lbnQoX3JlYWN0LmRlZmF1bHQuRnJhZ21lbnQsIHt9LCAuLi5oZWFkVGFncyB8fCBbXSkpO1xyXG4gICAgfVxyXG59XHJcbmV4cG9ydHMuSGVhZCA9IEhlYWQ7XHJcbmZ1bmN0aW9uIGhhbmRsZURvY3VtZW50U2NyaXB0TG9hZGVySXRlbXMoc2NyaXB0TG9hZGVyLCBfX05FWFRfREFUQV9fLCBwcm9wcykge1xyXG4gICAgdmFyIHJlZjEwLCByZWY3LCByZWY4LCByZWY5O1xyXG4gICAgaWYgKCFwcm9wcy5jaGlsZHJlbikgcmV0dXJuO1xyXG4gICAgY29uc3Qgc2NyaXB0TG9hZGVySXRlbXMgPSBbXTtcclxuICAgIGNvbnN0IGNoaWxkcmVuID0gQXJyYXkuaXNBcnJheShwcm9wcy5jaGlsZHJlbikgPyBwcm9wcy5jaGlsZHJlbiA6IFtcclxuICAgICAgICBwcm9wcy5jaGlsZHJlblxyXG4gICAgXTtcclxuICAgIGNvbnN0IGhlYWRDaGlsZHJlbiA9IChyZWYxMCA9IGNoaWxkcmVuLmZpbmQoKGNoaWxkKT0+Y2hpbGQudHlwZSA9PT0gSGVhZCkpID09IG51bGwgPyB2b2lkIDAgOiAocmVmNyA9IHJlZjEwLnByb3BzKSA9PSBudWxsID8gdm9pZCAwIDogcmVmNy5jaGlsZHJlbjtcclxuICAgIGNvbnN0IGJvZHlDaGlsZHJlbiA9IChyZWY4ID0gY2hpbGRyZW4uZmluZCgoY2hpbGQpPT5jaGlsZC50eXBlID09PSBcImJvZHlcIikpID09IG51bGwgPyB2b2lkIDAgOiAocmVmOSA9IHJlZjgucHJvcHMpID09IG51bGwgPyB2b2lkIDAgOiByZWY5LmNoaWxkcmVuO1xyXG4gICAgLy8gU2NyaXB0cyB3aXRoIGJlZm9yZUludGVyYWN0aXZlIGNhbiBiZSBwbGFjZWQgaW5zaWRlIEhlYWQgb3IgPGJvZHk+IHNvIGNoaWxkcmVuIG9mIGJvdGggbmVlZHMgdG8gYmUgdHJhdmVyc2VkXHJcbiAgICBjb25zdCBjb21iaW5lZENoaWxkcmVuID0gW1xyXG4gICAgICAgIC4uLkFycmF5LmlzQXJyYXkoaGVhZENoaWxkcmVuKSA/IGhlYWRDaGlsZHJlbiA6IFtcclxuICAgICAgICAgICAgaGVhZENoaWxkcmVuXHJcbiAgICAgICAgXSxcclxuICAgICAgICAuLi5BcnJheS5pc0FycmF5KGJvZHlDaGlsZHJlbikgPyBib2R5Q2hpbGRyZW4gOiBbXHJcbiAgICAgICAgICAgIGJvZHlDaGlsZHJlblxyXG4gICAgICAgIF0sIFxyXG4gICAgXTtcclxuICAgIF9yZWFjdC5kZWZhdWx0LkNoaWxkcmVuLmZvckVhY2goY29tYmluZWRDaGlsZHJlbiwgKGNoaWxkKT0+e1xyXG4gICAgICAgIHZhciByZWY7XHJcbiAgICAgICAgaWYgKCFjaGlsZCkgcmV0dXJuO1xyXG4gICAgICAgIC8vIFdoZW4gdXNpbmcgdGhlIGBuZXh0L3NjcmlwdGAgY29tcG9uZW50LCByZWdpc3RlciBpdCBpbiBzY3JpcHQgbG9hZGVyLlxyXG4gICAgICAgIGlmICgocmVmID0gY2hpbGQudHlwZSkgPT0gbnVsbCA/IHZvaWQgMCA6IHJlZi5fX25leHRTY3JpcHQpIHtcclxuICAgICAgICAgICAgaWYgKGNoaWxkLnByb3BzLnN0cmF0ZWd5ID09PSBcImJlZm9yZUludGVyYWN0aXZlXCIpIHtcclxuICAgICAgICAgICAgICAgIHNjcmlwdExvYWRlci5iZWZvcmVJbnRlcmFjdGl2ZSA9IChzY3JpcHRMb2FkZXIuYmVmb3JlSW50ZXJhY3RpdmUgfHwgW10pLmNvbmNhdChbXHJcbiAgICAgICAgICAgICAgICAgICAge1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAuLi5jaGlsZC5wcm9wc1xyXG4gICAgICAgICAgICAgICAgICAgIH0sIFxyXG4gICAgICAgICAgICAgICAgXSk7XHJcbiAgICAgICAgICAgICAgICByZXR1cm47XHJcbiAgICAgICAgICAgIH0gZWxzZSBpZiAoW1xyXG4gICAgICAgICAgICAgICAgXCJsYXp5T25sb2FkXCIsXHJcbiAgICAgICAgICAgICAgICBcImFmdGVySW50ZXJhY3RpdmVcIixcclxuICAgICAgICAgICAgICAgIFwid29ya2VyXCJcclxuICAgICAgICAgICAgXS5pbmNsdWRlcyhjaGlsZC5wcm9wcy5zdHJhdGVneSkpIHtcclxuICAgICAgICAgICAgICAgIHNjcmlwdExvYWRlckl0ZW1zLnB1c2goY2hpbGQucHJvcHMpO1xyXG4gICAgICAgICAgICAgICAgcmV0dXJuO1xyXG4gICAgICAgICAgICB9XHJcbiAgICAgICAgfVxyXG4gICAgfSk7XHJcbiAgICBfX05FWFRfREFUQV9fLnNjcmlwdExvYWRlciA9IHNjcmlwdExvYWRlckl0ZW1zO1xyXG59XHJcbmNsYXNzIE5leHRTY3JpcHQgZXh0ZW5kcyBfcmVhY3QuZGVmYXVsdC5Db21wb25lbnQge1xyXG4gICAgc3RhdGljIGNvbnRleHRUeXBlID0gX2h0bWxDb250ZXh0Lkh0bWxDb250ZXh0O1xyXG4gICAgZ2V0RHluYW1pY0NodW5rcyhmaWxlcykge1xyXG4gICAgICAgIHJldHVybiBnZXREeW5hbWljQ2h1bmtzKHRoaXMuY29udGV4dCwgdGhpcy5wcm9wcywgZmlsZXMpO1xyXG4gICAgfVxyXG4gICAgZ2V0UHJlTmV4dFNjcmlwdHMoKSB7XHJcbiAgICAgICAgcmV0dXJuIGdldFByZU5leHRTY3JpcHRzKHRoaXMuY29udGV4dCwgdGhpcy5wcm9wcyk7XHJcbiAgICB9XHJcbiAgICBnZXRTY3JpcHRzKGZpbGVzKSB7XHJcbiAgICAgICAgcmV0dXJuIGdldFNjcmlwdHModGhpcy5jb250ZXh0LCB0aGlzLnByb3BzLCBmaWxlcyk7XHJcbiAgICB9XHJcbiAgICBnZXRQb2x5ZmlsbFNjcmlwdHMoKSB7XHJcbiAgICAgICAgcmV0dXJuIGdldFBvbHlmaWxsU2NyaXB0cyh0aGlzLmNvbnRleHQsIHRoaXMucHJvcHMpO1xyXG4gICAgfVxyXG4gICAgc3RhdGljIGdldElubGluZVNjcmlwdFNvdXJjZShjb250ZXh0KSB7XHJcbiAgICAgICAgY29uc3QgeyBfX05FWFRfREFUQV9fICwgbGFyZ2VQYWdlRGF0YUJ5dGVzICB9ID0gY29udGV4dDtcclxuICAgICAgICB0cnkge1xyXG4gICAgICAgICAgICBjb25zdCBkYXRhID0gSlNPTi5zdHJpbmdpZnkoX19ORVhUX0RBVEFfXyk7XHJcbiAgICAgICAgICAgIGNvbnN0IGJ5dGVzID0gcHJvY2Vzcy5lbnYuTkVYVF9SVU5USU1FID09PSBcImVkZ2VcIiA/IG5ldyBUZXh0RW5jb2RlcigpLmVuY29kZShkYXRhKS5idWZmZXIuYnl0ZUxlbmd0aCA6IEJ1ZmZlci5mcm9tKGRhdGEpLmJ5dGVMZW5ndGg7XHJcbiAgICAgICAgICAgIGNvbnN0IHByZXR0eUJ5dGVzID0gcmVxdWlyZShcIi4uL2xpYi9wcmV0dHktYnl0ZXNcIikuZGVmYXVsdDtcclxuICAgICAgICAgICAgaWYgKGxhcmdlUGFnZURhdGFCeXRlcyAmJiBieXRlcyA+IGxhcmdlUGFnZURhdGFCeXRlcykge1xyXG4gICAgICAgICAgICAgICAgY29uc29sZS53YXJuKGBXYXJuaW5nOiBkYXRhIGZvciBwYWdlIFwiJHtfX05FWFRfREFUQV9fLnBhZ2V9XCIke19fTkVYVF9EQVRBX18ucGFnZSA9PT0gY29udGV4dC5kYW5nZXJvdXNBc1BhdGggPyBcIlwiIDogYCAocGF0aCBcIiR7Y29udGV4dC5kYW5nZXJvdXNBc1BhdGh9XCIpYH0gaXMgJHtwcmV0dHlCeXRlcyhieXRlcyl9IHdoaWNoIGV4Y2VlZHMgdGhlIHRocmVzaG9sZCBvZiAke3ByZXR0eUJ5dGVzKGxhcmdlUGFnZURhdGFCeXRlcyl9LCB0aGlzIGFtb3VudCBvZiBkYXRhIGNhbiByZWR1Y2UgcGVyZm9ybWFuY2UuXFxuU2VlIG1vcmUgaW5mbyBoZXJlOiBodHRwczovL25leHRqcy5vcmcvZG9jcy9tZXNzYWdlcy9sYXJnZS1wYWdlLWRhdGFgKTtcclxuICAgICAgICAgICAgfVxyXG4gICAgICAgICAgICByZXR1cm4gKDAsIF9odG1sZXNjYXBlKS5odG1sRXNjYXBlSnNvblN0cmluZyhkYXRhKTtcclxuICAgICAgICB9IGNhdGNoIChlcnIpIHtcclxuICAgICAgICAgICAgaWYgKCgwLCBfaXNFcnJvcikuZGVmYXVsdChlcnIpICYmIGVyci5tZXNzYWdlLmluZGV4T2YoXCJjaXJjdWxhciBzdHJ1Y3R1cmVcIikgIT09IC0xKSB7XHJcbiAgICAgICAgICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYENpcmN1bGFyIHN0cnVjdHVyZSBpbiBcImdldEluaXRpYWxQcm9wc1wiIHJlc3VsdCBvZiBwYWdlIFwiJHtfX05FWFRfREFUQV9fLnBhZ2V9XCIuIGh0dHBzOi8vbmV4dGpzLm9yZy9kb2NzL21lc3NhZ2VzL2NpcmN1bGFyLXN0cnVjdHVyZWApO1xyXG4gICAgICAgICAgICB9XHJcbiAgICAgICAgICAgIHRocm93IGVycjtcclxuICAgICAgICB9XHJcbiAgICB9XHJcbiAgICByZW5kZXIoKSB7XHJcbiAgICAgICAgY29uc3QgeyBhc3NldFByZWZpeCAsIGluQW1wTW9kZSAsIGJ1aWxkTWFuaWZlc3QgLCB1bnN0YWJsZV9ydW50aW1lSlMgLCBkb2NDb21wb25lbnRzUmVuZGVyZWQgLCBkZXZPbmx5Q2FjaGVCdXN0ZXJRdWVyeVN0cmluZyAsIGRpc2FibGVPcHRpbWl6ZWRMb2FkaW5nICwgY3Jvc3NPcmlnaW4gLCAgfSA9IHRoaXMuY29udGV4dDtcclxuICAgICAgICBjb25zdCBkaXNhYmxlUnVudGltZUpTID0gdW5zdGFibGVfcnVudGltZUpTID09PSBmYWxzZTtcclxuICAgICAgICBkb2NDb21wb25lbnRzUmVuZGVyZWQuTmV4dFNjcmlwdCA9IHRydWU7XHJcbiAgICAgICAgaWYgKHByb2Nlc3MuZW52Lk5FWFRfUlVOVElNRSAhPT0gXCJlZGdlXCIgJiYgaW5BbXBNb2RlKSB7XHJcbiAgICAgICAgICAgIGlmIChwcm9jZXNzLmVudi5OT0RFX0VOViA9PT0gXCJwcm9kdWN0aW9uXCIpIHtcclxuICAgICAgICAgICAgICAgIHJldHVybiBudWxsO1xyXG4gICAgICAgICAgICB9XHJcbiAgICAgICAgICAgIGNvbnN0IGFtcERldkZpbGVzID0gW1xyXG4gICAgICAgICAgICAgICAgLi4uYnVpbGRNYW5pZmVzdC5kZXZGaWxlcyxcclxuICAgICAgICAgICAgICAgIC4uLmJ1aWxkTWFuaWZlc3QucG9seWZpbGxGaWxlcyxcclxuICAgICAgICAgICAgICAgIC4uLmJ1aWxkTWFuaWZlc3QuYW1wRGV2RmlsZXMsIFxyXG4gICAgICAgICAgICBdO1xyXG4gICAgICAgICAgICByZXR1cm4gLyojX19QVVJFX18qLyBfcmVhY3QuZGVmYXVsdC5jcmVhdGVFbGVtZW50KF9yZWFjdC5kZWZhdWx0LkZyYWdtZW50LCBudWxsLCBkaXNhYmxlUnVudGltZUpTID8gbnVsbCA6IC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChcInNjcmlwdFwiLCB7XHJcbiAgICAgICAgICAgICAgICBpZDogXCJfX05FWFRfREFUQV9fXCIsXHJcbiAgICAgICAgICAgICAgICB0eXBlOiBcImFwcGxpY2F0aW9uL2pzb25cIixcclxuICAgICAgICAgICAgICAgIG5vbmNlOiB0aGlzLnByb3BzLm5vbmNlLFxyXG4gICAgICAgICAgICAgICAgY3Jvc3NPcmlnaW46IHRoaXMucHJvcHMuY3Jvc3NPcmlnaW4gfHwgY3Jvc3NPcmlnaW4sXHJcbiAgICAgICAgICAgICAgICBkYW5nZXJvdXNseVNldElubmVySFRNTDoge1xyXG4gICAgICAgICAgICAgICAgICAgIF9faHRtbDogTmV4dFNjcmlwdC5nZXRJbmxpbmVTY3JpcHRTb3VyY2UodGhpcy5jb250ZXh0KVxyXG4gICAgICAgICAgICAgICAgfSxcclxuICAgICAgICAgICAgICAgIFwiZGF0YS1hbXBkZXZtb2RlXCI6IHRydWVcclxuICAgICAgICAgICAgfSksIGFtcERldkZpbGVzLm1hcCgoZmlsZSk9Pi8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChcInNjcmlwdFwiLCB7XHJcbiAgICAgICAgICAgICAgICAgICAga2V5OiBmaWxlLFxyXG4gICAgICAgICAgICAgICAgICAgIHNyYzogYCR7YXNzZXRQcmVmaXh9L19uZXh0LyR7ZmlsZX0ke2Rldk9ubHlDYWNoZUJ1c3RlclF1ZXJ5U3RyaW5nfWAsXHJcbiAgICAgICAgICAgICAgICAgICAgbm9uY2U6IHRoaXMucHJvcHMubm9uY2UsXHJcbiAgICAgICAgICAgICAgICAgICAgY3Jvc3NPcmlnaW46IHRoaXMucHJvcHMuY3Jvc3NPcmlnaW4gfHwgY3Jvc3NPcmlnaW4sXHJcbiAgICAgICAgICAgICAgICAgICAgXCJkYXRhLWFtcGRldm1vZGVcIjogdHJ1ZVxyXG4gICAgICAgICAgICAgICAgfSkpKTtcclxuICAgICAgICB9XHJcbiAgICAgICAgaWYgKHByb2Nlc3MuZW52Lk5PREVfRU5WICE9PSBcInByb2R1Y3Rpb25cIikge1xyXG4gICAgICAgICAgICBpZiAodGhpcy5wcm9wcy5jcm9zc09yaWdpbikgY29uc29sZS53YXJuKFwiV2FybmluZzogYE5leHRTY3JpcHRgIGF0dHJpYnV0ZSBgY3Jvc3NPcmlnaW5gIGlzIGRlcHJlY2F0ZWQuIGh0dHBzOi8vbmV4dGpzLm9yZy9kb2NzL21lc3NhZ2VzL2RvYy1jcm9zc29yaWdpbi1kZXByZWNhdGVkXCIpO1xyXG4gICAgICAgIH1cclxuICAgICAgICBjb25zdCBmaWxlcyA9IGdldERvY3VtZW50RmlsZXModGhpcy5jb250ZXh0LmJ1aWxkTWFuaWZlc3QsIHRoaXMuY29udGV4dC5fX05FWFRfREFUQV9fLnBhZ2UsIHByb2Nlc3MuZW52Lk5FWFRfUlVOVElNRSAhPT0gXCJlZGdlXCIgJiYgaW5BbXBNb2RlKTtcclxuICAgICAgICByZXR1cm4gLyojX19QVVJFX18qLyBfcmVhY3QuZGVmYXVsdC5jcmVhdGVFbGVtZW50KF9yZWFjdC5kZWZhdWx0LkZyYWdtZW50LCBudWxsLCAhZGlzYWJsZVJ1bnRpbWVKUyAmJiBidWlsZE1hbmlmZXN0LmRldkZpbGVzID8gYnVpbGRNYW5pZmVzdC5kZXZGaWxlcy5tYXAoKGZpbGUpPT4vKiNfX1BVUkVfXyovIF9yZWFjdC5kZWZhdWx0LmNyZWF0ZUVsZW1lbnQoXCJzY3JpcHRcIiwge1xyXG4gICAgICAgICAgICAgICAga2V5OiBmaWxlLFxyXG4gICAgICAgICAgICAgICAgc3JjOiBgJHthc3NldFByZWZpeH0vX25leHQvJHtlbmNvZGVVUkkoZmlsZSl9JHtkZXZPbmx5Q2FjaGVCdXN0ZXJRdWVyeVN0cmluZ31gLFxyXG4gICAgICAgICAgICAgICAgbm9uY2U6IHRoaXMucHJvcHMubm9uY2UsXHJcbiAgICAgICAgICAgICAgICBjcm9zc09yaWdpbjogdGhpcy5wcm9wcy5jcm9zc09yaWdpbiB8fCBjcm9zc09yaWdpblxyXG4gICAgICAgICAgICB9KSkgOiBudWxsLCBkaXNhYmxlUnVudGltZUpTID8gbnVsbCA6IC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChcInNjcmlwdFwiLCB7XHJcbiAgICAgICAgICAgIGlkOiBcIl9fTkVYVF9EQVRBX19cIixcclxuICAgICAgICAgICAgdHlwZTogXCJhcHBsaWNhdGlvbi9qc29uXCIsXHJcbiAgICAgICAgICAgIG5vbmNlOiB0aGlzLnByb3BzLm5vbmNlLFxyXG4gICAgICAgICAgICBjcm9zc09yaWdpbjogdGhpcy5wcm9wcy5jcm9zc09yaWdpbiB8fCBjcm9zc09yaWdpbixcclxuICAgICAgICAgICAgZGFuZ2Vyb3VzbHlTZXRJbm5lckhUTUw6IHtcclxuICAgICAgICAgICAgICAgIF9faHRtbDogTmV4dFNjcmlwdC5nZXRJbmxpbmVTY3JpcHRTb3VyY2UodGhpcy5jb250ZXh0KVxyXG4gICAgICAgICAgICB9XHJcbiAgICAgICAgfSksIGRpc2FibGVPcHRpbWl6ZWRMb2FkaW5nICYmICFkaXNhYmxlUnVudGltZUpTICYmIHRoaXMuZ2V0UG9seWZpbGxTY3JpcHRzKCksIGRpc2FibGVPcHRpbWl6ZWRMb2FkaW5nICYmICFkaXNhYmxlUnVudGltZUpTICYmIHRoaXMuZ2V0UHJlTmV4dFNjcmlwdHMoKSwgZGlzYWJsZU9wdGltaXplZExvYWRpbmcgJiYgIWRpc2FibGVSdW50aW1lSlMgJiYgdGhpcy5nZXREeW5hbWljQ2h1bmtzKGZpbGVzKSwgZGlzYWJsZU9wdGltaXplZExvYWRpbmcgJiYgIWRpc2FibGVSdW50aW1lSlMgJiYgdGhpcy5nZXRTY3JpcHRzKGZpbGVzKSk7XHJcbiAgICB9XHJcbn1cclxuZXhwb3J0cy5OZXh0U2NyaXB0ID0gTmV4dFNjcmlwdDtcclxuZnVuY3Rpb24gSHRtbChwcm9wcykge1xyXG4gICAgY29uc3QgeyBpbkFtcE1vZGUgLCBkb2NDb21wb25lbnRzUmVuZGVyZWQgLCBsb2NhbGUgLCBzY3JpcHRMb2FkZXIgLCBfX05FWFRfREFUQV9fICwgIH0gPSAoMCwgX3JlYWN0KS51c2VDb250ZXh0KF9odG1sQ29udGV4dC5IdG1sQ29udGV4dCk7XHJcbiAgICBkb2NDb21wb25lbnRzUmVuZGVyZWQuSHRtbCA9IHRydWU7XHJcbiAgICBoYW5kbGVEb2N1bWVudFNjcmlwdExvYWRlckl0ZW1zKHNjcmlwdExvYWRlciwgX19ORVhUX0RBVEFfXywgcHJvcHMpO1xyXG4gICAgcmV0dXJuIC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChcImh0bWxcIiwgT2JqZWN0LmFzc2lnbih7fSwgcHJvcHMsIHtcclxuICAgICAgICBsYW5nOiBwcm9wcy5sYW5nIHx8IGxvY2FsZSB8fCB1bmRlZmluZWQsXHJcbiAgICAgICAgYW1wOiBwcm9jZXNzLmVudi5ORVhUX1JVTlRJTUUgIT09IFwiZWRnZVwiICYmIGluQW1wTW9kZSA/IFwiXCIgOiB1bmRlZmluZWQsXHJcbiAgICAgICAgXCJkYXRhLWFtcGRldm1vZGVcIjogcHJvY2Vzcy5lbnYuTkVYVF9SVU5USU1FICE9PSBcImVkZ2VcIiAmJiBpbkFtcE1vZGUgJiYgcHJvY2Vzcy5lbnYuTk9ERV9FTlYgIT09IFwicHJvZHVjdGlvblwiID8gXCJcIiA6IHVuZGVmaW5lZFxyXG4gICAgfSkpO1xyXG59XHJcbmZ1bmN0aW9uIE1haW4oKSB7XHJcbiAgICBjb25zdCB7IGRvY0NvbXBvbmVudHNSZW5kZXJlZCAgfSA9ICgwLCBfcmVhY3QpLnVzZUNvbnRleHQoX2h0bWxDb250ZXh0Lkh0bWxDb250ZXh0KTtcclxuICAgIGRvY0NvbXBvbmVudHNSZW5kZXJlZC5NYWluID0gdHJ1ZTtcclxuICAgIC8vIEB0cy1pZ25vcmVcclxuICAgIHJldHVybiAvKiNfX1BVUkVfXyovIF9yZWFjdC5kZWZhdWx0LmNyZWF0ZUVsZW1lbnQoXCJuZXh0LWpzLWludGVybmFsLWJvZHktcmVuZGVyLXRhcmdldFwiLCBudWxsKTtcclxufVxyXG4vLyBBZGQgYSBzcGVjaWFsIHByb3BlcnR5IHRvIHRoZSBidWlsdC1pbiBgRG9jdW1lbnRgIGNvbXBvbmVudCBzbyBsYXRlciB3ZSBjYW5cclxuLy8gaWRlbnRpZnkgaWYgYSB1c2VyIGN1c3RvbWl6ZWQgYERvY3VtZW50YCBpcyB1c2VkIG9yIG5vdC5cclxuY29uc3QgSW50ZXJuYWxGdW5jdGlvbkRvY3VtZW50ID0gZnVuY3Rpb24gSW50ZXJuYWxGdW5jdGlvbkRvY3VtZW50KCkge1xyXG4gICAgcmV0dXJuIC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChIdG1sLCBudWxsLCAvKiNfX1BVUkVfXyovIF9yZWFjdC5kZWZhdWx0LmNyZWF0ZUVsZW1lbnQoSGVhZCwgbnVsbCksIC8qI19fUFVSRV9fKi8gX3JlYWN0LmRlZmF1bHQuY3JlYXRlRWxlbWVudChcImJvZHlcIiwgbnVsbCwgLyojX19QVVJFX18qLyBfcmVhY3QuZGVmYXVsdC5jcmVhdGVFbGVtZW50KE1haW4sIG51bGwpLCAvKiNfX1BVUkVfXyovIF9yZWFjdC5kZWZhdWx0LmNyZWF0ZUVsZW1lbnQoTmV4dFNjcmlwdCwgbnVsbCkpKTtcclxufTtcclxuRG9jdW1lbnRbX2NvbnN0YW50cy5ORVhUX0JVSUxUSU5fRE9DVU1FTlRdID0gSW50ZXJuYWxGdW5jdGlvbkRvY3VtZW50O1xyXG5cclxuLy8jIHNvdXJjZU1hcHBpbmdVUkw9X2RvY3VtZW50LmpzLm1hcCJdLCJuYW1lcyI6WyJPYmplY3QiLCJkZWZpbmVQcm9wZXJ0eSIsImV4cG9ydHMiLCJ2YWx1ZSIsIkh0bWwiLCJNYWluIiwiZGVmYXVsdCIsIl9yZWFjdCIsIl9pbnRlcm9wUmVxdWlyZVdpbGRjYXJkIiwicmVxdWlyZSIsIl9jb25zdGFudHMiLCJfZ2V0UGFnZUZpbGVzIiwiX2h0bWxlc2NhcGUiLCJfaXNFcnJvciIsIl9pbnRlcm9wUmVxdWlyZURlZmF1bHQiLCJfaHRtbENvbnRleHQiLCJEb2N1bWVudCIsIkNvbXBvbmVudCIsImdldEluaXRpYWxQcm9wcyIsImN0eCIsImRlZmF1bHRHZXRJbml0aWFsUHJvcHMiLCJyZW5kZXIiLCJjcmVhdGVFbGVtZW50IiwiSGVhZCIsIk5leHRTY3JpcHQiLCJvYmoiLCJfX2VzTW9kdWxlIiwiX2dldFJlcXVpcmVXaWxkY2FyZENhY2hlIiwiV2Vha01hcCIsImNhY2hlIiwiaGFzIiwiZ2V0IiwibmV3T2JqIiwiaGFzUHJvcGVydHlEZXNjcmlwdG9yIiwiZ2V0T3duUHJvcGVydHlEZXNjcmlwdG9yIiwia2V5IiwicHJvdG90eXBlIiwiaGFzT3duUHJvcGVydHkiLCJjYWxsIiwiZGVzYyIsInNldCIsImdldERvY3VtZW50RmlsZXMiLCJidWlsZE1hbmlmZXN0IiwicGF0aG5hbWUiLCJpbkFtcE1vZGUiLCJzaGFyZWRGaWxlcyIsImdldFBhZ2VGaWxlcyIsInBhZ2VGaWxlcyIsInByb2Nlc3MiLCJlbnYiLCJORVhUX1JVTlRJTUUiLCJhbGxGaWxlcyIsIlNldCIsImdldFBvbHlmaWxsU2NyaXB0cyIsImNvbnRleHQiLCJwcm9wcyIsImFzc2V0UHJlZml4IiwiZGV2T25seUNhY2hlQnVzdGVyUXVlcnlTdHJpbmciLCJkaXNhYmxlT3B0aW1pemVkTG9hZGluZyIsImNyb3NzT3JpZ2luIiwicG9seWZpbGxGaWxlcyIsImZpbHRlciIsInBvbHlmaWxsIiwiZW5kc1dpdGgiLCJtYXAiLCJkZWZlciIsIm5vbmNlIiwibm9Nb2R1bGUiLCJzcmMiLCJoYXNDb21wb25lbnRQcm9wcyIsImNoaWxkIiwiQW1wU3R5bGVzIiwic3R5bGVzIiwiY3VyU3R5bGVzIiwiQXJyYXkiLCJpc0FycmF5IiwiY2hpbGRyZW4iLCJoYXNTdHlsZXMiLCJlbCIsInJlZiIsInJlZjEiLCJkYW5nZXJvdXNseVNldElubmVySFRNTCIsIl9faHRtbCIsImZvckVhY2giLCJwdXNoIiwic3R5bGUiLCJqb2luIiwicmVwbGFjZSIsImdldER5bmFtaWNDaHVua3MiLCJmaWxlcyIsImR5bmFtaWNJbXBvcnRzIiwiaXNEZXZlbG9wbWVudCIsImZpbGUiLCJpbmNsdWRlcyIsImFzeW5jIiwiZW5jb2RlVVJJIiwiZ2V0U2NyaXB0cyIsIm5vcm1hbFNjcmlwdHMiLCJsb3dQcmlvcml0eVNjcmlwdHMiLCJsb3dQcmlvcml0eUZpbGVzIiwiZ2V0UHJlTmV4dFdvcmtlclNjcmlwdHMiLCJzY3JpcHRMb2FkZXIiLCJuZXh0U2NyaXB0V29ya2VycyIsInBhcnR5dG93blNuaXBwZXQiLCJfX25vbl93ZWJwYWNrX3JlcXVpcmVfXyIsInVzZXJEZWZpbmVkQ29uZmlnIiwiZmluZCIsInJlZjIiLCJsZW5ndGgiLCJGcmFnbWVudCIsIndvcmtlciIsImluZGV4Iiwic3RyYXRlZ3kiLCJzY3JpcHRDaGlsZHJlbiIsInNjcmlwdFByb3BzIiwic3JjUHJvcHMiLCJFcnJvciIsImFzc2lnbiIsInR5cGUiLCJlcnIiLCJjb2RlIiwiY29uc29sZSIsIndhcm4iLCJtZXNzYWdlIiwiZ2V0UHJlTmV4dFNjcmlwdHMiLCJ3ZWJXb3JrZXJTY3JpcHRzIiwiYmVmb3JlSW50ZXJhY3RpdmVTY3JpcHRzIiwiYmVmb3JlSW50ZXJhY3RpdmUiLCJzY3JpcHQiLCJnZXRIZWFkSFRNTFByb3BzIiwicmVzdFByb3BzIiwiaGVhZFByb3BzIiwiZ2V0QW1wUGF0aCIsImFtcFBhdGgiLCJhc1BhdGgiLCJnZXRGb250TG9hZGVyTGlua3MiLCJmb250TG9hZGVyTWFuaWZlc3QiLCJkYW5nZXJvdXNBc1BhdGgiLCJwcmVjb25uZWN0IiwicHJlbG9hZCIsImFwcEZvbnRzRW50cnkiLCJwYWdlcyIsInBhZ2VGb250c0VudHJ5IiwicHJlbG9hZGVkRm9udEZpbGVzIiwicHJlY29ubmVjdFRvU2VsZiIsInJlbCIsImhyZWYiLCJmb250RmlsZSIsImV4dCIsImV4ZWMiLCJhcyIsImNvbnRleHRUeXBlIiwiSHRtbENvbnRleHQiLCJnZXRDc3NMaW5rcyIsIm9wdGltaXplQ3NzIiwib3B0aW1pemVGb250cyIsImNzc0ZpbGVzIiwiZiIsInVubWFuZ2VkRmlsZXMiLCJkeW5hbWljQ3NzRmlsZXMiLCJmcm9tIiwiZXhpc3RpbmciLCJjc3NMaW5rRWxlbWVudHMiLCJpc1NoYXJlZEZpbGUiLCJpc1VubWFuYWdlZEZpbGUiLCJ1bmRlZmluZWQiLCJtYWtlU3R5bGVzaGVldEluZXJ0IiwiZ2V0UHJlbG9hZER5bmFtaWNDaHVua3MiLCJCb29sZWFuIiwiZ2V0UHJlbG9hZE1haW5MaW5rcyIsInByZWxvYWRGaWxlcyIsImdldEJlZm9yZUludGVyYWN0aXZlSW5saW5lU2NyaXB0cyIsImh0bWwiLCJpZCIsIl9fTkVYVF9DUk9TU19PUklHSU4iLCJub2RlIiwiQ2hpbGRyZW4iLCJjIiwicmVmNSIsInJlZjMiLCJPUFRJTUlaRURfRk9OVF9QUk9WSURFUlMiLCJzb21lIiwidXJsIiwicmVmNCIsInN0YXJ0c1dpdGgiLCJuZXdQcm9wcyIsImNsb25lRWxlbWVudCIsImh5YnJpZEFtcCIsImNhbm9uaWNhbEJhc2UiLCJfX05FWFRfREFUQV9fIiwiaGVhZFRhZ3MiLCJ1bnN0YWJsZV9ydW50aW1lSlMiLCJ1bnN0YWJsZV9Kc1ByZWxvYWQiLCJkaXNhYmxlUnVudGltZUpTIiwiZGlzYWJsZUpzUHJlbG9hZCIsImRvY0NvbXBvbmVudHNSZW5kZXJlZCIsImhlYWQiLCJjc3NQcmVsb2FkcyIsIm90aGVySGVhZEVsZW1lbnRzIiwiY29uY2F0IiwidG9BcnJheSIsImlzUmVhY3RIZWxtZXQiLCJyZWY2IiwibmFtZSIsImhhc0FtcGh0bWxSZWwiLCJoYXNDYW5vbmljYWxSZWwiLCJiYWRQcm9wIiwiaW5kZXhPZiIsImtleXMiLCJwcm9wIiwicGFnZSIsImZvbnRMb2FkZXJMaW5rcyIsImNvbnRlbnQiLCJjb3VudCIsInRvU3RyaW5nIiwiY2xlYW5BbXBQYXRoIiwiaGFuZGxlRG9jdW1lbnRTY3JpcHRMb2FkZXJJdGVtcyIsInJlZjEwIiwicmVmNyIsInJlZjgiLCJyZWY5Iiwic2NyaXB0TG9hZGVySXRlbXMiLCJoZWFkQ2hpbGRyZW4iLCJib2R5Q2hpbGRyZW4iLCJjb21iaW5lZENoaWxkcmVuIiwiX19uZXh0U2NyaXB0IiwiZ2V0SW5saW5lU2NyaXB0U291cmNlIiwibGFyZ2VQYWdlRGF0YUJ5dGVzIiwiZGF0YSIsIkpTT04iLCJzdHJpbmdpZnkiLCJieXRlcyIsIlRleHRFbmNvZGVyIiwiZW5jb2RlIiwiYnVmZmVyIiwiYnl0ZUxlbmd0aCIsIkJ1ZmZlciIsInByZXR0eUJ5dGVzIiwiaHRtbEVzY2FwZUpzb25TdHJpbmciLCJhbXBEZXZGaWxlcyIsImRldkZpbGVzIiwibG9jYWxlIiwidXNlQ29udGV4dCIsImxhbmciLCJhbXAiLCJJbnRlcm5hbEZ1bmN0aW9uRG9jdW1lbnQiLCJORVhUX0JVSUxUSU5fRE9DVU1FTlQiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./node_modules/next/dist/pages/_document.js\n");
 
 /***/ }),
 
-/***/ 5955:
+/***/ "./node_modules/next/dist/lib/is-error.js":
+/*!************************************************!*\
+  !*** ./node_modules/next/dist/lib/is-error.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({\r\n    value: true\r\n}));\r\nexports[\"default\"] = isError;\r\nexports.getProperError = getProperError;\r\nvar _isPlainObject = __webpack_require__(/*! ../shared/lib/is-plain-object */ \"../shared/lib/is-plain-object\");\r\nfunction isError(err) {\r\n    return typeof err === \"object\" && err !== null && \"name\" in err && \"message\" in err;\r\n}\r\nfunction getProperError(err) {\r\n    if (isError(err)) {\r\n        return err;\r\n    }\r\n    if (true) {\r\n        // provide better error for case where `throw undefined`\r\n        // is called in development\r\n        if (typeof err === \"undefined\") {\r\n            return new Error(\"An undefined error was thrown, \" + \"see here for more info: https://nextjs.org/docs/messages/threw-undefined\");\r\n        }\r\n        if (err === null) {\r\n            return new Error(\"A null error was thrown, \" + \"see here for more info: https://nextjs.org/docs/messages/threw-undefined\");\r\n        }\r\n    }\r\n    return new Error((0, _isPlainObject).isPlainObject(err) ? JSON.stringify(err) : err + \"\");\r\n}\r\n\r\n//# sourceMappingURL=is-error.js.map//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9ub2RlX21vZHVsZXMvbmV4dC9kaXN0L2xpYi9pcy1lcnJvci5qcy5qcyIsIm1hcHBpbmdzIjoiQUFBYTtBQUNiLDhDQUE2QztBQUM3QztBQUNBLENBQUMsRUFBQztBQUNGLGtCQUFlO0FBQ2Ysc0JBQXNCO0FBQ3RCLHFCQUFxQixtQkFBTyxDQUFDLG9FQUErQjtBQUM1RDtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLFFBQVEsSUFBc0M7QUFDOUM7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9lZHVzaGFyZS8uL25vZGVfbW9kdWxlcy9uZXh0L2Rpc3QvbGliL2lzLWVycm9yLmpzPzE3OGUiXSwic291cmNlc0NvbnRlbnQiOlsiXCJ1c2Ugc3RyaWN0XCI7XHJcbk9iamVjdC5kZWZpbmVQcm9wZXJ0eShleHBvcnRzLCBcIl9fZXNNb2R1bGVcIiwge1xyXG4gICAgdmFsdWU6IHRydWVcclxufSk7XHJcbmV4cG9ydHMuZGVmYXVsdCA9IGlzRXJyb3I7XHJcbmV4cG9ydHMuZ2V0UHJvcGVyRXJyb3IgPSBnZXRQcm9wZXJFcnJvcjtcclxudmFyIF9pc1BsYWluT2JqZWN0ID0gcmVxdWlyZShcIi4uL3NoYXJlZC9saWIvaXMtcGxhaW4tb2JqZWN0XCIpO1xyXG5mdW5jdGlvbiBpc0Vycm9yKGVycikge1xyXG4gICAgcmV0dXJuIHR5cGVvZiBlcnIgPT09IFwib2JqZWN0XCIgJiYgZXJyICE9PSBudWxsICYmIFwibmFtZVwiIGluIGVyciAmJiBcIm1lc3NhZ2VcIiBpbiBlcnI7XHJcbn1cclxuZnVuY3Rpb24gZ2V0UHJvcGVyRXJyb3IoZXJyKSB7XHJcbiAgICBpZiAoaXNFcnJvcihlcnIpKSB7XHJcbiAgICAgICAgcmV0dXJuIGVycjtcclxuICAgIH1cclxuICAgIGlmIChwcm9jZXNzLmVudi5OT0RFX0VOViA9PT0gXCJkZXZlbG9wbWVudFwiKSB7XHJcbiAgICAgICAgLy8gcHJvdmlkZSBiZXR0ZXIgZXJyb3IgZm9yIGNhc2Ugd2hlcmUgYHRocm93IHVuZGVmaW5lZGBcclxuICAgICAgICAvLyBpcyBjYWxsZWQgaW4gZGV2ZWxvcG1lbnRcclxuICAgICAgICBpZiAodHlwZW9mIGVyciA9PT0gXCJ1bmRlZmluZWRcIikge1xyXG4gICAgICAgICAgICByZXR1cm4gbmV3IEVycm9yKFwiQW4gdW5kZWZpbmVkIGVycm9yIHdhcyB0aHJvd24sIFwiICsgXCJzZWUgaGVyZSBmb3IgbW9yZSBpbmZvOiBodHRwczovL25leHRqcy5vcmcvZG9jcy9tZXNzYWdlcy90aHJldy11bmRlZmluZWRcIik7XHJcbiAgICAgICAgfVxyXG4gICAgICAgIGlmIChlcnIgPT09IG51bGwpIHtcclxuICAgICAgICAgICAgcmV0dXJuIG5ldyBFcnJvcihcIkEgbnVsbCBlcnJvciB3YXMgdGhyb3duLCBcIiArIFwic2VlIGhlcmUgZm9yIG1vcmUgaW5mbzogaHR0cHM6Ly9uZXh0anMub3JnL2RvY3MvbWVzc2FnZXMvdGhyZXctdW5kZWZpbmVkXCIpO1xyXG4gICAgICAgIH1cclxuICAgIH1cclxuICAgIHJldHVybiBuZXcgRXJyb3IoKDAsIF9pc1BsYWluT2JqZWN0KS5pc1BsYWluT2JqZWN0KGVycikgPyBKU09OLnN0cmluZ2lmeShlcnIpIDogZXJyICsgXCJcIik7XHJcbn1cclxuXHJcbi8vIyBzb3VyY2VNYXBwaW5nVVJMPWlzLWVycm9yLmpzLm1hcCJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./node_modules/next/dist/lib/is-error.js\n");
+
+/***/ }),
+
+/***/ "./node_modules/next/dist/lib/pretty-bytes.js":
+/*!****************************************************!*\
+  !*** ./node_modules/next/dist/lib/pretty-bytes.js ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-var __webpack_unused_export__;
-
-__webpack_unused_export__ = ({
-    value: true
-});
-exports.Z = prettyBytes;
-function prettyBytes(number, options) {
-    if (!Number.isFinite(number)) {
-        throw new TypeError(`Expected a finite number, got ${typeof number}: ${number}`);
-    }
-    options = Object.assign({}, options);
-    if (options.signed && number === 0) {
-        return " 0 B";
-    }
-    const isNegative = number < 0;
-    const prefix = isNegative ? "-" : options.signed ? "+" : "";
-    if (isNegative) {
-        number = -number;
-    }
-    if (number < 1) {
-        const numberString = toLocaleString(number, options.locale);
-        return prefix + numberString + " B";
-    }
-    const exponent = Math.min(Math.floor(Math.log10(number) / 3), UNITS.length - 1);
-    number = Number((number / Math.pow(1000, exponent)).toPrecision(3));
-    const numberString = toLocaleString(number, options.locale);
-    const unit = UNITS[exponent];
-    return prefix + numberString + " " + unit;
-}
-/*
-MIT License
-
-Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/ const UNITS = [
-    "B",
-    "kB",
-    "MB",
-    "GB",
-    "TB",
-    "PB",
-    "EB",
-    "ZB",
-    "YB"
-];
-/*
-Formats the given number using `Number#toLocaleString`.
-- If locale is a string, the value is expected to be a locale-key (for example: `de`).
-- If locale is true, the system default locale is used for translation.
-- If no value for locale is specified, the number is returned unmodified.
-*/ const toLocaleString = (number, locale)=>{
-    let result = number;
-    if (typeof locale === "string") {
-        result = number.toLocaleString(locale);
-    } else if (locale === true) {
-        result = number.toLocaleString();
-    }
-    return result;
-};
-
-//# sourceMappingURL=pretty-bytes.js.map
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({\r\n    value: true\r\n}));\r\nexports[\"default\"] = prettyBytes;\r\nfunction prettyBytes(number, options) {\r\n    if (!Number.isFinite(number)) {\r\n        throw new TypeError(`Expected a finite number, got ${typeof number}: ${number}`);\r\n    }\r\n    options = Object.assign({}, options);\r\n    if (options.signed && number === 0) {\r\n        return \" 0 B\";\r\n    }\r\n    const isNegative = number < 0;\r\n    const prefix = isNegative ? \"-\" : options.signed ? \"+\" : \"\";\r\n    if (isNegative) {\r\n        number = -number;\r\n    }\r\n    if (number < 1) {\r\n        const numberString = toLocaleString(number, options.locale);\r\n        return prefix + numberString + \" B\";\r\n    }\r\n    const exponent = Math.min(Math.floor(Math.log10(number) / 3), UNITS.length - 1);\r\n    number = Number((number / Math.pow(1000, exponent)).toPrecision(3));\r\n    const numberString = toLocaleString(number, options.locale);\r\n    const unit = UNITS[exponent];\r\n    return prefix + numberString + \" \" + unit;\r\n}\r\n/*\r\nMIT License\r\n\r\nCopyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)\r\n\r\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\r\n\r\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\r\n*/ const UNITS = [\r\n    \"B\",\r\n    \"kB\",\r\n    \"MB\",\r\n    \"GB\",\r\n    \"TB\",\r\n    \"PB\",\r\n    \"EB\",\r\n    \"ZB\",\r\n    \"YB\"\r\n];\r\n/*\r\nFormats the given number using `Number#toLocaleString`.\r\n- If locale is a string, the value is expected to be a locale-key (for example: `de`).\r\n- If locale is true, the system default locale is used for translation.\r\n- If no value for locale is specified, the number is returned unmodified.\r\n*/ const toLocaleString = (number, locale)=>{\r\n    let result = number;\r\n    if (typeof locale === \"string\") {\r\n        result = number.toLocaleString(locale);\r\n    } else if (locale === true) {\r\n        result = number.toLocaleString();\r\n    }\r\n    return result;\r\n};\r\n\r\n//# sourceMappingURL=pretty-bytes.js.map//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9ub2RlX21vZHVsZXMvbmV4dC9kaXN0L2xpYi9wcmV0dHktYnl0ZXMuanMuanMiLCJtYXBwaW5ncyI6IkFBQWE7QUFDYiw4Q0FBNkM7QUFDN0M7QUFDQSxDQUFDLEVBQUM7QUFDRixrQkFBZTtBQUNmO0FBQ0E7QUFDQSw2REFBNkQsY0FBYyxJQUFJLE9BQU87QUFDdEY7QUFDQSw4QkFBOEI7QUFDOUI7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsTUFBTTtBQUNOO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSIsInNvdXJjZXMiOlsid2VicGFjazovL2VkdXNoYXJlLy4vbm9kZV9tb2R1bGVzL25leHQvZGlzdC9saWIvcHJldHR5LWJ5dGVzLmpzP2ZmMzAiXSwic291cmNlc0NvbnRlbnQiOlsiXCJ1c2Ugc3RyaWN0XCI7XHJcbk9iamVjdC5kZWZpbmVQcm9wZXJ0eShleHBvcnRzLCBcIl9fZXNNb2R1bGVcIiwge1xyXG4gICAgdmFsdWU6IHRydWVcclxufSk7XHJcbmV4cG9ydHMuZGVmYXVsdCA9IHByZXR0eUJ5dGVzO1xyXG5mdW5jdGlvbiBwcmV0dHlCeXRlcyhudW1iZXIsIG9wdGlvbnMpIHtcclxuICAgIGlmICghTnVtYmVyLmlzRmluaXRlKG51bWJlcikpIHtcclxuICAgICAgICB0aHJvdyBuZXcgVHlwZUVycm9yKGBFeHBlY3RlZCBhIGZpbml0ZSBudW1iZXIsIGdvdCAke3R5cGVvZiBudW1iZXJ9OiAke251bWJlcn1gKTtcclxuICAgIH1cclxuICAgIG9wdGlvbnMgPSBPYmplY3QuYXNzaWduKHt9LCBvcHRpb25zKTtcclxuICAgIGlmIChvcHRpb25zLnNpZ25lZCAmJiBudW1iZXIgPT09IDApIHtcclxuICAgICAgICByZXR1cm4gXCIgMCBCXCI7XHJcbiAgICB9XHJcbiAgICBjb25zdCBpc05lZ2F0aXZlID0gbnVtYmVyIDwgMDtcclxuICAgIGNvbnN0IHByZWZpeCA9IGlzTmVnYXRpdmUgPyBcIi1cIiA6IG9wdGlvbnMuc2lnbmVkID8gXCIrXCIgOiBcIlwiO1xyXG4gICAgaWYgKGlzTmVnYXRpdmUpIHtcclxuICAgICAgICBudW1iZXIgPSAtbnVtYmVyO1xyXG4gICAgfVxyXG4gICAgaWYgKG51bWJlciA8IDEpIHtcclxuICAgICAgICBjb25zdCBudW1iZXJTdHJpbmcgPSB0b0xvY2FsZVN0cmluZyhudW1iZXIsIG9wdGlvbnMubG9jYWxlKTtcclxuICAgICAgICByZXR1cm4gcHJlZml4ICsgbnVtYmVyU3RyaW5nICsgXCIgQlwiO1xyXG4gICAgfVxyXG4gICAgY29uc3QgZXhwb25lbnQgPSBNYXRoLm1pbihNYXRoLmZsb29yKE1hdGgubG9nMTAobnVtYmVyKSAvIDMpLCBVTklUUy5sZW5ndGggLSAxKTtcclxuICAgIG51bWJlciA9IE51bWJlcigobnVtYmVyIC8gTWF0aC5wb3coMTAwMCwgZXhwb25lbnQpKS50b1ByZWNpc2lvbigzKSk7XHJcbiAgICBjb25zdCBudW1iZXJTdHJpbmcgPSB0b0xvY2FsZVN0cmluZyhudW1iZXIsIG9wdGlvbnMubG9jYWxlKTtcclxuICAgIGNvbnN0IHVuaXQgPSBVTklUU1tleHBvbmVudF07XHJcbiAgICByZXR1cm4gcHJlZml4ICsgbnVtYmVyU3RyaW5nICsgXCIgXCIgKyB1bml0O1xyXG59XHJcbi8qXHJcbk1JVCBMaWNlbnNlXHJcblxyXG5Db3B5cmlnaHQgKGMpIFNpbmRyZSBTb3JodXMgPHNpbmRyZXNvcmh1c0BnbWFpbC5jb20+IChzaW5kcmVzb3JodXMuY29tKVxyXG5cclxuUGVybWlzc2lvbiBpcyBoZXJlYnkgZ3JhbnRlZCwgZnJlZSBvZiBjaGFyZ2UsIHRvIGFueSBwZXJzb24gb2J0YWluaW5nIGEgY29weSBvZiB0aGlzIHNvZnR3YXJlIGFuZCBhc3NvY2lhdGVkIGRvY3VtZW50YXRpb24gZmlsZXMgKHRoZSBcIlNvZnR3YXJlXCIpLCB0byBkZWFsIGluIHRoZSBTb2Z0d2FyZSB3aXRob3V0IHJlc3RyaWN0aW9uLCBpbmNsdWRpbmcgd2l0aG91dCBsaW1pdGF0aW9uIHRoZSByaWdodHMgdG8gdXNlLCBjb3B5LCBtb2RpZnksIG1lcmdlLCBwdWJsaXNoLCBkaXN0cmlidXRlLCBzdWJsaWNlbnNlLCBhbmQvb3Igc2VsbCBjb3BpZXMgb2YgdGhlIFNvZnR3YXJlLCBhbmQgdG8gcGVybWl0IHBlcnNvbnMgdG8gd2hvbSB0aGUgU29mdHdhcmUgaXMgZnVybmlzaGVkIHRvIGRvIHNvLCBzdWJqZWN0IHRvIHRoZSBmb2xsb3dpbmcgY29uZGl0aW9uczpcclxuXHJcblRoZSBhYm92ZSBjb3B5cmlnaHQgbm90aWNlIGFuZCB0aGlzIHBlcm1pc3Npb24gbm90aWNlIHNoYWxsIGJlIGluY2x1ZGVkIGluIGFsbCBjb3BpZXMgb3Igc3Vic3RhbnRpYWwgcG9ydGlvbnMgb2YgdGhlIFNvZnR3YXJlLlxyXG5cclxuVEhFIFNPRlRXQVJFIElTIFBST1ZJREVEIFwiQVMgSVNcIiwgV0lUSE9VVCBXQVJSQU5UWSBPRiBBTlkgS0lORCwgRVhQUkVTUyBPUiBJTVBMSUVELCBJTkNMVURJTkcgQlVUIE5PVCBMSU1JVEVEIFRPIFRIRSBXQVJSQU5USUVTIE9GIE1FUkNIQU5UQUJJTElUWSwgRklUTkVTUyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0UgQU5EIE5PTklORlJJTkdFTUVOVC4gSU4gTk8gRVZFTlQgU0hBTEwgVEhFIEFVVEhPUlMgT1IgQ09QWVJJR0hUIEhPTERFUlMgQkUgTElBQkxFIEZPUiBBTlkgQ0xBSU0sIERBTUFHRVMgT1IgT1RIRVIgTElBQklMSVRZLCBXSEVUSEVSIElOIEFOIEFDVElPTiBPRiBDT05UUkFDVCwgVE9SVCBPUiBPVEhFUldJU0UsIEFSSVNJTkcgRlJPTSwgT1VUIE9GIE9SIElOIENPTk5FQ1RJT04gV0lUSCBUSEUgU09GVFdBUkUgT1IgVEhFIFVTRSBPUiBPVEhFUiBERUFMSU5HUyBJTiBUSEUgU09GVFdBUkUuXHJcbiovIGNvbnN0IFVOSVRTID0gW1xyXG4gICAgXCJCXCIsXHJcbiAgICBcImtCXCIsXHJcbiAgICBcIk1CXCIsXHJcbiAgICBcIkdCXCIsXHJcbiAgICBcIlRCXCIsXHJcbiAgICBcIlBCXCIsXHJcbiAgICBcIkVCXCIsXHJcbiAgICBcIlpCXCIsXHJcbiAgICBcIllCXCJcclxuXTtcclxuLypcclxuRm9ybWF0cyB0aGUgZ2l2ZW4gbnVtYmVyIHVzaW5nIGBOdW1iZXIjdG9Mb2NhbGVTdHJpbmdgLlxyXG4tIElmIGxvY2FsZSBpcyBhIHN0cmluZywgdGhlIHZhbHVlIGlzIGV4cGVjdGVkIHRvIGJlIGEgbG9jYWxlLWtleSAoZm9yIGV4YW1wbGU6IGBkZWApLlxyXG4tIElmIGxvY2FsZSBpcyB0cnVlLCB0aGUgc3lzdGVtIGRlZmF1bHQgbG9jYWxlIGlzIHVzZWQgZm9yIHRyYW5zbGF0aW9uLlxyXG4tIElmIG5vIHZhbHVlIGZvciBsb2NhbGUgaXMgc3BlY2lmaWVkLCB0aGUgbnVtYmVyIGlzIHJldHVybmVkIHVubW9kaWZpZWQuXHJcbiovIGNvbnN0IHRvTG9jYWxlU3RyaW5nID0gKG51bWJlciwgbG9jYWxlKT0+e1xyXG4gICAgbGV0IHJlc3VsdCA9IG51bWJlcjtcclxuICAgIGlmICh0eXBlb2YgbG9jYWxlID09PSBcInN0cmluZ1wiKSB7XHJcbiAgICAgICAgcmVzdWx0ID0gbnVtYmVyLnRvTG9jYWxlU3RyaW5nKGxvY2FsZSk7XHJcbiAgICB9IGVsc2UgaWYgKGxvY2FsZSA9PT0gdHJ1ZSkge1xyXG4gICAgICAgIHJlc3VsdCA9IG51bWJlci50b0xvY2FsZVN0cmluZygpO1xyXG4gICAgfVxyXG4gICAgcmV0dXJuIHJlc3VsdDtcclxufTtcclxuXHJcbi8vIyBzb3VyY2VNYXBwaW5nVVJMPXByZXR0eS1ieXRlcy5qcy5tYXAiXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./node_modules/next/dist/lib/pretty-bytes.js\n");
 
 /***/ }),
 
-/***/ 4140:
+/***/ "../server/get-page-files":
+/*!*****************************************************!*\
+  !*** external "next/dist/server/get-page-files.js" ***!
+  \*****************************************************/
 /***/ ((module) => {
 
 module.exports = require("next/dist/server/get-page-files.js");
 
 /***/ }),
 
-/***/ 9716:
+/***/ "../server/htmlescape":
+/*!*************************************************!*\
+  !*** external "next/dist/server/htmlescape.js" ***!
+  \*************************************************/
 /***/ ((module) => {
 
 module.exports = require("next/dist/server/htmlescape.js");
 
 /***/ }),
 
-/***/ 6368:
+/***/ "../server/utils":
+/*!********************************************!*\
+  !*** external "next/dist/server/utils.js" ***!
+  \********************************************/
 /***/ ((module) => {
 
 module.exports = require("next/dist/server/utils.js");
 
 /***/ }),
 
-/***/ 6724:
+/***/ "../shared/lib/constants":
+/*!****************************************************!*\
+  !*** external "next/dist/shared/lib/constants.js" ***!
+  \****************************************************/
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/constants.js");
 
 /***/ }),
 
-/***/ 8743:
+/***/ "../shared/lib/html-context":
+/*!*******************************************************!*\
+  !*** external "next/dist/shared/lib/html-context.js" ***!
+  \*******************************************************/
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/html-context.js");
 
 /***/ }),
 
-/***/ 8524:
+/***/ "../shared/lib/is-plain-object":
+/*!**********************************************************!*\
+  !*** external "next/dist/shared/lib/is-plain-object.js" ***!
+  \**********************************************************/
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/is-plain-object.js");
 
 /***/ }),
 
-/***/ 6689:
+/***/ "react":
+/*!************************!*\
+  !*** external "react" ***!
+  \************************/
 /***/ ((module) => {
 
 module.exports = require("react");
@@ -827,7 +120,7 @@ module.exports = require("react");
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [676], () => (__webpack_exec__(7081)));
+var __webpack_exports__ = (__webpack_exec__("./node_modules/next/dist/pages/_document.js"));
 module.exports = __webpack_exports__;
 
 })();

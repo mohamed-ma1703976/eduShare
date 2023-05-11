@@ -1,305 +1,112 @@
 "use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
 (() => {
 var exports = {};
-exports.id = 289;
-exports.ids = [289];
+exports.id = "pages/Student/registration";
+exports.ids = ["pages/Student/registration"];
 exports.modules = {
 
-/***/ 1119:
+/***/ "./Firebase/Firebase.js":
+/*!******************************!*\
+  !*** ./Firebase/Firebase.js ***!
+  \******************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Registration)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(997);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6689);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5692);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_mui_material__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1853);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(401);
-/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(1492);
-/* harmony import */ var _Firebase_Firebase__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(6216);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([firebase_auth__WEBPACK_IMPORTED_MODULE_4__, firebase_firestore__WEBPACK_IMPORTED_MODULE_5__, _Firebase_Firebase__WEBPACK_IMPORTED_MODULE_6__]);
-([firebase_auth__WEBPACK_IMPORTED_MODULE_4__, firebase_firestore__WEBPACK_IMPORTED_MODULE_5__, _Firebase_Firebase__WEBPACK_IMPORTED_MODULE_6__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
-
-
-
-
-
-
-
-function Registration() {
-    const router = (0,next_router__WEBPACK_IMPORTED_MODULE_3__.useRouter)();
-    const [signUpData, setSignUpData] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
-        email: "",
-        password: "",
-        firstName: "",
-        lastName: "",
-        phone: ""
-    });
-    function handleChange(event) {
-        setSignUpData((prev)=>{
-            return {
-                ...prev,
-                [event.target.name]: event.target.value
-            };
-        });
-    }
-    async function handleSignUp(e) {
-        e.preventDefault();
-        const auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_4__.getAuth)(_Firebase_Firebase__WEBPACK_IMPORTED_MODULE_6__/* .app */ .l2);
-        let collectedData = {
-            firstName: signUpData.firstName,
-            lastName: signUpData.lastName,
-            email: signUpData.email,
-            phone: signUpData.phone,
-            registerdcourses: []
-        };
-        try {
-            const userCredential = await (0,firebase_auth__WEBPACK_IMPORTED_MODULE_4__.createUserWithEmailAndPassword)(auth, signUpData.email, signUpData.password);
-            const user = userCredential.user;
-            const db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_5__.getFirestore)(_Firebase_Firebase__WEBPACK_IMPORTED_MODULE_6__/* .app */ .l2);
-            const docRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(db, "Student", user.uid);
-            await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_5__.setDoc)(docRef, collectedData);
-            router.push("/");
-        } catch (error) {
-            console.error("Error signing up:", error);
-        }
-    }
-    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Paper, {
-        style: {
-            backgroundImage: `url(${"https://i.ibb.co/6bJ0VFb/Background.jpg"})`,
-            backgroundSize: "cover",
-            minHeight: "100vh",
-            color: "#f5f5f5",
-            width: "100vw"
-        },
-        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Grid, {
-            container: true,
-            justifyContent: {
-                sm: "center"
-            },
-            alignItems: {
-                sm: "center"
-            },
-            height: "100vh",
-            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Paper, {
-                sx: {
-                    width: "40%",
-                    margin: "0 0 0 400px",
-                    backgroundColor: "white",
-                    padding: 5,
-                    pb: 10,
-                    boxShadow: {
-                        xs: "none",
-                        md: "0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)"
-                    }
-                },
-                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Stack, {
-                    direction: "column",
-                    gap: 2,
-                    children: [
-                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Typography, {
-                            variant: "h3",
-                            sx: {
-                                color: "#454545",
-                                fontWeight: "800",
-                                margin: "0 0 0 -23px",
-                                textAlign: "center"
-                            },
-                            children: [
-                                "Edu",
-                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                    style: {
-                                        color: "#1ABC9C"
-                                    },
-                                    children: "Share"
-                                })
-                            ]
-                        }),
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Typography, {
-                            variant: "h6",
-                            sx: {
-                                color: "#454545",
-                                fontWeight: "800",
-                                margin: "0 0 0 -23px",
-                                textAlign: "center"
-                            },
-                            children: "( Student Registration )"
-                        }),
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("form", {
-                            onSubmit: handleSignUp,
-                            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Stack, {
-                                direction: "column",
-                                gap: 2,
-                                sx: {
-                                    margin: "10px"
-                                },
-                                children: [
-                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Stack, {
-                                        direction: "row",
-                                        gap: 2,
-                                        children: [
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_2__.TextField, {
-                                                id: "outlined-basic",
-                                                label: "First Name",
-                                                variant: "outlined",
-                                                name: "firstName",
-                                                onChange: handleChange,
-                                                sx: {
-                                                    flexGrow: 1
-                                                }
-                                            }),
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_2__.TextField, {
-                                                id: "outlined-basic",
-                                                label: "Last Name",
-                                                variant: "outlined",
-                                                name: "lastName",
-                                                onChange: handleChange,
-                                                sx: {
-                                                    flexGrow: 1
-                                                }
-                                            })
-                                        ]
-                                    }),
-                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Stack, {
-                                        direction: "row",
-                                        gap: 2,
-                                        children: [
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_2__.TextField, {
-                                                id: "outlined-basic",
-                                                label: "Phone Number",
-                                                variant: "outlined",
-                                                name: "phone",
-                                                onChange: handleChange,
-                                                sx: {
-                                                    flexGrow: 1
-                                                }
-                                            }),
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_2__.TextField, {
-                                                id: "outlined-basic",
-                                                label: "Enter Email",
-                                                variant: "outlined",
-                                                name: "email",
-                                                onChange: handleChange,
-                                                sx: {
-                                                    flexGrow: 1
-                                                }
-                                            })
-                                        ]
-                                    }),
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Stack, {
-                                        direction: "row",
-                                        gap: 2,
-                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_2__.TextField, {
-                                            id: "outlined-basic",
-                                            label: "Enter Password",
-                                            variant: "outlined",
-                                            name: "password",
-                                            onChange: handleChange,
-                                            sx: {
-                                                flexGrow: 1
-                                            },
-                                            margin: "normal",
-                                            placeholder: "Password",
-                                            type: "password",
-                                            fullWidth: true
-                                        })
-                                    }),
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Button, {
-                                        sx: {
-                                            backgroundColor: "#00adb5",
-                                            height: 45,
-                                            fontSize: 22,
-                                            fontWeight: "bold",
-                                            margin: "10px 0"
-                                        },
-                                        variant: "contained",
-                                        type: "submit",
-                                        onClick: handleSignUp,
-                                        children: "Register"
-                                    })
-                                ]
-                            })
-                        }),
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                            style: {
-                                margin: "-30px 0 0 10px"
-                            },
-                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Link, {
-                                href: "/",
-                                variant: "body2",
-                                color: "inherit",
-                                children: " Back to login page"
-                            })
-                        })
-                    ]
-                })
-            })
-        })
-    });
-}
-
-__webpack_async_result__();
-} catch(e) { __webpack_async_result__(e); } });
+eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"app\": () => (/* binding */ app),\n/* harmony export */   \"auth\": () => (/* binding */ auth),\n/* harmony export */   \"collection\": () => (/* reexport safe */ firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection),\n/* harmony export */   \"db\": () => (/* binding */ db),\n/* harmony export */   \"getFirestoreTimestamp\": () => (/* binding */ getFirestoreTimestamp),\n/* harmony export */   \"storage\": () => (/* binding */ storage)\n/* harmony export */ });\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"firebase/app\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/firestore */ \"firebase/firestore\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/auth */ \"firebase/auth\");\n/* harmony import */ var firebase_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/storage */ \"firebase/storage\");\nvar __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([firebase_app__WEBPACK_IMPORTED_MODULE_0__, firebase_firestore__WEBPACK_IMPORTED_MODULE_1__, firebase_auth__WEBPACK_IMPORTED_MODULE_2__, firebase_storage__WEBPACK_IMPORTED_MODULE_3__]);\n([firebase_app__WEBPACK_IMPORTED_MODULE_0__, firebase_firestore__WEBPACK_IMPORTED_MODULE_1__, firebase_auth__WEBPACK_IMPORTED_MODULE_2__, firebase_storage__WEBPACK_IMPORTED_MODULE_3__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);\n\n\n\n // Import the storage module\n\nconst firebaseConfig = {\n    apiKey: \"AIzaSyC-ZYyj3mpgKszGlMQmETjBuBCqzYGFDh4\",\n    authDomain: \"edushare-e9242.firebaseapp.com\",\n    projectId: \"edushare-e9242\",\n    storageBucket: \"edushare-e9242.appspot.com\",\n    messagingSenderId: \"826723606155\",\n    appId: \"1:826723606155:web:4ef2868e093bc281523e8e\",\n    measurementId: \"G-BGCNB10FJ0\"\n};\n// Initialize Firebase\nconst app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(app);\nconst auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_2__.getAuth)(app);\nconst storage = (0,firebase_storage__WEBPACK_IMPORTED_MODULE_3__.getStorage)(app); // Get the storage instance\nconst getFirestoreTimestamp = ()=>{\n    return (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.serverTimestamp)();\n};\n\n\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } });//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9GaXJlYmFzZS9GaXJlYmFzZS5qcy5qcyIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7O0FBQTZDO0FBQ2lCO0FBQ3RCO0FBQ00sQ0FBQyw0QkFBNEI7QUFDdEI7QUFDckQsTUFBTU0saUJBQWlCO0lBQ3JCQyxRQUFRO0lBQ1JDLFlBQVk7SUFDWkMsV0FBVztJQUNYQyxlQUFlO0lBQ2ZDLG1CQUFtQjtJQUNuQkMsT0FBTztJQUNQQyxlQUFlO0FBQ2pCO0FBRUEsc0JBQXNCO0FBQ3RCLE1BQU1DLE1BQU1kLDJEQUFhQSxDQUFDTTtBQUMxQixNQUFNUyxLQUFLZCxnRUFBWUEsQ0FBQ2E7QUFDeEIsTUFBTUUsT0FBT2Isc0RBQU9BLENBQUNXO0FBQ3JCLE1BQU1HLFVBQVViLDREQUFVQSxDQUFDVSxNQUFNLDJCQUEyQjtBQUVyRCxNQUFNSSx3QkFBd0IsSUFBTTtJQUN6QyxPQUFPYixtRUFBZUE7QUFDeEIsRUFBRTtBQUUyQyIsInNvdXJjZXMiOlsid2VicGFjazovL2VkdXNoYXJlLy4vRmlyZWJhc2UvRmlyZWJhc2UuanM/MzAwNiJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBpbml0aWFsaXplQXBwIH0gZnJvbSAnZmlyZWJhc2UvYXBwJztcclxuaW1wb3J0IHsgZ2V0RmlyZXN0b3JlLCBjb2xsZWN0aW9uIH0gZnJvbSAnZmlyZWJhc2UvZmlyZXN0b3JlJztcclxuaW1wb3J0IHsgZ2V0QXV0aCB9IGZyb20gJ2ZpcmViYXNlL2F1dGgnO1xyXG5pbXBvcnQgeyBnZXRTdG9yYWdlIH0gZnJvbSAnZmlyZWJhc2Uvc3RvcmFnZSc7IC8vIEltcG9ydCB0aGUgc3RvcmFnZSBtb2R1bGVcclxuaW1wb3J0IHsgc2VydmVyVGltZXN0YW1wIH0gZnJvbSAnZmlyZWJhc2UvZmlyZXN0b3JlJztcclxuY29uc3QgZmlyZWJhc2VDb25maWcgPSB7XHJcbiAgYXBpS2V5OiBcIkFJemFTeUMtWll5ajNtcGdLc3pHbE1RbUVUakJ1QkNxellHRkRoNFwiLFxyXG4gIGF1dGhEb21haW46IFwiZWR1c2hhcmUtZTkyNDIuZmlyZWJhc2VhcHAuY29tXCIsXHJcbiAgcHJvamVjdElkOiBcImVkdXNoYXJlLWU5MjQyXCIsXHJcbiAgc3RvcmFnZUJ1Y2tldDogXCJlZHVzaGFyZS1lOTI0Mi5hcHBzcG90LmNvbVwiLFxyXG4gIG1lc3NhZ2luZ1NlbmRlcklkOiBcIjgyNjcyMzYwNjE1NVwiLFxyXG4gIGFwcElkOiBcIjE6ODI2NzIzNjA2MTU1OndlYjo0ZWYyODY4ZTA5M2JjMjgxNTIzZThlXCIsXHJcbiAgbWVhc3VyZW1lbnRJZDogXCJHLUJHQ05CMTBGSjBcIlxyXG59O1xyXG5cclxuLy8gSW5pdGlhbGl6ZSBGaXJlYmFzZVxyXG5jb25zdCBhcHAgPSBpbml0aWFsaXplQXBwKGZpcmViYXNlQ29uZmlnKTtcclxuY29uc3QgZGIgPSBnZXRGaXJlc3RvcmUoYXBwKTtcclxuY29uc3QgYXV0aCA9IGdldEF1dGgoYXBwKTtcclxuY29uc3Qgc3RvcmFnZSA9IGdldFN0b3JhZ2UoYXBwKTsgLy8gR2V0IHRoZSBzdG9yYWdlIGluc3RhbmNlXHJcblxyXG5leHBvcnQgY29uc3QgZ2V0RmlyZXN0b3JlVGltZXN0YW1wID0gKCkgPT4ge1xyXG4gIHJldHVybiBzZXJ2ZXJUaW1lc3RhbXAoKTtcclxufTtcclxuXHJcbmV4cG9ydCB7IGFwcCwgZGIsIGF1dGgsc3RvcmFnZSwgY29sbGVjdGlvbiB9O1xyXG4iXSwibmFtZXMiOlsiaW5pdGlhbGl6ZUFwcCIsImdldEZpcmVzdG9yZSIsImNvbGxlY3Rpb24iLCJnZXRBdXRoIiwiZ2V0U3RvcmFnZSIsInNlcnZlclRpbWVzdGFtcCIsImZpcmViYXNlQ29uZmlnIiwiYXBpS2V5IiwiYXV0aERvbWFpbiIsInByb2plY3RJZCIsInN0b3JhZ2VCdWNrZXQiLCJtZXNzYWdpbmdTZW5kZXJJZCIsImFwcElkIiwibWVhc3VyZW1lbnRJZCIsImFwcCIsImRiIiwiYXV0aCIsInN0b3JhZ2UiLCJnZXRGaXJlc3RvcmVUaW1lc3RhbXAiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./Firebase/Firebase.js\n");
 
 /***/ }),
 
-/***/ 5692:
+/***/ "./pages/Student/registration.js":
+/*!***************************************!*\
+  !*** ./pages/Student/registration.js ***!
+  \***************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Registration)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"react/jsx-dev-runtime\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material */ \"@mui/material\");\n/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_mui_material__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/router */ \"next/router\");\n/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! firebase/auth */ \"firebase/auth\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! firebase/firestore */ \"firebase/firestore\");\n/* harmony import */ var _Firebase_Firebase__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../Firebase/Firebase */ \"./Firebase/Firebase.js\");\nvar __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([firebase_auth__WEBPACK_IMPORTED_MODULE_4__, firebase_firestore__WEBPACK_IMPORTED_MODULE_5__, _Firebase_Firebase__WEBPACK_IMPORTED_MODULE_6__]);\n([firebase_auth__WEBPACK_IMPORTED_MODULE_4__, firebase_firestore__WEBPACK_IMPORTED_MODULE_5__, _Firebase_Firebase__WEBPACK_IMPORTED_MODULE_6__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);\n\n\n\n\n\n\n\nfunction Registration() {\n    const router = (0,next_router__WEBPACK_IMPORTED_MODULE_3__.useRouter)();\n    const [signUpData, setSignUpData] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({\n        email: \"\",\n        password: \"\",\n        firstName: \"\",\n        lastName: \"\",\n        phone: \"\"\n    });\n    function handleChange(event) {\n        setSignUpData((prev)=>{\n            return {\n                ...prev,\n                [event.target.name]: event.target.value\n            };\n        });\n    }\n    async function handleSignUp(e) {\n        e.preventDefault();\n        const auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_4__.getAuth)(_Firebase_Firebase__WEBPACK_IMPORTED_MODULE_6__.app);\n        let collectedData = {\n            firstName: signUpData.firstName,\n            lastName: signUpData.lastName,\n            email: signUpData.email,\n            phone: signUpData.phone,\n            registerdcourses: []\n        };\n        try {\n            const userCredential = await (0,firebase_auth__WEBPACK_IMPORTED_MODULE_4__.createUserWithEmailAndPassword)(auth, signUpData.email, signUpData.password);\n            const user = userCredential.user;\n            const db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_5__.getFirestore)(_Firebase_Firebase__WEBPACK_IMPORTED_MODULE_6__.app);\n            const docRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_5__.doc)(db, \"Student\", user.uid);\n            await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_5__.setDoc)(docRef, collectedData);\n            router.push(\"/\");\n        } catch (error) {\n            console.error(\"Error signing up:\", error);\n        }\n    }\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Paper, {\n        style: {\n            backgroundImage: `url(${\"https://i.ibb.co/6bJ0VFb/Background.jpg\"})`,\n            backgroundSize: \"cover\",\n            minHeight: \"100vh\",\n            color: \"#f5f5f5\",\n            width: \"100vw\"\n        },\n        children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Grid, {\n            container: true,\n            justifyContent: {\n                sm: \"center\"\n            },\n            alignItems: {\n                sm: \"center\"\n            },\n            height: \"100vh\",\n            children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Paper, {\n                sx: {\n                    width: \"40%\",\n                    margin: \"0 0 0 400px\",\n                    backgroundColor: \"white\",\n                    padding: 5,\n                    pb: 10,\n                    boxShadow: {\n                        xs: \"none\",\n                        md: \"0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)\"\n                    }\n                },\n                children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Stack, {\n                    direction: \"column\",\n                    gap: 2,\n                    children: [\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Typography, {\n                            variant: \"h3\",\n                            sx: {\n                                color: \"#454545\",\n                                fontWeight: \"800\",\n                                margin: \"0 0 0 -23px\",\n                                textAlign: \"center\"\n                            },\n                            children: [\n                                \"Edu\",\n                                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"span\", {\n                                    style: {\n                                        color: \"#1ABC9C\"\n                                    },\n                                    children: \"Share\"\n                                }, void 0, false, {\n                                    fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\Student\\\\registration.js\",\n                                    lineNumber: 103,\n                                    columnNumber: 18\n                                }, this)\n                            ]\n                        }, void 0, true, {\n                            fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\Student\\\\registration.js\",\n                            lineNumber: 94,\n                            columnNumber: 13\n                        }, this),\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Typography, {\n                            variant: \"h6\",\n                            sx: {\n                                color: \"#454545\",\n                                fontWeight: \"800\",\n                                margin: \"0 0 0 -23px\",\n                                textAlign: \"center\"\n                            },\n                            children: \"( Student Registration )\"\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\Student\\\\registration.js\",\n                            lineNumber: 107,\n                            columnNumber: 13\n                        }, this),\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"form\", {\n                            onSubmit: handleSignUp,\n                            children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Stack, {\n                                direction: \"column\",\n                                gap: 2,\n                                sx: {\n                                    margin: \"10px\"\n                                },\n                                children: [\n                                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Stack, {\n                                        direction: \"row\",\n                                        gap: 2,\n                                        children: [\n                                            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.TextField, {\n                                                id: \"outlined-basic\",\n                                                label: \"First Name\",\n                                                variant: \"outlined\",\n                                                name: \"firstName\",\n                                                onChange: handleChange,\n                                                sx: {\n                                                    flexGrow: 1\n                                                }\n                                            }, void 0, false, {\n                                                fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\Student\\\\registration.js\",\n                                                lineNumber: 121,\n                                                columnNumber: 19\n                                            }, this),\n                                            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.TextField, {\n                                                id: \"outlined-basic\",\n                                                label: \"Last Name\",\n                                                variant: \"outlined\",\n                                                name: \"lastName\",\n                                                onChange: handleChange,\n                                                sx: {\n                                                    flexGrow: 1\n                                                }\n                                            }, void 0, false, {\n                                                fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\Student\\\\registration.js\",\n                                                lineNumber: 130,\n                                                columnNumber: 19\n                                            }, this)\n                                        ]\n                                    }, void 0, true, {\n                                        fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\Student\\\\registration.js\",\n                                        lineNumber: 120,\n                                        columnNumber: 17\n                                    }, this),\n                                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Stack, {\n                                        direction: \"row\",\n                                        gap: 2,\n                                        children: [\n                                            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.TextField, {\n                                                id: \"outlined-basic\",\n                                                label: \"Phone Number\",\n                                                variant: \"outlined\",\n                                                name: \"phone\",\n                                                onChange: handleChange,\n                                                sx: {\n                                                    flexGrow: 1\n                                                }\n                                            }, void 0, false, {\n                                                fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\Student\\\\registration.js\",\n                                                lineNumber: 141,\n                                                columnNumber: 19\n                                            }, this),\n                                            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.TextField, {\n                                                id: \"outlined-basic\",\n                                                label: \"Enter Email\",\n                                                variant: \"outlined\",\n                                                name: \"email\",\n                                                onChange: handleChange,\n                                                sx: {\n                                                    flexGrow: 1\n                                                }\n                                            }, void 0, false, {\n                                                fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\Student\\\\registration.js\",\n                                                lineNumber: 150,\n                                                columnNumber: 19\n                                            }, this)\n                                        ]\n                                    }, void 0, true, {\n                                        fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\Student\\\\registration.js\",\n                                        lineNumber: 140,\n                                        columnNumber: 17\n                                    }, this),\n                                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Stack, {\n                                        direction: \"row\",\n                                        gap: 2,\n                                        children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.TextField, {\n                                            id: \"outlined-basic\",\n                                            label: \"Enter Password\",\n                                            variant: \"outlined\",\n                                            name: \"password\",\n                                            onChange: handleChange,\n                                            sx: {\n                                                flexGrow: 1\n                                            },\n                                            margin: \"normal\",\n                                            placeholder: \"Password\",\n                                            type: \"password\",\n                                            fullWidth: true\n                                        }, void 0, false, {\n                                            fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\Student\\\\registration.js\",\n                                            lineNumber: 161,\n                                            columnNumber: 19\n                                        }, this)\n                                    }, void 0, false, {\n                                        fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\Student\\\\registration.js\",\n                                        lineNumber: 160,\n                                        columnNumber: 17\n                                    }, this),\n                                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Button, {\n                                        sx: {\n                                            backgroundColor: \"#00adb5\",\n                                            height: 45,\n                                            fontSize: 22,\n                                            fontWeight: \"bold\",\n                                            margin: \"10px 0\"\n                                        },\n                                        variant: \"contained\",\n                                        type: \"submit\",\n                                        onClick: handleSignUp,\n                                        children: \"Register\"\n                                    }, void 0, false, {\n                                        fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\Student\\\\registration.js\",\n                                        lineNumber: 175,\n                                        columnNumber: 17\n                                    }, this)\n                                ]\n                            }, void 0, true, {\n                                fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\Student\\\\registration.js\",\n                                lineNumber: 119,\n                                columnNumber: 15\n                            }, this)\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\Student\\\\registration.js\",\n                            lineNumber: 118,\n                            columnNumber: 13\n                        }, this),\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n                            style: {\n                                margin: \"-30px 0 0 10px\"\n                            },\n                            children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Typography, {\n                                variant: \"body2\",\n                                color: \"inherit\",\n                                sx: {\n                                    textDecoration: \"underline\",\n                                    cursor: \"pointer\"\n                                },\n                                onClick: ()=>router.push(\"/\"),\n                                children: \" Back to login page\"\n                            }, void 0, false, {\n                                fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\Student\\\\registration.js\",\n                                lineNumber: 194,\n                                columnNumber: 15\n                            }, this)\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\Student\\\\registration.js\",\n                            lineNumber: 191,\n                            columnNumber: 13\n                        }, this)\n                    ]\n                }, void 0, true, {\n                    fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\Student\\\\registration.js\",\n                    lineNumber: 93,\n                    columnNumber: 11\n                }, this)\n            }, void 0, false, {\n                fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\Student\\\\registration.js\",\n                lineNumber: 79,\n                columnNumber: 9\n            }, this)\n        }, void 0, false, {\n            fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\Student\\\\registration.js\",\n            lineNumber: 73,\n            columnNumber: 7\n        }, this)\n    }, void 0, false, {\n        fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\Student\\\\registration.js\",\n        lineNumber: 64,\n        columnNumber: 5\n    }, this);\n}\n\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } });//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,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LFFBQVE7NENBQ1J3QixVQUFVOzRDQUNWWixZQUFZOzRDQUNaVixRQUFRO3dDQUNWO3dDQUNBUyxTQUFRO3dDQUNSVyxNQUFLO3dDQUNMRyxTQUFTakQ7a0RBQ1Y7Ozs7Ozs7Ozs7Ozs7Ozs7O3NDQUtMLDhEQUFDa0Q7NEJBQUlwQyxPQUFPO2dDQUFFWSxRQUFROzRCQUFpQjtzQ0FHckMsNEVBQUNsRCxxREFBVUE7Z0NBQUMyRCxTQUFRO2dDQUFRakIsT0FBTTtnQ0FBVU8sSUFBSTtvQ0FDakQwQixnQkFBZ0I7b0NBQWFDLFFBQU87Z0NBQ3ZDO2dDQUFHSCxTQUFTLElBQUkvRCxPQUFPeUIsSUFBSSxDQUFDOzBDQUFNOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQVM1QyxDQUFDIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vZWR1c2hhcmUvLi9wYWdlcy9TdHVkZW50L3JlZ2lzdHJhdGlvbi5qcz8yYjJkIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBSZWFjdCwgeyB1c2VTdGF0ZSB9IGZyb20gXCJyZWFjdFwiO1xyXG5pbXBvcnQge1xyXG4gIEJ1dHRvbixcclxuICBHcmlkLFxyXG4gIFBhcGVyLFxyXG4gIFN0YWNrLFxyXG4gIFRleHRGaWVsZCxcclxuICBUeXBvZ3JhcGh5LFxyXG4gIExpbmtcclxufSBmcm9tIFwiQG11aS9tYXRlcmlhbFwiO1xyXG5pbXBvcnQgeyB1c2VSb3V0ZXIgfSBmcm9tICduZXh0L3JvdXRlcic7XHJcbmltcG9ydCB7IGdldEF1dGgsIGNyZWF0ZVVzZXJXaXRoRW1haWxBbmRQYXNzd29yZCB9IGZyb20gXCJmaXJlYmFzZS9hdXRoXCI7XHJcbmltcG9ydCB7IGdldEZpcmVzdG9yZSwgZG9jLCBzZXREb2MgfSBmcm9tIFwiZmlyZWJhc2UvZmlyZXN0b3JlXCI7XHJcbmltcG9ydCB7IGFwcCB9IGZyb20gXCIuLi8uLi9GaXJlYmFzZS9GaXJlYmFzZVwiO1xyXG5cclxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gUmVnaXN0cmF0aW9uKCkge1xyXG4gIGNvbnN0IHJvdXRlciA9IHVzZVJvdXRlcigpO1xyXG5cclxuICBjb25zdCBbc2lnblVwRGF0YSwgc2V0U2lnblVwRGF0YV0gPSB1c2VTdGF0ZSh7XHJcbiAgICBlbWFpbDogXCJcIixcclxuICAgIHBhc3N3b3JkOiBcIlwiLFxyXG4gICAgZmlyc3ROYW1lOiBcIlwiLFxyXG4gICAgbGFzdE5hbWU6IFwiXCIsXHJcbiAgICBwaG9uZTogXCJcIixcclxuICB9KTtcclxuXHJcbiAgZnVuY3Rpb24gaGFuZGxlQ2hhbmdlKGV2ZW50KSB7XHJcbiAgICBzZXRTaWduVXBEYXRhKChwcmV2KSA9PiB7XHJcbiAgICAgIHJldHVybiB7XHJcbiAgICAgICAgLi4ucHJldixcclxuICAgICAgICBbZXZlbnQudGFyZ2V0Lm5hbWVdOiBldmVudC50YXJnZXQudmFsdWVcclxuICAgICAgfTtcclxuICAgIH0pO1xyXG4gIH1cclxuXHJcbiAgYXN5bmMgZnVuY3Rpb24gaGFuZGxlU2lnblVwKGUpIHtcclxuICAgIGUucHJldmVudERlZmF1bHQoKTtcclxuXHJcbiAgICBjb25zdCBhdXRoID0gZ2V0QXV0aChhcHApO1xyXG5cclxuICAgIGxldCBjb2xsZWN0ZWREYXRhID0ge1xyXG4gICAgICBmaXJzdE5hbWU6IHNpZ25VcERhdGEuZmlyc3ROYW1lLFxyXG4gICAgICBsYXN0TmFtZTogc2lnblVwRGF0YS5sYXN0TmFtZSxcclxuICAgICAgZW1haWw6IHNpZ25VcERhdGEuZW1haWwsXHJcbiAgICAgIHBob25lOiBzaWduVXBEYXRhLnBob25lLFxyXG4gICAgICByZWdpc3RlcmRjb3Vyc2VzOiBbXVxyXG4gICAgfVxyXG4gICAgdHJ5IHtcclxuICAgICAgY29uc3QgdXNlckNyZWRlbnRpYWwgPSBhd2FpdCBjcmVhdGVVc2VyV2l0aEVtYWlsQW5kUGFzc3dvcmQoYXV0aCwgc2lnblVwRGF0YS5lbWFpbCwgc2lnblVwRGF0YS5wYXNzd29yZCk7XHJcbiAgICAgIGNvbnN0IHVzZXIgPSB1c2VyQ3JlZGVudGlhbC51c2VyO1xyXG4gICAgICBjb25zdCBkYiA9IGdldEZpcmVzdG9yZShhcHApO1xyXG4gICAgICBjb25zdCBkb2NSZWYgPSBkb2MoZGIsIFwiU3R1ZGVudFwiLCB1c2VyLnVpZCk7XHJcbiAgICAgIGF3YWl0IHNldERvYyhkb2NSZWYsIGNvbGxlY3RlZERhdGEpO1xyXG4gICAgICByb3V0ZXIucHVzaChcIi9cIik7XHJcbiAgICB9IGNhdGNoIChlcnJvcikge1xyXG4gICAgICBjb25zb2xlLmVycm9yKFwiRXJyb3Igc2lnbmluZyB1cDpcIiwgZXJyb3IpO1xyXG4gICAgfVxyXG4gIH1cclxuICByZXR1cm4gKFxyXG5cclxuXHJcblxyXG5cclxuICAgIDxQYXBlclxyXG4gICAgICBzdHlsZT17e1xyXG4gICAgICAgIGJhY2tncm91bmRJbWFnZTogYHVybCgke1wiaHR0cHM6Ly9pLmliYi5jby82YkowVkZiL0JhY2tncm91bmQuanBnXCJ9KWAsXHJcbiAgICAgICAgYmFja2dyb3VuZFNpemU6IFwiY292ZXJcIixcclxuICAgICAgICBtaW5IZWlnaHQ6IFwiMTAwdmhcIixcclxuICAgICAgICBjb2xvcjogXCIjZjVmNWY1XCIsXHJcbiAgICAgICAgd2lkdGg6IFwiMTAwdndcIixcclxuICAgICAgfX1cclxuICAgID5cclxuICAgICAgPEdyaWRcclxuICAgICAgICBjb250YWluZXJcclxuICAgICAgICBqdXN0aWZ5Q29udGVudD17eyBzbTogXCJjZW50ZXJcIiB9fVxyXG4gICAgICAgIGFsaWduSXRlbXM9e3sgc206IFwiY2VudGVyXCIgfX1cclxuICAgICAgICBoZWlnaHQ9e1wiMTAwdmhcIn1cclxuICAgICAgPlxyXG4gICAgICAgIDxQYXBlclxyXG4gICAgICAgICAgc3g9e3tcclxuICAgICAgICAgICAgd2lkdGg6IFwiNDAlXCIsXHJcbiAgICAgICAgICAgIG1hcmdpbjogXCIwIDAgMCA0MDBweFwiLFxyXG4gICAgICAgICAgICBiYWNrZ3JvdW5kQ29sb3I6IFwid2hpdGVcIixcclxuICAgICAgICAgICAgcGFkZGluZzogNSxcclxuICAgICAgICAgICAgcGI6IDEwLFxyXG4gICAgICAgICAgICBib3hTaGFkb3c6IHtcclxuICAgICAgICAgICAgICB4czogXCJub25lXCIsXHJcbiAgICAgICAgICAgICAgbWQ6XHJcbiAgICAgICAgICAgICAgICBcIjBweCA0cHggNXB4IC0ycHggcmdiYSgwLDAsMCwwLjIpLDBweCA3cHggMTBweCAxcHggcmdiYSgwLDAsMCwwLjE0KSwwcHggMnB4IDE2cHggMXB4IHJnYmEoMCwwLDAsMC4xMilcIixcclxuICAgICAgICAgICAgfSxcclxuICAgICAgICAgIH19XHJcbiAgICAgICAgPlxyXG4gICAgICAgICAgPFN0YWNrIGRpcmVjdGlvbj17XCJjb2x1bW5cIn0gZ2FwPXsyfT5cclxuICAgICAgICAgICAgPFR5cG9ncmFwaHlcclxuICAgICAgICAgICAgICB2YXJpYW50PVwiaDNcIlxyXG4gICAgICAgICAgICAgIHN4PXt7XHJcbiAgICAgICAgICAgICAgICBjb2xvcjogXCIjNDU0NTQ1XCIsXHJcbiAgICAgICAgICAgICAgICBmb250V2VpZ2h0OiBcIjgwMFwiLFxyXG4gICAgICAgICAgICAgICAgbWFyZ2luOiBcIjAgMCAwIC0yM3B4XCIsXHJcbiAgICAgICAgICAgICAgICB0ZXh0QWxpZ246IFwiY2VudGVyXCIsXHJcbiAgICAgICAgICAgICAgfX1cclxuICAgICAgICAgICAgPlxyXG4gICAgICAgICAgICAgIEVkdTxzcGFuIHN0eWxlPXt7IGNvbG9yOiBcIiMxQUJDOUNcIiB9fT5TaGFyZTwvc3Bhbj5cclxuICAgICAgICAgICAgPC9UeXBvZ3JhcGh5PlxyXG5cclxuXHJcbiAgICAgICAgICAgIDxUeXBvZ3JhcGh5XHJcbiAgICAgICAgICAgICAgdmFyaWFudD1cImg2XCJcclxuICAgICAgICAgICAgICBzeD17e1xyXG4gICAgICAgICAgICAgICAgY29sb3I6IFwiIzQ1NDU0NVwiLFxyXG4gICAgICAgICAgICAgICAgZm9udFdlaWdodDogXCI4MDBcIixcclxuICAgICAgICAgICAgICAgIG1hcmdpbjogXCIwIDAgMCAtMjNweFwiLFxyXG4gICAgICAgICAgICAgICAgdGV4dEFsaWduOiBcImNlbnRlclwiLFxyXG4gICAgICAgICAgICAgIH19XHJcbiAgICAgICAgICAgID5cclxuICAgICAgICAgICAgICAoIFN0dWRlbnQgUmVnaXN0cmF0aW9uIClcclxuICAgICAgICAgICAgPC9UeXBvZ3JhcGh5PlxyXG4gICAgICAgICAgICA8Zm9ybSBvblN1Ym1pdD17aGFuZGxlU2lnblVwfT5cclxuICAgICAgICAgICAgICA8U3RhY2sgZGlyZWN0aW9uPXtcImNvbHVtblwifSBnYXA9ezJ9IHN4PXt7IG1hcmdpbjogXCIxMHB4XCIgfX0+XHJcbiAgICAgICAgICAgICAgICA8U3RhY2sgZGlyZWN0aW9uPXtcInJvd1wifSBnYXA9ezJ9PlxyXG4gICAgICAgICAgICAgICAgICA8VGV4dEZpZWxkXHJcbiAgICAgICAgICAgICAgICAgICAgaWQ9XCJvdXRsaW5lZC1iYXNpY1wiXHJcbiAgICAgICAgICAgICAgICAgICAgbGFiZWw9XCJGaXJzdCBOYW1lXCJcclxuICAgICAgICAgICAgICAgICAgICB2YXJpYW50PVwib3V0bGluZWRcIlxyXG4gICAgICAgICAgICAgICAgICAgIG5hbWU9XCJmaXJzdE5hbWVcIlxyXG4gICAgICAgICAgICAgICAgICAgIG9uQ2hhbmdlPXtoYW5kbGVDaGFuZ2V9XHJcbiAgICAgICAgICAgICAgICAgICAgc3g9e3sgZmxleEdyb3c6IDEgfX1cclxuICAgICAgICAgICAgICAgICAgLz5cclxuXHJcbiAgICAgICAgICAgICAgICAgIDxUZXh0RmllbGRcclxuICAgICAgICAgICAgICAgICAgICBpZD1cIm91dGxpbmVkLWJhc2ljXCJcclxuICAgICAgICAgICAgICAgICAgICBsYWJlbD1cIkxhc3QgTmFtZVwiXHJcbiAgICAgICAgICAgICAgICAgICAgdmFyaWFudD1cIm91dGxpbmVkXCJcclxuICAgICAgICAgICAgICAgICAgICBuYW1lPVwibGFzdE5hbWVcIlxyXG4gICAgICAgICAgICAgICAgICAgIG9uQ2hhbmdlPXtoYW5kbGVDaGFuZ2V9XHJcbiAgICAgICAgICAgICAgICAgICAgc3g9e3sgZmxleEdyb3c6IDEgfX1cclxuICAgICAgICAgICAgICAgICAgLz5cclxuICAgICAgICAgICAgICAgIDwvU3RhY2s+XHJcblxyXG4gICAgICAgICAgICAgICAgPFN0YWNrIGRpcmVjdGlvbj17XCJyb3dcIn0gZ2FwPXsyfT5cclxuICAgICAgICAgICAgICAgICAgPFRleHRGaWVsZFxyXG4gICAgICAgICAgICAgICAgICAgIGlkPVwib3V0bGluZWQtYmFzaWNcIlxyXG4gICAgICAgICAgICAgICAgICAgIGxhYmVsPVwiUGhvbmUgTnVtYmVyXCJcclxuICAgICAgICAgICAgICAgICAgICB2YXJpYW50PVwib3V0bGluZWRcIlxyXG4gICAgICAgICAgICAgICAgICAgIG5hbWU9XCJwaG9uZVwiXHJcbiAgICAgICAgICAgICAgICAgICAgb25DaGFuZ2U9e2hhbmRsZUNoYW5nZX1cclxuICAgICAgICAgICAgICAgICAgICBzeD17eyBmbGV4R3JvdzogMSB9fVxyXG4gICAgICAgICAgICAgICAgICAvPlxyXG5cclxuICAgICAgICAgICAgICAgICAgPFRleHRGaWVsZFxyXG4gICAgICAgICAgICAgICAgICAgIGlkPVwib3V0bGluZWQtYmFzaWNcIlxyXG4gICAgICAgICAgICAgICAgICAgIGxhYmVsPVwiRW50ZXIgRW1haWxcIlxyXG4gICAgICAgICAgICAgICAgICAgIHZhcmlhbnQ9XCJvdXRsaW5lZFwiXHJcbiAgICAgICAgICAgICAgICAgICAgbmFtZT1cImVtYWlsXCJcclxuICAgICAgICAgICAgICAgICAgICBvbkNoYW5nZT17aGFuZGxlQ2hhbmdlfVxyXG4gICAgICAgICAgICAgICAgICAgIHN4PXt7IGZsZXhHcm93OiAxIH19XHJcbiAgICAgICAgICAgICAgICAgIC8+XHJcbiAgICAgICAgICAgICAgICA8L1N0YWNrPlxyXG5cclxuICAgICAgICAgICAgICAgIDxTdGFjayBkaXJlY3Rpb249e1wicm93XCJ9IGdhcD17Mn0+XHJcbiAgICAgICAgICAgICAgICAgIDxUZXh0RmllbGRcclxuICAgICAgICAgICAgICAgICAgICBpZD1cIm91dGxpbmVkLWJhc2ljXCJcclxuICAgICAgICAgICAgICAgICAgICBsYWJlbD1cIkVudGVyIFBhc3N3b3JkXCJcclxuICAgICAgICAgICAgICAgICAgICB2YXJpYW50PVwib3V0bGluZWRcIlxyXG4gICAgICAgICAgICAgICAgICAgIG5hbWU9XCJwYXNzd29yZFwiXHJcbiAgICAgICAgICAgICAgICAgICAgb25DaGFuZ2U9e2hhbmRsZUNoYW5nZX1cclxuICAgICAgICAgICAgICAgICAgICBzeD17eyBmbGV4R3JvdzogMSB9fVxyXG4gICAgICAgICAgICAgICAgICAgIG1hcmdpbj1cIm5vcm1hbFwiXHJcbiAgICAgICAgICAgICAgcGxhY2Vob2xkZXI9XCJQYXNzd29yZFwiXHJcbiAgICAgICAgICAgICAgdHlwZT1cInBhc3N3b3JkXCJcclxuICAgICAgICAgICAgICBmdWxsV2lkdGhcclxuICAgICAgICAgICAgICAgICAgLz5cclxuICAgICAgICAgICAgICAgIDwvU3RhY2s+XHJcblxyXG4gICAgICAgICAgICAgICAgPEJ1dHRvblxyXG4gICAgICAgICAgICAgICAgICBzeD17e1xyXG4gICAgICAgICAgICAgICAgICAgIGJhY2tncm91bmRDb2xvcjogXCIjMDBhZGI1XCIsXHJcbiAgICAgICAgICAgICAgICAgICAgaGVpZ2h0OiA0NSxcclxuICAgICAgICAgICAgICAgICAgICBmb250U2l6ZTogMjIsXHJcbiAgICAgICAgICAgICAgICAgICAgZm9udFdlaWdodDogXCJib2xkXCIsXHJcbiAgICAgICAgICAgICAgICAgICAgbWFyZ2luOiBcIjEwcHggMFwiLFxyXG4gICAgICAgICAgICAgICAgICB9fVxyXG4gICAgICAgICAgICAgICAgICB2YXJpYW50PVwiY29udGFpbmVkXCJcclxuICAgICAgICAgICAgICAgICAgdHlwZT1cInN1Ym1pdFwiXHJcbiAgICAgICAgICAgICAgICAgIG9uQ2xpY2s9e2hhbmRsZVNpZ25VcH1cclxuICAgICAgICAgICAgICAgID5cclxuICAgICAgICAgICAgICAgICAgUmVnaXN0ZXJcclxuICAgICAgICAgICAgICAgIDwvQnV0dG9uPlxyXG4gICAgICAgICAgICAgIDwvU3RhY2s+XHJcbiAgICAgICAgICAgIDwvZm9ybT5cclxuICAgICAgICAgICAgPGRpdiBzdHlsZT17eyBtYXJnaW46IFwiLTMwcHggMCAwIDEwcHhcIiB9fT5cclxuICAgICAgICAgICAgICB7LyogPExpbmsgaHJlZj1cIi9cIiB2YXJpYW50PVwiYm9keTJcIiBjb2xvcj1cImluaGVyaXRcIj4gQmFjayB0byBsb2dpbiBwYWdlPC9MaW5rPiAqL31cclxuXHJcbiAgICAgICAgICAgICAgPFR5cG9ncmFwaHkgdmFyaWFudD1cImJvZHkyXCIgY29sb3I9XCJpbmhlcml0XCIgc3g9e3tcclxuICAgICAgICAgICAgIHRleHREZWNvcmF0aW9uOiAndW5kZXJsaW5lJywgY3Vyc29yOlwicG9pbnRlclwiXHJcbiAgICAgICAgICB9fSBvbkNsaWNrPXsoKT0+cm91dGVyLnB1c2goJy8nKX0+IEJhY2sgdG8gbG9naW4gcGFnZTwvVHlwb2dyYXBoeT5cclxuICAgICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgICA8L1N0YWNrPlxyXG4gICAgICAgIDwvUGFwZXI+XHJcbiAgICAgIDwvR3JpZD5cclxuICAgIDwvUGFwZXI+XHJcblxyXG5cclxuICApO1xyXG59XHJcblxyXG5cclxuXHJcbiJdLCJuYW1lcyI6WyJSZWFjdCIsInVzZVN0YXRlIiwiQnV0dG9uIiwiR3JpZCIsIlBhcGVyIiwiU3RhY2siLCJUZXh0RmllbGQiLCJUeXBvZ3JhcGh5IiwiTGluayIsInVzZVJvdXRlciIsImdldEF1dGgiLCJjcmVhdGVVc2VyV2l0aEVtYWlsQW5kUGFzc3dvcmQiLCJnZXRGaXJlc3RvcmUiLCJkb2MiLCJzZXREb2MiLCJhcHAiLCJSZWdpc3RyYXRpb24iLCJyb3V0ZXIiLCJzaWduVXBEYXRhIiwic2V0U2lnblVwRGF0YSIsImVtYWlsIiwicGFzc3dvcmQiLCJmaXJzdE5hbWUiLCJsYXN0TmFtZSIsInBob25lIiwiaGFuZGxlQ2hhbmdlIiwiZXZlbnQiLCJwcmV2IiwidGFyZ2V0IiwibmFtZSIsInZhbHVlIiwiaGFuZGxlU2lnblVwIiwiZSIsInByZXZlbnREZWZhdWx0IiwiYXV0aCIsImNvbGxlY3RlZERhdGEiLCJyZWdpc3RlcmRjb3Vyc2VzIiwidXNlckNyZWRlbnRpYWwiLCJ1c2VyIiwiZGIiLCJkb2NSZWYiLCJ1aWQiLCJwdXNoIiwiZXJyb3IiLCJjb25zb2xlIiwic3R5bGUiLCJiYWNrZ3JvdW5kSW1hZ2UiLCJiYWNrZ3JvdW5kU2l6ZSIsIm1pbkhlaWdodCIsImNvbG9yIiwid2lkdGgiLCJjb250YWluZXIiLCJqdXN0aWZ5Q29udGVudCIsInNtIiwiYWxpZ25JdGVtcyIsImhlaWdodCIsInN4IiwibWFyZ2luIiwiYmFja2dyb3VuZENvbG9yIiwicGFkZGluZyIsInBiIiwiYm94U2hhZG93IiwieHMiLCJtZCIsImRpcmVjdGlvbiIsImdhcCIsInZhcmlhbnQiLCJmb250V2VpZ2h0IiwidGV4dEFsaWduIiwic3BhbiIsImZvcm0iLCJvblN1Ym1pdCIsImlkIiwibGFiZWwiLCJvbkNoYW5nZSIsImZsZXhHcm93IiwicGxhY2Vob2xkZXIiLCJ0eXBlIiwiZnVsbFdpZHRoIiwiZm9udFNpemUiLCJvbkNsaWNrIiwiZGl2IiwidGV4dERlY29yYXRpb24iLCJjdXJzb3IiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./pages/Student/registration.js\n");
+
+/***/ }),
+
+/***/ "@mui/material":
+/*!********************************!*\
+  !*** external "@mui/material" ***!
+  \********************************/
 /***/ ((module) => {
 
 module.exports = require("@mui/material");
 
 /***/ }),
 
-/***/ 1853:
+/***/ "next/router":
+/*!******************************!*\
+  !*** external "next/router" ***!
+  \******************************/
 /***/ ((module) => {
 
 module.exports = require("next/router");
 
 /***/ }),
 
-/***/ 6689:
+/***/ "react":
+/*!************************!*\
+  !*** external "react" ***!
+  \************************/
 /***/ ((module) => {
 
 module.exports = require("react");
 
 /***/ }),
 
-/***/ 997:
+/***/ "react/jsx-dev-runtime":
+/*!****************************************!*\
+  !*** external "react/jsx-dev-runtime" ***!
+  \****************************************/
 /***/ ((module) => {
 
-module.exports = require("react/jsx-runtime");
+module.exports = require("react/jsx-dev-runtime");
 
 /***/ }),
 
-/***/ 3745:
+/***/ "firebase/app":
+/*!*******************************!*\
+  !*** external "firebase/app" ***!
+  \*******************************/
 /***/ ((module) => {
 
 module.exports = import("firebase/app");;
 
 /***/ }),
 
-/***/ 401:
+/***/ "firebase/auth":
+/*!********************************!*\
+  !*** external "firebase/auth" ***!
+  \********************************/
 /***/ ((module) => {
 
 module.exports = import("firebase/auth");;
 
 /***/ }),
 
-/***/ 1492:
+/***/ "firebase/firestore":
+/*!*************************************!*\
+  !*** external "firebase/firestore" ***!
+  \*************************************/
 /***/ ((module) => {
 
 module.exports = import("firebase/firestore");;
 
 /***/ }),
 
-/***/ 3392:
+/***/ "firebase/storage":
+/*!***********************************!*\
+  !*** external "firebase/storage" ***!
+  \***********************************/
 /***/ ((module) => {
 
 module.exports = import("firebase/storage");;
@@ -313,7 +120,7 @@ module.exports = import("firebase/storage");;
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [6216], () => (__webpack_exec__(1119)));
+var __webpack_exports__ = (__webpack_exec__("./pages/Student/registration.js"));
 module.exports = __webpack_exports__;
 
 })();

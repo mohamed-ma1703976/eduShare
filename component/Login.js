@@ -175,7 +175,11 @@ export default function App() {
             </Button>
           </form>
         </Stack>
-        <Link href="eduShare/signup/register" variant="body2" color="inherit"> Don't have an account? Register</Link>
+        {/* <Link href="signup/register" variant="body2" color="inherit"> Don't have an account? Register</Link> */}
+
+        <Typography variant="body2" color="inherit" sx={{
+             textDecoration: 'underline', cursor:"pointer"
+          }} onClick={()=>router.push('signup/register')}>Don't have an account? Register</Typography>
       </Paper>
     </Grid >
   );

@@ -1,169 +1,75 @@
 "use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
 (() => {
 var exports = {};
-exports.id = 5209;
-exports.ids = [5209];
+exports.id = "pages/signup/register";
+exports.ids = ["pages/signup/register"];
 exports.modules = {
 
-/***/ 4487:
+/***/ "./component/Signup/RoleSelection.js":
+/*!*******************************************!*\
+  !*** ./component/Signup/RoleSelection.js ***!
+  \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  "default": () => (/* binding */ register)
-});
-
-// EXTERNAL MODULE: external "react/jsx-runtime"
-var jsx_runtime_ = __webpack_require__(997);
-// EXTERNAL MODULE: external "@mui/material"
-var material_ = __webpack_require__(5692);
-// EXTERNAL MODULE: external "react"
-var external_react_ = __webpack_require__(6689);
-// EXTERNAL MODULE: external "next/router"
-var router_ = __webpack_require__(1853);
-;// CONCATENATED MODULE: ./component/Signup/RoleSelection.js
-
-
-
-
-function RoleSelection() {
-    const router = (0,router_.useRouter)();
-    return /*#__PURE__*/ jsx_runtime_.jsx(material_.Grid, {
-        container: true,
-        justifyContent: {
-            sm: "center"
-        },
-        alignItems: {
-            sm: "center"
-        },
-        height: "100vh",
-        children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)(material_.Paper, {
-            sx: {
-                width: "30%",
-                height: 220,
-                margin: "0 0 0 130px",
-                backgroundColor: "white",
-                padding: 5,
-                pb: 10,
-                boxShadow: {
-                    xs: "none",
-                    md: "0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)"
-                }
-            },
-            children: [
-                /*#__PURE__*/ (0,jsx_runtime_.jsxs)(material_.Stack, {
-                    direction: "column",
-                    gap: 2,
-                    children: [
-                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)(material_.Typography, {
-                            variant: "h3",
-                            sx: {
-                                color: "#454545",
-                                fontWeight: "800",
-                                margin: "0 0 0 -23px",
-                                textAlign: "center"
-                            },
-                            children: [
-                                "Edu",
-                                /*#__PURE__*/ jsx_runtime_.jsx("span", {
-                                    style: {
-                                        color: "#1ABC9C"
-                                    },
-                                    children: "Share"
-                                })
-                            ]
-                        }),
-                        /*#__PURE__*/ jsx_runtime_.jsx(material_.Button, {
-                            sx: {
-                                backgroundColor: "#00adb5",
-                                height: 45,
-                                fontSize: 22,
-                                fontWeight: "bold",
-                                margin: "20px 0 10px 0"
-                            },
-                            variant: "contained",
-                            type: "submit",
-                            onClick: ()=>router.push("/Student/registration"),
-                            children: "Sign Up as Student"
-                        }),
-                        /*#__PURE__*/ jsx_runtime_.jsx(material_.Button, {
-                            sx: {
-                                backgroundColor: "#00adb5",
-                                height: 45,
-                                fontSize: 22,
-                                fontWeight: "bold"
-                            },
-                            variant: "contained",
-                            type: "submit",
-                            onClick: ()=>router.push("/Instructor/registration"),
-                            children: "Sign Up as Instructor"
-                        })
-                    ]
-                }),
-                /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                    style: {
-                        margin: "10px 0 0 10px"
-                    },
-                    children: /*#__PURE__*/ jsx_runtime_.jsx(material_.Link, {
-                        href: "/",
-                        variant: "body2",
-                        color: "inherit",
-                        children: " Back to login page"
-                    })
-                })
-            ]
-        })
-    });
-}
-
-;// CONCATENATED MODULE: ./pages/signup/register.js
-
-
-
-function register() {
-    return /*#__PURE__*/ jsx_runtime_.jsx(material_.Paper, {
-        style: {
-            backgroundImage: `url(${"https://i.ibb.co/6bJ0VFb/Background.jpg"})`,
-            backgroundSize: "cover",
-            height: "100vh",
-            color: "#f5f5f5",
-            width: "100vw"
-        },
-        children: /*#__PURE__*/ jsx_runtime_.jsx(RoleSelection, {})
-    });
-}
-
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ RoleSelection)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"react/jsx-dev-runtime\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material */ \"@mui/material\");\n/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_mui_material__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/router */ \"next/router\");\n/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_3__);\n\n\n\n\nfunction RoleSelection() {\n    const router = (0,next_router__WEBPACK_IMPORTED_MODULE_3__.useRouter)();\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Grid, {\n        container: true,\n        justifyContent: {\n            sm: \"center\"\n        },\n        alignItems: {\n            sm: \"center\"\n        },\n        height: \"100vh\",\n        children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Paper, {\n            sx: {\n                width: \"30%\",\n                height: 220,\n                margin: \"0 0 0 130px\",\n                backgroundColor: \"white\",\n                padding: 5,\n                pb: 10,\n                boxShadow: {\n                    xs: \"none\",\n                    md: \"0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)\"\n                }\n            },\n            children: [\n                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Stack, {\n                    direction: \"column\",\n                    gap: 2,\n                    children: [\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Typography, {\n                            variant: \"h3\",\n                            sx: {\n                                color: \"#454545\",\n                                fontWeight: \"800\",\n                                margin: \"0 0 0 -23px\",\n                                textAlign: \"center\"\n                            },\n                            children: [\n                                \"Edu\",\n                                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"span\", {\n                                    style: {\n                                        color: \"#1ABC9C\"\n                                    },\n                                    children: \"Share\"\n                                }, void 0, false, {\n                                    fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\component\\\\Signup\\\\RoleSelection.js\",\n                                    lineNumber: 38,\n                                    columnNumber: 128\n                                }, this)\n                            ]\n                        }, void 0, true, {\n                            fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\component\\\\Signup\\\\RoleSelection.js\",\n                            lineNumber: 38,\n                            columnNumber: 11\n                        }, this),\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Button, {\n                            sx: {\n                                backgroundColor: \"#00adb5\",\n                                height: 45,\n                                fontSize: 22,\n                                fontWeight: \"bold\",\n                                margin: \"20px 0 10px 0\"\n                            },\n                            variant: \"contained\",\n                            type: \"submit\",\n                            onClick: ()=>router.push(\"/Student/registration\"),\n                            children: \"Sign Up as Student\"\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\component\\\\Signup\\\\RoleSelection.js\",\n                            lineNumber: 40,\n                            columnNumber: 11\n                        }, this),\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Button, {\n                            sx: {\n                                backgroundColor: \"#00adb5\",\n                                height: 45,\n                                fontSize: 22,\n                                fontWeight: \"bold\"\n                            },\n                            variant: \"contained\",\n                            type: \"submit\",\n                            onClick: ()=>router.push(\"/Instructor/registration\"),\n                            children: \"Sign Up as Instructor\"\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\component\\\\Signup\\\\RoleSelection.js\",\n                            lineNumber: 55,\n                            columnNumber: 11\n                        }, this)\n                    ]\n                }, void 0, true, {\n                    fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\component\\\\Signup\\\\RoleSelection.js\",\n                    lineNumber: 37,\n                    columnNumber: 9\n                }, this),\n                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n                    style: {\n                        margin: \"10px 0 0 10px\"\n                    },\n                    children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Typography, {\n                        variant: \"body2\",\n                        color: \"inherit\",\n                        sx: {\n                            textDecoration: \"underline\",\n                            cursor: \"pointer\"\n                        },\n                        onClick: ()=>router.push(\"/\"),\n                        children: \" Back to login page\"\n                    }, void 0, false, {\n                        fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\component\\\\Signup\\\\RoleSelection.js\",\n                        lineNumber: 70,\n                        columnNumber: 11\n                    }, this)\n                }, void 0, false, {\n                    fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\component\\\\Signup\\\\RoleSelection.js\",\n                    lineNumber: 69,\n                    columnNumber: 9\n                }, this)\n            ]\n        }, void 0, true, {\n            fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\component\\\\Signup\\\\RoleSelection.js\",\n            lineNumber: 22,\n            columnNumber: 7\n        }, this)\n    }, void 0, false, {\n        fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\component\\\\Signup\\\\RoleSelection.js\",\n        lineNumber: 16,\n        columnNumber: 5\n    }, this);\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9jb21wb25lbnQvU2lnbnVwL1JvbGVTZWxlY3Rpb24uanMuanMiLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7O0FBQUE7QUFBMEI7QUFRSDtBQUNpQjtBQUV6QixTQUFTUSxnQkFBZ0I7SUFDdEMsTUFBTUMsU0FBU0Ysc0RBQVNBO0lBRXhCLHFCQUNFLDhEQUFDTCwrQ0FBSUE7UUFDSFEsU0FBUztRQUNUQyxnQkFBZ0I7WUFBRUMsSUFBSTtRQUFTO1FBQy9CQyxZQUFZO1lBQUVELElBQUk7UUFBUztRQUMzQkUsUUFBUTtrQkFFUiw0RUFBQ1gsZ0RBQUtBO1lBQ0pZLElBQUk7Z0JBQ0ZDLE9BQU87Z0JBQ1BGLFFBQVE7Z0JBQ1JHLFFBQVE7Z0JBQ1JDLGlCQUFpQjtnQkFDakJDLFNBQVM7Z0JBQ1RDLElBQUk7Z0JBQ0pDLFdBQVc7b0JBQ1RDLElBQUk7b0JBQ0pDLElBQ0U7Z0JBQ0o7WUFDRjs7OEJBRUEsOERBQUNuQixnREFBS0E7b0JBQUNvQixXQUFXO29CQUFVQyxLQUFLOztzQ0FDL0IsOERBQUNwQixxREFBVUE7NEJBQUNxQixTQUFROzRCQUFLWCxJQUFJO2dDQUFFWSxPQUFPO2dDQUFXQyxZQUFZO2dDQUFPWCxRQUFRO2dDQUFlWSxXQUFXOzRCQUFTOztnQ0FBRzs4Q0FBRyw4REFBQ0M7b0NBQUtDLE9BQU87d0NBQUVKLE9BQU87b0NBQVU7OENBQUc7Ozs7Ozs7Ozs7OztzQ0FFeEosOERBQUMxQixpREFBTUE7NEJBQ0xjLElBQUk7Z0NBQ0ZHLGlCQUFpQjtnQ0FDakJKLFFBQVE7Z0NBQ1JrQixVQUFVO2dDQUNWSixZQUFZO2dDQUNaWCxRQUFROzRCQUNWOzRCQUNBUyxTQUFROzRCQUNSTyxNQUFLOzRCQUNMQyxTQUFTLElBQU16QixPQUFPMEIsSUFBSSxDQUFDO3NDQUM1Qjs7Ozs7O3NDQUlELDhEQUFDbEMsaURBQU1BOzRCQUNMYyxJQUFJO2dDQUNGRyxpQkFBaUI7Z0NBQ2pCSixRQUFRO2dDQUNSa0IsVUFBVTtnQ0FDVkosWUFBWTs0QkFDZDs0QkFDQUYsU0FBUTs0QkFDUk8sTUFBSzs0QkFDTEMsU0FBUyxJQUFNekIsT0FBTzBCLElBQUksQ0FBQztzQ0FDNUI7Ozs7Ozs7Ozs7Ozs4QkFJSCw4REFBQ0M7b0JBQUlMLE9BQU87d0JBQUVkLFFBQVE7b0JBQWdCOzhCQUNwQyw0RUFBQ1oscURBQVVBO3dCQUFDcUIsU0FBUTt3QkFBUUMsT0FBTTt3QkFBVVosSUFBSTs0QkFDN0NzQixnQkFBZ0I7NEJBQWFDLFFBQU87d0JBQ3ZDO3dCQUFHSixTQUFTLElBQUl6QixPQUFPMEIsSUFBSSxDQUFDO2tDQUFNOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBSzVDLENBQUMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9lZHVzaGFyZS8uL2NvbXBvbmVudC9TaWdudXAvUm9sZVNlbGVjdGlvbi5qcz80MDA4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBSZWFjdCBmcm9tIFwicmVhY3RcIjtcclxuaW1wb3J0IHtcclxuICBCdXR0b24sXHJcbiAgR3JpZCxcclxuICBQYXBlcixcclxuICBTdGFjayxcclxuICBUeXBvZ3JhcGh5LFxyXG4gIExpbmtcclxufSBmcm9tIFwiQG11aS9tYXRlcmlhbFwiO1xyXG5pbXBvcnQgeyB1c2VSb3V0ZXIgfSBmcm9tICduZXh0L3JvdXRlcic7XHJcblxyXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBSb2xlU2VsZWN0aW9uKCkge1xyXG4gIGNvbnN0IHJvdXRlciA9IHVzZVJvdXRlcigpO1xyXG5cclxuICByZXR1cm4gKFxyXG4gICAgPEdyaWRcclxuICAgICAgY29udGFpbmVyXHJcbiAgICAgIGp1c3RpZnlDb250ZW50PXt7IHNtOiBcImNlbnRlclwiIH19XHJcbiAgICAgIGFsaWduSXRlbXM9e3sgc206IFwiY2VudGVyXCIgfX1cclxuICAgICAgaGVpZ2h0PXtcIjEwMHZoXCJ9XHJcbiAgICA+XHJcbiAgICAgIDxQYXBlclxyXG4gICAgICAgIHN4PXt7XHJcbiAgICAgICAgICB3aWR0aDogXCIzMCVcIixcclxuICAgICAgICAgIGhlaWdodDogMjIwLFxyXG4gICAgICAgICAgbWFyZ2luOiBcIjAgMCAwIDEzMHB4XCIsXHJcbiAgICAgICAgICBiYWNrZ3JvdW5kQ29sb3I6IFwid2hpdGVcIixcclxuICAgICAgICAgIHBhZGRpbmc6IDUsXHJcbiAgICAgICAgICBwYjogMTAsXHJcbiAgICAgICAgICBib3hTaGFkb3c6IHtcclxuICAgICAgICAgICAgeHM6IFwibm9uZVwiLFxyXG4gICAgICAgICAgICBtZDpcclxuICAgICAgICAgICAgICBcIjBweCA0cHggNXB4IC0ycHggcmdiYSgwLDAsMCwwLjIpLDBweCA3cHggMTBweCAxcHggcmdiYSgwLDAsMCwwLjE0KSwwcHggMnB4IDE2cHggMXB4IHJnYmEoMCwwLDAsMC4xMilcIlxyXG4gICAgICAgICAgfVxyXG4gICAgICAgIH19XHJcbiAgICAgID5cclxuICAgICAgICA8U3RhY2sgZGlyZWN0aW9uPXtcImNvbHVtblwifSBnYXA9ezJ9PlxyXG4gICAgICAgICAgPFR5cG9ncmFwaHkgdmFyaWFudD0naDMnIHN4PXt7IGNvbG9yOiBcIiM0NTQ1NDVcIiwgZm9udFdlaWdodDogXCI4MDBcIiwgbWFyZ2luOiBcIjAgMCAwIC0yM3B4XCIsIHRleHRBbGlnbjogXCJjZW50ZXJcIiB9fT5FZHU8c3BhbiBzdHlsZT17eyBjb2xvcjogXCIjMUFCQzlDXCIgfX0+U2hhcmU8L3NwYW4+PC9UeXBvZ3JhcGh5PlxyXG5cclxuICAgICAgICAgIDxCdXR0b25cclxuICAgICAgICAgICAgc3g9e3tcclxuICAgICAgICAgICAgICBiYWNrZ3JvdW5kQ29sb3I6IFwiIzAwYWRiNVwiLFxyXG4gICAgICAgICAgICAgIGhlaWdodDogNDUsXHJcbiAgICAgICAgICAgICAgZm9udFNpemU6IDIyLFxyXG4gICAgICAgICAgICAgIGZvbnRXZWlnaHQ6IFwiYm9sZFwiLFxyXG4gICAgICAgICAgICAgIG1hcmdpbjogXCIyMHB4IDAgMTBweCAwXCJcclxuICAgICAgICAgICAgfX1cclxuICAgICAgICAgICAgdmFyaWFudD1cImNvbnRhaW5lZFwiXHJcbiAgICAgICAgICAgIHR5cGU9XCJzdWJtaXRcIlxyXG4gICAgICAgICAgICBvbkNsaWNrPXsoKSA9PiByb3V0ZXIucHVzaChcIi9TdHVkZW50L3JlZ2lzdHJhdGlvblwiKX1cclxuICAgICAgICAgID5cclxuICAgICAgICAgICAgU2lnbiBVcCBhcyBTdHVkZW50XHJcbiAgICAgICAgICA8L0J1dHRvbj5cclxuXHJcbiAgICAgICAgICA8QnV0dG9uXHJcbiAgICAgICAgICAgIHN4PXt7XHJcbiAgICAgICAgICAgICAgYmFja2dyb3VuZENvbG9yOiBcIiMwMGFkYjVcIixcclxuICAgICAgICAgICAgICBoZWlnaHQ6IDQ1LFxyXG4gICAgICAgICAgICAgIGZvbnRTaXplOiAyMixcclxuICAgICAgICAgICAgICBmb250V2VpZ2h0OiBcImJvbGRcIlxyXG4gICAgICAgICAgICB9fVxyXG4gICAgICAgICAgICB2YXJpYW50PVwiY29udGFpbmVkXCJcclxuICAgICAgICAgICAgdHlwZT1cInN1Ym1pdFwiXHJcbiAgICAgICAgICAgIG9uQ2xpY2s9eygpID0+IHJvdXRlci5wdXNoKFwiL0luc3RydWN0b3IvcmVnaXN0cmF0aW9uXCIpfVxyXG4gICAgICAgICAgPlxyXG4gICAgICAgICAgICBTaWduIFVwIGFzIEluc3RydWN0b3JcclxuICAgICAgICAgIDwvQnV0dG9uPlxyXG4gICAgICAgIDwvU3RhY2s+XHJcbiAgICAgICAgPGRpdiBzdHlsZT17eyBtYXJnaW46IFwiMTBweCAwIDAgMTBweFwiIH19PlxyXG4gICAgICAgICAgPFR5cG9ncmFwaHkgdmFyaWFudD1cImJvZHkyXCIgY29sb3I9XCJpbmhlcml0XCIgc3g9e3tcclxuICAgICAgICAgICAgIHRleHREZWNvcmF0aW9uOiAndW5kZXJsaW5lJywgY3Vyc29yOlwicG9pbnRlclwiXHJcbiAgICAgICAgICB9fSBvbkNsaWNrPXsoKT0+cm91dGVyLnB1c2goJy8nKX0+IEJhY2sgdG8gbG9naW4gcGFnZTwvVHlwb2dyYXBoeT5cclxuICAgICAgICA8L2Rpdj5cclxuICAgICAgPC9QYXBlcj5cclxuICAgIDwvR3JpZCA+XHJcbiAgKTtcclxufVxyXG4iXSwibmFtZXMiOlsiUmVhY3QiLCJCdXR0b24iLCJHcmlkIiwiUGFwZXIiLCJTdGFjayIsIlR5cG9ncmFwaHkiLCJMaW5rIiwidXNlUm91dGVyIiwiUm9sZVNlbGVjdGlvbiIsInJvdXRlciIsImNvbnRhaW5lciIsImp1c3RpZnlDb250ZW50Iiwic20iLCJhbGlnbkl0ZW1zIiwiaGVpZ2h0Iiwic3giLCJ3aWR0aCIsIm1hcmdpbiIsImJhY2tncm91bmRDb2xvciIsInBhZGRpbmciLCJwYiIsImJveFNoYWRvdyIsInhzIiwibWQiLCJkaXJlY3Rpb24iLCJnYXAiLCJ2YXJpYW50IiwiY29sb3IiLCJmb250V2VpZ2h0IiwidGV4dEFsaWduIiwic3BhbiIsInN0eWxlIiwiZm9udFNpemUiLCJ0eXBlIiwib25DbGljayIsInB1c2giLCJkaXYiLCJ0ZXh0RGVjb3JhdGlvbiIsImN1cnNvciJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./component/Signup/RoleSelection.js\n");
 
 /***/ }),
 
-/***/ 5692:
+/***/ "./pages/signup/register.js":
+/*!**********************************!*\
+  !*** ./pages/signup/register.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ register)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"react/jsx-dev-runtime\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @mui/material */ \"@mui/material\");\n/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_mui_material__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _component_Signup_RoleSelection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../component/Signup/RoleSelection */ \"./component/Signup/RoleSelection.js\");\n\n\n\nfunction register() {\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_1__.Paper, {\n        style: {\n            backgroundImage: `url(${\"https://i.ibb.co/6bJ0VFb/Background.jpg\"})`,\n            backgroundSize: \"cover\",\n            height: \"100vh\",\n            color: \"#f5f5f5\",\n            width: \"100vw\"\n        },\n        children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_component_Signup_RoleSelection__WEBPACK_IMPORTED_MODULE_2__[\"default\"], {}, void 0, false, {\n            fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\signup\\\\register.js\",\n            lineNumber: 18,\n            columnNumber: 7\n        }, this)\n    }, void 0, false, {\n        fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\signup\\\\register.js\",\n        lineNumber: 8,\n        columnNumber: 5\n    }, this);\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9wYWdlcy9zaWdudXAvcmVnaXN0ZXIuanMuanMiLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQUE7QUFBcUM7QUFDMkI7QUFFakQsU0FBU0UsV0FBVztJQUNqQyxxQkFHRSw4REFBQ0YsZ0RBQUtBO1FBQ0pHLE9BQU87WUFDTEMsaUJBQWlCLENBQUMsSUFBSSxFQUFFLDBDQUEwQyxDQUFDLENBQUM7WUFDcEVDLGdCQUFnQjtZQUNoQkMsUUFBUTtZQUNSQyxPQUFPO1lBQ1BDLE9BQU87UUFDVDtrQkFHQSw0RUFBQ1AsdUVBQWFBOzs7Ozs7Ozs7O0FBR3BCLENBQUMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9lZHVzaGFyZS8uL3BhZ2VzL3NpZ251cC9yZWdpc3Rlci5qcz8zZGNhIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IFBhcGVyIH0gZnJvbSBcIkBtdWkvbWF0ZXJpYWxcIlxyXG5pbXBvcnQgUm9sZVNlbGVjdGlvbiBmcm9tIFwiLi4vLi4vY29tcG9uZW50L1NpZ251cC9Sb2xlU2VsZWN0aW9uXCJcclxuXHJcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIHJlZ2lzdGVyKCkge1xyXG4gIHJldHVybiAoXHJcblxyXG5cclxuICAgIDxQYXBlclxyXG4gICAgICBzdHlsZT17e1xyXG4gICAgICAgIGJhY2tncm91bmRJbWFnZTogYHVybCgke1wiaHR0cHM6Ly9pLmliYi5jby82YkowVkZiL0JhY2tncm91bmQuanBnXCJ9KWAsXHJcbiAgICAgICAgYmFja2dyb3VuZFNpemU6IFwiY292ZXJcIixcclxuICAgICAgICBoZWlnaHQ6IFwiMTAwdmhcIixcclxuICAgICAgICBjb2xvcjogXCIjZjVmNWY1XCIsXHJcbiAgICAgICAgd2lkdGg6IFwiMTAwdndcIixcclxuICAgICAgfX1cclxuICAgID5cclxuXHJcbiAgICAgIDxSb2xlU2VsZWN0aW9uIC8+XHJcbiAgICA8L1BhcGVyPlxyXG4gIClcclxufVxyXG4iXSwibmFtZXMiOlsiUGFwZXIiLCJSb2xlU2VsZWN0aW9uIiwicmVnaXN0ZXIiLCJzdHlsZSIsImJhY2tncm91bmRJbWFnZSIsImJhY2tncm91bmRTaXplIiwiaGVpZ2h0IiwiY29sb3IiLCJ3aWR0aCJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./pages/signup/register.js\n");
+
+/***/ }),
+
+/***/ "@mui/material":
+/*!********************************!*\
+  !*** external "@mui/material" ***!
+  \********************************/
 /***/ ((module) => {
 
 module.exports = require("@mui/material");
 
 /***/ }),
 
-/***/ 1853:
+/***/ "next/router":
+/*!******************************!*\
+  !*** external "next/router" ***!
+  \******************************/
 /***/ ((module) => {
 
 module.exports = require("next/router");
 
 /***/ }),
 
-/***/ 6689:
+/***/ "react":
+/*!************************!*\
+  !*** external "react" ***!
+  \************************/
 /***/ ((module) => {
 
 module.exports = require("react");
 
 /***/ }),
 
-/***/ 997:
+/***/ "react/jsx-dev-runtime":
+/*!****************************************!*\
+  !*** external "react/jsx-dev-runtime" ***!
+  \****************************************/
 /***/ ((module) => {
 
-module.exports = require("react/jsx-runtime");
+module.exports = require("react/jsx-dev-runtime");
 
 /***/ })
 
@@ -174,7 +80,7 @@ module.exports = require("react/jsx-runtime");
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = (__webpack_exec__(4487));
+var __webpack_exports__ = (__webpack_exec__("./pages/signup/register.js"));
 module.exports = __webpack_exports__;
 
 })();

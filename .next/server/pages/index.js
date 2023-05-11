@@ -1,376 +1,142 @@
 "use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
 (() => {
 var exports = {};
-exports.id = 5405;
-exports.ids = [5405];
+exports.id = "pages/index";
+exports.ids = ["pages/index"];
 exports.modules = {
 
-/***/ 9136:
+/***/ "./Firebase/Firebase.js":
+/*!******************************!*\
+  !*** ./Firebase/Firebase.js ***!
+  \******************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Z": () => (/* binding */ App)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(997);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6689);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5692);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_mui_material__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _mui_system__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(7986);
-/* harmony import */ var _mui_system__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_mui_system__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1853);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _hooks_AuthProvider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(5242);
-/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(401);
-/* harmony import */ var _Firebase_Firebase__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(6216);
-/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(1492);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([firebase_auth__WEBPACK_IMPORTED_MODULE_6__, _Firebase_Firebase__WEBPACK_IMPORTED_MODULE_7__, firebase_firestore__WEBPACK_IMPORTED_MODULE_8__]);
-([firebase_auth__WEBPACK_IMPORTED_MODULE_6__, _Firebase_Firebase__WEBPACK_IMPORTED_MODULE_7__, firebase_firestore__WEBPACK_IMPORTED_MODULE_8__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
-
-
-
-
-
-
-
-
-
-
-function App() {
-    const router = (0,next_router__WEBPACK_IMPORTED_MODULE_4__.useRouter)();
-    const { login  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_hooks_AuthProvider__WEBPACK_IMPORTED_MODULE_5__/* .AuthContext */ .V);
-    const [loginData, setLoginData] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
-        email: "",
-        password: ""
-    });
-    const [loginError, setLoginError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
-    function handelChange(event) {
-        setLoginData((pre)=>{
-            return {
-                ...pre,
-                [event.target.name]: event.target.value
-            };
-        });
-    }
-    async function handelLogin(e) {
-        e.preventDefault();
-        const auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_6__.getAuth)(_Firebase_Firebase__WEBPACK_IMPORTED_MODULE_7__/* .app */ .l2);
-        try {
-            const userCredential = await (0,firebase_auth__WEBPACK_IMPORTED_MODULE_6__.signInWithEmailAndPassword)(auth, loginData.email, loginData.password);
-            const userId = userCredential.user.uid;
-            login(userId);
-            const db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_8__.getFirestore)(_Firebase_Firebase__WEBPACK_IMPORTED_MODULE_7__/* .app */ .l2);
-            const studentDocRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_8__.doc)(db, "Student", userId);
-            const studentDoc = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_8__.getDoc)(studentDocRef);
-            const instructorDocRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_8__.doc)(db, "Instructor", userId);
-            const instructorDoc = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_8__.getDoc)(instructorDocRef);
-            const adminDocRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_8__.doc)(db, "Admin", userId);
-            const adminDoc = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_8__.getDoc)(adminDocRef);
-            let userDoc;
-            let role;
-            if (studentDoc.exists()) {
-                userDoc = studentDoc;
-                role = "student";
-            //  router.push('/Student')
-            } else if (instructorDoc.exists()) {
-                userDoc = instructorDoc;
-                role = "instructor";
-            // router.push('/Instructor')
-            } else if (adminDoc.exists()) {
-                userDoc = adminDoc;
-                role = "admin";
-            //router.push('/Admin')
-            } else {
-                throw new Error("User not found in any role collection.");
-            }
-            const userData = userDoc.data();
-            let profileComplete;
-            if (role === "student") {
-                profileComplete = userData.displayName && userData.bio && userData.title;
-            } else if (role === "instructor") {
-                profileComplete = userData.displayName && userData.bio && userData.title;
-            } else {
-                profileComplete = true; // Assuming admins don't need a profile completeness check
-            }
-            if (!profileComplete) {
-                router.push("/createProfile");
-            } else {
-                if (role === "student") {
-                    router.push("/Student");
-                } else if (role === "instructor") {
-                    router.push("/Instructor");
-                } else {
-                    router.push("/Admin");
-                }
-            }
-            setLoginError(false);
-        } catch (error) {
-            setLoginError(true);
-        }
-    }
-    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Grid, {
-        container: true,
-        justifyContent: {
-            sm: "center"
-        },
-        alignItems: {
-            sm: "center"
-        },
-        height: "100vh",
-        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Paper, {
-            sx: {
-                width: 500,
-                height: 300,
-                backgroundColor: "white",
-                padding: 5,
-                pb: 10,
-                boxShadow: {
-                    xs: "none",
-                    md: "0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)"
-                }
-            },
-            children: [
-                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Stack, {
-                    direction: "column",
-                    gap: 2,
-                    children: [
-                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Typography, {
-                            variant: "h3",
-                            sx: {
-                                color: "#454545",
-                                fontWeight: "800",
-                                margin: "0 0 0 -23px",
-                                textAlign: "center"
-                            },
-                            children: [
-                                "Edu",
-                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                    style: {
-                                        color: "#1ABC9C"
-                                    },
-                                    children: "Share"
-                                })
-                            ]
-                        }),
-                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("form", {
-                            style: {
-                                display: "flex",
-                                flexDirection: "column",
-                                margin: "10px 10px 10px 10px"
-                            },
-                            onSubmit: handelLogin,
-                            children: [
-                                loginError && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Alert, {
-                                    severity: "error",
-                                    sx: {
-                                        width: "85%",
-                                        margin: "0 0 0 16px"
-                                    },
-                                    children: "Email or Password is Wrong !"
-                                }),
-                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_2__.TextField, {
-                                    id: "outlined-basic",
-                                    label: "Enter Email",
-                                    variant: "outlined",
-                                    name: "email",
-                                    onChange: handelChange,
-                                    sx: {
-                                        margin: "10px 10px 10px 10px"
-                                    }
-                                }),
-                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_2__.TextField, {
-                                    id: "outlined-basic",
-                                    label: "Enter Password",
-                                    variant: "outlined",
-                                    name: "password",
-                                    onChange: handelChange,
-                                    sx: {
-                                        margin: "10px 10px 10px 10px"
-                                    },
-                                    margin: "normal",
-                                    placeholder: "Password",
-                                    type: "password",
-                                    fullWidth: true
-                                }),
-                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Button, {
-                                    sx: {
-                                        backgroundColor: "#00adb5",
-                                        height: 45,
-                                        fontSize: 22,
-                                        fontWeight: "bold"
-                                    },
-                                    variant: "contained",
-                                    type: "submit",
-                                    onClick: handelLogin,
-                                    children: "Login"
-                                })
-                            ]
-                        })
-                    ]
-                }),
-                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Link, {
-                    href: "/signup/register",
-                    variant: "body2",
-                    color: "inherit",
-                    children: " Don't have an account? Register"
-                })
-            ]
-        })
-    });
-}
-
-__webpack_async_result__();
-} catch(e) { __webpack_async_result__(e); } });
+eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"app\": () => (/* binding */ app),\n/* harmony export */   \"auth\": () => (/* binding */ auth),\n/* harmony export */   \"collection\": () => (/* reexport safe */ firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection),\n/* harmony export */   \"db\": () => (/* binding */ db),\n/* harmony export */   \"getFirestoreTimestamp\": () => (/* binding */ getFirestoreTimestamp),\n/* harmony export */   \"storage\": () => (/* binding */ storage)\n/* harmony export */ });\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"firebase/app\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/firestore */ \"firebase/firestore\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/auth */ \"firebase/auth\");\n/* harmony import */ var firebase_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/storage */ \"firebase/storage\");\nvar __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([firebase_app__WEBPACK_IMPORTED_MODULE_0__, firebase_firestore__WEBPACK_IMPORTED_MODULE_1__, firebase_auth__WEBPACK_IMPORTED_MODULE_2__, firebase_storage__WEBPACK_IMPORTED_MODULE_3__]);\n([firebase_app__WEBPACK_IMPORTED_MODULE_0__, firebase_firestore__WEBPACK_IMPORTED_MODULE_1__, firebase_auth__WEBPACK_IMPORTED_MODULE_2__, firebase_storage__WEBPACK_IMPORTED_MODULE_3__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);\n\n\n\n // Import the storage module\n\nconst firebaseConfig = {\n    apiKey: \"AIzaSyC-ZYyj3mpgKszGlMQmETjBuBCqzYGFDh4\",\n    authDomain: \"edushare-e9242.firebaseapp.com\",\n    projectId: \"edushare-e9242\",\n    storageBucket: \"edushare-e9242.appspot.com\",\n    messagingSenderId: \"826723606155\",\n    appId: \"1:826723606155:web:4ef2868e093bc281523e8e\",\n    measurementId: \"G-BGCNB10FJ0\"\n};\n// Initialize Firebase\nconst app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(app);\nconst auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_2__.getAuth)(app);\nconst storage = (0,firebase_storage__WEBPACK_IMPORTED_MODULE_3__.getStorage)(app); // Get the storage instance\nconst getFirestoreTimestamp = ()=>{\n    return (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.serverTimestamp)();\n};\n\n\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } });//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9GaXJlYmFzZS9GaXJlYmFzZS5qcy5qcyIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7O0FBQTZDO0FBQ2lCO0FBQ3RCO0FBQ00sQ0FBQyw0QkFBNEI7QUFDdEI7QUFDckQsTUFBTU0saUJBQWlCO0lBQ3JCQyxRQUFRO0lBQ1JDLFlBQVk7SUFDWkMsV0FBVztJQUNYQyxlQUFlO0lBQ2ZDLG1CQUFtQjtJQUNuQkMsT0FBTztJQUNQQyxlQUFlO0FBQ2pCO0FBRUEsc0JBQXNCO0FBQ3RCLE1BQU1DLE1BQU1kLDJEQUFhQSxDQUFDTTtBQUMxQixNQUFNUyxLQUFLZCxnRUFBWUEsQ0FBQ2E7QUFDeEIsTUFBTUUsT0FBT2Isc0RBQU9BLENBQUNXO0FBQ3JCLE1BQU1HLFVBQVViLDREQUFVQSxDQUFDVSxNQUFNLDJCQUEyQjtBQUVyRCxNQUFNSSx3QkFBd0IsSUFBTTtJQUN6QyxPQUFPYixtRUFBZUE7QUFDeEIsRUFBRTtBQUUyQyIsInNvdXJjZXMiOlsid2VicGFjazovL2VkdXNoYXJlLy4vRmlyZWJhc2UvRmlyZWJhc2UuanM/MzAwNiJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBpbml0aWFsaXplQXBwIH0gZnJvbSAnZmlyZWJhc2UvYXBwJztcclxuaW1wb3J0IHsgZ2V0RmlyZXN0b3JlLCBjb2xsZWN0aW9uIH0gZnJvbSAnZmlyZWJhc2UvZmlyZXN0b3JlJztcclxuaW1wb3J0IHsgZ2V0QXV0aCB9IGZyb20gJ2ZpcmViYXNlL2F1dGgnO1xyXG5pbXBvcnQgeyBnZXRTdG9yYWdlIH0gZnJvbSAnZmlyZWJhc2Uvc3RvcmFnZSc7IC8vIEltcG9ydCB0aGUgc3RvcmFnZSBtb2R1bGVcclxuaW1wb3J0IHsgc2VydmVyVGltZXN0YW1wIH0gZnJvbSAnZmlyZWJhc2UvZmlyZXN0b3JlJztcclxuY29uc3QgZmlyZWJhc2VDb25maWcgPSB7XHJcbiAgYXBpS2V5OiBcIkFJemFTeUMtWll5ajNtcGdLc3pHbE1RbUVUakJ1QkNxellHRkRoNFwiLFxyXG4gIGF1dGhEb21haW46IFwiZWR1c2hhcmUtZTkyNDIuZmlyZWJhc2VhcHAuY29tXCIsXHJcbiAgcHJvamVjdElkOiBcImVkdXNoYXJlLWU5MjQyXCIsXHJcbiAgc3RvcmFnZUJ1Y2tldDogXCJlZHVzaGFyZS1lOTI0Mi5hcHBzcG90LmNvbVwiLFxyXG4gIG1lc3NhZ2luZ1NlbmRlcklkOiBcIjgyNjcyMzYwNjE1NVwiLFxyXG4gIGFwcElkOiBcIjE6ODI2NzIzNjA2MTU1OndlYjo0ZWYyODY4ZTA5M2JjMjgxNTIzZThlXCIsXHJcbiAgbWVhc3VyZW1lbnRJZDogXCJHLUJHQ05CMTBGSjBcIlxyXG59O1xyXG5cclxuLy8gSW5pdGlhbGl6ZSBGaXJlYmFzZVxyXG5jb25zdCBhcHAgPSBpbml0aWFsaXplQXBwKGZpcmViYXNlQ29uZmlnKTtcclxuY29uc3QgZGIgPSBnZXRGaXJlc3RvcmUoYXBwKTtcclxuY29uc3QgYXV0aCA9IGdldEF1dGgoYXBwKTtcclxuY29uc3Qgc3RvcmFnZSA9IGdldFN0b3JhZ2UoYXBwKTsgLy8gR2V0IHRoZSBzdG9yYWdlIGluc3RhbmNlXHJcblxyXG5leHBvcnQgY29uc3QgZ2V0RmlyZXN0b3JlVGltZXN0YW1wID0gKCkgPT4ge1xyXG4gIHJldHVybiBzZXJ2ZXJUaW1lc3RhbXAoKTtcclxufTtcclxuXHJcbmV4cG9ydCB7IGFwcCwgZGIsIGF1dGgsc3RvcmFnZSwgY29sbGVjdGlvbiB9O1xyXG4iXSwibmFtZXMiOlsiaW5pdGlhbGl6ZUFwcCIsImdldEZpcmVzdG9yZSIsImNvbGxlY3Rpb24iLCJnZXRBdXRoIiwiZ2V0U3RvcmFnZSIsInNlcnZlclRpbWVzdGFtcCIsImZpcmViYXNlQ29uZmlnIiwiYXBpS2V5IiwiYXV0aERvbWFpbiIsInByb2plY3RJZCIsInN0b3JhZ2VCdWNrZXQiLCJtZXNzYWdpbmdTZW5kZXJJZCIsImFwcElkIiwibWVhc3VyZW1lbnRJZCIsImFwcCIsImRiIiwiYXV0aCIsInN0b3JhZ2UiLCJnZXRGaXJlc3RvcmVUaW1lc3RhbXAiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./Firebase/Firebase.js\n");
 
 /***/ }),
 
-/***/ 5242:
+/***/ "./component/Login.js":
+/*!****************************!*\
+  !*** ./component/Login.js ***!
+  \****************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ App)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"react/jsx-dev-runtime\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material */ \"@mui/material\");\n/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_mui_material__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _mui_system__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/system */ \"@mui/system\");\n/* harmony import */ var _mui_system__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_mui_system__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! next/router */ \"next/router\");\n/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var _hooks_AuthProvider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../hooks/AuthProvider */ \"./hooks/AuthProvider.js\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! firebase/auth */ \"firebase/auth\");\n/* harmony import */ var _Firebase_Firebase__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Firebase/Firebase */ \"./Firebase/Firebase.js\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! firebase/firestore */ \"firebase/firestore\");\nvar __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([firebase_auth__WEBPACK_IMPORTED_MODULE_6__, _Firebase_Firebase__WEBPACK_IMPORTED_MODULE_7__, firebase_firestore__WEBPACK_IMPORTED_MODULE_8__]);\n([firebase_auth__WEBPACK_IMPORTED_MODULE_6__, _Firebase_Firebase__WEBPACK_IMPORTED_MODULE_7__, firebase_firestore__WEBPACK_IMPORTED_MODULE_8__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);\n\n\n\n\n\n\n\n\n\n\nfunction App() {\n    const router = (0,next_router__WEBPACK_IMPORTED_MODULE_4__.useRouter)();\n    const { login  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_hooks_AuthProvider__WEBPACK_IMPORTED_MODULE_5__.AuthContext);\n    const [loginData, setLoginData] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({\n        email: \"\",\n        password: \"\"\n    });\n    const [loginError, setLoginError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);\n    function handelChange(event) {\n        setLoginData((pre)=>{\n            return {\n                ...pre,\n                [event.target.name]: event.target.value\n            };\n        });\n    }\n    async function handelLogin(e) {\n        e.preventDefault();\n        const auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_6__.getAuth)(_Firebase_Firebase__WEBPACK_IMPORTED_MODULE_7__.app);\n        try {\n            const userCredential = await (0,firebase_auth__WEBPACK_IMPORTED_MODULE_6__.signInWithEmailAndPassword)(auth, loginData.email, loginData.password);\n            const userId = userCredential.user.uid;\n            login(userId);\n            const db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_8__.getFirestore)(_Firebase_Firebase__WEBPACK_IMPORTED_MODULE_7__.app);\n            const studentDocRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_8__.doc)(db, \"Student\", userId);\n            const studentDoc = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_8__.getDoc)(studentDocRef);\n            const instructorDocRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_8__.doc)(db, \"Instructor\", userId);\n            const instructorDoc = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_8__.getDoc)(instructorDocRef);\n            const adminDocRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_8__.doc)(db, \"Admin\", userId);\n            const adminDoc = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_8__.getDoc)(adminDocRef);\n            let userDoc;\n            let role;\n            if (studentDoc.exists()) {\n                userDoc = studentDoc;\n                role = \"student\";\n            //  router.push('/Student')\n            } else if (instructorDoc.exists()) {\n                userDoc = instructorDoc;\n                role = \"instructor\";\n            // router.push('/Instructor')\n            } else if (adminDoc.exists()) {\n                userDoc = adminDoc;\n                role = \"admin\";\n            //router.push('/Admin')\n            } else {\n                throw new Error(\"User not found in any role collection.\");\n            }\n            const userData = userDoc.data();\n            let profileComplete;\n            if (role === \"student\") {\n                profileComplete = userData.displayName && userData.bio && userData.title;\n            } else if (role === \"instructor\") {\n                profileComplete = userData.displayName && userData.bio && userData.title;\n            } else {\n                profileComplete = true; // Assuming admins don't need a profile completeness check\n            }\n            if (!profileComplete) {\n                router.push(\"/createProfile\");\n            } else {\n                if (role === \"student\") {\n                    router.push(\"/Student\");\n                } else if (role === \"instructor\") {\n                    router.push(\"/Instructor\");\n                } else {\n                    router.push(\"/Admin\");\n                }\n            }\n            setLoginError(false);\n        } catch (error) {\n            setLoginError(true);\n        }\n    }\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Grid, {\n        container: true,\n        justifyContent: {\n            sm: \"center\"\n        },\n        alignItems: {\n            sm: \"center\"\n        },\n        height: \"100vh\",\n        children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Paper, {\n            sx: {\n                width: 500,\n                height: 300,\n                backgroundColor: \"white\",\n                padding: 5,\n                pb: 10,\n                boxShadow: {\n                    xs: \"none\",\n                    md: \"0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)\"\n                }\n            },\n            children: [\n                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Stack, {\n                    direction: \"column\",\n                    gap: 2,\n                    children: [\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Typography, {\n                            variant: \"h3\",\n                            sx: {\n                                color: \"#454545\",\n                                fontWeight: \"800\",\n                                margin: \"0 0 0 -23px\",\n                                textAlign: \"center\"\n                            },\n                            children: [\n                                \"Edu\",\n                                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"span\", {\n                                    style: {\n                                        color: \"#1ABC9C\"\n                                    },\n                                    children: \"Share\"\n                                }, void 0, false, {\n                                    fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\component\\\\Login.js\",\n                                    lineNumber: 135,\n                                    columnNumber: 128\n                                }, this)\n                            ]\n                        }, void 0, true, {\n                            fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\component\\\\Login.js\",\n                            lineNumber: 135,\n                            columnNumber: 11\n                        }, this),\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"form\", {\n                            style: {\n                                display: \"flex\",\n                                flexDirection: \"column\",\n                                margin: \"10px 10px 10px 10px\"\n                            },\n                            onSubmit: handelLogin,\n                            children: [\n                                loginError && /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Alert, {\n                                    severity: \"error\",\n                                    sx: {\n                                        width: \"85%\",\n                                        margin: \"0 0 0 16px\"\n                                    },\n                                    children: \"Email or Password is Wrong !\"\n                                }, void 0, false, {\n                                    fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\component\\\\Login.js\",\n                                    lineNumber: 140,\n                                    columnNumber: 28\n                                }, this),\n                                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.TextField, {\n                                    id: \"outlined-basic\",\n                                    label: \"Enter Email\",\n                                    variant: \"outlined\",\n                                    name: \"email\",\n                                    onChange: handelChange,\n                                    sx: {\n                                        margin: \"10px 10px 10px 10px\"\n                                    }\n                                }, void 0, false, {\n                                    fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\component\\\\Login.js\",\n                                    lineNumber: 141,\n                                    columnNumber: 13\n                                }, this),\n                                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.TextField, {\n                                    id: \"outlined-basic\",\n                                    label: \"Enter Password\",\n                                    variant: \"outlined\",\n                                    name: \"password\",\n                                    onChange: handelChange,\n                                    sx: {\n                                        margin: \"10px 10px 10px 10px\"\n                                    },\n                                    margin: \"normal\",\n                                    placeholder: \"Password\",\n                                    type: \"password\",\n                                    fullWidth: true\n                                }, void 0, false, {\n                                    fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\component\\\\Login.js\",\n                                    lineNumber: 151,\n                                    columnNumber: 13\n                                }, this),\n                                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Button, {\n                                    sx: {\n                                        backgroundColor: \"#00adb5\",\n                                        height: 45,\n                                        fontSize: 22,\n                                        fontWeight: \"bold\"\n                                    },\n                                    variant: \"contained\",\n                                    type: \"submit\",\n                                    onClick: handelLogin,\n                                    children: \"Login\"\n                                }, void 0, false, {\n                                    fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\component\\\\Login.js\",\n                                    lineNumber: 163,\n                                    columnNumber: 13\n                                }, this)\n                            ]\n                        }, void 0, true, {\n                            fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\component\\\\Login.js\",\n                            lineNumber: 136,\n                            columnNumber: 11\n                        }, this)\n                    ]\n                }, void 0, true, {\n                    fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\component\\\\Login.js\",\n                    lineNumber: 134,\n                    columnNumber: 9\n                }, this),\n                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Typography, {\n                    variant: \"body2\",\n                    color: \"inherit\",\n                    sx: {\n                        textDecoration: \"underline\",\n                        cursor: \"pointer\"\n                    },\n                    onClick: ()=>router.push(\"signup/register\"),\n                    children: \"Don't have an account? Register\"\n                }, void 0, false, {\n                    fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\component\\\\Login.js\",\n                    lineNumber: 180,\n                    columnNumber: 9\n                }, this)\n            ]\n        }, void 0, true, {\n            fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\component\\\\Login.js\",\n            lineNumber: 120,\n            columnNumber: 7\n        }, this)\n    }, void 0, false, {\n        fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\component\\\\Login.js\",\n        lineNumber: 114,\n        columnNumber: 5\n    }, this);\n}\n\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } });//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,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NUMsTUFBSztvQ0FDTDBELFVBQVU5RDtvQ0FDVnNDLElBQUk7d0NBQUVhLFFBQVE7b0NBQXNCO29DQUNwQ0EsUUFBTztvQ0FDUFksYUFBWTtvQ0FDWkMsTUFBSztvQ0FDTEMsU0FBUzs7Ozs7OzhDQUVYLDhEQUFDN0YsaURBQU1BO29DQUNMa0UsSUFBSTt3Q0FDRkUsaUJBQWlCO3dDQUNqQkgsUUFBUTt3Q0FDUjZCLFVBQVU7d0NBQ1ZoQixZQUFZO29DQUNkO29DQUNBRixTQUFRO29DQUNSZ0IsTUFBSztvQ0FDTEcsU0FBUzdEOzhDQUNWOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OEJBT0wsOERBQUM3QixxREFBVUE7b0JBQUN1RSxTQUFRO29CQUFRQyxPQUFNO29CQUFVWCxJQUFJO3dCQUMzQzhCLGdCQUFnQjt3QkFBYUMsUUFBTztvQkFDdkM7b0JBQUdGLFNBQVMsSUFBSTNFLE9BQU91QyxJQUFJLENBQUM7OEJBQW9COzs7Ozs7Ozs7Ozs7Ozs7OztBQUkxRCxDQUFDIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vZWR1c2hhcmUvLi9jb21wb25lbnQvTG9naW4uanM/MTMzMCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUmVhY3QsIHsgdXNlU3RhdGUgfSBmcm9tIFwicmVhY3RcIjtcclxuaW1wb3J0IHtcclxuICBCdXR0b24sXHJcbiAgR3JpZCxcclxuICBQYXBlcixcclxuICBTdGFjayxcclxuICBUZXh0RmllbGQsXHJcbiAgVHlwb2dyYXBoeSxcclxuICBMaW5rLFxyXG4gIEFsZXJ0LFxyXG4gIFxyXG59IGZyb20gXCJAbXVpL21hdGVyaWFsXCI7XHJcbmltcG9ydCB7IEJveCB9IGZyb20gXCJAbXVpL3N5c3RlbVwiO1xyXG5pbXBvcnQgUm91dGVyLCB7IHVzZVJvdXRlciB9IGZyb20gXCJuZXh0L3JvdXRlclwiO1xyXG5pbXBvcnQgeyB1c2VDb250ZXh0IH0gZnJvbSBcInJlYWN0XCI7XHJcbmltcG9ydCB7IEF1dGhDb250ZXh0IH0gZnJvbSBcIi4uL2hvb2tzL0F1dGhQcm92aWRlclwiO1xyXG5pbXBvcnQgeyBnZXRBdXRoLCBzaWduSW5XaXRoRW1haWxBbmRQYXNzd29yZCB9IGZyb20gXCJmaXJlYmFzZS9hdXRoXCI7XHJcbmltcG9ydCB7IGFwcCB9IGZyb20gXCIuLi9GaXJlYmFzZS9GaXJlYmFzZVwiO1xyXG5pbXBvcnQgeyBnZXRGaXJlc3RvcmUsIGRvYywgZ2V0RG9jIH0gZnJvbSBcImZpcmViYXNlL2ZpcmVzdG9yZVwiO1xyXG5cclxuXHJcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIEFwcCgpIHtcclxuICBjb25zdCByb3V0ZXIgPSB1c2VSb3V0ZXIoKTtcclxuICBjb25zdCB7IGxvZ2luIH0gPSB1c2VDb250ZXh0KEF1dGhDb250ZXh0KTtcclxuXHJcbiAgY29uc3QgW2xvZ2luRGF0YSwgc2V0TG9naW5EYXRhXSA9IHVzZVN0YXRlKHtcclxuICAgIGVtYWlsOiBcIlwiLFxyXG4gICAgcGFzc3dvcmQ6IFwiXCIsXHJcbiAgfSk7XHJcblxyXG4gIGNvbnN0IFtsb2dpbkVycm9yLCBzZXRMb2dpbkVycm9yXSA9IHVzZVN0YXRlKGZhbHNlKTtcclxuXHJcbiAgZnVuY3Rpb24gaGFuZGVsQ2hhbmdlKGV2ZW50KSB7XHJcbiAgICBzZXRMb2dpbkRhdGEoKHByZSkgPT4ge1xyXG4gICAgICByZXR1cm4ge1xyXG4gICAgICAgIC4uLnByZSxcclxuICAgICAgICBbZXZlbnQudGFyZ2V0Lm5hbWVdOiBldmVudC50YXJnZXQudmFsdWUsXHJcbiAgICAgIH07XHJcbiAgICB9KTtcclxuICB9XHJcblxyXG4gIGFzeW5jIGZ1bmN0aW9uIGhhbmRlbExvZ2luKGUpIHtcclxuICAgIGUucHJldmVudERlZmF1bHQoKTtcclxuICAgIGNvbnN0IGF1dGggPSBnZXRBdXRoKGFwcCk7XHJcbiAgICB0cnkge1xyXG4gICAgICBjb25zdCB1c2VyQ3JlZGVudGlhbCA9IGF3YWl0IHNpZ25JbldpdGhFbWFpbEFuZFBhc3N3b3JkKFxyXG4gICAgICAgIGF1dGgsXHJcbiAgICAgICAgbG9naW5EYXRhLmVtYWlsLFxyXG4gICAgICAgIGxvZ2luRGF0YS5wYXNzd29yZFxyXG4gICAgICApO1xyXG4gICAgICBjb25zdCB1c2VySWQgPSB1c2VyQ3JlZGVudGlhbC51c2VyLnVpZDtcclxuICAgICAgbG9naW4odXNlcklkKTtcclxuXHJcbiAgICAgIGNvbnN0IGRiID0gZ2V0RmlyZXN0b3JlKGFwcCk7XHJcblxyXG4gICAgICBjb25zdCBzdHVkZW50RG9jUmVmID0gZG9jKGRiLCBcIlN0dWRlbnRcIiwgdXNlcklkKTtcclxuICAgICAgY29uc3Qgc3R1ZGVudERvYyA9IGF3YWl0IGdldERvYyhzdHVkZW50RG9jUmVmKTtcclxuXHJcbiAgICAgIGNvbnN0IGluc3RydWN0b3JEb2NSZWYgPSBkb2MoZGIsIFwiSW5zdHJ1Y3RvclwiLCB1c2VySWQpO1xyXG4gICAgICBjb25zdCBpbnN0cnVjdG9yRG9jID0gYXdhaXQgZ2V0RG9jKGluc3RydWN0b3JEb2NSZWYpO1xyXG5cclxuICAgICAgY29uc3QgYWRtaW5Eb2NSZWYgPSBkb2MoZGIsIFwiQWRtaW5cIiwgdXNlcklkKTtcclxuICAgICAgY29uc3QgYWRtaW5Eb2MgPSBhd2FpdCBnZXREb2MoYWRtaW5Eb2NSZWYpO1xyXG5cclxuICAgICAgbGV0IHVzZXJEb2M7XHJcbiAgICAgIGxldCByb2xlO1xyXG5cclxuICAgICAgaWYgKHN0dWRlbnREb2MuZXhpc3RzKCkpIHtcclxuICAgICAgICB1c2VyRG9jID0gc3R1ZGVudERvYztcclxuICAgICAgICByb2xlID0gXCJzdHVkZW50XCI7XHJcbiAgICAgICAgLy8gIHJvdXRlci5wdXNoKCcvU3R1ZGVudCcpXHJcbiAgICAgIH0gZWxzZSBpZiAoaW5zdHJ1Y3RvckRvYy5leGlzdHMoKSkge1xyXG4gICAgICAgIHVzZXJEb2MgPSBpbnN0cnVjdG9yRG9jO1xyXG4gICAgICAgIHJvbGUgPSBcImluc3RydWN0b3JcIjtcclxuICAgICAgICAvLyByb3V0ZXIucHVzaCgnL0luc3RydWN0b3InKVxyXG5cclxuICAgICAgfSBlbHNlIGlmIChhZG1pbkRvYy5leGlzdHMoKSkge1xyXG4gICAgICAgIHVzZXJEb2MgPSBhZG1pbkRvYztcclxuICAgICAgICByb2xlID0gXCJhZG1pblwiO1xyXG4gICAgICAgIC8vcm91dGVyLnB1c2goJy9BZG1pbicpXHJcbiAgICAgIH0gZWxzZSB7XHJcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKFwiVXNlciBub3QgZm91bmQgaW4gYW55IHJvbGUgY29sbGVjdGlvbi5cIik7XHJcbiAgICAgIH1cclxuXHJcbiAgICAgIGNvbnN0IHVzZXJEYXRhID0gdXNlckRvYy5kYXRhKCk7XHJcbiAgICAgIGxldCBwcm9maWxlQ29tcGxldGU7XHJcblxyXG4gICAgICBpZiAocm9sZSA9PT0gXCJzdHVkZW50XCIpIHtcclxuICAgICAgICBwcm9maWxlQ29tcGxldGUgPSB1c2VyRGF0YS5kaXNwbGF5TmFtZSAmJiB1c2VyRGF0YS5iaW8gJiYgdXNlckRhdGEudGl0bGU7XHJcbiAgICAgIH0gZWxzZSBpZiAocm9sZSA9PT0gXCJpbnN0cnVjdG9yXCIpIHtcclxuICAgICAgICBwcm9maWxlQ29tcGxldGUgPSB1c2VyRGF0YS5kaXNwbGF5TmFtZSAmJiB1c2VyRGF0YS5iaW8gJiYgdXNlckRhdGEudGl0bGU7XHJcbiAgICAgIH0gZWxzZSB7XHJcbiAgICAgICAgcHJvZmlsZUNvbXBsZXRlID0gdHJ1ZTsgLy8gQXNzdW1pbmcgYWRtaW5zIGRvbid0IG5lZWQgYSBwcm9maWxlIGNvbXBsZXRlbmVzcyBjaGVja1xyXG4gICAgICB9XHJcblxyXG4gICAgICBpZiAoIXByb2ZpbGVDb21wbGV0ZSkge1xyXG4gICAgICAgIHJvdXRlci5wdXNoKFwiL2NyZWF0ZVByb2ZpbGVcIik7XHJcbiAgICAgIH0gZWxzZSB7XHJcbiAgICAgICAgaWYgKHJvbGUgPT09IFwic3R1ZGVudFwiKSB7XHJcbiAgICAgICAgICByb3V0ZXIucHVzaChcIi9TdHVkZW50XCIpO1xyXG4gICAgICAgIH0gZWxzZSBpZiAocm9sZSA9PT0gXCJpbnN0cnVjdG9yXCIpIHtcclxuICAgICAgICAgIHJvdXRlci5wdXNoKFwiL0luc3RydWN0b3JcIik7XHJcbiAgICAgICAgfSBlbHNlIHtcclxuICAgICAgICAgIHJvdXRlci5wdXNoKFwiL0FkbWluXCIpO1xyXG4gICAgICAgIH1cclxuICAgICAgfVxyXG5cclxuICAgICAgc2V0TG9naW5FcnJvcihmYWxzZSk7XHJcbiAgICB9IGNhdGNoIChlcnJvcikge1xyXG4gICAgICBzZXRMb2dpbkVycm9yKHRydWUpO1xyXG4gICAgfVxyXG4gIH1cclxuICByZXR1cm4gKFxyXG4gICAgPEdyaWRcclxuICAgICAgY29udGFpbmVyXHJcbiAgICAgIGp1c3RpZnlDb250ZW50PXt7IHNtOiBcImNlbnRlclwiIH19XHJcbiAgICAgIGFsaWduSXRlbXM9e3sgc206IFwiY2VudGVyXCIgfX1cclxuICAgICAgaGVpZ2h0PXtcIjEwMHZoXCJ9XHJcbiAgICA+XHJcbiAgICAgIDxQYXBlclxyXG4gICAgICAgIHN4PXt7XHJcbiAgICAgICAgICB3aWR0aDogNTAwLFxyXG4gICAgICAgICAgaGVpZ2h0OiAzMDAsXHJcbiAgICAgICAgICBiYWNrZ3JvdW5kQ29sb3I6IFwid2hpdGVcIixcclxuICAgICAgICAgIHBhZGRpbmc6IDUsXHJcbiAgICAgICAgICBwYjogMTAsXHJcbiAgICAgICAgICBib3hTaGFkb3c6IHtcclxuICAgICAgICAgICAgeHM6IFwibm9uZVwiLFxyXG4gICAgICAgICAgICBtZDpcclxuICAgICAgICAgICAgICBcIjBweCA0cHggNXB4IC0ycHggcmdiYSgwLDAsMCwwLjIpLDBweCA3cHggMTBweCAxcHggcmdiYSgwLDAsMCwwLjE0KSwwcHggMnB4IDE2cHggMXB4IHJnYmEoMCwwLDAsMC4xMilcIlxyXG4gICAgICAgICAgfVxyXG4gICAgICAgIH19XHJcbiAgICAgID5cclxuICAgICAgICA8U3RhY2sgZGlyZWN0aW9uPXtcImNvbHVtblwifSBnYXA9ezJ9PlxyXG4gICAgICAgICAgPFR5cG9ncmFwaHkgdmFyaWFudD0naDMnIHN4PXt7IGNvbG9yOiBcIiM0NTQ1NDVcIiwgZm9udFdlaWdodDogXCI4MDBcIiwgbWFyZ2luOiBcIjAgMCAwIC0yM3B4XCIsIHRleHRBbGlnbjogXCJjZW50ZXJcIiB9fT5FZHU8c3BhbiBzdHlsZT17eyBjb2xvcjogXCIjMUFCQzlDXCIgfX0+U2hhcmU8L3NwYW4+PC9UeXBvZ3JhcGh5PlxyXG4gICAgICAgICAgPGZvcm0gc3R5bGU9e3tcclxuICAgICAgICAgICAgZGlzcGxheTogXCJmbGV4XCIsIGZsZXhEaXJlY3Rpb246IFwiY29sdW1uXCIsIG1hcmdpbjogXCIxMHB4IDEwcHggMTBweCAxMHB4XCJcclxuICAgICAgICAgIH19IG9uU3VibWl0PXtoYW5kZWxMb2dpbn0+XHJcblxyXG4gICAgICAgICAgICB7bG9naW5FcnJvciAmJiA8QWxlcnQgc2V2ZXJpdHk9XCJlcnJvclwiIHN4PXt7IHdpZHRoOiBcIjg1JVwiLCBtYXJnaW46IFwiMCAwIDAgMTZweFwiIH19PkVtYWlsIG9yIFBhc3N3b3JkIGlzIFdyb25nICE8L0FsZXJ0Pn1cclxuICAgICAgICAgICAgPFRleHRGaWVsZFxyXG4gICAgICAgICAgICAgIGlkPVwib3V0bGluZWQtYmFzaWNcIlxyXG4gICAgICAgICAgICAgIGxhYmVsPVwiRW50ZXIgRW1haWxcIlxyXG4gICAgICAgICAgICAgIHZhcmlhbnQ9XCJvdXRsaW5lZFwiXHJcbiAgICAgICAgICAgICAgbmFtZT1cImVtYWlsXCJcclxuICAgICAgICAgICAgICBvbkNoYW5nZT17aGFuZGVsQ2hhbmdlfVxyXG4gICAgICAgICAgICAgIHN4PXt7IG1hcmdpbjogXCIxMHB4IDEwcHggMTBweCAxMHB4XCIgfX1cclxuXHJcblxyXG4gICAgICAgICAgICAvPlxyXG4gICAgICAgICAgICA8VGV4dEZpZWxkXHJcbiAgICAgICAgICAgICAgaWQ9XCJvdXRsaW5lZC1iYXNpY1wiXHJcbiAgICAgICAgICAgICAgbGFiZWw9XCJFbnRlciBQYXNzd29yZFwiXHJcbiAgICAgICAgICAgICAgdmFyaWFudD1cIm91dGxpbmVkXCJcclxuICAgICAgICAgICAgICBuYW1lPVwicGFzc3dvcmRcIlxyXG4gICAgICAgICAgICAgIG9uQ2hhbmdlPXtoYW5kZWxDaGFuZ2V9XHJcbiAgICAgICAgICAgICAgc3g9e3sgbWFyZ2luOiBcIjEwcHggMTBweCAxMHB4IDEwcHhcIiB9fVxyXG4gICAgICAgICAgICAgIG1hcmdpbj1cIm5vcm1hbFwiXHJcbiAgICAgICAgICAgICAgcGxhY2Vob2xkZXI9XCJQYXNzd29yZFwiXHJcbiAgICAgICAgICAgICAgdHlwZT1cInBhc3N3b3JkXCJcclxuICAgICAgICAgICAgICBmdWxsV2lkdGhcclxuICAgICAgICAgICAgLz5cclxuICAgICAgICAgICAgPEJ1dHRvblxyXG4gICAgICAgICAgICAgIHN4PXt7XHJcbiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kQ29sb3I6IFwiIzAwYWRiNVwiLFxyXG4gICAgICAgICAgICAgICAgaGVpZ2h0OiA0NSxcclxuICAgICAgICAgICAgICAgIGZvbnRTaXplOiAyMixcclxuICAgICAgICAgICAgICAgIGZvbnRXZWlnaHQ6IFwiYm9sZFwiXHJcbiAgICAgICAgICAgICAgfX1cclxuICAgICAgICAgICAgICB2YXJpYW50PVwiY29udGFpbmVkXCJcclxuICAgICAgICAgICAgICB0eXBlPVwic3VibWl0XCJcclxuICAgICAgICAgICAgICBvbkNsaWNrPXtoYW5kZWxMb2dpbn1cclxuICAgICAgICAgICAgPlxyXG4gICAgICAgICAgICAgIExvZ2luXHJcbiAgICAgICAgICAgIDwvQnV0dG9uPlxyXG4gICAgICAgICAgPC9mb3JtPlxyXG4gICAgICAgIDwvU3RhY2s+XHJcbiAgICAgICAgey8qIDxMaW5rIGhyZWY9XCJzaWdudXAvcmVnaXN0ZXJcIiB2YXJpYW50PVwiYm9keTJcIiBjb2xvcj1cImluaGVyaXRcIj4gRG9uJ3QgaGF2ZSBhbiBhY2NvdW50PyBSZWdpc3RlcjwvTGluaz4gKi99XHJcblxyXG4gICAgICAgIDxUeXBvZ3JhcGh5IHZhcmlhbnQ9XCJib2R5MlwiIGNvbG9yPVwiaW5oZXJpdFwiIHN4PXt7XHJcbiAgICAgICAgICAgICB0ZXh0RGVjb3JhdGlvbjogJ3VuZGVybGluZScsIGN1cnNvcjpcInBvaW50ZXJcIlxyXG4gICAgICAgICAgfX0gb25DbGljaz17KCk9PnJvdXRlci5wdXNoKCdzaWdudXAvcmVnaXN0ZXInKX0+RG9uJ3QgaGF2ZSBhbiBhY2NvdW50PyBSZWdpc3RlcjwvVHlwb2dyYXBoeT5cclxuICAgICAgPC9QYXBlcj5cclxuICAgIDwvR3JpZCA+XHJcbiAgKTtcclxufVxyXG5cclxuXHJcblxyXG4iXSwibmFtZXMiOlsiUmVhY3QiLCJ1c2VTdGF0ZSIsIkJ1dHRvbiIsIkdyaWQiLCJQYXBlciIsIlN0YWNrIiwiVGV4dEZpZWxkIiwiVHlwb2dyYXBoeSIsIkxpbmsiLCJBbGVydCIsIkJveCIsIlJvdXRlciIsInVzZVJvdXRlciIsInVzZUNvbnRleHQiLCJBdXRoQ29udGV4dCIsImdldEF1dGgiLCJzaWduSW5XaXRoRW1haWxBbmRQYXNzd29yZCIsImFwcCIsImdldEZpcmVzdG9yZSIsImRvYyIsImdldERvYyIsIkFwcCIsInJvdXRlciIsImxvZ2luIiwibG9naW5EYXRhIiwic2V0TG9naW5EYXRhIiwiZW1haWwiLCJwYXNzd29yZCIsImxvZ2luRXJyb3IiLCJzZXRMb2dpbkVycm9yIiwiaGFuZGVsQ2hhbmdlIiwiZXZlbnQiLCJwcmUiLCJ0YXJnZXQiLCJuYW1lIiwidmFsdWUiLCJoYW5kZWxMb2dpbiIsImUiLCJwcmV2ZW50RGVmYXVsdCIsImF1dGgiLCJ1c2VyQ3JlZGVudGlhbCIsInVzZXJJZCIsInVzZXIiLCJ1aWQiLCJkYiIsInN0dWRlbnREb2NSZWYiLCJzdHVkZW50RG9jIiwiaW5zdHJ1Y3RvckRvY1JlZiIsImluc3RydWN0b3JEb2MiLCJhZG1pbkRvY1JlZiIsImFkbWluRG9jIiwidXNlckRvYyIsInJvbGUiLCJleGlzdHMiLCJFcnJvciIsInVzZXJEYXRhIiwiZGF0YSIsInByb2ZpbGVDb21wbGV0ZSIsImRpc3BsYXlOYW1lIiwiYmlvIiwidGl0bGUiLCJwdXNoIiwiZXJyb3IiLCJjb250YWluZXIiLCJqdXN0aWZ5Q29udGVudCIsInNtIiwiYWxpZ25JdGVtcyIsImhlaWdodCIsInN4Iiwid2lkdGgiLCJiYWNrZ3JvdW5kQ29sb3IiLCJwYWRkaW5nIiwicGIiLCJib3hTaGFkb3ciLCJ4cyIsIm1kIiwiZGlyZWN0aW9uIiwiZ2FwIiwidmFyaWFudCIsImNvbG9yIiwiZm9udFdlaWdodCIsIm1hcmdpbiIsInRleHRBbGlnbiIsInNwYW4iLCJzdHlsZSIsImZvcm0iLCJkaXNwbGF5IiwiZmxleERpcmVjdGlvbiIsIm9uU3VibWl0Iiwic2V2ZXJpdHkiLCJpZCIsImxhYmVsIiwib25DaGFuZ2UiLCJwbGFjZWhvbGRlciIsInR5cGUiLCJmdWxsV2lkdGgiLCJmb250U2l6ZSIsIm9uQ2xpY2siLCJ0ZXh0RGVjb3JhdGlvbiIsImN1cnNvciJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./component/Login.js\n");
+
+/***/ }),
+
+/***/ "./hooks/AuthProvider.js":
+/*!*******************************!*\
+  !*** ./hooks/AuthProvider.js ***!
+  \*******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "H": () => (/* binding */ AuthProvider),
-/* harmony export */   "V": () => (/* binding */ AuthContext)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(997);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6689);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-
-
-const AuthContext = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.createContext)();
-const AuthProvider = ({ children  })=>{
-    const [userId, setUserId] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
-    const [currentId, setCurrentId] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
-    const login = (userId)=>{
-        setUserId(userId);
-    };
-    const logout = ()=>{
-        setUserId(null);
-    };
-    const currentIdState = (currentId)=>{
-        setCurrentId(currentId);
-    };
-    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(AuthContext.Provider, {
-        value: {
-            userId,
-            login,
-            logout,
-            currentIdState,
-            currentId
-        },
-        children: children
-    });
-};
-
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"AuthContext\": () => (/* binding */ AuthContext),\n/* harmony export */   \"AuthProvider\": () => (/* binding */ AuthProvider)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"react/jsx-dev-runtime\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n\n\nconst AuthContext = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.createContext)();\nconst AuthProvider = ({ children  })=>{\n    const [userId, setUserId] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);\n    const [currentId, setCurrentId] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);\n    const login = (userId)=>{\n        setUserId(userId);\n    };\n    const logout = ()=>{\n        setUserId(null);\n    };\n    const currentIdState = (currentId)=>{\n        setCurrentId(currentId);\n    };\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(AuthContext.Provider, {\n        value: {\n            userId,\n            login,\n            logout,\n            currentIdState,\n            currentId\n        },\n        children: children\n    }, void 0, false, {\n        fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\hooks\\\\AuthProvider.js\",\n        lineNumber: 21,\n        columnNumber: 5\n    }, undefined);\n};\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9ob29rcy9BdXRoUHJvdmlkZXIuanMuanMiLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQUE7QUFBZ0Q7QUFFekMsTUFBTUUsNEJBQWNGLG9EQUFhQSxHQUFHO0FBRXBDLE1BQU1HLGVBQWUsQ0FBQyxFQUFFQyxTQUFRLEVBQUUsR0FBSztJQUM1QyxNQUFNLENBQUNDLFFBQVFDLFVBQVUsR0FBR0wsK0NBQVFBLENBQUMsSUFBSTtJQUN6QyxNQUFNLENBQUNNLFdBQVdDLGFBQWEsR0FBR1AsK0NBQVFBLENBQUMsSUFBSTtJQUUvQyxNQUFNUSxRQUFRLENBQUNKLFNBQVc7UUFDeEJDLFVBQVVEO0lBQ1o7SUFFQSxNQUFNSyxTQUFTLElBQU07UUFDbkJKLFVBQVUsSUFBSTtJQUNoQjtJQUNBLE1BQU1LLGlCQUFpQixDQUFDSixZQUFjO1FBQ3BDQyxhQUFhRDtJQUNmO0lBRUEscUJBQ0UsOERBQUNMLFlBQVlVLFFBQVE7UUFBQ0MsT0FBTztZQUFFUjtZQUFRSTtZQUFPQztZQUFRQztZQUFlSjtRQUFTO2tCQUMzRUg7Ozs7OztBQUdQLEVBQUUiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9lZHVzaGFyZS8uL2hvb2tzL0F1dGhQcm92aWRlci5qcz9hYTUwIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IGNyZWF0ZUNvbnRleHQsIHVzZVN0YXRlIH0gZnJvbSBcInJlYWN0XCI7XHJcblxyXG5leHBvcnQgY29uc3QgQXV0aENvbnRleHQgPSBjcmVhdGVDb250ZXh0KCk7XHJcblxyXG5leHBvcnQgY29uc3QgQXV0aFByb3ZpZGVyID0gKHsgY2hpbGRyZW4gfSkgPT4ge1xyXG4gIGNvbnN0IFt1c2VySWQsIHNldFVzZXJJZF0gPSB1c2VTdGF0ZShudWxsKTtcclxuICBjb25zdCBbY3VycmVudElkLCBzZXRDdXJyZW50SWRdID0gdXNlU3RhdGUobnVsbCk7XHJcblxyXG4gIGNvbnN0IGxvZ2luID0gKHVzZXJJZCkgPT4ge1xyXG4gICAgc2V0VXNlcklkKHVzZXJJZCk7XHJcbiAgfTtcclxuXHJcbiAgY29uc3QgbG9nb3V0ID0gKCkgPT4ge1xyXG4gICAgc2V0VXNlcklkKG51bGwpO1xyXG4gIH07XHJcbiAgY29uc3QgY3VycmVudElkU3RhdGUgPSAoY3VycmVudElkKSA9PiB7XHJcbiAgICBzZXRDdXJyZW50SWQoY3VycmVudElkKTtcclxuICB9O1xyXG5cclxuICByZXR1cm4gKFxyXG4gICAgPEF1dGhDb250ZXh0LlByb3ZpZGVyIHZhbHVlPXt7IHVzZXJJZCwgbG9naW4sIGxvZ291dCAsY3VycmVudElkU3RhdGUsY3VycmVudElkfX0+XHJcbiAgICAgIHtjaGlsZHJlbn1cclxuICAgIDwvQXV0aENvbnRleHQuUHJvdmlkZXI+XHJcbiAgKTtcclxufTtcclxuIl0sIm5hbWVzIjpbImNyZWF0ZUNvbnRleHQiLCJ1c2VTdGF0ZSIsIkF1dGhDb250ZXh0IiwiQXV0aFByb3ZpZGVyIiwiY2hpbGRyZW4iLCJ1c2VySWQiLCJzZXRVc2VySWQiLCJjdXJyZW50SWQiLCJzZXRDdXJyZW50SWQiLCJsb2dpbiIsImxvZ291dCIsImN1cnJlbnRJZFN0YXRlIiwiUHJvdmlkZXIiLCJ2YWx1ZSJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./hooks/AuthProvider.js\n");
 
 /***/ }),
 
-/***/ 4369:
+/***/ "./pages/index.js":
+/*!************************!*\
+  !*** ./pages/index.js ***!
+  \************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ AdminDashBoard)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(997);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5692);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_mui_material__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _component_Login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9136);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6689);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_component_Login__WEBPACK_IMPORTED_MODULE_2__]);
-_component_Login__WEBPACK_IMPORTED_MODULE_2__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
-
-
-
-
-function AdminDashBoard() {
-    const [user, setUser] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)("");
-    console.log(user);
-    // function handleLogin(name) {
-    //   setUser(name);
-    // }
-    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_1__.Paper, {
-        style: {
-            backgroundImage: `url(${"https://i.ibb.co/6bJ0VFb/Background.jpg"})`,
-            backgroundSize: "cover",
-            height: "100vh",
-            color: "#f5f5f5",
-            width: "100vw"
-        },
-        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_component_Login__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z, {
-            setUserr: setUser,
-            userr: user
-        })
-    });
-}
-
-__webpack_async_result__();
-} catch(e) { __webpack_async_result__(e); } });
+eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ AdminDashBoard)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"react/jsx-dev-runtime\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @mui/material */ \"@mui/material\");\n/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_mui_material__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _component_Login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../component/Login */ \"./component/Login.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);\nvar __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_component_Login__WEBPACK_IMPORTED_MODULE_2__]);\n_component_Login__WEBPACK_IMPORTED_MODULE_2__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];\n\n\n\n\nfunction AdminDashBoard() {\n    const [user, setUser] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(\"\");\n    console.log(user);\n    // function handleLogin(name) {\n    //   setUser(name);\n    // }\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_1__.Paper, {\n        style: {\n            backgroundImage: `url(${\"https://i.ibb.co/6bJ0VFb/Background.jpg\"})`,\n            backgroundSize: \"cover\",\n            height: \"100vh\",\n            color: \"#f5f5f5\",\n            width: \"100vw\"\n        },\n        children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_component_Login__WEBPACK_IMPORTED_MODULE_2__[\"default\"], {\n            setUserr: setUser,\n            userr: user\n        }, void 0, false, {\n            fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\index.js\",\n            lineNumber: 26,\n            columnNumber: 7\n        }, this)\n    }, void 0, false, {\n        fileName: \"C:\\\\Users\\\\USER\\\\Desktop\\\\Spring-2023-Qu\\\\senior2-edushare\\\\eduShare\\\\pages\\\\index.js\",\n        lineNumber: 16,\n        columnNumber: 5\n    }, this);\n}\n\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } });//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9wYWdlcy9pbmRleC5qcy5qcyIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7OztBQUNBO0FBQXFDO0FBQ0M7QUFDTDtBQUdsQixTQUFTRyxpQkFBaUI7SUFFdkMsTUFBTSxDQUFDQyxNQUFNQyxRQUFRLEdBQUdILCtDQUFRQSxDQUFDO0lBQ2pDSSxRQUFRQyxHQUFHLENBQUNIO0lBRVosK0JBQStCO0lBQy9CLG1CQUFtQjtJQUNuQixJQUFJO0lBQ0oscUJBQ0UsOERBQUNKLGdEQUFLQTtRQUNKUSxPQUFPO1lBQ0xDLGlCQUFpQixDQUFDLElBQUksRUFBRSwwQ0FBMEMsQ0FBQyxDQUFDO1lBQ3BFQyxnQkFBZ0I7WUFDaEJDLFFBQVE7WUFDUkMsT0FBTztZQUNQQyxPQUFPO1FBQ1Q7a0JBR0EsNEVBQUNaLHdEQUFLQTtZQUFDYSxVQUFVVDtZQUFTVSxPQUFPWDs7Ozs7Ozs7Ozs7QUFHdkMsQ0FBQyIsInNvdXJjZXMiOlsid2VicGFjazovL2VkdXNoYXJlLy4vcGFnZXMvaW5kZXguanM/YmVlNyJdLCJzb3VyY2VzQ29udGVudCI6WyJcclxuaW1wb3J0IHsgUGFwZXIgfSBmcm9tIFwiQG11aS9tYXRlcmlhbFwiXHJcbmltcG9ydCBMb2dpbiBmcm9tICcuLi9jb21wb25lbnQvTG9naW4nXHJcbmltcG9ydCB7IHVzZVN0YXRlIH0gZnJvbSBcInJlYWN0XCI7XHJcblxyXG5cclxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gQWRtaW5EYXNoQm9hcmQoKSB7XHJcblxyXG4gIGNvbnN0IFt1c2VyLCBzZXRVc2VyXSA9IHVzZVN0YXRlKFwiXCIpO1xyXG4gIGNvbnNvbGUubG9nKHVzZXIpO1xyXG5cclxuICAvLyBmdW5jdGlvbiBoYW5kbGVMb2dpbihuYW1lKSB7XHJcbiAgLy8gICBzZXRVc2VyKG5hbWUpO1xyXG4gIC8vIH1cclxuICByZXR1cm4gKFxyXG4gICAgPFBhcGVyXHJcbiAgICAgIHN0eWxlPXt7XHJcbiAgICAgICAgYmFja2dyb3VuZEltYWdlOiBgdXJsKCR7XCJodHRwczovL2kuaWJiLmNvLzZiSjBWRmIvQmFja2dyb3VuZC5qcGdcIn0pYCxcclxuICAgICAgICBiYWNrZ3JvdW5kU2l6ZTogXCJjb3ZlclwiLFxyXG4gICAgICAgIGhlaWdodDogXCIxMDB2aFwiLFxyXG4gICAgICAgIGNvbG9yOiBcIiNmNWY1ZjVcIixcclxuICAgICAgICB3aWR0aDogXCIxMDB2d1wiLFxyXG4gICAgICB9fVxyXG4gICAgPlxyXG5cclxuICAgICAgPExvZ2luIHNldFVzZXJyPXtzZXRVc2VyfSB1c2Vycj17dXNlcn0gLz5cclxuICAgIDwvUGFwZXI+XHJcbiAgKVxyXG59XHJcbiJdLCJuYW1lcyI6WyJQYXBlciIsIkxvZ2luIiwidXNlU3RhdGUiLCJBZG1pbkRhc2hCb2FyZCIsInVzZXIiLCJzZXRVc2VyIiwiY29uc29sZSIsImxvZyIsInN0eWxlIiwiYmFja2dyb3VuZEltYWdlIiwiYmFja2dyb3VuZFNpemUiLCJoZWlnaHQiLCJjb2xvciIsIndpZHRoIiwic2V0VXNlcnIiLCJ1c2VyciJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./pages/index.js\n");
 
 /***/ }),
 
-/***/ 5692:
+/***/ "@mui/material":
+/*!********************************!*\
+  !*** external "@mui/material" ***!
+  \********************************/
 /***/ ((module) => {
 
 module.exports = require("@mui/material");
 
 /***/ }),
 
-/***/ 7986:
+/***/ "@mui/system":
+/*!******************************!*\
+  !*** external "@mui/system" ***!
+  \******************************/
 /***/ ((module) => {
 
 module.exports = require("@mui/system");
 
 /***/ }),
 
-/***/ 1853:
+/***/ "next/router":
+/*!******************************!*\
+  !*** external "next/router" ***!
+  \******************************/
 /***/ ((module) => {
 
 module.exports = require("next/router");
 
 /***/ }),
 
-/***/ 6689:
+/***/ "react":
+/*!************************!*\
+  !*** external "react" ***!
+  \************************/
 /***/ ((module) => {
 
 module.exports = require("react");
 
 /***/ }),
 
-/***/ 997:
+/***/ "react/jsx-dev-runtime":
+/*!****************************************!*\
+  !*** external "react/jsx-dev-runtime" ***!
+  \****************************************/
 /***/ ((module) => {
 
-module.exports = require("react/jsx-runtime");
+module.exports = require("react/jsx-dev-runtime");
 
 /***/ }),
 
-/***/ 3745:
+/***/ "firebase/app":
+/*!*******************************!*\
+  !*** external "firebase/app" ***!
+  \*******************************/
 /***/ ((module) => {
 
 module.exports = import("firebase/app");;
 
 /***/ }),
 
-/***/ 401:
+/***/ "firebase/auth":
+/*!********************************!*\
+  !*** external "firebase/auth" ***!
+  \********************************/
 /***/ ((module) => {
 
 module.exports = import("firebase/auth");;
 
 /***/ }),
 
-/***/ 1492:
+/***/ "firebase/firestore":
+/*!*************************************!*\
+  !*** external "firebase/firestore" ***!
+  \*************************************/
 /***/ ((module) => {
 
 module.exports = import("firebase/firestore");;
 
 /***/ }),
 
-/***/ 3392:
+/***/ "firebase/storage":
+/*!***********************************!*\
+  !*** external "firebase/storage" ***!
+  \***********************************/
 /***/ ((module) => {
 
 module.exports = import("firebase/storage");;
@@ -384,7 +150,7 @@ module.exports = import("firebase/storage");;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [6216], () => (__webpack_exec__(4369)));
+var __webpack_exports__ = (__webpack_exec__("./pages/index.js"));
 module.exports = __webpack_exports__;
 
 })();

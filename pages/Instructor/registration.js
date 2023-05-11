@@ -247,7 +247,10 @@ export default function Registration() {
 
                     </Stack>
                     <div style={{ margin: "-10px 0 0 10px" }}>
-                        <Link href="/" variant="body2" color="inherit"> Back to login page</Link>
+                        {/* <Link href="/" variant="body2" color="inherit"> Back to login page</Link> */}
+                        <Typography variant="body2" color="inherit" sx={{
+                            textDecoration: 'underline', cursor: "pointer"
+                        }} onClick={() => router.push('/')}> Back to login page</Typography>
                     </div>
 
                 </Paper>
