@@ -18,7 +18,6 @@ import { db } from '../../Firebase/Firebase';
 import { useRouter } from 'next/router';
 import { auth } from '../../Firebase/Firebase';
 import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
-import Head from 'next/head';
 function CreateBlog() {
 
   const [inst, setInst] = useState([]);
