@@ -118,24 +118,24 @@ export default function App() {
         }}
       >
         <Stack direction="column" gap={2}>
-          <Typography 
-            variant="h3" 
-            sx={{ 
-              color: "#454545", 
-              fontWeight: "800", 
-              textAlign: "center", 
+          <Typography
+            variant="h3"
+            sx={{
+              color: "#454545",
+              fontWeight: "800",
+              textAlign: "center",
               fontSize: { xs: "1.8rem", sm: "2.3rem", md: "2.8rem", lg: "3.3rem" },
               mt: 2
             }}
           >
             Edu<span style={{ color: "#1ABC9C" }}>Share</span>
           </Typography>
-          <form 
+          <form
             style={{
-              display: "flex", 
-              flexDirection: "column", 
+              display: "flex",
+              flexDirection: "column",
               margin: { xs: "10px", sm: "15px", md: "20px", lg: "25px" }
-            }} 
+            }}
             onSubmit={handelLogin}
           >
             {loginError && <Alert severity="error" sx={{ width: "89%", margin: "0 0 0 10px" }}>Email or Password is Wrong !</Alert>}
@@ -145,10 +145,11 @@ export default function App() {
               variant="outlined"
               name="email"
               onChange={handelChange}
-              sx={{ 
+              sx={{
                 margin: { xs: "10px", sm: "15px", md: "20px", lg: "25px" },
-                fontSize: { xs: "0.8rem", sm: "0.9rem", md: "1rem", lg: "1.1rem" } 
+                fontSize: { xs: "0.8rem", sm: "0.9rem", md: "1rem", lg: "1.1rem" }
               }}
+              onFocus={() => setLoginError(false)}
             />
             <TextField
               id="outlined-basic"
@@ -156,13 +157,15 @@ export default function App() {
               variant="outlined"
               name="password"
               onChange={handelChange}
-              sx={{ 
+              sx={{
                 margin: { xs: "10px", sm: "15px", md: "20px", lg: "25px" },
-                fontSize: { xs: "0.8rem", sm: "0.9rem", md: "1rem", lg:"1.1rem" }
+                fontSize: { xs: "0.8rem", sm: "0.9rem", md: "1rem", lg: "1.1rem" }
               }}
               margin="normal"
               placeholder="Password"
               type="password"
+              onFocus={() => setLoginError(false)}
+
             />
             <Button
               sx={{
@@ -182,15 +185,15 @@ export default function App() {
           </form>
         </Stack>
 
-        <Typography 
-          variant="body2" 
-          color="inherit" 
+        <Typography
+          variant="body2"
+          color="inherit"
           sx={{
-            textDecoration: 'underline', 
+            textDecoration: 'underline',
             cursor: "pointer",
-            margin: { xs: "10px 0 0 10px", sm: "15px 0 0 15px", md: "20px 0 0 20px", lg: "25px 0 0 25px" }, 
+            margin: { xs: "10px 0 0 10px", sm: "15px 0 0 15px", md: "20px 0 0 20px", lg: "25px 0 0 25px" },
             fontSize: { xs: "0.7rem", sm: "0.8rem", md: "0.9rem", lg: "1rem" }
-          }} 
+          }}
           onClick={() => router.push('/signup/register')}
         >
           Don't have an account? Register
