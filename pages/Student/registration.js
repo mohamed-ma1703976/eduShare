@@ -6,8 +6,10 @@ import {
   Stack,
   TextField,
   Typography,
-  Link
+  Link,
+  useMediaQuery
 } from "@mui/material";
+import { useTheme } from '@mui/material/styles';
 import { useRouter } from 'next/router';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
@@ -15,6 +17,8 @@ import { app } from "../../Firebase/Firebase";
 
 export default function Registration() {
   const router = useRouter();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [signUpData, setSignUpData] = useState({
     email: "",
@@ -57,38 +61,32 @@ export default function Registration() {
     }
   }
   return (
-
-
-
-      <Paper
-        style={{
-          backgroundImage: `url(${"https://i.ibb.co/6bJ0VFb/Background.jpg"})`,
-          backgroundSize: "cover",
-          minHeight: "100vh",
-          color: "#f5f5f5",
-          width: "100vw",
-        }}
+    <Paper
+      sx={{
+        backgroundImage: `url(${"https://i.ibb.co/6bJ0VFb/Background.jpg"})`,
+        backgroundSize: "cover",
+        minHeight: "100vh",
+        color: "#f5f5f5",
+      }}
+    >
+      <Grid
+        container
+        justifyContent="center"
+        alignItems="center"
+        style={{ minHeight: '100vh' }}
       >
-        <Grid
-          container
-          justifyContent={{ sm: "center" }}
-          alignItems={{ sm: "center" }}
-          height={"100vh"}
+        <Paper
+          sx={{
+            width: isMobile ? "90%" : "40%",
+            backgroundColor: "white",
+            padding: 5,
+            pb: 10,
+            boxShadow: {
+              xs: "none",
+              md: "0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)",
+            },
+          }}
         >
-          <Paper
-            sx={{
-              width: "40%",
-              margin: "0 0 0 400px",
-              backgroundColor: "white",
-              padding: 5,
-              pb: 10,
-              boxShadow: {
-                xs: "none",
-                md:
-                  "0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)",
-              },
-            }}
-          >
             <Stack direction={"column"} gap={2}>
               <Typography
                 variant="h3"

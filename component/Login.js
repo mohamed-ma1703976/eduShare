@@ -1,23 +1,11 @@
-import React, { useState } from "react";
-import {
-  Button,
-  Grid,
-  Paper,
-  Stack,
-  TextField,
-  Typography,
-  Link,
-  Alert,
-
-} from "@mui/material";
+import React, { useState, useContext } from "react";
+import { Button, Grid, Paper, Stack, TextField, Typography, Alert } from "@mui/material";
 import { Box } from "@mui/system";
-import Router, { useRouter } from "next/router";
-import { useContext } from "react";
+import { useRouter } from "next/router";
 import { AuthContext } from "../hooks/AuthProvider";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from "../Firebase/Firebase";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
-
 
 export default function App() {
   const router = useRouter();
@@ -113,30 +101,43 @@ export default function App() {
   return (
     <Grid
       container
-      justifyContent={{ sm: "center" }}
-      alignItems={{ sm: "center" }}
-      height={"100vh"}
+      justifyContent="center"
+      alignItems="center"
+      sx={{ height: "100vh" }}
     >
       <Paper
         sx={{
-          width: 500,
-          height: 300,
+          width: { xs: "90%", sm: "60%", md: "40%", lg: "30%" },
+          minHeight: { xs: 300, sm: 350, md: 400, lg: 450 },
           backgroundColor: "white",
-          padding: 5,
-          pb: 10,
+          padding: { xs: 2, sm: 3, md: 4, lg: 5 },
           boxShadow: {
             xs: "none",
-            md:
-              "0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)"
+            md: "0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)"
           }
         }}
       >
-        <Stack direction={"column"} gap={2}>
-          <Typography variant='h3' sx={{ color: "#454545", fontWeight: "800", margin: "0 0 0 -23px", textAlign: "center" }}>Edu<span style={{ color: "#1ABC9C" }}>Share</span></Typography>
-          <form style={{
-            display: "flex", flexDirection: "column", margin: "10px 10px 10px 10px"
-          }} onSubmit={handelLogin}>
-
+        <Stack direction="column" gap={2}>
+          <Typography 
+            variant="h3" 
+            sx={{ 
+              color: "#454545", 
+              fontWeight: "800", 
+              textAlign: "center", 
+              fontSize: { xs: "1.8rem", sm: "2.3rem", md: "2.8rem", lg: "3.3rem" },
+              mt: 2
+            }}
+          >
+            Edu<span style={{ color: "#1ABC9C" }}>Share</span>
+          </Typography>
+          <form 
+            style={{
+              display: "flex", 
+              flexDirection: "column", 
+              margin: { xs: "10px", sm: "15px", md: "20px", lg: "25px" }
+            }} 
+            onSubmit={handelLogin}
+          >
             {loginError && <Alert severity="error" sx={{ width: "89%", margin: "0 0 0 10px" }}>Email or Password is Wrong !</Alert>}
             <TextField
               id="outlined-basic"
@@ -144,9 +145,10 @@ export default function App() {
               variant="outlined"
               name="email"
               onChange={handelChange}
-              sx={{ margin: "10px 10px 10px 10px" }}
-
-
+              sx={{ 
+                margin: { xs: "10px", sm: "15px", md: "20px", lg: "25px" },
+                fontSize: { xs: "0.8rem", sm: "0.9rem", md: "1rem", lg: "1.1rem" } 
+              }}
             />
             <TextField
               id="outlined-basic"
@@ -154,20 +156,22 @@ export default function App() {
               variant="outlined"
               name="password"
               onChange={handelChange}
-              sx={{ margin: "10px 10px 10px 10px" }}
+              sx={{ 
+                margin: { xs: "10px", sm: "15px", md: "20px", lg: "25px" },
+                fontSize: { xs: "0.8rem", sm: "0.9rem", md: "1rem", lg:"1.1rem" }
+              }}
               margin="normal"
               placeholder="Password"
               type="password"
-              //fullWidth
             />
             <Button
               sx={{
                 backgroundColor: "#00adb5",
-                height: 45,
-                fontSize: 22,
+                height: { xs: "35px", sm: "40px", md: "45px", lg: "50px" },
+                fontSize: { xs: "1rem", sm: "1.2rem", md: "1.4rem", lg: "1.6rem" },
                 fontWeight: "bold",
-                margin:"0 0 0 10px",
-                width:"96.5%"
+                margin: { xs: "10px 0 0 10px", sm: "15px 0 0 15px", md: "20px 0 0 20px", lg: "25px 0 0 25px" },
+                width: "90%"
               }}
               variant="contained"
               type="submit"
@@ -177,15 +181,21 @@ export default function App() {
             </Button>
           </form>
         </Stack>
-        {/* <Link href="signup/register" variant="body2" color="inherit"> Don't have an account? Register</Link> */}
 
-        <Typography variant="body2" color="inherit" sx={{
-          textDecoration: 'underline', cursor: "pointer" ,margin:"0 0 0 18px"
-        }} onClick={() => router.push('/signup/register')}>Don't have an account? Register</Typography>
+        <Typography 
+          variant="body2" 
+          color="inherit" 
+          sx={{
+            textDecoration: 'underline', 
+            cursor: "pointer",
+            margin: { xs: "10px 0 0 10px", sm: "15px 0 0 15px", md: "20px 0 0 20px", lg: "25px 0 0 25px" }, 
+            fontSize: { xs: "0.7rem", sm: "0.8rem", md: "0.9rem", lg: "1rem" }
+          }} 
+          onClick={() => router.push('/signup/register')}
+        >
+          Don't have an account? Register
+        </Typography>
       </Paper>
     </Grid >
   );
 }
-
-
-

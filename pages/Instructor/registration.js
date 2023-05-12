@@ -1,3 +1,8 @@
+import { useRouter } from 'next/router';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, doc, setDoc, addDoc } from "firebase/firestore";
+import { db, collection } from "../../Firebase/Firebase"
+import { app } from "../../Firebase/Firebase";
 import React, { useState } from "react";
 import {
     Button,
@@ -6,16 +11,15 @@ import {
     Stack,
     TextField,
     Typography,
-    Link
+    Link,
+    useMediaQuery,
+    useTheme
 } from "@mui/material";
-import { useRouter } from 'next/router';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, doc, setDoc, addDoc } from "firebase/firestore";
-import { db, collection } from "../../Firebase/Firebase"
-import { app } from "../../Firebase/Firebase";
 
 export default function Registration() {
     const router = useRouter();
+    const theme = useTheme();
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
     const [signUpData, setSignUpData] = useState({
         email: "",
@@ -63,72 +67,60 @@ export default function Registration() {
         }
     }
     return (
-
-
-
-
-
-
-
-            <Paper
-                style={{
-                    backgroundImage: `url(${"https://i.ibb.co/6bJ0VFb/Background.jpg"})`,
-                    backgroundSize: "cover",
-                    height: "100vh",
-                    color: "#f5f5f5",
-                    width: "100vw",
-                }}
+        <Paper
+            style={{
+                backgroundImage: `url(${"https://i.ibb.co/6bJ0VFb/Background.jpg"})`,
+                backgroundSize: "cover",
+                height: "100vh",
+                color: "#f5f5f5",
+                width: "100vw",
+            }}
+        >
+            <Grid
+                container
+                justifyContent={{ sm: "center" }}
+                alignItems={{ sm: "center" }}
+                height={"100vh"}
             >
-
-
-
-
-
-                <Grid
-                    container
-                    justifyContent={{ sm: "center" }}
-                    alignItems={{ sm: "center" }}
-                    height={"100vh"}
+                <Paper
+                    sx={{
+                        width: isSmallScreen ? '90%' : '42%',
+                        height: isSmallScreen ? 'auto' : '80vh',
+                        margin: isSmallScreen ? 'auto' : '0 0 0 400px',
+                        backgroundColor: "white",
+                        padding: isSmallScreen ? 2 : 5,
+                        pb: 10,
+                        boxShadow: {
+                            xs: "none",
+                            md:
+                                "0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)",
+                        },
+                    }}
                 >
-                    <Paper
-                        s sx={{
-                            width: "42%",
-                            height: "80vh",
-                            margin: "0 0 0 400px",
-                            backgroundColor: "white",
-                            padding: 5,
-                            pb: 10,
-                            boxShadow: {
-                                xs: "none",
-                                md:
-                                    "0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12)",
-                            },
-                        }}
-                    >
-                        <Stack direction={"column"} gap={2}>
-                            <Typography
-                                variant="h3"
-                                sx={{
-                                    color: "#454545",
-                                    fontWeight: "800",
-                                    margin: "0 0 0 -23px",
-                                    textAlign: "center",
-                                }}
-                            >
-                                Edu<span style={{ color: "#1ABC9C" }}>Share</span>
-                            </Typography>
+                    <Stack direction={"column"} gap={2}>
+                        <Typography
+                            variant={isSmallScreen ? 'h5' : 'h3'}
+                            sx={{
+                                color: "#454545",
+                                fontWeight: "800",
+                                margin: "0 0 0 -23px",
+                                textAlign: "center",
+                            }}
+                        >
+                            Edu<span style={{ color: "#1ABC9C" }}>Share</span>
+                        </Typography>
 
-                            <Typography
-                                variant="h6"
-                                sx={{
-                                    color: "#454545",
-                                    fontWeight: "800",
-                                    margin: "0 0 0 -23px",
-                                    textAlign: "center",
-                                }}
-                            >
-                                ( Instructor Registration )
-                            </Typography>
+                        <Typography
+                            variant={isSmallScreen ? 'h7' : 'h6'}
+                            sx={{
+                                color: "#454545",
+                                fontWeight: "800",
+                                margin: "0 0 0 -23px",
+                                textAlign: "center",
+                            }}
+                        >
+                            ( Instructor Registration )
+                        </Typography>
                             <form onSubmit={handleSignUp}>
 
                                 <Stack direction={"column"} gap={2} sx={{ margin: "10px" }}>

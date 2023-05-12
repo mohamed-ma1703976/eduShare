@@ -1,31 +1,25 @@
 import React from "react";
-import {
-  Button,
-  Grid,
-  Paper,
-  Stack,
-  Typography,
-  Link
-} from "@mui/material";
+import { Button, Grid, Paper, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { useRouter } from 'next/router';
 
 export default function RoleSelection() {
   const router = useRouter();
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Grid
       container
-      justifyContent={{ sm: "center" }}
-      alignItems={{ sm: "center" }}
-      height={"100vh"}
+      justifyContent="center"
+      alignItems="center"
+      style={{ minHeight: '100vh' }}
     >
       <Paper
         sx={{
-          width: "30%",
-          height: 220,
-          margin: "0 0 0 130px",
+          width: isSmallScreen ? '90%' : '30%',
+          margin: isSmallScreen ? 'auto' : '0 0 0 130px',
           backgroundColor: "white",
-          padding: 5,
+          padding: isSmallScreen ? 2 : 5,
           pb: 10,
           boxShadow: {
             xs: "none",
@@ -35,13 +29,13 @@ export default function RoleSelection() {
         }}
       >
         <Stack direction={"column"} gap={2}>
-          <Typography variant='h3' sx={{ color: "#454545", fontWeight: "800", margin: "0 0 0 -23px", textAlign: "center" }}>Edu<span style={{ color: "#1ABC9C" }}>Share</span></Typography>
+          <Typography variant={isSmallScreen ? 'h5' : 'h3'} sx={{ color: "#454545", fontWeight: "800", margin: "0 0 0 -23px", textAlign: "center" }}>Edu<span style={{ color: "#1ABC9C" }}>Share</span></Typography>
 
           <Button
             sx={{
               backgroundColor: "#00adb5",
-              height: 45,
-              fontSize: 22,
+              height: isSmallScreen ? 35 : 45,
+              fontSize: isSmallScreen ? 16 : 22,
               fontWeight: "bold",
               margin: "20px 0 10px 0"
             }}
@@ -55,8 +49,8 @@ export default function RoleSelection() {
           <Button
             sx={{
               backgroundColor: "#00adb5",
-              height: 45,
-              fontSize: 22,
+              height: isSmallScreen ? 35 : 45,
+              fontSize: isSmallScreen ? 16 : 22,
               fontWeight: "bold"
             }}
             variant="contained"
