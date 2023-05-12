@@ -11,7 +11,7 @@ import InstructorCard from "../../component/Student/InstructorCard";
 import StudentCard from "../../component/Admin/StudentCard";
 import { db } from '../../Firebase/Firebase';
 import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
-
+import Head from 'next/head'
 function AdminDashBoard() {
   const [isLoading, setIsLoading] = useState(true);
   const [instructorsSnapshot, instructorsLoading, instructorsError] = useCollection(collection(db, "Instructor"));
