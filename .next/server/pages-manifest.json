@@ -2,8 +2,10 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/signup/register": "pages/signup/register.js",
-  "/Student/registration": "pages/Student/registration.js",
   "/": "pages/index.js",
-  "/Instructor/registration": "pages/Instructor/registration.js"
+  "/Instructor": "pages/Instructor.js",
+  "/Instructor/uploadcontanet": "pages/Instructor/uploadcontanet.js",
+  "/signup/register": "pages/signup/register.js",
+  "/Instructor/registration": "pages/Instructor/registration.js",
+  "/Instructor/profile": "pages/Instructor/profile.js"
 }

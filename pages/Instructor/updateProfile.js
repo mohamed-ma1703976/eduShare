@@ -11,6 +11,7 @@ import {
   Avatar,
   Box,
 } from '@mui/material';
+import Head from 'next/head';
 import { app, auth } from '../../Firebase/Firebase';
 import getUserRole from '../../hooks/getRole';
 import {
@@ -156,6 +157,10 @@ export default function UpdateInstructorProfile() {
           width: "100%",
         }}
       >
+         <Head>
+        <title>Update Profile</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
         <Paper
           sx={{
             width: { xs: '90%', sm: 500 },

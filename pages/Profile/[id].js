@@ -11,6 +11,7 @@ import {
   Grid,
   IconButton,
 } from "@mui/material";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { app } from "../../Firebase/Firebase";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
@@ -85,6 +86,10 @@ return (
       minHeight: "100vh",
     }}
   >
+    <Head>
+        <title>{user.displayName}</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
     <CardMedia
       component="img"
       image={user.coverPicture || defaultCoverImage}

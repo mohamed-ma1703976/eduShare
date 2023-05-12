@@ -9,6 +9,7 @@ import {
   Box,
   Input,
 } from '@mui/material';
+import Head from 'next/head'
 import AddAPhoto from '@mui/icons-material/AddAPhoto';
 import { doc, setDoc, collection, getDocs } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -17,7 +18,7 @@ import { db } from '../../Firebase/Firebase';
 import { useRouter } from 'next/router';
 import { auth } from '../../Firebase/Firebase';
 import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
-
+import Head from 'next/head';
 function CreateBlog() {
 
   const [inst, setInst] = useState([]);
@@ -110,6 +111,10 @@ function CreateBlog() {
           width: "100%",
         }}
       >
+        <Head>
+        <title>Create Blog</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
         <Paper
           sx={{
             width: { xs: '90%', sm: 500 },

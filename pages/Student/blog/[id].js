@@ -6,6 +6,7 @@ import StuSideBar from '../../../component/Student/StuSideBar';
 import { db } from '../../../Firebase/Firebase';
 import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
 import Loading from '../../../component/Loading ';
+import Head from 'next/head'
 
 function BlogPage({ blog }) {
   const router = useRouter();
@@ -18,6 +19,10 @@ function BlogPage({ blog }) {
 
   return (
     <div>
+      <Head>
+        <title>{blog.Title}</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
         <Box>
           <StuNav />
           <Grid container>

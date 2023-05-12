@@ -15,7 +15,7 @@ import {
     useMediaQuery,
     useTheme
 } from "@mui/material";
-
+import Head from 'next/head'
 export default function Registration() {
     const router = useRouter();
     const theme = useTheme();
@@ -76,6 +76,10 @@ export default function Registration() {
                 width: "100vw",
             }}
         >
+             <Head>
+        <title>Instructor Registration</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
             <Grid
                 container
                 justifyContent={{ sm: "center" }}

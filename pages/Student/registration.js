@@ -14,6 +14,7 @@ import { useRouter } from 'next/router';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { app } from "../../Firebase/Firebase";
+import Head from 'next/head'
 
 export default function Registration() {
   const router = useRouter();
@@ -69,6 +70,10 @@ export default function Registration() {
         color: "#f5f5f5",
       }}
     >
+      <Head>
+        <title>Student Registration</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
       <Grid
         container
         justifyContent="center"

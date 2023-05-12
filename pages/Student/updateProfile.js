@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head'
 import { AuthContext } from '../../hooks/AuthProvider';
 import {
   Grid,
@@ -157,6 +158,10 @@ export default function UpdateProfile() {
           width: "100%",
         }}
       >
+        <Head>
+        <title>Update Profile</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
         <Paper
           sx={{
             width: { xs: '90%', sm: 500 },

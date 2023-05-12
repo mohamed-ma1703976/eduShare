@@ -6,6 +6,7 @@ import DropCourse from "../../component/Student/DropCourse";
 import { auth } from "../../Firebase/Firebase";
 import Loading from "../../component/Loading ";
 import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
+import Head from 'next/head'
 
 export default function mycourses() {
   const [userId, setUserId] = useState(null);
@@ -35,6 +36,10 @@ export default function mycourses() {
 
   return (
     <Box>
+      <Head>
+        <title>My Courses</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
       <PrivateRoute path="/secure">
         {loading && <Loading />}
         {!loading && (

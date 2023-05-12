@@ -10,6 +10,7 @@ import { app } from "../../../Firebase/Firebase";
 import Loading from "../../../component/Loading ";
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import Head from 'next/head'
 
 const CoursePage = ({ course }) => {
   const router = useRouter();
@@ -257,6 +258,10 @@ const CoursePage = ({ course }) => {
   console.log(rating)
   return (
     <div>
+      <Head>
+        <title>{course.CourseTitle}</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
       <Box>
         <StuNav />
         <Grid container>

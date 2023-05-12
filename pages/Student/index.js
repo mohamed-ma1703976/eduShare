@@ -17,6 +17,7 @@ import Loading from "../../component/Loading ";
 import useIsMounted from "../../hooks/useIsMounted";
 import WebBanner from "../../component/Student/WebBanner";
 import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute";
+import Head from 'next/head';
 export default function StudentDashboard() {
   const { userId } = useContext(AuthContext);
 
@@ -85,6 +86,10 @@ export default function StudentDashboard() {
         <Loading />
       ) : (
         <div>
+      <Head>
+        <title>EduShare</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
         <Box>
           <StuNav />
           <WebBanner />

@@ -18,7 +18,7 @@ import { AuthContext } from "../hooks/AuthProvider";
 import { useRouter } from "next/router";
 import { app, auth } from "../Firebase/Firebase";
 import getUserRole from '../hooks/getRole';
-
+import Head from "next/head";
 import { getFirestore, doc, setDoc, getDoc, updateDoc, collection } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 // import { Avatar } from "@mui/material";
@@ -165,6 +165,10 @@ export default function CreateProfile() {
         width: "100vw",
       }}
     >
+       <Head>
+        <title>Create Profile</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
       <Paper
         sx={{
           width: 500,

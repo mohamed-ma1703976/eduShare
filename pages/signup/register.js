@@ -1,5 +1,6 @@
 import { Paper } from "@mui/material"
 import RoleSelection from "../../component/Signup/RoleSelection"
+import Head from 'next/head'
 
 export default function register() {
   return (
@@ -14,7 +15,10 @@ export default function register() {
         width: "100vw",
       }}
     >
-
+      <Head>
+        <title>Registration</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
       <RoleSelection />
     </Paper>
   )

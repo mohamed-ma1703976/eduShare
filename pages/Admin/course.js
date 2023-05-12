@@ -4,14 +4,17 @@ import { Box, Stack, Grid, Card, CardActions, CardContent, CardMedia, Button, Ty
 import CardList from '../../component/CardList'
 import React from 'react'
 import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
-
+import Head from 'next/head';
 function course() {
     const [search, setSearch] = React.useState("")
 
     return (
         <PrivateRoute path="/secure">
         <Box>
-
+        <Head>
+        <title>Courses</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
             <Navbar setCourseSearch={setSearch}/>
 
 

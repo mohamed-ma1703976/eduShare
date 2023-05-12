@@ -5,7 +5,7 @@ import { Box, Stack } from '@mui/material';
 import MyCalendar from '../../component/Instructors/Calendar';
 import Loading from '../../component/Loading ';
 import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
-
+import Head from 'next/head';
 const CalendarPage = () => {
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
@@ -22,6 +22,10 @@ const CalendarPage = () => {
 
   return (
     <div>
+      <Head>
+        <title>Calendar</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
       <Box>
       <PrivateRoute path="/secure">
         <InstNav setCourseSearch={setSearch} />

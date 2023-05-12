@@ -5,7 +5,7 @@ import StuSideBar from "../../component/Student/StuSideBar";
 import InstructorsAchivementCards from "../../component/Student/InstructorsAchivementCards";
 import Loading from "../../component/Loading "; // Import Loading component
 import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
-
+import Head from 'next/head';
 export default function coursePage() {
   const [loading, setLoading] = useState(true);
 
@@ -21,6 +21,10 @@ export default function coursePage() {
 
   return (
     <Box>
+      <Head>
+        <title>Instructor Achievements</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
       <PrivateRoute path="/secure">
 
         <StuNav />

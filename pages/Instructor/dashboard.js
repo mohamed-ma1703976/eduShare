@@ -4,13 +4,17 @@ import Sidebar from '../../component/Sidebar'
 import Card from '../../component/Card'
 import { Box, Stack } from "@mui/material"
 import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
-
+import Head from 'next/head'
 function dashboard() {
   const [search, setSearch] = React.useState("")
 
   return (
 
     <div >
+      <Head>
+        <title>EduShare</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
       <PrivateRoute path="/secure">
         <Box>
 

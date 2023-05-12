@@ -13,6 +13,7 @@ import {
   Stack,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import Head from 'next/head';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { AuthContext } from '../../hooks/AuthProvider';
 import { db, app, } from '../../Firebase/Firebase';
@@ -21,7 +22,6 @@ import { getFirestore, collection, query, where, onSnapshot, doc, deleteDoc } fr
 import InstSidebar from '../../component/Instructors/InstSidebarr';
 import InstNav from '../../component/Instructors/InstNav';
 import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
-
 function MyBlogs() {
   const router = useRouter();
   const [blogs, setBlogs] = useState([]);
@@ -77,6 +77,10 @@ function MyBlogs() {
 
   return (
     <div>
+      <Head>
+        <title>My Blogs</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
       <PrivateRoute path="/secure">
 
         <Box>

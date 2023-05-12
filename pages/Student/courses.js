@@ -7,6 +7,7 @@ import { db, collection } from "../../Firebase/Firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
 import Loading from "../../component/Loading ";
 import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute";
+import Head from 'next/head'
 
 export default function Courses() {
   const [coursesSnapshot, loading, error] = useCollection(
@@ -18,6 +19,10 @@ export default function Courses() {
 
   return (
     <>
+     <Head>
+        <title>Courses</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
       <PrivateRoute path="/secure">
         {loading ? (
           <Loading />

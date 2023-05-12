@@ -20,15 +20,25 @@
       "static/chunks/main.js",
       "static/chunks/pages/index.js"
     ],
+    "/Instructor": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/Instructor.js"
+    ],
+    "/Instructor/profile": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/Instructor/profile.js"
+    ],
     "/Instructor/registration": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/Instructor/registration.js"
     ],
-    "/Student/registration": [
+    "/Instructor/uploadcontanet": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Student/registration.js"
+      "static/chunks/pages/Instructor/uploadcontanet.js"
     ],
     "/_app": [
       "static/chunks/webpack.js",

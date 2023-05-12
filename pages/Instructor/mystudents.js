@@ -6,7 +6,7 @@ import { Box, Stack } from "@mui/material"
 import MyStudents from '../../component/Instructors/MyStudents'
 import Loading from '../../component/Loading '
 import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
-
+import Head from 'next/head'
 function mystudents() {
   const [search, setSearch] = React.useState("")
   const [loading, setLoading] = useState(true);
@@ -24,6 +24,10 @@ function mystudents() {
   return (
 
     <div >
+      <Head>
+        <title>My Students</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
       <PrivateRoute path="/secure">
         <Box>
 

@@ -6,7 +6,7 @@ import InstSidebar from '../../../component/Instructors/InstSidebarr';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../../Firebase/Firebase';
 import Loading from '../../../component/Loading ';
-
+import Head from 'next/head';
 const EventDetails = () => {
   const router = useRouter();
   const { id } = router.query;
@@ -40,6 +40,10 @@ const EventDetails = () => {
 
   return (
     <div>
+       <Head>
+        <title>{eventDetails.title}</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
       <Box>
         <InstNav />
         <Grid container>

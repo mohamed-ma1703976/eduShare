@@ -7,6 +7,7 @@ import { doc, getDoc, setDoc, collection, getDocs } from 'firebase/firestore';
 import { db ,auth} from '../../../Firebase/Firebase';
 import Loading from '../../../component/Loading ';
 import { CardMedia } from '@mui/material';
+import Head from 'next/head'
 
 const EventDetails = () => {
   const router = useRouter();
@@ -82,6 +83,10 @@ const EventDetails = () => {
 
   return (
     <div>
+      <Head>
+        <title>{eventDetails.title}</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
       <Box>
         <StuNav />
         <Grid container>

@@ -15,7 +15,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db } from '../../../Firebase/Firebase';
 import { useRouter } from 'next/router';
 import { auth } from '../../../Firebase/Firebase';
-
+import Head from 'next/head';
 function UpdateBlog({ blogData, userId }) {
   const [title, setTitle] = useState(blogData.Title);
   const [body, setBody] = useState(blogData.Body);
@@ -90,6 +90,10 @@ function UpdateBlog({ blogData, userId }) {
         width: "100%",
       }}
     >
+        <Head>
+        <title>Update Blog</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
       <Paper
         sx={{
           width: { xs: '90%', sm: 500 },

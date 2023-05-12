@@ -11,7 +11,7 @@ import InstNav from '../../component/Instructors/InstNav'
 import Loading from "../../component/Loading ";
 import EditIcon from "@mui/icons-material/Edit";
 import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
-
+import Head from "next/head";
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -50,6 +50,10 @@ const Profile = () => {
 
   return (
     <div>
+      <Head>
+        <title>My Profile</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
       <PrivateRoute path="/secure">
         <Box>
           {loading && <Loading />}

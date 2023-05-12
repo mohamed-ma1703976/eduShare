@@ -7,7 +7,7 @@ import { db, collection } from '../../Firebase/Firebase';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import Loading from '../../component/Loading ';
 import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute";
-
+import Head from 'next/head'
 export default function Blogs() {
   const [blogsSnapshot, loading, error] = useCollection(collection(db, 'Blog'));
   const blogs = blogsSnapshot?.docs.map((doc) => ({ id: doc.id, ...doc.data() })) || [];
@@ -35,6 +35,10 @@ export default function Blogs() {
   return (
     <>
       <Box>
+      <Head>
+        <title>Blogs</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
         <PrivateRoute path="/secure">
           <StuNav />
           <Grid container>

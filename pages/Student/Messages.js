@@ -6,6 +6,7 @@ import StuNav from "../../component/Student/StuNav";
 import StuSideBar from "../../component/Student/StuSideBar";
 import { useRouter } from 'next/router';
 import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
+import Head from 'next/head'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -92,6 +93,10 @@ function Messages({ userId }) {
   let replayName = stu.find(s => s.id === userId)?.attributes?.displayName
   return (
     <div>
+      <Head>
+        <title>Inbox</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
       <PrivateRoute path="/secure">
         <StuNav />
         <Box sx={{ display: 'flex' }}>

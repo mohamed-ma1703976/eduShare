@@ -33,6 +33,10 @@ function AdminDashBoard() {
 
   return (
     <div>
+      <Head>
+        <title>EduShare</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
       <PrivateRoute path="/secure">
         {isLoading ? (
           <Loading />

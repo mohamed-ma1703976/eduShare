@@ -14,6 +14,7 @@ import {
     Paper,
     Button,
 } from '@mui/material';
+import Head from 'next/head';
 import InstNav from '../../component/Instructors/InstNav';
 import InstSidebar from '../../component/Instructors/InstSidebarr';
 import UploadFile from '../../component/Instructors/UploadFile';
@@ -75,6 +76,10 @@ function UploadContent() {
 
     return (
         <div>
+             <Head>
+        <title>Upload Content</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
             <PrivateRoute path="/secure">
                 <Box>
                     <InstNav />

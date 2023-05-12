@@ -2,7 +2,7 @@ import Navbar from '../../component/Navbar'
 import Sidebar from '../../component/Sidebar'
 import InstructorTable from '../../component/Signup/InstructorTable'
 import { Box, Stack } from "@mui/material"
-
+import Head from 'next/head'
 import React from 'react'
 import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
 
@@ -12,7 +12,10 @@ function instructors() {
     return (
         <PrivateRoute path="/secure">
             <Box>
-
+            <Head>
+        <title>Instructors</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
                 <Navbar />
 
 

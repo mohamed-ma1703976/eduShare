@@ -6,6 +6,7 @@ import DropCourse from "../../component/Student/DropCourse";
 import { auth } from "../../Firebase/Firebase";
 import CoursePage from "../../component/Student/CoursePage";
 import { useRouter } from "next/router";
+import Head from 'next/head'
 export default function coursePage() {
 
     const router = useRouter()
@@ -14,7 +15,10 @@ export default function coursePage() {
 
     return (
         <Box>
-
+     <Head>
+        <title>{courseName}</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
             <StuNav />
 
             <Stack direction="row" spacing={2} >

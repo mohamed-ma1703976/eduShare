@@ -9,7 +9,7 @@ import { app } from '../../Firebase/Firebase';
 import { useRouter } from 'next/router';
 import { deepOrange, deepPurple } from '@mui/material/colors';
 import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
-
+import Head from 'next/head';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -156,6 +156,10 @@ function Messages({ userId }) {
   }
   return (
     <div>
+      <Head>
+        <title>Inbox</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
       <PrivateRoute path="/secure">
         <InstNav />
         <Grid container>

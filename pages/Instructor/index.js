@@ -17,7 +17,7 @@ import { getDocs, collection, where, query, doc, updateDoc, addDoc } from "fireb
 import Pending from "../../component/Instructors/Pending";
 import Loading from '../../component/Loading ';
 import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute"
-
+import Head from 'next/head'
 export default function instructorDashboard() {
   const [competitions, setCompetitions] = useState([]);
   const [students, setStudents] = useState([]);
@@ -231,6 +231,10 @@ export default function instructorDashboard() {
       <Loading />
     ) : (
       <div>
+        <Head>
+        <title>EduShare</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
         <PrivateRoute path="/secure">
 
           {statusCheck ? (

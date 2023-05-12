@@ -7,6 +7,7 @@ import StuNav from '../../component/Student/StuNav';
 import StuSideBar from '../../component/Student/StuSideBar';
 import EventCard from '../../component/Student/EventCard'; // You will create this component later
 import PrivateRoute from "../../component/PrivateRoutes/PrivateRoute";
+import Head from 'next/head'
 
 export default function Events() {
   const [eventsSnapshot, loading, error] = useCollection(collection(db, 'Events'));
@@ -33,6 +34,10 @@ export default function Events() {
 
   return (
     <>
+     <Head>
+        <title>Events</title>
+        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+      </Head>
       <PrivateRoute path="/secure">
         <Box>
           <StuNav />
