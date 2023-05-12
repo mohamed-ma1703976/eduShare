@@ -43,6 +43,12 @@ export default function Registration() {
 
     const auth = getAuth(app);
 
+    if(signUpData.password.length < 6){
+      alert('Password lenght should be more than 6 digits')
+  }else if(signUpData.email ==="" || signUpData.firstName === "" || signUpData.lastName ==="" || signUpData.phone ==="" ){
+      alert('All Fields are required')
+  }
+
     let collectedData = {
       firstName: signUpData.firstName,
       lastName: signUpData.lastName,

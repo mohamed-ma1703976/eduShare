@@ -3,9 +3,5 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/Instructor": "pages/Instructor.js",
-  "/Instructor/uploadcontanet": "pages/Instructor/uploadcontanet.js",
-  "/signup/register": "pages/signup/register.js",
-  "/Instructor/registration": "pages/Instructor/registration.js",
-  "/Instructor/profile": "pages/Instructor/profile.js"
+  "/Instructor/registration": "pages/Instructor/registration.js"
 }

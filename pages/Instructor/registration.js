@@ -42,6 +42,11 @@ export default function Registration() {
     console.log(signUpData)
     async function handleSignUp(e) {
         e.preventDefault();
+        if(signUpData.password.length < 6){
+            alert('Password lenght should be more than 6 digits')
+        }else if(signUpData.email ==="" || signUpData.firstName === "" || signUpData.lastName ==="" || signUpData.phone ==="" ||signUpData.personalInfo ==="" || signUpData.specialization ===""){
+            alert('All Fields are required')
+        }
 
         const auth = getAuth(app);
 

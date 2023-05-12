@@ -20,25 +20,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/index.js"
     ],
-    "/Instructor": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Instructor.js"
-    ],
-    "/Instructor/profile": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Instructor/profile.js"
-    ],
     "/Instructor/registration": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/Instructor/registration.js"
-    ],
-    "/Instructor/uploadcontanet": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Instructor/uploadcontanet.js"
     ],
     "/_app": [
       "static/chunks/webpack.js",
@@ -49,11 +34,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
-    ],
-    "/signup/register": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/signup/register.js"
     ]
   },
   "ampFirstPages": []
