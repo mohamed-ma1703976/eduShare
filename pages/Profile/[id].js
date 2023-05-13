@@ -18,6 +18,7 @@ import { getFirestore, doc, getDoc } from "firebase/firestore";
 import getUserRole from "../../hooks/getRole";
 // import { MessageOutlined, FavoriteOutlined } from "@mui/icons-material";
 import { motion } from "framer-motion";
+import Loading from "../../component/Loading ";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -60,11 +61,7 @@ const Profile = () => {
   if (!user) {
     return (
       <div>
-        <CircularProgress
-          size={100}
-          color="success"
-          sx={{ margin: "200px 550px 0 0 " }}
-        />
+        <Loading/>
       </div>
     );
   }
