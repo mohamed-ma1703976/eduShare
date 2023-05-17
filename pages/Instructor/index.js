@@ -116,7 +116,7 @@ export default function instructorDashboard() {
   }, []);
 
   console.log(students)
-  let nameOfCourse = instructors.find(s => s.id === userId)?.attributes.myCourse[0]?.coursname[0]  //console.log(idOfCourse)
+  let nameOfCourse = instructors?.find(s => s.id === userId)?.attributes?.myCourse[0]?.coursname[0]  //console.log(idOfCourse)
   useEffect(() => {
     if (nameOfCourse !== undefined) {
       setShowName(true)
