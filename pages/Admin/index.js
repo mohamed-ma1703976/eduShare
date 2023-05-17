@@ -60,7 +60,7 @@ function AdminDashBoard() {
                           color: "#454545",
                         }}
                       >
-                        Top Instructors
+                        Latest Instructors
                       </Typography>
                       <Grid container spacing={2}>
                         {instructors.map((instructor) => (

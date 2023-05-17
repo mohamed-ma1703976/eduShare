@@ -10,6 +10,9 @@ import { useRouter } from "next/router"
 import React, { useEffect } from 'react'
 import { motion, useAnimation } from 'framer-motion';
 import { useMediaQuery } from '@mui/material';
+import NewspaperIcon from '@mui/icons-material/Newspaper';
+import EventIcon from '@mui/icons-material/Event';
+
 
 function Sidebar() {
     const router = useRouter()
@@ -65,7 +68,34 @@ function Sidebar() {
                         <ListItemText sx={{ color: "#909497" }} primary={useMediaQuery('(min-width:769px)') ? "Courses": null} />
                     </ListItemButton>
                 </ListItem>
-    
+                <ListItem disablePadding>
+                    <ListItemButton onClick={() => router.push("/Admin/Blogs")} sx={{
+                        "&:hover": {
+                            backgroundColor: "#1ABC9C",
+                            color: "primary.contrastText",
+                        },
+                        transition: "background-color 0.3s ease-in-out",
+                    }}>
+                        <ListItemIcon>
+                            <NewspaperIcon />
+                        </ListItemIcon>
+                        <ListItemText sx={{ color: "#909497" }} primary={useMediaQuery('(min-width:769px)') ? "Blogs": null} />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                <ListItemButton onClick={() => router.push("/Admin/Events")} sx={{
+                        "&:hover": {
+                            backgroundColor: "#1ABC9C",
+                            color: "primary.contrastText",
+                        },
+                        transition: "background-color 0.3s ease-in-out",
+                    }}>
+                        <ListItemIcon>
+                            <EventIcon />
+                        </ListItemIcon>
+                        <ListItemText sx={{ color: "#909497" }} primary={useMediaQuery('(min-width:769px)') ? "Events": null} />
+                    </ListItemButton>
+                </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton onClick={() => router.push("/Admin/instructors")} sx={{
                         "&:hover": {
@@ -93,21 +123,6 @@ function Sidebar() {
                             <Groups3Icon />
                         </ListItemIcon>
                         <ListItemText sx={{ color: "#909497" }} primary={useMediaQuery('(min-width:769px)') ? "Students": null} />
-                    </ListItemButton>
-                </ListItem>
-    
-                <ListItem disablePadding>
-                    <ListItemButton sx={{
-                        "&:hover": {
-                            backgroundColor: "#1ABC9C",
-                            color: "primary.contrastText",
-                        },
-                        transition: "background-color 0.3s ease-in-out",
-                    }}>
-                        <ListItemIcon>
-                            <AccountCircleIcon />
-                        </ListItemIcon>
-                        <ListItemText sx={{ color: "#909497" }} primary={useMediaQuery('(min-width:769px)') ? "Profile": null} />
                     </ListItemButton>
                 </ListItem>
    
