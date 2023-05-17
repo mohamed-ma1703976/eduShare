@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Grid} from '@mui/material';
+import { Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Grid } from '@mui/material';
 import Sidebar from '../../component/Sidebar';
 import Navbar from '../../component/Navbar';
 import { db } from '../../Firebase/Firebase';
@@ -34,16 +34,21 @@ export default function Blogs() {
   }
 
   const deleteBlog = async (id) => {
-    await deleteDoc(doc(db, 'Blog', id));
+    if (confirm("Are you sure you want to continue?")) {
+      await deleteDoc(doc(db, 'Blog', id));
+
+    } else {
+      return
+    }
   };
 
   return (
     <>
       <Box>
-      <Head>
-        <title>Blogs</title>
-        <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
-      </Head>
+        <Head>
+          <title>Blogs</title>
+          <link rel="icon" href="https://i.ibb.co/RN7HqQT/Edu-Share-Logo.png" />
+        </Head>
         <PrivateRoute path="/secure">
           <Navbar />
           <Grid container>
@@ -65,7 +70,7 @@ export default function Blogs() {
               </Typography>
               <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead sx={{ backgroundColor: "#1ABC9C" }}>
+                  <TableHead sx={{ backgroundColor: "#1ABC9C" }}>
                     <TableRow>
                       <TableCell>Blog Title</TableCell>
                       <TableCell>Instructor</TableCell>

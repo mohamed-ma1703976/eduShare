@@ -4,6 +4,8 @@ import {
 } from '@mui/material';
 import {
   collection,
+  deleteDoc,
+  doc,
   getDocs,
   updateDoc,
 } from 'firebase/firestore';
@@ -48,7 +50,6 @@ function CardList({ courseSearch }) {
 
   async function handleDelete(id) {
     if (confirm("Are you sure you want to continue?")) {
-
       try {
         const courseRef = doc(db, 'Course', id);
         await deleteDoc(courseRef);
