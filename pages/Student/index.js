@@ -98,7 +98,7 @@ export default function StudentDashboard() {
                 <StuSideBar />
               </Grid>
               <Grid item xs={10}>
-                <Box>
+                <Box sx={{margin:"0 0 0 10px"}}>
                   <Card>
                     <CardContent>
                       {/* <Typography
@@ -160,7 +160,7 @@ export default function StudentDashboard() {
                           >
                             Top Instructors
                           </Typography>
-                          <Slider {...settings}>
+                          <Slider {...settings} >
                             {instructors.map((instructor) =>
                               instructor.hasOwnProperty("title") &&
                               instructor.title ? (

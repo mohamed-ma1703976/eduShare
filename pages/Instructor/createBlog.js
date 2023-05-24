@@ -49,6 +49,8 @@ function CreateBlog() {
   }, []);
 
   let nameOfInst = inst.find(s => s.id === userId)?.attributes.firstName
+  let nameOfInst2 = inst.find(s => s.id === userId)?.attributes.lastName
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -72,7 +74,8 @@ function CreateBlog() {
       Body: body,
       AuthorId: userId,
       img: url,
-      instruuctorName: nameOfInst
+      instruuctorName: nameOfInst,
+      lastName1:nameOfInst2
     });
 
     setTitle('');

@@ -116,9 +116,9 @@ const EventDetails = () => {
               <Typography variant="body1" gutterBottom>
                 Description: {eventDetails.description}
               </Typography>
-                    <Button variant="contained" sx={{ backgroundColor: '#1ABC9C', marginRight: 2 }} onClick={() => registerForEvent()} disabled={showReg}>
+                    {/* <Button variant="contained" sx={{ backgroundColor: '#1ABC9C', marginRight: 2 }} onClick={() => registerForEvent()} disabled={showReg}>
                   {showReg ? "Registerd" : "Register"}
-                </Button>
+                </Button> */}
             </Box>
           </Grid>
         </Grid>
