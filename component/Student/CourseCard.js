@@ -57,7 +57,7 @@ const CourseCard = ({ course }) => {
   };
 
   let sum = course?.rates?.reduce((accumulator, currentValue) => {
-    return accumulator + currentValue.rating;
+    return accumulator + currentValue?.rating;
   }, 0);
   
   let average = course?.rates?.length ? sum / course.rates.length : 0;

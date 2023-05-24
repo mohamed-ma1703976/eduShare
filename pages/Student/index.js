@@ -101,7 +101,7 @@ export default function StudentDashboard() {
                 <Box>
                   <Card>
                     <CardContent>
-                      <Typography
+                      {/* <Typography
                         variant="h5"
                         mt={4}
                         gutterBottom
@@ -120,7 +120,7 @@ export default function StudentDashboard() {
                             <CourseCard course={course} />
                           </Box>
                         ))}
-                      </Slider>
+                      </Slider> */}
                       <Typography
                         variant="h5"
                         mt={4}
@@ -178,7 +178,7 @@ export default function StudentDashboard() {
   
                       {latestBlogs.length > 0 && (
                         <>
-                          <Typography
+                          {/* <Typography
                             variant="h5"
                             mt={4}
                             gutterBottom
@@ -200,12 +200,12 @@ export default function StudentDashboard() {
                                 <BlogCard blog={blog} />
                               </Box>
                             ))}
-                          </Slider>
+                          </Slider> */}
                         </>
                       )}
                     </CardContent>
                   </Card>
-                  {events.length > 0 && (
+                  {/* {events.length > 0 && (
         <>
           <Typography
             variant="h5"
@@ -229,7 +229,7 @@ export default function StudentDashboard() {
             ))}
           </Grid>
         </>
-      )}
+      )} */}
                 </Box>
               </Grid>
             </Grid>
